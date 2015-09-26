@@ -1,0 +1,17 @@
+webpack = require 'webpack'
+WebpackDevServer = require 'webpack-dev-server'
+config = require './webpack.coffee'
+
+new WebpackDevServer(webpack(config.wp), {
+  publicPath: config.wp.output.publicPath
+  hot: true
+  historyApiFallback: true
+  stats: {
+  	colors: true
+  }
+}).listen(config.PORT, (err) ->
+	if (err)
+		console.log err
+
+	console.log "Listening at localhost:#{ config.PORT }"
+)
