@@ -29,6 +29,7 @@
   "devDependencies": {
     "autoprefixer": "^6.0.3",
     "interpret": "^0.6.6",
+    "normalize.css": "^3.0.3",
     "postcss": "^5.0.8",
     "postcss-import": "^7.0.0",
     "postcss-loader": "^0.6.0",

@@ -1,9 +1,12 @@
+NormalizeCSS = require 'normalize.css'
+
 React = require 'react'
 ReactDOM = require 'react-dom'
-{ Router, Route, Link, IndexRoute } = require 'react-router'
+{ Router, Route, IndexRoute } = require 'react-router'
+
 App = require './components/app/app'
+Gallery = require './components/gallery/gallery'
 Test = require './components/test'
-Gallery = require './components/gallery/gallery.cjsx'
 
 ReactDOM.render (
 	<Router>

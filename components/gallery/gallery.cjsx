@@ -1,7 +1,7 @@
 React = require 'react'
 Art = require '../art/art'
+css = require './gallery.css'
 example_db = require '../../assets/example_db'
-require './gallery.css'
 
 module.exports = React.createClass
 	displayName: 'Gallery'

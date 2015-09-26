@@ -13,6 +13,9 @@ art = for num in [0...11]
 		}
 	}
 
+# Отсортировать случайно
+art.sort () -> 0.5 - Math.random()
+
 module.exports = {
 	art: art
 }
