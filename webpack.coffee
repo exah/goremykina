@@ -1,7 +1,9 @@
 path = require 'path'
 webpack = require 'webpack'
+postcss = require 'postcss'
+postcssImport = require 'postcss-import'
 
-HOST = "0.0.0.0"
+HOST = '0.0.0.0'
 PORT = 8765
 
 wp = {
@@ -28,11 +30,27 @@ wp = {
 	]
 	module: {
 		loaders: [
-      { test: /\.css$/, loaders: ['style', 'css']},
-      { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx']},
-      { test: /\.coffee$/, loader: 'coffee' }
+      {
+      	test: /\.css$/
+      	loader: "style!css!postcss"
+      }
+      {
+      	test: /\.cjsx$/
+      	loaders: ['react-hot', 'coffee', 'cjsx']
+     	}
+      {
+      	test: /\.coffee$/,
+      	loader: 'coffee'
+      }
     ]
 	}
+	postcss: ->
+		[
+			postcssImport { onImport: (files) => files.forEach(@addDependency) }
+			require 'autoprefixer'
+			require 'postcss-nested'
+			require 'postcss-simple-vars'
+		]
 }
 
 module.exports = {

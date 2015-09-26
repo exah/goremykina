@@ -1,7 +1,10 @@
+@import "../global";
+
 .art {
 	margin: 1.5em;
-}
+	background: $red;
 
-.art-image {
-	object-fit: contain;
+	&-image {
+		object-fit: contain;
+	}
 }

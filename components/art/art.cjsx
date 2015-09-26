@@ -1,5 +1,5 @@
 React = require 'react'
-require './art.css'
+css = require './art.css'
 
 module.exports = React.createClass
 	displayName: 'Art'

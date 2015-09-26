@@ -27,6 +27,12 @@
   "author": "John Grishin (@exah)",
   "license": "ISC",
   "devDependencies": {
-    "interpret": "^0.6.6"
+    "autoprefixer": "^6.0.3",
+    "interpret": "^0.6.6",
+    "postcss": "^5.0.8",
+    "postcss-import": "^7.0.0",
+    "postcss-loader": "^0.6.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^1.0.1"
   }
 }

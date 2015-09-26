@@ -1,6 +1,6 @@
 React = require 'react'
 { Router, Route, Link, IndexRoute } = require 'react-router'
-require './app.css'
+css = require './app.css'
 
 module.exports = React.createClass
 	displayName: 'App'
