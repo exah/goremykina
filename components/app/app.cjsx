@@ -1,11 +1,14 @@
 React = require 'react'
+{ Router, Route, Link, IndexRoute } = require 'react-router'
 require './app.css'
-Gallery = require '../gallery/gallery.cjsx'
 
 module.exports = React.createClass
 	displayName: 'App'
 	render: ->
-		<div>
-			Hello World!
-			<Gallery />
+		<div className="app">
+			<header className="logo">
+				<a href="/"><img src="assets/media/logo.svg" alt="" /></a>
+			</header>
+			<nav className="app-nav"> <Link to="/gallery">Gallery</Link> <Link to="/test">Test</Link> </nav>
+			{@props.children}
 		</div>

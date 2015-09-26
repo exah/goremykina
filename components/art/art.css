@@ -1,0 +1,7 @@
+.art {
+	margin: 1.5em;
+}
+
+.art-image {
+	object-fit: contain;
+}
