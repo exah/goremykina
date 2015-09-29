@@ -6,13 +6,14 @@ ReactDOM = require 'react-dom'
 
 App = require './components/app/app'
 Gallery = require './components/gallery/gallery'
-Test = require './components/test'
+About = require './components/about'
 
 ReactDOM.render (
 	<Router>
 		<Route path="/" component={App}>
 			<IndexRoute component={Gallery} />
 			<Route path="/gallery" component={Gallery} />
-			<Route path="/test" component={Test} />
+			<Route path="/about" component={About} />
 		</Route>
-	</Router>), document.getElementById('App')
+	</Router>
+), document.getElementById('IrinaGoremykina')

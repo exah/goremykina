@@ -2,9 +2,11 @@
 
 .art {
 	margin: 1.5em;
-	background: $red;
+	/*opacity: 0;
+	transform: translateY(-10px);*/
 
 	&-image {
 		object-fit: contain;
+		width: 100%;
 	}
 }
