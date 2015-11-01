@@ -5,7 +5,7 @@ css = require './app.css'
 
 navLinks = [
 	{
-		url: "gallery"
+		url: ""
 		name: "Картины"
 		index: true
 	}

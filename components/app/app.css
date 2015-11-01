@@ -38,29 +38,3 @@
 		width: 100%;
 	}
 }
-
-.article {
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
-	max-width: 500px;
-	line-height: 1.6em;
-	hyphens: auto;
-
-	> p:first-of-type {
-		font-size: 1.1em;
-		padding-left: 0;
-	}
-
-/*	> p {
-		padding-left: 3em;
-	}*/
-
-	img {
-		max-width: 200px;
-		position: absolute;
-		left: 0;
-		top: -.5em;
-		z-index: -1;
-	}
-}

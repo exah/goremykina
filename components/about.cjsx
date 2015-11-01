@@ -7,20 +7,9 @@ example_db = require '../assets/example_db'
 module.exports = class About extends React.Component
 	style: {
 		'textAlign': 'left'
-		'paddingLeft': 'calc(200px - 0.7em)'
-	#	'opacity': 0
-		'transition': 'all .5s'
+		'paddingLeft': 'calc(250px - 0.7em)'
+		'maxWidth': '650px'
 	}
-	# componentDidMount: ->
-	# 	$html = document.documentElement
-
-	# 	$html.style.backgroundColor = 'black'
-	# 	$html.style.color = 'white'
-	# componentWillUnmount: ->
-	# 	$html = document.documentElement
-
-	# 	$html.style.backgroundColor = ''
-	# 	$html.style.color = ''
 	renderMD: (text) ->
 		markup = Marked(text, sanitize: true)
 		{ __html: markup }

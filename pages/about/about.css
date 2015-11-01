@@ -1,0 +1,9 @@
+.about .article {
+	img {
+		max-width: 200px;
+		position: absolute;
+		left: 0;
+		top: -.5em;
+		z-index: -1;
+	}
+}
