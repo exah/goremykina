@@ -1,14 +1,14 @@
 NormalizeCSS = require 'normalize.css'
 
 React = require 'react'
-ReactDOM = require 'react-dom'
+{ render } = require 'react-dom'
 { Router, Route, IndexRoute, Redirect } = require 'react-router'
 
 App = require './components/app/app'
 Gallery = require './pages/gallery/gallery'
 About = require './pages/about/about'
 
-ReactDOM.render (
+render (
   <Router>
     <Route path="/" component={App}>
       <IndexRoute component={Gallery} />
