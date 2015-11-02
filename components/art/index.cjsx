@@ -1,8 +1,12 @@
 React = require 'react'
-# ReactDOM = require 'react-dom'
 # require 'waypoints/lib/noframework.waypoints.js'
 # Velocity = require 'velocity-animate'
-css = require './art.css'
+require './index.css'
+
+$$ = (selector, context) ->
+  context = context || document
+  elements = context.querySelectorAll(selector)
+  Array.prototype.slice.call(elements)
 
 module.exports = class Art extends React.Component
   # style: {
@@ -11,11 +15,6 @@ module.exports = class Art extends React.Component
   # }
 
   # componentDidMount: ->
-  #   $$ = (selector, context) ->
-  #     context = context || document;
-  #     elements = context.querySelectorAll(selector)
-  #     Array.prototype.slice.call(elements)
-
   #   $$('.art').forEach (el) ->
   #     waypoint = new Waypoint({
   #       element: el

@@ -1,6 +1,6 @@
 React = require 'react'
 Marked = require 'marked'
-css = require './article.css'
+require './index.css'
 
 module.exports = class About extends React.Component
   renderMD: (text) ->
@@ -8,7 +8,7 @@ module.exports = class About extends React.Component
     { __html: markup }
   render: ->
     <article
-        className="article"
-        style={@props.style}
-        lang="ru"
-        dangerouslySetInnerHTML={@renderMD(@props.text)} />
+      className="article"
+      style={@props.style}
+      lang="ru"
+      dangerouslySetInnerHTML={@renderMD(@props.text)} />

@@ -1,4 +1,4 @@
-@import "../../components/global";
+@import "../../global";
 
 .gallery {
 	display: flex;

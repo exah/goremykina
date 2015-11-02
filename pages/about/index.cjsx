@@ -1,7 +1,7 @@
 React = require 'react'
-Article = require "../../components/article/article"
-example_db = require "../../assets/example_db"
-css = require "./about.css"
+Article = require "../../components/article"
+store = require "../../assets/example_db"
+require "./index.css"
 
 module.exports = class About extends React.Component
   style: {
@@ -13,6 +13,6 @@ module.exports = class About extends React.Component
   render: ->
     <div className="app-content about" ref="about">
       <Article
-        text={example_db.about}
+        text={store.about}
         style={@style} />
     </div>

@@ -1,23 +1,22 @@
 path = require 'path'
 webpack = require 'webpack'
 postcss = require 'postcss'
-postcssImport = require 'postcss-import'
 
 HOST = '0.0.0.0'
 PORT = 8765
 
 wp = {
   debug: true
-  devtool: "eval"
+  devtool: 'eval'
   entry: [
     "webpack-dev-server/client?http://#{ HOST }:#{ PORT }"
-    "webpack/hot/only-dev-server"
-    "./index"
+    'webpack/hot/only-dev-server'
+    './index'
   ]
   output: {
-    path: path.join(__dirname, "dist")
-    filename: "bundle.js"
-    publicPath: "/static/"
+    path: path.join(__dirname, 'dist')
+    filename: 'bundle.js'
+    publicPath: '/static/'
   }
   resolve: {
     extensions: ['', '.js', '.cjsx', '.coffee']
@@ -32,7 +31,7 @@ wp = {
     loaders: [
       {
         test: /\.css$/
-        loader: "style!css!postcss"
+        loader: 'style!css!postcss'
       }
       {
         test: /\.cjsx$/
@@ -46,7 +45,7 @@ wp = {
   }
   postcss: ->
     [
-      postcssImport { onImport: (files) => files.forEach(@addDependency) }
+      require 'postcss-import'
       require 'autoprefixer'
       require 'postcss-nested'
       require 'postcss-simple-vars'

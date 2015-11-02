@@ -1,6 +1,6 @@
 React = require 'react'
 { Link, PropTypes, IndexLink } = require 'react-router'
-css = require './nav.css'
+require './index.css'
 
 module.exports = class Nav extends React.Component
   render: ->
