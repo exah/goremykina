@@ -8,7 +8,7 @@ new WebpackDevServer(webpack(config.wp), {
   historyApiFallback: true
   stats: { colors: true }
 }).listen(config.PORT, (err) ->
-	console.log err if err
+  console.log err if err
 
-	console.log "Listening at #{ config.HOST }:#{ config.PORT }"
+  console.log "Listening at #{ config.HOST }:#{ config.PORT }"
 )

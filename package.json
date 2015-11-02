@@ -3,14 +3,35 @@
   "version": "0.0.1",
   "description": "Personal portfolio of Irina Goremykina",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "scripts": {
+    "start": "coffee server.coffee",
+    "lint": "coffeelint . --ext cjsx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "art"
+  ],
+  "author": "John Grishin (@exah)",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.0.3",
     "cjsx-loader": "^2.0.1",
     "coffee-loader": "^0.7.2",
     "coffee-react-transform": "^3.1.0",
     "coffee-script": "^1.9.3",
+    "coffeelint": "^1.13.1",
     "css-loader": "^0.14.4",
+    "interpret": "^0.6.6",
     "marked": "^0.3.5",
+    "normalize.css": "^3.0.3",
     "photoswipe": "^4.1.0",
+    "postcss": "^5.0.8",
+    "postcss-import": "^7.0.0",
+    "postcss-loader": "^0.6.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-simple-vars": "^1.0.1",
+    "pre-commit": "^1.1.2",
     "react": "0.14.0-rc1",
     "react-dom": "0.14.0-rc1",
     "react-hot-loader": "^1.3.0",
@@ -21,23 +42,17 @@
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
   },
-  "scripts": {
-    "start": "coffee server.coffee",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "coffeelintConfig": {
+    "coffeelint": {
+      "transforms": [
+        "coffee-react-transform"
+      ]
+    },
+    "max_line_length": {
+      "level": "ignore"
+    }
   },
-  "keywords": [
-    "art"
-  ],
-  "author": "John Grishin (@exah)",
-  "license": "ISC",
-  "devDependencies": {
-    "autoprefixer": "^6.0.3",
-    "interpret": "^0.6.6",
-    "normalize.css": "^3.0.3",
-    "postcss": "^5.0.8",
-    "postcss-import": "^7.0.0",
-    "postcss-loader": "^0.6.0",
-    "postcss-nested": "^1.0.0",
-    "postcss-simple-vars": "^1.0.1"
-  }
+  "pre-commit": [
+    "lint"
+  ]
 }

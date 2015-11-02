@@ -9,12 +9,12 @@ Gallery = require './pages/gallery/gallery'
 About = require './pages/about/about'
 
 ReactDOM.render (
-	<Router>
-		<Route path="/" component={App}>
-			<IndexRoute component={Gallery} />
-			<Redirect from="/" to="/gallery" />
-			<Route path="/gallery" component={Gallery} />
-			<Route path="/about" component={About} />
-		</Route>
-	</Router>
+  <Router>
+    <Route path="/" component={App}>
+      <IndexRoute component={Gallery} />
+      <Redirect from="/" to="/gallery" />
+      <Route path="/gallery" component={Gallery} />
+      <Route path="/about" component={About} />
+    </Route>
+  </Router>
 ), document.getElementById('IrinaGoremykina')
