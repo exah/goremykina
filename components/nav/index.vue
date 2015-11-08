@@ -1,22 +1,20 @@
-<template>
+<template lang="jade">
 
-  <nav class="nav" role="navigation">
-    <a
+  .nav(role="navigation")
+    a.nav-item(
       v-link="{
         path: '/',
         activeClass:'is-active'
-      }"
-      class="nav-item">Картины</a>
+      }") Картины
 
-    <a
+    a.nav-item(
       v-link="{
         path: '/about',
         activeClass:'is-active'
-      }"
-      class="nav-item">Об Ирине</a>
-    <span class="nav-item">Записи</span>
-    <span class="nav-item">Контакты</span>
-  </nav>
+      }") Об ирине
+
+    span.nav-item Записи
+    span.nav-item Контакты
 
 </template>
 
