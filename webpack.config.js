@@ -45,6 +45,13 @@ const config = {
         loader: 'style!css!postcss',
       },
       {
+        test: /\.svg$/,
+        loaders: [
+          'raw',
+          'svgo'
+        ]
+      },
+      {
         test: /\.vue$/,
         loader: 'vue'
       },
