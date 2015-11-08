@@ -1,18 +1,8 @@
 <template lang="jade">
 
   .nav(role="navigation")
-    a.nav-item(
-      v-link="{
-        path: '/',
-        activeClass:'is-active'
-      }") Картины
-
-    a.nav-item(
-      v-link="{
-        path: '/about',
-        activeClass:'is-active'
-      }") Об ирине
-
+    a.nav-item(v-link="'/gallery'") Картины
+    a.nav-item(v-link="'/about'") Об Ирине
     span.nav-item Записи
     span.nav-item Контакты
 
