@@ -3,7 +3,7 @@
     a(href='{{src}}' target="_blank")
       img.art-image(
         v-bind:src="tmb['1x']"
-        v-bind:srcSet="{{tmb['2x']}} 2x"
+        srcSet="{{tmb['2x']}} 2x"
         alt="{{name}}")
 </template>
 

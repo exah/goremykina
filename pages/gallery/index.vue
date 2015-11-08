@@ -13,7 +13,7 @@
 <script>
   import vArticle from 'components/article';
   import vArt from 'components/art';
-  import { art, anons as text } from '../../assets/example_db';
+  import { art, anons as text } from 'assets/example_db';
   import './index.css';
 
   export default {

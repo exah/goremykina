@@ -20,7 +20,10 @@ const config = {
   },
   resolve: {
     alias: {
+      'assets': path.join(__dirname, 'assets'),
       'components': path.join(__dirname, 'components'),
+      'filters': path.join(__dirname, 'filters'),
+      'pages': path.join(__dirname, 'pages'),
     },
     extensions: ['', '.vue', '.js', '.json', '.css'],
   },

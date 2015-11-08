@@ -1,12 +1,12 @@
 <template lang="jade">
   .app-content.about
-    article-component(v-bind:text='text' v-bind:style='styles')
+    v-article(v-bind:text='text' v-bind:style='styles')
 </template>
 
 <script>
   import './index.css';
-  import articleComponent from 'components/article';
-  import { about } from '../../assets/example_db';
+  import vArticle from 'components/article';
+  import { about } from 'assets/example_db';
 
   export default {
    data: () => ({
@@ -18,7 +18,7 @@
      text: about,
    }),
    components: {
-    articleComponent
+    vArticle
    }
   }
 </script>
