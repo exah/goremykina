@@ -2,10 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 import postcss from 'postcss';
 
-const HOST = '0.0.0.0';
-const PORT = 8765;
+export const HOST = '0.0.0.0';
+export const PORT = 8765;
 
-const config = {
+export const config = {
   debug: true,
   devtool: '#source-map',
   entry: [
@@ -64,10 +64,4 @@ const config = {
       require('postcss-nested'),
       require('postcss-simple-vars'),
     ]
-}
-
-export default {
-  HOST: HOST,
-  PORT: PORT,
-  config: config,
 }

@@ -3,7 +3,7 @@
     a(href='{{src}}' target="_blank")
       img.art-image(
         v-bind:src="tmb['1x']"
-        srcSet="{{tmb['2x']}} 2x"
+        v-bind:srcset="tmb['2x']+' 2x'"
         alt="{{name}}")
 </template>
 
@@ -11,6 +11,6 @@
   import './index.css';
 
   export default {
-   props: ['src', 'name', 'tmb']
+    props: ['src', 'name', 'tmb']
   }
 </script>
