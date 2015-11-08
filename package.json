@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "art"
+    "art",
+    "react",
+    "coffee"
   ],
   "author": "John Grishin (@exah)",
   "license": "ISC",
