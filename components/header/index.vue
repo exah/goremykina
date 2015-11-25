@@ -1,6 +1,6 @@
 <template lang="jade">
-  .header
-    .logo(v-html='logo')
+.header
+  .logo(v-html='logo')
 </template>
 
 <script>

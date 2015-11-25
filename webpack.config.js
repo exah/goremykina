@@ -1,21 +1,23 @@
 import path from 'path';
 import webpack from 'webpack';
 import postcss from 'postcss';
+import vue from 'vue-loader';
 
 export const HOST = '0.0.0.0';
 export const PORT = 8765;
 
 export const config = {
   debug: true,
-  devtool: '#source-map',
+  devtool: 'source-map',
   entry: [
     `webpack-dev-server/client?http://${ HOST }:${ PORT }`,
-    `webpack/hot/only-dev-server`,
+    `webpack/hot/dev-server`,
     `./index`,
   ],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
+    sourceMapFilename: 'bundle.map.js',
     publicPath: '/static/',
   },
   resolve: {
@@ -37,7 +39,7 @@ export const config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel?sourceMap&optional[]=runtime&loose=all'],
+        loaders: ['babel?optional[]=runtime&loose=all'],
         exclude: /node_modules/,
       },
       {

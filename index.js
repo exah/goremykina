@@ -1,6 +1,8 @@
 import 'babel-polyfill';
 import Vue from 'vue';
 
+Vue.config.debug = true;
+
 // Filters
 import marked from './filters/marked';
 Vue.filter('marked', marked);
@@ -15,12 +17,8 @@ const router = new Router({
   transitionOnLoad: true,
 });
 
-router.beforeEach(function () {
-  window.scrollTo(0, 0);
-});
-
 router.redirect({
-  '*': '/gallery',
+  '*': '/',
 });
 
 // Components
@@ -30,7 +28,7 @@ import About from './pages/about';
 import './index.css';
 
 router.map({
-  '/gallery': {
+  '/': {
     component: Gallery,
   },
   '/about': {

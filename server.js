@@ -2,12 +2,15 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import { config, PORT, HOST } from './webpack.config';
 
-new WebpackDevServer(webpack(config), {
+const server = new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
+  noInfo: true,
   historyApiFallback: true,
   stats: { colors: true },
-}).listen(PORT, (err) => {
+});
+
+server.listen(PORT, (err) => {
   if (err) {
     console.error(err);
 

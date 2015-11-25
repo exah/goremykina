@@ -1,10 +1,10 @@
 <template lang="jade">
-  .art
-    a(href='{{src}}' target="_blank")
-      img.art-image(
-        v-bind:src="tmb['1x']"
-        v-bind:srcset="tmb['2x']+' 2x'"
-        alt="{{name}}")
+.art
+  a(href='{{src}}' target="_blank")
+    img.art-image(
+      v-bind:src="tmb['1x']"
+      v-bind:srcset="tmb['2x']+' 2x'"
+      alt="{{name}}")
 </template>
 
 <script>

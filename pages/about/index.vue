@@ -1,6 +1,6 @@
 <template lang="jade">
-  .app-content.about
-    v-article(v-bind:text='text' v-bind:style='styles')
+.app-content.about
+  v-article(v-bind:text='text' v-bind:style='styles')
 </template>
 
 <script>

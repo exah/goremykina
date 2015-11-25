@@ -51,8 +51,8 @@
     "vue-html-loader": "1.0.x",
     "vue-loader": "6.0.x",
     "vue-router": "0.7.x",
-    "webpack": "1.12.x",
-    "webpack-dev-server": "1.10.x"
+    "webpack": "^1.12.3",
+    "webpack-dev-server": "^1.12.1"
   },
   "pre-commit": [
     "lint"

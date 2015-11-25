@@ -1,12 +1,11 @@
 <template lang="jade">
-  .app
-    app-header
-    app-nav
-    router-view(
-      class='view'
-      keep-alive
-      transition
-      transition-mode='out-in')
+.app
+  app-header
+  app-nav
+  router-view.view(
+    keep-alive
+    transition
+    transition-mode='out-in')
 </template>
 
 <script>
@@ -15,9 +14,6 @@
   import './index.css';
 
   export default {
-    data: () => ({
-      'message': 'Goodbye world!'
-    }),
     components: {
       AppHeader,
       AppNav
