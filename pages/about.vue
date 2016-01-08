@@ -8,17 +8,17 @@
   import { about } from 'assets/example_db';
 
   export default {
-   data: () => ({
-     styles: {
-      textAlign: 'left',
-      paddingLeft: 'calc(250px - 0.7em)',
-      maxWidth: '650px'
-     },
-     text: about,
-   }),
-   components: {
-    vArticle
-   }
+    data: () => ({
+      styles: {
+        textAlign: 'left',
+        paddingLeft: 'calc(250px - 0.7em)',
+        maxWidth: '650px'
+      },
+      text: about,
+    }),
+    components: {
+      vArticle
+    }
   }
 </script>
 
