@@ -4,7 +4,6 @@
 </template>
 
 <script>
-  import './index.css';
   import vArticle from 'components/article';
   import { about } from 'assets/example_db';
 
@@ -22,3 +21,15 @@
    }
   }
 </script>
+
+<style lang="postcss">
+  .about .article {
+    img {
+      max-width: 200px;
+      position: absolute;
+      left: 0;
+      top: -.5em;
+      z-index: -1;
+    }
+  }
+</style>

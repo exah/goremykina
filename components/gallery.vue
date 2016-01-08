@@ -12,9 +12,9 @@
   import vArt from 'components/art';
 
   export default {
-   props: ['arts'],
-   components: {
-    vArt,
-   }
+    props: ['arts'],
+    components: {
+      vArt,
+    }
   }
 </script>

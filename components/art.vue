@@ -8,9 +8,22 @@
 </template>
 
 <script>
-  import './index.css';
-
   export default {
     props: ['src', 'name', 'tmb']
   }
 </script>
+
+<style lang="postcss">
+  @import "/global.css";
+
+  .art {
+    margin: 1.5em;
+    /*opacity: 0;
+    transform: translateY(-10px);*/
+
+    &-image {
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+</style>
