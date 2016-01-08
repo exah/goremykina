@@ -1,23 +1,25 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
+
+const APP_PATH = path.join(__dirname, 'app');
 
 const config = {
   entry: [
     'babel-polyfill',
-    './index'
+    './app/index'
   ],
   output: {
-    filename          : 'bundle.js',
-    sourceMapFilename : 'bundle.map.js',
-    publicPath        : '/static/',
+    path: './static',
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   resolve: {
     alias: {
-      assets    : path.join(__dirname, 'assets'),
-      components: path.join(__dirname, 'components'),
-      filters   : path.join(__dirname, 'filters'),
-      pages     : path.join(__dirname, 'pages'),
+      assets: `${ APP_PATH }/assets`,
+      components: `${ APP_PATH }/components`,
+      filters: `${ APP_PATH }/filters`,
     },
     extensions: [
       '',
@@ -64,7 +66,22 @@ const config = {
       require('autoprefixer'),
       require('postcss-nested'),
       require('postcss-simple-vars'),
-    ]
+    ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './app/index.html',
+      inject: true,
+    }),
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+  ]
 }
 
 if (process.env.NODE_ENV === 'production') {

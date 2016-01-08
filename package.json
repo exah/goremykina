@@ -2,13 +2,13 @@
   "name": "goremykina-2015",
   "version": "0.0.2",
   "description": "Personal portfolio of Irina Goremykina",
-  "main": "index.js",
+  "main": "app/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/exah/goremykina.git"
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --history-api-fallback --port 8765 --no-info",
+    "start": "webpack-dev-server --inline --hot --history-api-fallback --port 8765 --content-base ./app/",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
