@@ -21,17 +21,17 @@ router.redirect({
 });
 
 // Components
-import App from './pages/';
-import Gallery from './pages/gallery';
-import About from './pages/about';
+import App from 'components/app';
+import GalleryPage from 'components/gallery-page';
+import AboutPage from 'components/about-page';
 import './index.css';
 
 router.map({
   '/': {
-    component: Gallery,
+    component: GalleryPage,
   },
   '/about': {
-    component: About,
+    component: AboutPage,
   },
 });
 

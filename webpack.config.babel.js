@@ -74,13 +74,6 @@ const config = {
       inject: true,
     }),
     new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.optimize.OccurenceOrderPlugin(),
   ]
 }
 
