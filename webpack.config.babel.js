@@ -7,17 +7,21 @@ const APP_PATH = path.join(__dirname, 'app');
 
 const config = {
   entry: [
+    'normalize-css',
+    './app/index.scss',
     'babel-polyfill',
-    './app/index'
+    './app/index.js',
   ],
   output: {
     path: './static',
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/',
   },
   resolve: {
     alias: {
+      app: APP_PATH,
       assets: `${ APP_PATH }/assets`,
+      styles: `${ APP_PATH }/assets/styles`,
       components: `${ APP_PATH }/components`,
       filters: `${ APP_PATH }/filters`,
     },
@@ -48,6 +52,15 @@ const config = {
         ],
       },
       {
+        test: /\.(sass|scss)$/,
+        loaders: [
+          'style',
+          'css',
+          'sass',
+          'postcss',
+        ],
+      },
+      {
         test: /\.svg$/,
         loaders: [
           'raw',
@@ -62,10 +75,10 @@ const config = {
   },
   postcss: () =>
     [
-      require('postcss-import'),
+      require('postcss-calc'),
       require('autoprefixer'),
-      require('postcss-nested'),
-      require('postcss-simple-vars'),
+      require('rucksack-css'),
+      require('cssnano'),
     ],
   plugins: [
     new HtmlWebpackPlugin({
@@ -74,6 +87,7 @@ const config = {
       inject: true,
     }),
     new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
   ]
 }
 

@@ -1,7 +1,8 @@
-<template lang="jade">
-  .app-content
-    v-article(v-bind:text='text')
-    gallery(v-bind:arts="art")
+<template>
+  <div class="app-content">
+    <v-article :text="text"></v-article>
+    <gallery :arts="art"></gallery>
+  </div>
 </template>
 
 <script>
@@ -22,8 +23,8 @@
   }
 </script>
 
-<style lang="postcss">
-  @import "/global.css";
+<style lang="sass">
+  @import '~styles/variables';
 
   .gallery {
     display: flex;
@@ -41,5 +42,4 @@
       justify-content: center;
     }
   }
-
 </style>

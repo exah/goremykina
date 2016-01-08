@@ -1,10 +1,14 @@
-<template lang="jade">
-.art
-  a(href='{{src}}' target="_blank")
-    img.art-image(
-      v-bind:src="tmb['1x']"
-      v-bind:srcset="tmb['2x']+' 2x'"
-      alt="{{name}}")
+<template>
+  <div class="art">
+    <a href="{{src}}" target="_blank">
+      <img
+        :src="tmb['1x']"
+        :srcset="tmb['2x']+' 2x'"
+        class="art-image"
+        alt="{{name}}"
+      />
+    </a>
+  </div>
 </template>
 
 <script>
@@ -13,13 +17,11 @@
   }
 </script>
 
-<style lang="postcss">
-  @import "/global.css";
+<style lang="sass">
+  @import '~styles/variables';
 
   .art {
     margin: 1.5em;
-    /*opacity: 0;
-    transform: translateY(-10px);*/
 
     &-image {
       object-fit: contain;

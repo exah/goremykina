@@ -1,6 +1,9 @@
-<template lang="jade">
-.header
-  .logo(v-html='logo')
+<template>
+  <div class="header">
+    <a v-link="'/'">
+      <div class="logo" v-html="logo"></div>
+    </a>
+  </div>
 </template>
 
 <script>
@@ -11,8 +14,8 @@
   }
 </script>
 
-<style lang="postcss">
-  @import "/global.css";
+<style lang="sass">
+  @import '~styles/variables';
 
   .header {
     position: fixed;
@@ -31,5 +34,4 @@
       }
     }
   }
-
 </style>

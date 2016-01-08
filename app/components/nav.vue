@@ -1,13 +1,14 @@
-<template lang="jade">
-  .nav(role="navigation")
-    a.nav-item(v-link="'/gallery'") Картины
-    a.nav-item(v-link="'/about'") Об Ирине
-    span.nav-item Записи
-    span.nav-item Контакты
+<template>
+  <div class="nav" role="navigation">
+    <a class="nav-item" v-link="{ name: 'gallery' }">Картины</a>
+    <a class="nav-item" v-link="{ name: 'about' }">Об Ирине</a>
+    <span class="nav-item">Записи</span>
+    <span class="nav-item">Контакты</span>
+  </div>
 </template>
 
-<style lang="postcss">
-  @import "/global.css";
+<style lang="sass">
+  @import '~styles/variables';
 
   .nav {
     position: fixed;

@@ -1,6 +1,10 @@
-<template lang="jade">
-.app-content.about
-  v-article(v-bind:text='text' v-bind:style='styles')
+<template>
+  <div class="app-content about">
+    <v-article
+      :text="text"
+      :style="styles"
+    ></v-article>
+  </div>
 </template>
 
 <script>
@@ -22,7 +26,7 @@
   }
 </script>
 
-<style lang="postcss">
+<style lang="sass">
   .about .article {
     img {
       max-width: 200px;

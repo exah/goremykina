@@ -1,11 +1,13 @@
-<template lang="jade">
-  .app
-    app-header
-    app-nav
-    router-view.view(
-      keep-alive
+<template>
+  <div class="app">
+    <app-header></app-header>
+    <app-nav></app-nav>
+    <router-view
+      class="view"
       transition
-      transition-mode='out-in')
+      transition-mode="out-in"
+    ></router-view>
+  </div>
 </template>
 
 <script>
@@ -20,8 +22,8 @@
   }
 </script>
 
-<style lang="postcss">
-  @import "/global.css";
+<style lang="sass">
+  @import '~styles/variables';
 
   .app {
     padding: 0 2.5%;

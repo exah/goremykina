@@ -1,13 +1,12 @@
 import Vue from 'vue';
-
-Vue.config.debug = true;
-
-// Filters
-import marked from './filters/marked';
-Vue.filter('marked', marked);
-
-// Register router
 import Router from 'vue-router'
+import marked from './filters/marked';
+import App from 'components/app';
+import GalleryPage from 'components/gallery-page';
+import AboutPage from 'components/about-page';
+
+Vue.config.debug = (process.env.NODE_ENV !== 'production');
+Vue.filter('marked', marked);
 Vue.use(Router);
 
 const router = new Router({
@@ -20,19 +19,22 @@ router.redirect({
   '*': '/',
 });
 
-// Components
-import App from 'components/app';
-import GalleryPage from 'components/gallery-page';
-import AboutPage from 'components/about-page';
-import './index.css';
-
 router.map({
-  '/': {
+  '/gallery': {
+    name: 'gallery',
     component: GalleryPage,
   },
   '/about': {
+    name: 'about',
     component: AboutPage,
   },
 });
 
+router.alias({
+  '/': '/home',
+  '/home': '/gallery',
+});
+
 router.start(App, '#IrinaGoremykina')
+
+export { router };

@@ -1,7 +1,9 @@
-<template lang="jade">
-article.article(
-  lang="ru"
-  v-html="text | marked")
+<template>
+  <article
+    class="article"
+    lang="ru"
+    v-html="text | marked"
+  ></article>
 </template>
 
 <script>
@@ -10,7 +12,7 @@ article.article(
   }
 </script>
 
-<style lang="postcss">
+<style lang="sass">
   .article {
     position: relative;
     text-align: center;
