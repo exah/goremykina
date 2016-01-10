@@ -8,7 +8,7 @@
 </template>
 
 <style lang="sass">
-  @import '~styles/variables';
+  @import '~assets/styles/variables';
 
   .nav {
     position: fixed;

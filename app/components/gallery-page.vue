@@ -24,7 +24,7 @@
 </script>
 
 <style lang="sass">
-  @import '~styles/variables';
+  @import '~assets/styles/variables';
 
   .gallery {
     display: flex;

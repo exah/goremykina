@@ -18,7 +18,7 @@
 </script>
 
 <style lang="sass">
-  @import '~styles/variables';
+  @import '~assets/styles/variables';
 
   .art {
     margin: 1.5em;

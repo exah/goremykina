@@ -1,9 +1,8 @@
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import path from 'path';
 
-const APP_PATH = path.join(__dirname, 'app');
+const APP_PATH = __dirname + '/app';
 
 const config = {
   entry: [
@@ -18,19 +17,12 @@ const config = {
     publicPath: '/',
   },
   resolve: {
-    alias: {
-      app: APP_PATH,
-      assets: `${ APP_PATH }/assets`,
-      styles: `${ APP_PATH }/assets/styles`,
-      components: `${ APP_PATH }/components`,
-      filters: `${ APP_PATH }/filters`,
-    },
+    root: APP_PATH,
     extensions: [
       '',
-      '.vue',
       '.js',
-      '.json',
-      '.css'
+      '.babel.js',
+      '.vue',
     ],
   },
   resolveLoader: {
@@ -86,14 +78,14 @@ const config = {
       template: './app/index.html',
       inject: true,
     }),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
   ]
 }
 
 if (process.env.NODE_ENV === 'production') {
-  config.plugins = [
-    ...config.plugins,
+  config.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -105,11 +97,16 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.OccurenceOrderPlugin()
-  ]
+  );
 } else {
-  config.debug   = true;
-  config.devtool = 'source-map';
+  Object.assign(config, {
+    devServer: {
+      contentBase: APP_PATH,
+      historyApiFallback: true,
+    },
+    debug: true,
+    devtool: 'source-map',
+  });
 }
 
 export default config;

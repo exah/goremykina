@@ -23,7 +23,7 @@
 </script>
 
 <style lang="sass">
-  @import '~styles/variables';
+  @import '~assets/styles/variables';
 
   .app {
     padding: 0 2.5%;
@@ -49,7 +49,7 @@
   .view {
     transition: opacity .2s ease;
 
-    &.transition-enter, &.transition-leave {
+    &.v-enter, &.v-leave {
       opacity: 0;
     }
   }
