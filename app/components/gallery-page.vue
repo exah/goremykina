@@ -14,12 +14,15 @@
     name: 'GalleryPage',
     data: () => ({
       text,
-      art,
+      art: [],
     }),
     components: {
       vArticle,
       gallery,
-    }
+    },
+    ready() {
+      this.$set('art', art);
+    },
   }
 </script>
 

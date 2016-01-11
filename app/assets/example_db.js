@@ -1,8 +1,11 @@
-const PATH = '/assets/media/art';
+import sizeOf from 'browser-image-size';
+const PATH = 'assets/media/art';
 
 const art = [];
 
 for (let num = 0; num < 11; num++) {
+  const fullSizeLink = `${ PATH }/full/art-${ num }.jpg`;
+
   art[num] = {
     name: `Картина ${ num }`,
     description: `Описание ${ num }`,
@@ -10,11 +13,13 @@ for (let num = 0; num < 11; num++) {
       '1x': `${ PATH }/tmb/art-${ num }.jpg`,
       '2x': `${ PATH }/tmb/2x/art-${ num }.jpg`,
     },
-    src: `${ PATH }/full/art-${ num }.jpg`,
-  }
+    src: fullSizeLink,
+    size: {},
+  };
 }
 
 art.sort(() => 0.5 - Math.random());
+art.forEach(a => sizeOf(a.src).then(size => a.size = size));
 
 const anons = `
 Ирина очень тонко чувствует цвет,

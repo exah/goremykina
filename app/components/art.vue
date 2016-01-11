@@ -1,19 +1,40 @@
 <template>
-  <div class="art">
-    <a href="{{src}}" target="_blank">
+  <figure class="art">
+    <a
+      href="{{src}}"
+      target="_blank"
+      data-size="{{ size.width }}x{{ size.height }}"
+    >
       <img
         :src="tmb['1x']"
         :srcset="tmb['2x']+' 2x'"
-        class="art-image"
+        class="art__image"
         alt="{{name}}"
       />
     </a>
-  </div>
+    <figcaption class="art__caption">
+      {{name}}
+    </figcaption>
+  </figure>
 </template>
 
 <script>
   export default {
-    props: ['src', 'name', 'tmb']
+    props: {
+      src: String,
+      name: String,
+      tmb: Object,
+      size: {
+        type: Object,
+        default: () => ({
+          width: 0,
+          height: 0,
+        })
+      }
+    },
+    ready() {
+      //console.log(this.size);
+    }
   }
 </script>
 
@@ -23,9 +44,13 @@
   .art {
     margin: 1.5em;
 
-    &-image {
+    &__image {
       object-fit: contain;
       width: 100%;
+    }
+
+    &__caption {
+      display: none;
     }
   }
 </style>
