@@ -6,7 +6,6 @@ const APP_PATH = __dirname + '/app';
 
 const config = {
   entry: [
-    'normalize-css',
     './app/index.scss',
     'babel-polyfill',
     './app/index.js',
@@ -36,21 +35,16 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        loaders: [
-          'style',
-          'css',
-          'postcss',
-        ],
+        test: /\.vue$/,
+        loader: 'vue'
       },
       {
-        test: /\.(sass|scss)$/,
-        loaders: [
-          'style',
-          'css',
-          'sass',
-          'postcss',
-        ],
+        test: /\.(png|jpg|gif)$/,
+        loader: 'url',
+        query: {
+          limit: '20000',
+          name: 'assets/images/[name].[ext]?[hash]',
+        },
       },
       {
         test: /\.svg$/,
@@ -58,10 +52,6 @@ const config = {
           'raw',
           'svgo'
         ]
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue'
       },
     ]
   },
@@ -85,7 +75,27 @@ const config = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  config.plugins.push(
+  config.module.loaders = [
+    ...config.module.loaders,
+    {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style', 'css!postcss'),
+    },
+    {
+      test: /\.(sass|scss)$/,
+      loader: ExtractTextPlugin.extract('style', 'css!sass!postcss'),
+    },
+  ];
+
+  config.vue = {
+    loaders: {
+      css: ExtractTextPlugin.extract('style', 'css!postcss'),
+      sass: ExtractTextPlugin.extract('style', 'css!sass!postcss'),
+    }
+  };
+
+  config.plugins = [
+    ...config.plugins,
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -96,17 +106,37 @@ if (process.env.NODE_ENV === 'production') {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('[name].css'),
-  );
+    new ExtractTextPlugin('assets/style.css', { allChunks: true }),
+  ];
 } else {
-  Object.assign(config, {
-    devServer: {
-      contentBase: APP_PATH,
-      historyApiFallback: true,
+  config.module.loaders = [
+    ...config.module.loaders,
+    {
+      test: /\.css$/,
+      loaders: [
+        'style',
+        'css?sourceMap',
+        'postcss?sourceMap',
+      ],
     },
-    debug: true,
-    devtool: 'source-map',
-  });
+    {
+      test: /\.(sass|scss)$/,
+      loaders: [
+        'style',
+        'css?sourceMap',
+        'sass?sourceMap',
+        'postcss?sourceMap',
+      ],
+    },
+  ];
+
+  config.devServer = {
+    contentBase: APP_PATH,
+    historyApiFallback: true,
+  };
+
+  config.debug = true;
+  config.devtool = 'source-map';
 }
 
 export default config;
