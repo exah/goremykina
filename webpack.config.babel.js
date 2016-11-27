@@ -11,7 +11,7 @@ const config = {
     './app/index.js',
   ],
   output: {
-    path: './static',
+    path: './build',
     filename: '[name].js',
     publicPath: '/',
   },
