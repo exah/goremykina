@@ -2,8 +2,6 @@
   <div class="nav" role="navigation">
     <a class="nav-item" v-link="{ name: 'gallery' }">Картины</a>
     <a class="nav-item" v-link="{ name: 'about' }">Об Ирине</a>
-    <span class="nav-item">Записи</span>
-    <span class="nav-item">Контакты</span>
   </div>
 </template>
 
