@@ -1,0 +1,54 @@
+{
+  "name": "goremykina",
+  "version": "1.0.0",
+  "description": "Irina Goremykina - Personal Web Site",
+  "repository": "git@github.com:exah/goremykina.git",
+  "author": "John Grishin <r@exah.ru>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "serve -l 3000 -s dist",
+    "dev": "webpack-dev-server --mode development --inline --hot",
+    "build": "webpack-cli --mode production"
+  },
+  "eslintConfig": {
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "parser": "babel-eslint",
+    "rules": {
+      "no-shadow": 2
+    }
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "babel-eslint": "8",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-emotion": "^9.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-react": "^6.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-react": "^7.9.1",
+    "eslint-plugin-standard": "^3.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "react-hot-loader": "^4.3.3",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.7",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "common-tags": "^1.8.0",
+    "emotion": "^9.2.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.3",
+    "serve": "^9.0.0"
+  }
+}
