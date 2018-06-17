@@ -1,6 +1,7 @@
 const { host, port } = require('config')
 const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
+const CSSPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   resolve: {
@@ -10,6 +11,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [ CSSPlugin.loader, 'css-loader' ]
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -22,6 +27,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new CSSPlugin({
+      filename: '[name].css'
+    }),
     new HTMLPlugin({
       template: './src/template.js',
       inject: false
