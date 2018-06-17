@@ -1,16 +1,26 @@
 {
-  "presets": [
-    [ "@babel/preset-env", { "modules": false } ],
-    "@babel/preset-react"
-  ],
   "env": {
     "production": {
-      "plugins": [["emotion", { "hoist": true }]]
+      "plugins": [
+        [ "emotion", { "hoist": true } ]
+      ]
     },
     "development": {
       "plugins": [
-        ["emotion", { "sourceMap": true, "autoLabel": true }]
+        [ "emotion", { "sourceMap": true, "autoLabel": true } ]
       ]
     }
-  }
+  },
+  "plugins": [
+    "@babel/proposal-class-properties"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "useBuiltIns": "usage",
+        "modules": false
+      }
+    ],
+    "@babel/preset-react"
+  ]
 }

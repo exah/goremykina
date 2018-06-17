@@ -5,6 +5,7 @@ import { ThemeProvider } from 'emotion-theming'
 import { createTheme } from '@exah/prop-styles-system'
 import { Layout, Logo, FlexBox } from './components'
 import { THEME } from './constants'
+import Home from './pages/home'
 
 injectGlobal({
   'html, body, #app': {
@@ -26,7 +27,7 @@ const App = () => (
         </FlexBox>
       </Layout.Header>
       <Layout.Content>
-        Content
+        <Home />
       </Layout.Content>
       <Layout.Footer>
         <FlexBox justify>

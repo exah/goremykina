@@ -7,5 +7,6 @@ module.exports = {
   isClient,
   isServer,
   isDev,
-  isProd
+  isProd,
+  public: isClient ? ((window._ssr || {}).config || {}) : {}
 }

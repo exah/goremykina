@@ -1,45 +1,84 @@
-const { host, port } = require('config')
 const path = require('path')
-const HTMLPlugin = require('html-webpack-plugin')
+const config = require('config')
+const webpack = require('webpack')
 const CSSPlugin = require('mini-css-extract-plugin')
+const StatsPlugin = require('stats-webpack-plugin')
 
-module.exports = {
+const nodeEnv = config.isProd
+  ? 'production'
+  : 'development'
+
+const css = {
+  test: /\.css$/,
+  use: [ CSSPlugin.loader, 'css-loader' ]
+}
+
+const javascript = {
+  test: /\.js$/,
+  exclude: /node_modules/,
+  loader: 'babel-loader',
+  options: {
+    cacheDirectory: true,
+    plugins: [ 'react-hot-loader/babel' ]
+  }
+}
+
+const clientConfig = {
+  name: 'client',
+  target: 'web',
+  mode: nodeEnv,
+  entry: {
+    main: config.isProd
+      ? [ './src/client.js' ]
+      : [ 'webpack-hot-middleware/client', './src/client.js' ]
+  },
+  output: {
+    path: config.paths.dist,
+    publicPath: '/'
+  },
   resolve: {
     alias: {
-      'config$': path.resolve(__dirname, './config', './universal.js')
+      'config$': path.resolve(config.paths.config, './universal.js')
     }
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [ CSSPlugin.loader, 'css-loader' ]
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          plugins: [ 'react-hot-loader/babel' ]
-        }
-      }
+      css,
+      javascript
     ]
   },
   plugins: [
     new CSSPlugin({
       filename: '[name].css'
-    }),
-    new HTMLPlugin({
-      template: './src/template.js',
-      inject: false
     })
-  ],
-  devServer: {
-    host,
-    port,
-    stats: 'minimal',
-    disableHostCheck: true,
-    historyApiFallback: true
-  }
+  ].concat(config.isDev
+    ? [ new webpack.HotModuleReplacementPlugin() ]
+    : [ new StatsPlugin('stats.json', { chunkModules: true }) ]
+  )
 }
+
+const serverConfig = {
+  name: 'server',
+  target: 'node',
+  mode: config.isProd ? 'none' : 'development',
+  entry: {
+    server: './src/server.js'
+  },
+  output: {
+    path: config.paths.dist,
+    publicPath: '/',
+    filename: '[name].js',
+    libraryTarget: 'commonjs2'
+  },
+  module: {
+    rules: [ javascript ]
+  },
+  externals: Object.keys(require('./package.json').dependencies),
+  performance: { hints: false },
+  optimization: { nodeEnv }
+}
+
+module.exports = [
+  clientConfig,
+  serverConfig
+]
