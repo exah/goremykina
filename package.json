@@ -46,13 +46,17 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "@exah/prop-styles-system": "^0.2.0",
     "common-tags": "^1.8.0",
     "config": "^1.30.0",
     "defaults.css": "^1.2.0",
     "emotion": "^9.2.3",
+    "emotion-theming": "^9.2.3",
+    "macro-components": "^2.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-emotion": "^9.2.3",
+    "recompose": "^0.27.1",
     "serve": "^9.0.0"
   }
 }
