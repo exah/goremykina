@@ -1,6 +1,13 @@
+const { host, port } = require('config')
+const path = require('path')
 const HTMLPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  resolve: {
+    alias: {
+      'config$': path.resolve(__dirname, './config', './universal.js')
+    }
+  },
   module: {
     rules: [
       {
@@ -19,5 +26,12 @@ module.exports = {
       template: './src/template.js',
       inject: false
     })
-  ]
+  ],
+  devServer: {
+    host,
+    port,
+    stats: 'minimal',
+    disableHostCheck: true,
+    historyApiFallback: true
+  }
 }

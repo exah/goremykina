@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "common-tags": "^1.8.0",
+    "config": "^1.30.0",
     "emotion": "^9.2.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
