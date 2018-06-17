@@ -1,6 +1,7 @@
 import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './app'
 import { hydrate } from 'emotion'
 import { dataStore } from './hocs/with-data'
@@ -13,4 +14,8 @@ hydrate(cssIds)
 dataStore.init(initialData)
 
 // Render app
-ReactDOM.hydrate((<App />), document.getElementById('app'))
+ReactDOM.hydrate((
+  <Router>
+    <App />
+  </Router>
+), document.getElementById('app'))

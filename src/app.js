@@ -2,6 +2,7 @@ import React from 'react'
 import { hot } from 'react-hot-loader'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
+import { Switch, Route, Redirect } from 'react-router'
 import { createTheme } from '@exah/prop-styles-system'
 import { Layout, Logo, FlexBox } from './components'
 import { THEME } from './constants'
@@ -27,7 +28,10 @@ const App = () => (
         </FlexBox>
       </Layout.Header>
       <Layout.Content>
-        <Home />
+        <Switch>
+          <Route path='/:lang(ru|en)' component={Home} />
+          <Redirect from='/' to='/ru' exact />
+        </Switch>
       </Layout.Content>
       <Layout.Footer>
         <FlexBox justify>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
+import { StaticRouter as Router } from 'react-router'
 import { Helmet } from 'react-helmet'
 import { getAppInitialData } from './hocs/with-data'
 import template from './template'
@@ -24,7 +25,11 @@ const appMiddleware = (files, config) => (req, res) => {
     statusText: 'OK'
   }
 
-  const appTree = (<App />)
+  const appTree = (
+    <Router location={req.url} context={context}>
+      <App />
+    </Router>
+  )
 
   return getAppInitialData(appTree, { req, res })
     .catch((error) => {
