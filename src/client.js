@@ -7,7 +7,7 @@ import { hydrate } from 'emotion'
 import { dataStore } from './hocs/with-data'
 
 // Get server state
-const { cssIds, initialData } = (window._ssr || {})
+const { cssIds, initialData, lang } = (window._ssr || {})
 
 // Restore emotion css ids and withData state
 hydrate(cssIds)
@@ -16,6 +16,6 @@ dataStore.init(initialData)
 // Render app
 ReactDOM.hydrate((
   <Router>
-    <App />
+    <App userLang={lang} />
   </Router>
 ), document.getElementById('app'))

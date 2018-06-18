@@ -4,6 +4,7 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
 import { Helmet } from 'react-helmet'
 import { getAppInitialData } from './hocs/with-data'
+import { DEFAULT_LANG, SUPPORTED_LANGS } from './constants'
 import template from './template'
 import App from './app'
 
@@ -19,7 +20,9 @@ const renderApp = (tree) => {
   }
 }
 
-const appMiddleware = (files, config) => (req, res) => {
+const renderAppMiddleware = (files, config) => (req, res) => {
+  const lang = req.language || DEFAULT_LANG
+
   const context = {
     status: 200,
     statusText: 'OK'
@@ -27,7 +30,7 @@ const appMiddleware = (files, config) => (req, res) => {
 
   const appTree = (
     <Router location={req.url} context={context}>
-      <App />
+      <App userLang={lang} />
     </Router>
   )
 
@@ -61,7 +64,8 @@ const appMiddleware = (files, config) => (req, res) => {
       const ssrData = {
         config: config.public,
         cssIds: app.cssIds,
-        initialData
+        initialData,
+        lang
       }
 
       res.send(template({
@@ -89,10 +93,12 @@ const getFiles = (stats, ...chunks) => chunks.reduce((acc, name) => {
 export default function serverRender ({ clientStats }) {
   const config = require('config')
   const express = require('express')
+  const requestLanguage = require('express-request-language')
   const router = express.Router()
   const files = getFiles(clientStats, 'main')
 
-  router.use(appMiddleware(files, config))
+  router.use(requestLanguage({ languages: SUPPORTED_LANGS }))
+  router.use(renderAppMiddleware(files, config))
 
   return router
 }

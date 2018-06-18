@@ -7,4 +7,6 @@ const Home = ({ data }) => (
   </div>
 )
 
-export default withData((props) => Promise.resolve({ data: 'ok' }))(Home)
+export default withData((props) =>
+  Promise.resolve({ data: 'ok' })
+)(Home)

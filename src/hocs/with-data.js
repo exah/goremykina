@@ -64,7 +64,6 @@ const withData = (
       const onError = (error) => this.setState({ isLoading: false, error })
 
       promise.then(onSuccess).catch(onError)
-
       return promise
     }
     getInitialData = (contextData) => getData({
