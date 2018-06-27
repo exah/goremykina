@@ -5036,9 +5036,9 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-tree-walker@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.0.2.tgz#a50df477ba9f0559584d19944b669fefa2a5669f"
+react-tree-walker@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.1.0.tgz#c25974edf28a04f9b3ebb989bfa5dcaf54af1b58"
 
 react@^16.4.1:
   version "16.4.1"
