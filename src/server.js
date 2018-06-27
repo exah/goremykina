@@ -3,7 +3,7 @@ import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
 import { Helmet } from 'react-helmet'
-import { getAppInitialData } from './hocs/with-data'
+import { DataProvider, getAppInitialData, createDataStore } from './hocs/with-data'
 import { DEFAULT_LANG, SUPPORTED_LANGS } from './constants'
 import template from './template'
 import App from './app'
@@ -21,6 +21,7 @@ const renderApp = (tree) => {
 }
 
 const renderAppMiddleware = (files, config) => (req, res) => {
+  const dataStore = createDataStore()
   const userLang = req.language || DEFAULT_LANG
 
   const context = {
@@ -29,12 +30,14 @@ const renderAppMiddleware = (files, config) => (req, res) => {
   }
 
   const appTree = (
-    <Router location={req.url} context={context}>
-      <App userLang={userLang} />
-    </Router>
+    <DataProvider value={dataStore}>
+      <Router location={req.url} context={context}>
+        <App userLang={userLang} />
+      </Router>
+    </DataProvider>
   )
 
-  return getAppInitialData(appTree, { req, res })
+  return getAppInitialData(dataStore, appTree, { req, res })
     .catch((error) => {
       console.log('Prefetch failed')
       console.error(error)

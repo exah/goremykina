@@ -1,26 +1,31 @@
 import { isServer, isClient } from 'config'
-import React, { PureComponent } from 'react'
-import reactTreeWalker from 'react-tree-walker'
+import React, { createContext, PureComponent } from 'react'
 import { shallowEqual, wrapDisplayName } from 'recompose'
+import reactTreeWalker from 'react-tree-walker'
 
-let store = {}
-let pointer = 0
+const createDataStore = (initialData) => {
+  let store = initialData || {}
+  let pointer = 0
 
-const dataStore = {
-  init: (_store) => {
-    pointer = 0
-    store = _store || {}
-  },
-  nextId: () => {
-    pointer += 1
-    return pointer
-  },
-  save: (id, result) => {
-    store[id] = result
-  },
-  get: (id) => store[id],
-  getAll: () => store
+  return {
+    init: (value) => {
+      pointer = 0
+      store = value || {}
+    },
+    save: (id, result) => {
+      store[id] = result
+    },
+    nextId: () => {
+      pointer += 1
+      return pointer
+    },
+    getById: (id) => store[id],
+    get: () => store
+  }
 }
+
+const DataContext = createContext()
+const DataProvider = DataContext.Provider
 
 const alwaysResolve = () => Promise.resolve()
 
@@ -50,41 +55,42 @@ const withData = (
 ) => (BaseComponent) => {
   let id = null
 
-  const getData = (contextData) => {
-    const promise = optGetData({ isClient, isServer, ...contextData })
-    promise.then((data) => dataStore.save(id, data))
+  const getData = (context) => {
+    const promise = optGetData({ isClient, isServer, ...context })
+    promise.then((data) => context.dataStore.save(id, data))
     return promise
   }
 
-  return class Data extends PureComponent {
+  class Data extends PureComponent {
     static displayName = wrapDisplayName(BaseComponent, 'withData')
-    handleRequest = (promise) => {
-      this.setState({ isLoading: true })
-      const onSuccess = (data) => this.setState({ isLoading: false, data })
-      const onError = (error) => this.setState({ isLoading: false, error })
-
-      promise.then(onSuccess).catch(onError)
-      return promise
-    }
-    getInitialData = (contextData) => getData({
-      ...contextData,
+    getInitialData = (context) => getData({
+      ...context,
       ...this.props
     })
+    handleRequest = (promise) => {
+      this.setState({ isLoading: true })
+
+      promise
+        .then((data) => this.setState({ isLoading: false, data }))
+        .catch((error) => this.setState({ isLoading: false, error }))
+
+      return promise
+    }
     constructor (props) {
       super(props)
 
       if (!id) {
-        id = dataStore.nextId()
+        id = props.dataStore.nextId()
       }
 
       this.state = {
         isLoading: false,
         error: null,
-        data: dataStore.get(id)
+        data: props.dataStore.getById(id)
       }
     }
-    componentWillMount () {
-      if (isClient && dataStore.get(id) == null) {
+    componentDidMount () {
+      if (this.props.dataStore.getById(id) == null) {
         this.handleRequest(getData(this.props))
       }
     }
@@ -99,9 +105,15 @@ const withData = (
       )
     }
   }
+
+  return (props) => (
+    <DataContext.Consumer>
+      {(dataStore) => <Data {...props} dataStore={dataStore} />}
+    </DataContext.Consumer>
+  )
 }
 
-const getAppInitialData = (tree, context) => {
+const getAppInitialData = (dataStore, tree, context) => {
   dataStore.init()
 
   return new Promise((resolve, reject) =>
@@ -114,8 +126,13 @@ const getAppInitialData = (tree, context) => {
             return false
           })
       }
-    }, {}, {}).then(() => resolve(dataStore.getAll()))
+    }, {}, {}).then(() => resolve(dataStore.get()))
   )
 }
 
-export { withData, dataStore, getAppInitialData }
+export {
+  createDataStore,
+  DataProvider,
+  withData,
+  getAppInitialData
+}
