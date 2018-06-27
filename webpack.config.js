@@ -15,7 +15,7 @@ const css = {
 
 const javascript = {
   test: /\.js$/,
-  exclude: /node_modules/,
+  include: config.paths.src,
   loader: 'babel-loader',
   options: {
     cacheDirectory: true,

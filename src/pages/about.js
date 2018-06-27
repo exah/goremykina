@@ -1,5 +1,5 @@
 import React from 'react'
-import { withData } from '../hocs/with-data'
+import { withData } from 'react-get-app-data'
 
 const About = ({ data }) => (
   <div>

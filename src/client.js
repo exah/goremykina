@@ -3,21 +3,20 @@ import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { hydrateData } from 'react-get-app-data'
+import { hydrate as hydrateCSS } from 'emotion'
 import App from './app'
-import { hydrate } from 'emotion'
-import { DataProvider, createDataStore } from './hocs/with-data'
 
 // Get server state
 const { cssIds, initialData, userLang } = (window._ssr || {})
 
 // Restore emotion css ids and withData state
-hydrate(cssIds)
+hydrateCSS(cssIds)
+hydrateData(initialData)
 
 // Render app
 ReactDOM.hydrate((
-  <DataProvider value={createDataStore(initialData)}>
-    <Router>
-      <App userLang={userLang} />
-    </Router>
-  </DataProvider>
+  <Router>
+    <App userLang={userLang} />
+  </Router>
 ), document.getElementById('app'))
