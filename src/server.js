@@ -21,7 +21,7 @@ const renderApp = (tree) => {
 }
 
 const renderAppMiddleware = (files, config) => (req, res) => {
-  const lang = req.language || DEFAULT_LANG
+  const userLang = req.language || DEFAULT_LANG
 
   const context = {
     status: 200,
@@ -30,7 +30,7 @@ const renderAppMiddleware = (files, config) => (req, res) => {
 
   const appTree = (
     <Router location={req.url} context={context}>
-      <App userLang={lang} />
+      <App userLang={userLang} />
     </Router>
   )
 
@@ -65,7 +65,7 @@ const renderAppMiddleware = (files, config) => (req, res) => {
         config: config.public,
         cssIds: app.cssIds,
         initialData,
-        lang
+        userLang
       }
 
       res.send(template({

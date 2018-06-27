@@ -2,12 +2,29 @@ import React from 'react'
 import { hot } from 'react-hot-loader'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
-import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import { createTheme } from '@exah/prop-styles-system'
-import { Layout, Logo, FlexBox } from './components'
-import { THEME } from './constants'
-import Home from './pages/home'
-import About from './pages/about'
+import en from 'react-intl/locale-data/en'
+import ru from 'react-intl/locale-data/ru'
+
+import {
+  addLocaleData,
+  IntlProvider
+} from 'react-intl'
+
+import {
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
+
+import {
+  THEME,
+  DEFAULT_LANG,
+  ROUTE_LANG
+} from './constants'
+
+import { messages } from './data/intl'
+import { AppLayout } from './containers'
 
 injectGlobal({
   'html, body, #app': {
@@ -15,43 +32,23 @@ injectGlobal({
   }
 })
 
+addLocaleData([
+  ...en,
+  ...ru
+])
+
 const App = ({ userLang }) => (
   <ThemeProvider theme={createTheme(THEME)}>
     <Switch>
-      <Route path='/:lang(ru|en)'>
+      <Route path={ROUTE_LANG}>
         {({ match }) => (
-          <Layout>
-            <Layout.Header>
-              <FlexBox justify>
-                <FlexBox.Item>
-                  <Link to={match.url}>
-                    <Logo title='Irina Goremykina' />
-                  </Link>
-                </FlexBox.Item>
-                <FlexBox.Item>
-                  [lang]
-                </FlexBox.Item>
-              </FlexBox>
-            </Layout.Header>
-            <Layout.Content>
-              <Switch>
-                <Route path={match.path} exact component={Home} />
-                <Route path={match.path + '/about'} component={About} />
-              </Switch>
-            </Layout.Content>
-            <Layout.Footer>
-              <FlexBox justify>
-                <FlexBox.Item>
-                  <Link to={match.url + '/about'}>
-                    About Irina
-                  </Link>
-                </FlexBox.Item>
-                <FlexBox.Item>
-                  [description]
-                </FlexBox.Item>
-              </FlexBox>
-            </Layout.Footer>
-          </Layout>
+          <IntlProvider
+            defaultLocale={DEFAULT_LANG}
+            locale={match.params.lang}
+            messages={messages[match.params.lang]}
+          >
+            <AppLayout />
+          </IntlProvider>
         )}
       </Route>
       <Redirect from='/' to={'/' + userLang} exact />

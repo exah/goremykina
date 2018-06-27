@@ -4,11 +4,10 @@ import serialize from 'serialize-javascript'
 export default ({
   app,
   files,
-  ssrData = {},
-  lang = 'en'
+  ssrData = {}
 }) => html`
   <!DOCTYPE html>
-  <html lang="${lang}" class="no-js" ${app.head.htmlAttributes}>
+  <html class="no-js" ${app.head.htmlAttributes}>
     <head>
       <meta charset="utf-8" />
       ${app.head.title}
