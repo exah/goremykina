@@ -1,12 +1,12 @@
 import React from 'react'
 import Macro from 'macro-components'
 import styled from 'react-emotion'
-import { flexItemProps } from '@exah/prop-styles-system'
+import { flexItemPropStyles } from '@exah/prop-styles-system'
 import { Box, FlexBox, FlexBoxItem } from '../box'
 
 const LayoutContent = styled(Box)(
   { flexGrow: 1, flexShrink: 0, flexBasis: 'auto' },
-  flexItemProps
+  flexItemPropStyles
 )
 
 const createLayout = Macro({

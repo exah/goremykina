@@ -3,7 +3,7 @@ import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { hydrateData } from 'react-get-app-data'
+import { hydrateData } from 'react-universal-data'
 import { hydrate as hydrateCSS } from 'emotion'
 import App from './app'
 

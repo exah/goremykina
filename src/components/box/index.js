@@ -1,27 +1,23 @@
 import styled from 'react-emotion'
 
 import {
-  helperProps,
-  themeProps,
-  marginProps,
-  paddingProps,
-  borderProps,
-  flexProps,
-  flexItemProps,
-  sizesProps
+  space,
+  sizes,
+  colors,
+  flexPropStyles,
+  flexItemPropStyles,
+  utilityPropStyles
 } from '@exah/prop-styles-system'
 
 const Box = styled.div(
-  helperProps,
-  themeProps,
-  marginProps,
-  paddingProps,
-  borderProps,
-  sizesProps
+  space,
+  sizes,
+  colors,
+  utilityPropStyles
 )
 
-const FlexBox = styled(Box)({ display: 'flex' }, flexProps)
-const FlexBoxItem = styled(Box)(flexItemProps)
+const FlexBox = styled(Box)({ display: 'flex' }, flexPropStyles)
+const FlexBoxItem = styled(Box)(flexItemPropStyles)
 
 FlexBox.Item = FlexBoxItem
 

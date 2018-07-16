@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
-import { getAppInitialData } from 'react-get-app-data'
+import { getInitialData } from 'react-universal-data'
 import { DEFAULT_LANG, SUPPORTED_LANGS } from './constants'
 import template from './template'
 import App from './app'
@@ -28,13 +28,13 @@ const renderAppMiddleware = (files, config) => (req, res) => {
     statusText: 'OK'
   }
 
-  const appTree = (
+  const appElement = (
     <Router location={req.url} context={context}>
       <App userLang={userLang} />
     </Router>
   )
 
-  return getAppInitialData(appTree, { req, res })
+  return getInitialData(appElement)
     .catch((error) => {
       console.log('Prefetch failed')
       console.error(error)
@@ -59,7 +59,7 @@ const renderAppMiddleware = (files, config) => (req, res) => {
         return
       }
 
-      const app = renderApp(appTree)
+      const app = renderApp(appElement)
 
       const ssrData = {
         config: config.public,
