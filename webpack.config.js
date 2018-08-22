@@ -23,6 +23,10 @@ const javascript = {
   }
 }
 
+const getFilename = (ext) => config.isProd
+  ? `[name].[hash].${ext}`
+  : `[name].${ext}`
+
 const clientConfig = {
   name: 'client',
   target: 'web',
@@ -34,6 +38,8 @@ const clientConfig = {
   },
   output: {
     path: config.paths.dist,
+    filename: getFilename('js'),
+    chunkFilename: getFilename('js'),
     publicPath: '/'
   },
   resolve: {
@@ -47,9 +53,23 @@ const clientConfig = {
       javascript
     ]
   },
+  optimization: {
+    runtimeChunk: {
+      name: 'runtime'
+    },
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /node_modules/,
+          name: 'vendors',
+          chunks: 'initial'
+        }
+      }
+    }
+  },
   plugins: [
     new CSSPlugin({
-      filename: '[name].css'
+      filename: getFilename('css')
     })
   ].concat(config.isDev
     ? [ new webpack.HotModuleReplacementPlugin() ]
