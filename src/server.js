@@ -1,7 +1,11 @@
+import config from 'config'
+import express from 'express'
+import requestLanguage from 'express-request-language'
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
+import flushChunks from 'webpack-flush-chunks'
 import { StaticRouter as Router } from 'react-router'
 import { getInitialData } from 'react-universal-data'
 import { DEFAULT_LANG, SUPPORTED_LANGS } from './constants'
@@ -20,7 +24,7 @@ const renderApp = (tree) => {
   }
 }
 
-const renderAppMiddleware = (files, config) => (req, res) => {
+const renderAppMiddleware = (files) => (req, res) => {
   const userLang = req.language || DEFAULT_LANG
 
   const context = {
@@ -80,25 +84,19 @@ const renderAppMiddleware = (files, config) => (req, res) => {
     })
 }
 
-const testFile = (reg) => (file) => reg.test(file)
-
-const getFiles = (stats, ...chunks) => chunks.reduce((acc, name) => {
-  const assets = stats.assetsByChunkName[name].map((file) => stats.publicPath + file)
-  return {
-    css: acc.css.concat(assets.filter(testFile(/\.css$/))),
-    js: acc.js.concat(assets.filter(testFile(/\.js$/)))
-  }
-}, { css: [], js: [] })
-
 export default function serverRender ({ clientStats }) {
-  const config = require('config')
-  const express = require('express')
-  const requestLanguage = require('express-request-language')
+  const chunks = flushChunks(clientStats)
+  const toPublic = (file) => clientStats.publicPath + file
+
+  const files = {
+    js: chunks.scripts.map(toPublic),
+    css: chunks.stylesheets.map(toPublic)
+  }
+
   const router = express.Router()
-  const files = getFiles(clientStats, 'main')
 
   router.use(requestLanguage({ languages: SUPPORTED_LANGS }))
-  router.use(renderAppMiddleware(files, config))
+  router.use(renderAppMiddleware(files))
 
   return router
 }
