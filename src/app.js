@@ -2,7 +2,7 @@ import React from 'react'
 import { hot } from 'react-hot-loader'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
-import { createTheme } from '@exah/prop-styles-system'
+import { createTheme } from 'pss'
 import en from 'react-intl/locale-data/en'
 import ru from 'react-intl/locale-data/ru'
 

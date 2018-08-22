@@ -6,4 +6,6 @@ const Logo = (props) => (
   </svg>
 )
 
-export { Logo }
+export {
+  Logo
+}

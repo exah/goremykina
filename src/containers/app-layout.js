@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
 import { Link, Switch, Route } from 'react-router-dom'
-import { Layout, Logo, FlexBox } from '../components'
+import { Layout, FlexBox } from 'pss-components'
+import { Logo } from '../components'
 import { withIntl } from '../hocs'
 
 import {
@@ -18,8 +19,8 @@ const AppLayout = ({ _t, _link, _linkAlt, lang }) => (
       <html lang={lang} />
       <title>{_t('title')}</title>
     </Helmet>
-    <Layout>
-      <Layout.Header>
+    <Layout pd bg='site-background'>
+      <Layout.Item comp='header'>
         <FlexBox justify>
           <FlexBox.Item>
             <Link to={_link(ROUTE_HOME)}>
@@ -32,14 +33,14 @@ const AppLayout = ({ _t, _link, _linkAlt, lang }) => (
             </Link>
           </FlexBox.Item>
         </FlexBox>
-      </Layout.Header>
-      <Layout.Content>
+      </Layout.Item>
+      <Layout.Content comp='main'>
         <Switch>
           <Route path={ROUTE_HOME} exact component={Home} />
           <Route path={ROUTE_ABOUT} component={About} />
         </Switch>
       </Layout.Content>
-      <Layout.Footer>
+      <Layout.Item comp='footer'>
         <FlexBox justify>
           <FlexBox.Item>
             <Link to={_link(ROUTE_ABOUT)}>
@@ -50,7 +51,7 @@ const AppLayout = ({ _t, _link, _linkAlt, lang }) => (
             [description]
           </FlexBox.Item>
         </FlexBox>
-      </Layout.Footer>
+      </Layout.Item>
     </Layout>
   </Fragment>
 )

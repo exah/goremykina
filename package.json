@@ -56,7 +56,6 @@
     "webpack-hot-server-middleware": "^0.5.0"
   },
   "dependencies": {
-    "@exah/prop-styles-system": "^1.2.0",
     "body-parser": "^1.18.3",
     "common-tags": "^1.8.0",
     "compression": "^1.7.3",
@@ -70,9 +69,10 @@
     "express": "^4.16.3",
     "express-request-language": "^1.1.15",
     "intl": "^1.2.5",
-    "macro-components": "^2.0.0",
     "ms": "^2.1.1",
     "path-to-regexp": "^2.3.0",
+    "pss": "^2.2.0",
+    "pss-components": "^1.0.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-emotion": "^9.2.6",
