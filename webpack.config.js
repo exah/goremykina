@@ -1,6 +1,5 @@
 const path = require('path')
 const config = require('config')
-const webpack = require('webpack')
 const CSSPlugin = require('mini-css-extract-plugin')
 const StatsPlugin = require('stats-webpack-plugin')
 
@@ -32,9 +31,7 @@ const clientConfig = {
   target: 'web',
   mode: nodeEnv,
   entry: {
-    main: config.isProd
-      ? [ './src/client.js' ]
-      : [ 'webpack-hot-middleware/client', './src/client.js' ]
+    main: './src/client.js'
   },
   output: {
     path: config.paths.dist,
@@ -71,9 +68,9 @@ const clientConfig = {
     new CSSPlugin({
       filename: getFilename('css')
     })
-  ].concat(config.isDev
-    ? [ new webpack.HotModuleReplacementPlugin() ]
-    : [ new StatsPlugin('stats.json', { chunkModules: true }) ]
+  ].concat(config.isProd
+    ? [ new StatsPlugin('clientStats.json', { chunkModules: true }) ]
+    : []
   )
 }
 
@@ -95,7 +92,11 @@ const serverConfig = {
   },
   externals: Object.keys(require('./package.json').dependencies),
   performance: { hints: false },
-  optimization: { nodeEnv }
+  optimization: { nodeEnv },
+  plugins: [].concat(config.isProd
+    ? [ new StatsPlugin('serverStats.json', { chunkModules: true }) ]
+    : []
+  )
 }
 
 module.exports = [
