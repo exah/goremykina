@@ -3,13 +3,15 @@ const messages = {
     'title': 'Irina Goremykina',
     'nav.home': 'Irina Goremykina',
     'nav.about': 'About Irina',
-    'nav.lang': 'Русский'
+    'nav.lang': 'Русский',
+    'nav.back': 'Back'
   },
   ru: {
     'title': 'Ирина Горемыкина',
     'nav.home': 'Ирина Горемыкина',
     'nav.about': 'Об Ирине',
-    'nav.lang': 'English'
+    'nav.lang': 'English',
+    'nav.back': 'Назад'
   }
 }
 
