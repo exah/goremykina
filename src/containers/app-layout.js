@@ -1,19 +1,21 @@
 import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
-import { Link, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { Layout, FlexBox } from 'pss-components'
 import { Logo } from '../components'
 import { withIntl } from '../hocs'
 
 import {
   ROUTE_HOME,
+  ROUTE_PICTURE,
   ROUTE_ABOUT
 } from '../constants'
 
 import Home from '../pages/home'
 import About from '../pages/about'
+import AppLink from './app-link'
 
-const AppLayout = ({ _t, _link, _linkAlt, lang }) => (
+const AppLayout = ({ _t, _linkAlt, lang }) => (
   <Fragment>
     <Helmet>
       <html lang={lang} />
@@ -23,29 +25,30 @@ const AppLayout = ({ _t, _link, _linkAlt, lang }) => (
       <Layout.Item comp='header'>
         <FlexBox justify>
           <FlexBox.Item>
-            <Link to={_link(ROUTE_HOME)}>
+            <AppLink path={ROUTE_HOME}>
               <Logo title={_t('nav.home')} />
-            </Link>
+            </AppLink>
           </FlexBox.Item>
           <FlexBox.Item>
-            <Link to={_linkAlt(ROUTE_HOME)}>
+            <AppLink to={_linkAlt(ROUTE_HOME)}>
               {_t('nav.lang')}
-            </Link>
+            </AppLink>
           </FlexBox.Item>
         </FlexBox>
       </Layout.Item>
       <Layout.Content comp='main'>
         <Switch>
-          <Route path={ROUTE_HOME} exact component={Home} />
-          <Route path={ROUTE_ABOUT} component={About} />
+          <Route path={ROUTE_PICTURE} component={Home} />
+          <Route path={ROUTE_HOME} component={Home} />
         </Switch>
+        <Route path={ROUTE_ABOUT} component={About} />
       </Layout.Content>
       <Layout.Item comp='footer'>
         <FlexBox justify>
           <FlexBox.Item>
-            <Link to={_link(ROUTE_ABOUT)}>
+            <AppLink path={ROUTE_ABOUT}>
               {_t('nav.about')}
-            </Link>
+            </AppLink>
           </FlexBox.Item>
           <FlexBox.Item>
             [description]
