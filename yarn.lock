@@ -1171,6 +1171,13 @@ babel-messages@^6.23.0:
   dependencies:
     babel-runtime "^6.22.0"
 
+babel-plugin-dynamic-import-node@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-dynamic-import-node/-/babel-plugin-dynamic-import-node-2.0.0.tgz#d6fc3f6c5e3bdc34e49c15faca7ce069755c0a57"
+  dependencies:
+    babel-plugin-syntax-dynamic-import "^6.18.0"
+    object.assign "^4.1.0"
+
 babel-plugin-emotion@^9.2.6:
   version "9.2.6"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-9.2.6.tgz#992d48f316c20610c28a95ae90e6bd193014eec5"
@@ -1194,6 +1201,10 @@ babel-plugin-macros@^2.0.0:
   resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.3.0.tgz#1538e6339cbcbf093f334dc2f10f5f53043e3fda"
   dependencies:
     cosmiconfig "^4.0.0"
+
+babel-plugin-syntax-dynamic-import@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-syntax-dynamic-import/-/babel-plugin-syntax-dynamic-import-6.18.0.tgz#8d6a26229c83745a9982a441051572caa179b1da"
 
 babel-plugin-syntax-jsx@^6.18.0:
   version "6.18.0"
