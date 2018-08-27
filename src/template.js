@@ -1,5 +1,5 @@
-import { html } from 'common-tags'
 import serialize from 'serialize-javascript'
+import { dedent as html } from './utils'
 
 export default ({
   app,
