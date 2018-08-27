@@ -1,4 +1,5 @@
 const THEME = {
+  grid: 16,
   media: {
     D: '(min-width: 1025px)',
     T: '(max-width: 1024px)',
