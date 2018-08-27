@@ -1,23 +1,30 @@
-const dedent = (strings, ...values) => {
-  const lineLengths = strings.join('')
-    .split('\n')
+const getIndentation = (src) => {
+  const lengths = src.split('\n')
     .filter(line => line.trim().length !== 0)
-    .map(line => line.length - line.trimLeft().length)
+    .map((str) => str.length - str.trimLeft().length)
 
-  const indentation = Math.min(...lineLengths)
+  return Math.min(...lengths)
+}
+
+const toArray = (src) => Array.isArray(src) ? src : src ? [ src ] : []
+
+const dedent = (strings, ...values) => {
+  const indentation = getIndentation(strings.join(''))
 
   const parts = []
 
   for (let stringIndex = 0; stringIndex < strings.length; stringIndex++) {
     const trimmed = strings[stringIndex]
       .split('\n')
-      .map((line, lineIndex) => stringIndex === 0 || lineIndex > 0 ? line.substr(indentation) : line)
+      .map((str, strIndex) => stringIndex === 0 || strIndex > 0 ? str.substr(indentation) : str)
       .join('\n')
 
     parts.push(trimmed)
 
     if (stringIndex < values.length) {
-      parts.push(values[stringIndex])
+      parts.push(
+        toArray(values[stringIndex]).join('')
+      )
     }
   }
 
