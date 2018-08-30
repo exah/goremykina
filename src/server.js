@@ -3,6 +3,7 @@ import express from 'express'
 import requestLanguage from 'express-request-language'
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import * as emotion from 'emotion'
 import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
 import flushChunks from 'webpack-flush-chunks'
@@ -85,6 +86,8 @@ const renderAppMiddleware = (files) => (req, res) => {
 }
 
 export default function serverRender ({ clientStats }) {
+  emotion.flush() // Fresh styles on re-build
+
   const chunks = flushChunks(clientStats)
   const toPublic = (file) => clientStats.publicPath + file
 
