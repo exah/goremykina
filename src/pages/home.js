@@ -1,10 +1,13 @@
 import React from 'react'
+import { Box, Text } from 'pss-components'
 import { withData } from 'react-universal-data'
 
 const Home = ({ data, isLoading }) => (
-  <div>
-    {isLoading ? 'Loading...' : `Home: ${data}`}
-  </div>
+  <Box pdy>
+    <Text>
+      {isLoading ? 'Loading...' : `Home: ${data}`}
+    </Text>
+  </Box>
 )
 
 export default withData(

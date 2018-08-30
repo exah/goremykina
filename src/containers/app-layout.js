@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
 import { Switch, Route } from 'react-router-dom'
-import { Layout, FlexBox } from 'pss-components'
+import { Layout, FlexBox, Text } from 'pss-components'
 import { Logo } from '../components'
 import { withIntl } from '../hocs'
 
@@ -31,7 +31,7 @@ const AppLayout = ({ _t, _linkAlt, lang }) => (
           </FlexBox.Item>
           <FlexBox.Item>
             <AppLink to={_linkAlt(ROUTE_HOME)}>
-              {_t('nav.lang')}
+              <Text>{_t('nav.lang')}</Text>
             </AppLink>
           </FlexBox.Item>
         </FlexBox>
@@ -47,11 +47,11 @@ const AppLayout = ({ _t, _linkAlt, lang }) => (
         <FlexBox justify>
           <FlexBox.Item>
             <AppLink path={ROUTE_ABOUT}>
-              {_t('nav.about')}
+              <Text>{_t('nav.about')}</Text>
             </AppLink>
           </FlexBox.Item>
           <FlexBox.Item>
-            [description]
+            <Text>[description]</Text>
           </FlexBox.Item>
         </FlexBox>
       </Layout.Item>
