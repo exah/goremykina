@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'react-emotion'
 import { system } from 'pss'
+import { Base } from 'pss-components'
 
-const ModalContainer = styled('div')`
+const ModalContainer = styled(Base)`
   position: fixed;
   z-index: 100;
   top: 0;
