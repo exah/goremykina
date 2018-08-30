@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
@@ -26,34 +26,46 @@ import {
 import { messages } from './data/intl'
 import { AppLayout } from './containers'
 
-injectGlobal({
-  'html, body, #app': {
-    height: '100%'
-  }
-})
+const theme = createTheme(THEME)
 
 addLocaleData([
   ...en,
   ...ru
 ])
 
-const App = ({ userLang }) => (
-  <ThemeProvider theme={createTheme(THEME)}>
-    <Switch>
-      <Route path={ROUTE_LANG}>
-        {({ match }) => (
-          <IntlProvider
-            defaultLocale={DEFAULT_LANG}
-            locale={match.params.lang}
-            messages={messages[match.params.lang]}
-          >
-            <AppLayout />
-          </IntlProvider>
-        )}
-      </Route>
-      <Redirect from='/' to={'/' + userLang} exact />
-    </Switch>
-  </ThemeProvider>
-)
+class App extends Component {
+  constructor (props) {
+    super(props)
+
+    injectGlobal({
+      'html, body, #app': {
+        height: '100%'
+      },
+      ':root': theme.textStyle.root
+    })
+  }
+  render () {
+    const { userLang } = this.props
+
+    return (
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route path={ROUTE_LANG}>
+            {({ match }) => (
+              <IntlProvider
+                defaultLocale={DEFAULT_LANG}
+                locale={match.params.lang}
+                messages={messages[match.params.lang]}
+              >
+                <AppLayout />
+              </IntlProvider>
+            )}
+          </Route>
+          <Redirect from='/' to={'/' + userLang} exact />
+        </Switch>
+      </ThemeProvider>
+    )
+  }
+}
 
 export default hot(module)(App)
