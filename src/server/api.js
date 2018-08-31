@@ -6,12 +6,20 @@ const router = express.Router()
 
 router.use(API_GET_PAGE, (req, res, next) => {
   if (req.params.slug === aboutData.slug) {
-    res.json(aboutData)
+    res.status(200).json({
+      status: 200,
+      message: 'ok',
+      data: aboutData
+    })
 
     return
   }
 
-  next()
+  res.status(404).json({
+    status: 404,
+    message: 'Page Not Found',
+    data: null
+  })
 })
 
 export default router
