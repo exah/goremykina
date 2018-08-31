@@ -3,6 +3,7 @@ import styled from 'react-emotion'
 import { compose } from 'recompose'
 import { withData } from 'react-universal-data'
 import { Box, Grid } from 'pss-components'
+import { getPage } from '../api'
 import { ROUTE_HOME } from '../constants'
 import { Modal } from '../components'
 import { AppLink } from '../containers'
@@ -39,5 +40,5 @@ const About = ({ _t, content, photo }) => (
 
 export default compose(
   withIntl,
-  withData(() => import('../data/about'))
+  withData(({ lang }) => getPage({ lang, slug: 'about' }))
 )(About)

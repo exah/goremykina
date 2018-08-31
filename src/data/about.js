@@ -1,5 +1,7 @@
 import { dedent } from '../utils'
 
+const slug = 'about'
+
 const photo = {
   url: '/photo.jpg',
   width: 2912,
@@ -16,6 +18,7 @@ const content = dedent`
 `
 
 export {
+  slug,
   photo,
   content
 }
