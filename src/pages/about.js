@@ -10,7 +10,7 @@ import { AppLink } from '../containers'
 import { withIntl } from '../hocs'
 import { renderMarkdown } from '../utils'
 
-const PhotoImage = styled('img')`
+const Photo = styled('img')`
   display: block;
   width: 100%;
   height: auto;
@@ -30,7 +30,7 @@ const About = ({ _t, content, photo }) => (
         </Grid.Item>
         {photo && (
           <Grid.Item col={3} mgt={2}>
-            <PhotoImage src={photo.url} width={photo.width} height={photo.height} alt='' />
+            <Photo src={photo.url} width={photo.width} height={photo.height} alt='' />
           </Grid.Item>
         )}
       </Grid>

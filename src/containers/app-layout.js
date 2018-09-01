@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react'
 import Helmet from 'react-helmet'
-import { Switch, Route } from 'react-router-dom'
 import { Layout, FlexBox, Text } from 'pss-components'
-import { Logo } from '../components'
+import { Logo, RouteWithProps } from '../components'
 import { withIntl } from '../hocs'
 
 import {
   ROUTE_HOME,
-  ROUTE_PICTURE,
   ROUTE_ABOUT
 } from '../constants'
 
@@ -36,13 +34,13 @@ const AppLayout = ({ _t, _linkAlt, lang }) => (
           </FlexBox.Item>
         </FlexBox>
       </Layout.Item>
-      <Layout.Content comp='main'>
-        <Switch>
-          <Route path={ROUTE_PICTURE} component={Home} />
-          <Route path={ROUTE_HOME} component={Home} />
-        </Switch>
-        <Route path={ROUTE_ABOUT} component={About} />
-      </Layout.Content>
+      <Layout.Body comp='main'>
+        <RouteWithProps path={ROUTE_HOME} component={Home} exact>
+          {(state) => (
+            <RouteWithProps path={ROUTE_ABOUT} component={About} {...state} />
+          )}
+        </RouteWithProps>
+      </Layout.Body>
       <Layout.Item comp='footer'>
         <FlexBox justify>
           <FlexBox.Item>
