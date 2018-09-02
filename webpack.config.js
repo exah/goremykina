@@ -34,7 +34,7 @@ const clientConfig = {
     main: './src/client.js'
   },
   output: {
-    path: config.paths.dist,
+    path: config.paths.distClient,
     filename: getFilename('js'),
     chunkFilename: getFilename('js'),
     publicPath: '/'
@@ -82,7 +82,7 @@ const serverConfig = {
     server: './src/server.js'
   },
   output: {
-    path: config.paths.dist,
+    path: config.paths.distServer,
     publicPath: '/',
     filename: '[name].js',
     libraryTarget: 'commonjs2'

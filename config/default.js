@@ -21,6 +21,8 @@ const config = {
     config: resolvePath('./config'),
     public: resolvePath('./public'),
     dist: resolvePath('./dist'),
+    distClient: resolvePath('./dist/client'),
+    distServer: resolvePath('./dist/server'),
     src: resolvePath('./src')
   }
 }

@@ -19,7 +19,6 @@ app.use(webpackUniversalAndHot({
   webpackConfig,
   isDev: config.isDev,
   isHot: true,
-  outputPath: config.paths.dist,
   clientEntry: 'main',
   serverEntry: 'server',
   clientStatsFileName: 'clientStats.json',

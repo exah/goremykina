@@ -49,11 +49,10 @@
     "react-hot-loader": "^4.3.5",
     "stats-webpack-plugin": "^0.7.0",
     "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-flush-chunks": "^2.0.1"
+    "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@exah/webpack-universal-hot-middleware": "^1.0.1",
+    "@exah/webpack-universal-hot-middleware": "^1.1.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
