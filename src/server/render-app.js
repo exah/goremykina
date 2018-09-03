@@ -21,7 +21,7 @@ const renderApp = (tree) => {
   }
 }
 
-const renderAppMiddleware = (files) => (req, res) => {
+const renderAppMiddleware = (files) => (req, res, next) => {
   const userLang = req.language || DEFAULT_LANG
 
   const context = {
@@ -76,8 +76,7 @@ const renderAppMiddleware = (files) => (req, res) => {
       }))
     })
     .catch((error) => {
-      console.error(error)
-      res.send(`Error: ${error.message}`)
+      next(error)
     })
 }
 
