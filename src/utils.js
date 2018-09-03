@@ -1,3 +1,19 @@
+import React from 'react'
+import remark from 'remark'
+import reactRenderer from 'remark-react'
+import { Text } from 'pss-components'
+
+const toArray = (src) => src == null ? [] : [].concat(src)
+
+const markdown = remark().use(reactRenderer, {
+  remarkReactComponents: {
+    p: (props) => <Text comp='p' mgb {...props} />
+  }
+})
+
+const renderMarkdown = (src = '') =>
+  markdown.processSync(src).contents
+
 const getIndent = (lines) => {
   const lengths = lines
     .filter(line => line.trim().length !== 0)
@@ -7,8 +23,6 @@ const getIndent = (lines) => {
 
   return result === Infinity ? 0 : result
 }
-
-const toArray = (src) => Array.isArray(src) ? src : src ? [ src ] : []
 
 const dedent = (strings, ...values) => {
   const stripIndent = getIndent(strings.join('').split('\n'))
@@ -35,5 +49,6 @@ const dedent = (strings, ...values) => {
 }
 
 export {
+  renderMarkdown,
   dedent
 }
