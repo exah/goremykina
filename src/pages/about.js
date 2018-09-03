@@ -39,9 +39,9 @@ const About = ({ _t, content, photo }) => (
 )
 
 export default compose(
-  withIntl,
-  withData(({ lang }) => getPage({ lang, slug: 'about' }).then((res) => ({
+  withData(({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
     status: res.status,
     ...res.data
-  })))
+  }))),
+  withIntl
 )(About)
