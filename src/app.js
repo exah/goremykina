@@ -51,13 +51,13 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path={ROUTE_LANG}>
-            {({ match }) => (
+            {(props) => (
               <IntlProvider
                 defaultLocale={DEFAULT_LANG}
-                locale={match.params.lang}
-                messages={messages[match.params.lang]}
+                locale={props.match.params.lang}
+                messages={messages[props.match.params.lang]}
               >
-                <AppLayout />
+                <AppLayout {...props} />
               </IntlProvider>
             )}
           </Route>
