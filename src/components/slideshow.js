@@ -25,6 +25,7 @@ const SlideshowItem = styled(SlideshowItemBase)`
 `
 
 class Slideshow extends PureComponent {
+  static Item = SlideshowItem
   static defaultProps = {
     defaultView: 0,
     equalHeight: undefined,
@@ -35,13 +36,8 @@ class Slideshow extends PureComponent {
     hysteresis: 0.4,
     duration: '0.4s',
     easeFunction: 'cubic-bezier(0.15, 0.3, 0.25, 1)',
+    onChange: () => undefined,
     delay: '0s'
-  }
-  static Item = SlideshowItem
-  state = {
-    currentViewIndex: this.props.defaultView,
-    lastViewIndex: 0,
-    views: []
   }
   static getDerivedStateFromProps (props, state) {
     const views = React.Children.toArray(props.children)
@@ -51,6 +47,11 @@ class Slideshow extends PureComponent {
       views,
       lastViewIndex
     }
+  }
+  state = {
+    currentViewIndex: this.props.defaultView,
+    lastViewIndex: 0,
+    views: []
   }
   componentDidMount () {
     this.updateSize()
@@ -74,11 +75,17 @@ class Slideshow extends PureComponent {
     this.handleViewChange(Math.min(currentViewIndex + 1, lastViewIndex))
   }
   handleViewChange = (index) => {
+    const { onChange } = this.props
+
     this.setState((s) => {
       if (s.currentViewIndex === index) return
-      return { currentViewIndex: index }
+
+      return {
+        currentViewIndex: index
+      }
     }, () => {
       this.instance.rootNode.style.transform = ''
+      onChange(this.state)
     })
   }
   getMousePosition = (event) => {
@@ -100,15 +107,13 @@ class Slideshow extends PureComponent {
     }
   }
   updateSize = () => {
-    setTimeout(() => {
-      const { containerNode, updateHeight } = this.instance
+    const { containerNode, updateHeight } = this.instance
 
-      containerNode.style.width = ''
-      const nextWidth = Math.ceil(containerNode.getBoundingClientRect().width)
-      containerNode.style.width = nextWidth + 'px'
+    containerNode.style.width = ''
+    const nextWidth = Math.ceil(containerNode.getBoundingClientRect().width)
+    containerNode.style.width = nextWidth + 'px'
 
-      updateHeight()
-    }, 0)
+    updateHeight()
   }
   render () {
     const {

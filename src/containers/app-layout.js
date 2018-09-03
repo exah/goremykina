@@ -21,10 +21,17 @@ class AppLayout extends Component {
     pictures: []
   }
   state = {
-    activePicture: null
+    activePictureIndex: 0
+  }
+  handlePictureChange = ({ currentViewIndex }) => {
+    this.setState({
+      activePictureIndex: currentViewIndex
+    })
   }
   render () {
     const { _t, _linkAlt, lang, isLoading, pictures } = this.props
+    const { activePictureIndex } = this.state
+    const activePicture = pictures[activePictureIndex]
 
     return (
       <>
@@ -33,7 +40,7 @@ class AppLayout extends Component {
           <title>{_t('title')}</title>
         </Helmet>
         <Layout bg='site-background'>
-          <Layout.Item comp='header' pd>
+          <Layout.Item comp='header' pd={2}>
             <FlexBox justify>
               <FlexBox.Item>
                 <AppLink path={ROUTE_HOME}>
@@ -53,6 +60,7 @@ class AppLayout extends Component {
               component={Home}
               isLoading={isLoading}
               pictures={pictures}
+              onPictureChange={this.handlePictureChange}
               exact
             />
             <RouteWithProps
@@ -61,16 +69,25 @@ class AppLayout extends Component {
               isLoading={isLoading}
             />
           </Layout.Body>
-          <Layout.Item comp='footer' pd>
-            <FlexBox justify>
+          <Layout.Item comp='footer' pd={2}>
+            <FlexBox justify align='flex-end'>
               <FlexBox.Item>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{_t('nav.about')}</Text>
                 </AppLink>
               </FlexBox.Item>
-              <FlexBox.Item>
-                <Text>[description]</Text>
-              </FlexBox.Item>
+              {activePicture && (
+                <FlexBox.Item>
+                  <Text align='right'>
+                    <Text mgb>
+                      {activePicture.name}
+                    </Text>
+                    <Text textStyle='caption'>
+                      {activePicture.description}
+                    </Text>
+                  </Text>
+                </FlexBox.Item>
+              )}
             </FlexBox>
           </Layout.Item>
         </Layout>

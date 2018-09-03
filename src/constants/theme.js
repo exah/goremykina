@@ -6,8 +6,8 @@ const THEME = {
     M: '(max-width: 600px)'
   },
   space: {
-    default: [ 0, 24, 72 ],
-    M: [ 0, 16, 32 ]
+    default: [ 0, 6, 24, 72 ],
+    M: [ 0, 6, 16, 32 ]
   },
   color: {
     'site-background': '#E4E4E4'

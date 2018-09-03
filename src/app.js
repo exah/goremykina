@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
+import React, { Component } from 'react'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
 import { createTheme } from 'pss'
@@ -51,13 +51,13 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path={ROUTE_LANG}>
-            {(props) => (
+            {({ match }) => (
               <IntlProvider
                 defaultLocale={DEFAULT_LANG}
-                locale={props.match.params.lang}
-                messages={messages[props.match.params.lang]}
+                locale={match.params.lang}
+                messages={messages[match.params.lang]}
               >
-                <AppLayout {...props} />
+                <AppLayout match={match} />
               </IntlProvider>
             )}
           </Route>

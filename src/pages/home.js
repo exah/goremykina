@@ -16,14 +16,20 @@ const Picture = styled('img')`
   height: auto;
 `
 
-const Home = ({ _t, isLoading, children, pictures = [] }) => (
+const Home = ({
+  _t,
+  isLoading,
+  children,
+  pictures = [],
+  onPictureChange
+}) => (
   isLoading ? (
     <Text mg='auto'>
       {_t('label.loading')}
     </Text>
   ) : (
     <Layout.Content wd>
-      <Slideshow ht wd equalHeight='100%'>
+      <Slideshow equalHeight='100%' onChange={onPictureChange} ht wd>
         {pictures.map((pic) => (
           <Slideshow.Item key={pic.id} position='relative' ht>
             <Picture

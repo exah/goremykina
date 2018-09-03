@@ -17,19 +17,19 @@ const Photo = styled('img')`
 `
 
 const About = ({ _t, content, photo }) => (
-  <Modal opacity={0.9}>
-    <Box pd ht ovsy ovtouch>
+  <Modal opacity={0.97}>
+    <Box pd={2} ht ovsy ovtouch>
       <Grid ht spacex>
         <Grid.Item col={1} mgt='auto'>
           <AppLink path={ROUTE_HOME}>
             {_t('nav.back')}
           </AppLink>
         </Grid.Item>
-        <Grid.Item mgx='auto' col={6} mgt={2}>
+        <Grid.Item mgx='auto' col={6} mgt={3}>
           {renderMarkdown(content)}
         </Grid.Item>
         {photo && (
-          <Grid.Item col={3} mgt={2}>
+          <Grid.Item col={3} mgt={3}>
             <Photo src={photo.url} width={photo.width} height={photo.height} alt='' />
           </Grid.Item>
         )}
@@ -39,9 +39,13 @@ const About = ({ _t, content, photo }) => (
 )
 
 export default compose(
-  withData(({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
-    status: res.status,
-    ...res.data
-  }))),
+  withData(
+    ({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
+      status: res.status,
+      ...res.data
+    })),
+    (prev, next) =>
+      prev.match.params.lang !== next.match.params.lang
+  ),
   withIntl
 )(About)
