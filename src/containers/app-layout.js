@@ -67,6 +67,7 @@ class AppLayout extends Component {
               path={ROUTE_ABOUT}
               component={About}
               isLoading={isLoading}
+              activePicture={activePicture}
             />
           </Layout.Body>
           <Layout.Item comp='footer' pd={2}>
