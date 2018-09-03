@@ -3,6 +3,7 @@ import remark from 'remark'
 import reactRenderer from 'remark-react'
 import { Text } from 'pss-components'
 
+const identity = (val) => val
 const toArray = (src) => src == null ? [] : [].concat(src)
 
 const markdown = remark().use(reactRenderer, {
@@ -48,7 +49,28 @@ const dedent = (strings, ...values) => {
   return parts.join('').trim()
 }
 
+function listen (target, eventName, fn, ...options) {
+  target.addEventListener(eventName, fn, ...options)
+  return () => target.removeEventListener(eventName, fn, ...options)
+}
+
+const throttle = (fn = identity) => {
+  let wait
+
+  return function (...args) {
+    if (wait) return
+    wait = true
+
+    window.requestAnimationFrame(() => {
+      wait = false
+      fn.apply(this, args)
+    })
+  }
+}
+
 export {
   renderMarkdown,
-  dedent
+  dedent,
+  listen,
+  throttle
 }

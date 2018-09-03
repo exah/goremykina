@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import { Box } from 'pss-components'
 import styled from 'react-emotion'
+import { Box } from 'pss-components'
 import SwipeableViews from 'react-swipeable-views'
+import { listen, throttle } from '../utils'
 
 class SlideshowItemBase extends PureComponent {
   handleDrag = (e) => {
@@ -55,9 +56,14 @@ class Slideshow extends PureComponent {
   }
   componentDidMount () {
     this.updateSize()
+
+    this.destroyResize = listen(window, 'resize', throttle(this.updateSize))
   }
   componentDidUpdate () {
     this.updateSize()
+  }
+  componentWillUnmount () {
+    this.destroyResize()
   }
   setIntance = (ref) => {
     this.instance = ref
