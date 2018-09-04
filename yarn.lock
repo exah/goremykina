@@ -2671,6 +2671,10 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+framez@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/framez/-/framez-0.3.2.tgz#a689f13c6bdd51accb8e093c0b0f7c1cd6a126a5"
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -4642,6 +4646,15 @@ react-event-listener@^0.6.0:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-flip-toolkit@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-flip-toolkit/-/react-flip-toolkit-4.0.5.tgz#0e936bea5f57abf7a3359c2cd0293b707a1e906c"
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    rematrix "^0.2.2"
+    wobble "^1.5.0"
+
 react-helmet@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-5.2.0.tgz#a81811df21313a6d55c5f058c4aeba5d6f3d97a7"
@@ -4953,6 +4966,10 @@ remark@^9.0.0:
     remark-parse "^5.0.0"
     remark-stringify "^5.0.0"
     unified "^6.0.0"
+
+rematrix@^0.2.2:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/rematrix/-/rematrix-0.2.3.tgz#37ec6b060a3c03c0fde3cf5628c6e109ea51e9d4"
 
 remove-trailing-separator@^1.0.1:
   version "1.1.0"
@@ -6061,6 +6078,10 @@ widest-line@^2.0.0:
   resolved "https://registry.yarnpkg.com/widest-line/-/widest-line-2.0.0.tgz#0142a4e8a243f8882c0233aa0e0281aa76152273"
   dependencies:
     string-width "^2.1.1"
+
+wobble@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/wobble/-/wobble-1.5.0.tgz#5192d6681642ca22e4e133408628b99e9a7d1559"
 
 wordwrap@~1.0.0:
   version "1.0.0"

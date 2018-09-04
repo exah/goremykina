@@ -8,7 +8,7 @@ const toArray = (src) => src == null ? [] : [].concat(src)
 
 const markdown = remark().use(reactRenderer, {
   remarkReactComponents: {
-    p: (props) => <Text comp='p' mgb {...props} />
+    p: (props) => <Text comp='p' mgb={2} {...props} />
   }
 })
 

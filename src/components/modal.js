@@ -15,7 +15,7 @@ const ModalContainer = styled(Base)`
 `
 
 const Modal = ({ children, ...rest }) => (
-  <ModalContainer bg='site-background' {...rest}>
+  <ModalContainer {...rest}>
     {children}
   </ModalContainer>
 )

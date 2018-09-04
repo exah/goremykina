@@ -46,7 +46,11 @@ class Slideshow extends PureComponent {
 
     return {
       views,
-      lastViewIndex
+      lastViewIndex,
+      prevViewIndex: props.currentViewIndex,
+      currentViewIndex: props.currentViewIndex !== state.prevViewIndex
+        ? props.currentViewIndex
+        : state.currentViewIndex
     }
   }
   state = {
@@ -153,8 +157,9 @@ class Slideshow extends PureComponent {
           ignoreNativeScroll={ignoreNativeScroll}
           resistance={resistance}
           enableMouseEvents={enableMouseEvents}
-          style={{ height: equalHeight }}
+          style={{ height: equalHeight, overflow: 'visible' }}
           containerStyle={{ height: equalHeight }}
+          slideStyle={{ overflow: 'visible' }}
         >
           {views}
         </SwipeableViews>

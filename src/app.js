@@ -20,7 +20,7 @@ import {
 import {
   THEME,
   DEFAULT_LANG,
-  ROUTE_LANG
+  ROUTE_PAGE
 } from './constants'
 
 import { messages } from './data/intl'
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route path={ROUTE_LANG}>
+          <Route path={ROUTE_PAGE}>
             {({ match }) => (
               <IntlProvider
                 defaultLocale={DEFAULT_LANG}

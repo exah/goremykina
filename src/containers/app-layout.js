@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Flipper } from 'react-flip-toolkit'
 import Helmet from 'react-helmet'
 import { compose } from 'recompose'
 import { withData } from 'react-universal-data'
@@ -16,6 +17,8 @@ import Home from '../pages/home'
 import About from '../pages/about'
 import AppLink from './app-link'
 
+const FlipperLayoutBody = Layout.Body.withComponent(Flipper)
+
 class AppLayout extends Component {
   static defaultProps = {
     pictures: []
@@ -29,9 +32,10 @@ class AppLayout extends Component {
     })
   }
   render () {
-    const { _t, _linkAlt, lang, isLoading, pictures } = this.props
+    const { _t, _linkAlt, lang, isLoading, match, pictures } = this.props
     const { activePictureIndex } = this.state
     const activePicture = pictures[activePictureIndex]
+    const isAboutPageOpen = match.params.page === 'about'
 
     return (
       <>
@@ -39,7 +43,7 @@ class AppLayout extends Component {
           <html lang={lang} />
           <title>{_t('title')}</title>
         </Helmet>
-        <Layout bg='site-background'>
+        <Layout bg='site-background' ovh>
           <Layout.Item comp='header' pd={2}>
             <FlexBox justify>
               <FlexBox.Item>
@@ -54,13 +58,14 @@ class AppLayout extends Component {
               </FlexBox.Item>
             </FlexBox>
           </Layout.Item>
-          <Layout.Body comp='main'>
+          <FlipperLayoutBody flipKey={isAboutPageOpen}>
             <RouteWithProps
               path={ROUTE_HOME}
               component={Home}
-              isLoading={isLoading}
               pictures={pictures}
               onPictureChange={this.handlePictureChange}
+              isAboutPageOpen={isAboutPageOpen}
+              activePictureIndex={activePictureIndex}
               exact
             />
             <RouteWithProps
@@ -69,7 +74,7 @@ class AppLayout extends Component {
               isLoading={isLoading}
               activePicture={activePicture}
             />
-          </Layout.Body>
+          </FlipperLayoutBody>
           <Layout.Item comp='footer' pd={2}>
             <FlexBox justify align='flex-end'>
               <FlexBox.Item>
@@ -81,10 +86,10 @@ class AppLayout extends Component {
                 <FlexBox.Item>
                   <Text align='right'>
                     <Text mgb>
-                      {activePicture.name}
+                      {isLoading ? _t('label.loading') : activePicture.name}
                     </Text>
                     <Text textStyle='caption'>
-                      {activePicture.description}
+                      {isLoading ? <>&nbsp;</> : activePicture.description}
                     </Text>
                   </Text>
                 </FlexBox.Item>
