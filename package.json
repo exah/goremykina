@@ -11,7 +11,11 @@
     "start": "cross-env NODE_ENV=production node server",
     "build": "cross-env NODE_ENV=production webpack-cli",
     "dev": "nodemon -w server server",
-    "prebuild": "rimraf dist"
+    "prebuild": "rimraf dist",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +59,7 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "@exah/webpack-universal-hot-middleware": "^1.1.0",
+    "animejs": "^2.2.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
@@ -68,7 +73,9 @@
     "express": "^4.16.3",
     "express-request-language": "^1.1.15",
     "framez": "^0.3.2",
+    "husky": "^0.14.3",
     "intl": "^1.2.5",
+    "lint-staged": "^7.2.2",
     "ms": "^2.1.1",
     "path-to-regexp": "^2.4.0",
     "pss": "^2.3.1",

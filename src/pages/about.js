@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'react-emotion'
 import { compose } from 'recompose'
 import { Box, Grid } from 'pss-components'
+import anime from 'animejs'
 import { Flipped } from 'react-flip-toolkit'
 import { withData } from 'react-universal-data'
-import { animate, updateStyles, withTime } from 'framez'
 import { ROUTE_HOME } from '../constants'
 import { AppLink } from '../containers'
 import { Modal } from '../components'
@@ -18,27 +18,35 @@ const Img = styled('img')`
   height: auto;
 `
 
-const fade = ($el, start, end, next) => {
-  const $target = $el.querySelectorAll('[data-fade]')
-
+const transition = ($el, start, end, next) => {
   if (end === 0) {
     $el.style.backgroundColor = 'transparent'
     $el.querySelector('[data-hide]').style.visibility = 'hidden'
   }
 
-  animate(
-    withTime(300),
-    updateStyles($target, { opacity: [ start, end ] })
-  )
-    .start()
-    .then(next)
+  const fadeAnime = anime({
+    targets: $el.querySelectorAll('[data-fade]'),
+    opacity: [ start, end ],
+    duration: 400,
+    easing: 'easeInOutSine'
+  }).finished
+
+  const scaleAnime = anime({
+    targets: $el.querySelectorAll('[data-scale]'),
+    scale: [ start, end ],
+    opacity: [ start, end ],
+    duration: 400,
+    easing: 'easeInOutSine'
+  }).finished
+
+  Promise.all([ fadeAnime, scaleAnime ]).then(next)
 }
 
-const fadeIn = (el) => fade(el, 0, 1)
-const fadeOut = (el, index, next) => fade(el, 1, 0, next)
+const onAppear = (el) => transition(el, 0, 1)
+const onExit = (el, index, next) => transition(el, 1, 0, next)
 
 const About = ({ _t, activePicture, content, photo }) => (
-  <Flipped flipId='about-page' onAppear={fadeIn} onExit={fadeOut}>
+  <Flipped flipId='about-page' onAppear={onAppear} onExit={onExit}>
     <Modal bg='site-background'>
       <Box pd={2} ht ovsy ovtouch>
         <Grid ht spacex>
@@ -53,20 +61,22 @@ const About = ({ _t, activePicture, content, photo }) => (
               ) : _t('nav.back')}
             </AppLink>
           </Grid.Item>
-          <Grid.Item mgx='auto' col={6} mgt={3} data-fade>
-            <Box>
+          <Grid.Item mgx='auto' col={6} mgt={3}>
+            <Box data-fade>
               {renderMarkdown(content)}
             </Box>
           </Grid.Item>
-          <Grid.Item col={3} mgt={3} data-fade>
-            {photo && (
-              <Img
-                src={photo.url}
-                width={photo.width}
-                height={photo.height}
-                alt=''
-              />
-            )}
+          <Grid.Item col={3} mgt={3}>
+            <Box data-scale css={{ transformOrigin: 'top right', mixBlendMode: 'multiply' }}>
+              {photo && (
+                <Img
+                  src={photo.url}
+                  width={photo.width}
+                  height={photo.height}
+                  alt=''
+                />
+              )}
+            </Box>
           </Grid.Item>
         </Grid>
       </Box>
