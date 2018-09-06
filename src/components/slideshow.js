@@ -29,7 +29,6 @@ class Slideshow extends PureComponent {
   static Item = SlideshowItem
   static defaultProps = {
     defaultView: 0,
-    equalHeight: undefined,
     animateHeight: false,
     enableMouseEvents: true,
     resistance: true,
@@ -128,16 +127,13 @@ class Slideshow extends PureComponent {
   render () {
     const {
       duration,
-      equalHeight,
       animateHeight,
       easeFunction,
       hysteresis,
       ignoreNativeScroll,
       resistance,
       enableMouseEvents,
-      delay,
-      children,
-      ...rest
+      delay
     } = this.props
 
     const {
@@ -146,24 +142,23 @@ class Slideshow extends PureComponent {
     } = this.state
 
     return (
-      <Box onClick={this.handleClick} {...rest}>
-        <SwipeableViews
-          ref={this.setIntance}
-          index={currentViewIndex}
-          onChangeIndex={this.handleViewChange}
-          animateHeight={animateHeight}
-          springConfig={{ duration, easeFunction, delay }}
-          hysteresis={hysteresis}
-          ignoreNativeScroll={ignoreNativeScroll}
-          resistance={resistance}
-          enableMouseEvents={enableMouseEvents}
-          style={{ height: equalHeight, overflow: 'visible' }}
-          containerStyle={{ height: equalHeight }}
-          slideStyle={{ overflow: 'visible' }}
-        >
-          {views}
-        </SwipeableViews>
-      </Box>
+      <SwipeableViews
+        ref={this.setIntance}
+        index={currentViewIndex}
+        onChangeIndex={this.handleViewChange}
+        animateHeight={animateHeight}
+        springConfig={{ duration, easeFunction, delay }}
+        hysteresis={hysteresis}
+        ignoreNativeScroll={ignoreNativeScroll}
+        resistance={resistance}
+        enableMouseEvents={enableMouseEvents}
+        style={{ height: '100%', overflow: 'visible' }}
+        containerStyle={{ height: '100%' }}
+        slideStyle={{ overflow: 'visible' }}
+        onClick={this.handleClick}
+      >
+        {views}
+      </SwipeableViews>
     )
   }
 }

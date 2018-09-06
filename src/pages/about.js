@@ -1,16 +1,21 @@
 import React from 'react'
 import styled from 'react-emotion'
 import { compose } from 'recompose'
-import { Box, Grid } from 'pss-components'
-import anime from 'animejs'
-import { Flipped } from 'react-flip-toolkit'
 import { withData } from 'react-universal-data'
-import { ROUTE_HOME } from '../constants'
+import anime from 'animejs'
+import { Layout, Box, Grid, Text } from 'pss-components'
+import { Flipped } from 'react-flip-toolkit'
+import { ROUTE_HOME, ROUTE_ABOUT } from '../constants'
 import { AppLink } from '../containers'
 import { Modal } from '../components'
 import { withIntl } from '../hocs'
 import { getPage } from '../api'
 import { renderMarkdown } from '../utils'
+
+const ScaleBox = styled(Box)`
+  transform-origin: top right;
+  mix-blend-mode: multiply;
+`
 
 const Img = styled('img')`
   display: block;
@@ -32,7 +37,7 @@ const transition = ($el, start, end, next) => {
   }).finished
 
   const scaleAnime = anime({
-    targets: $el.querySelectorAll('[data-scale]'),
+    targets: $el.querySelectorAll(ScaleBox),
     scale: [ start, end ],
     opacity: [ start, end ],
     duration: 400,
@@ -45,40 +50,55 @@ const transition = ($el, start, end, next) => {
 const onAppear = (el) => transition(el, 0, 1)
 const onExit = (el, index, next) => transition(el, 1, 0, next)
 
-const About = ({ _t, activePicture, content, photo }) => (
+const About = ({
+  _t,
+  langAlt,
+  activePicture,
+  content,
+  photo
+}) => (
   <Flipped flipId='about-page' onAppear={onAppear} onExit={onExit}>
     <Modal bg='site-background'>
-      <Box pd={2} ht ovsy ovtouch>
-        <Grid ht spacex>
-          <Grid.Item col={1} mgt='auto'>
-            <AppLink path={ROUTE_HOME} title={_t('nav.back')}>
-              {activePicture ? (
-                <Flipped flipId={'pic-' + activePicture.id}>
-                  <Box data-hide>
-                    <Img src={activePicture.url} alt='' />
-                  </Box>
-                </Flipped>
-              ) : _t('nav.back')}
+      <Box ht ovsy ovtouch>
+        <Layout>
+          <Layout.Item pd={2} mgl='auto'>
+            <AppLink path={ROUTE_ABOUT} lang={langAlt}>
+              <Text>{_t('nav.lang')}</Text>
             </AppLink>
-          </Grid.Item>
-          <Grid.Item mgx='auto' col={6} mgt={3}>
-            <Box data-fade>
-              {renderMarkdown(content)}
-            </Box>
-          </Grid.Item>
-          <Grid.Item col={3} mgt={3}>
-            <Box data-scale css={{ transformOrigin: 'top right', mixBlendMode: 'multiply' }}>
-              {photo && (
-                <Img
-                  src={photo.url}
-                  width={photo.width}
-                  height={photo.height}
-                  alt=''
-                />
-              )}
-            </Box>
-          </Grid.Item>
-        </Grid>
+          </Layout.Item>
+          <Layout.Body pdx={2}>
+            <Grid spacex={2}>
+              <Grid.Item col={1} position='sticky' bottom mgt='auto' pdb={2}>
+                <AppLink path={ROUTE_HOME} title={_t('nav.back')}>
+                  {activePicture ? (
+                    <Flipped flipId={'pic-' + activePicture.id}>
+                      <Box data-hide>
+                        <Img src={activePicture.url} alt='' />
+                      </Box>
+                    </Flipped>
+                  ) : _t('nav.back')}
+                </AppLink>
+              </Grid.Item>
+              <Grid.Item mgx='auto' col={6}>
+                <Box data-fade pdt={2}>
+                  {renderMarkdown(content)}
+                </Box>
+              </Grid.Item>
+              <Grid.Item col={3}>
+                <ScaleBox position='sticky' top pdt={2}>
+                  {photo && (
+                    <Img
+                      src={photo.url}
+                      width={photo.width}
+                      height={photo.height}
+                      alt=''
+                    />
+                  )}
+                </ScaleBox>
+              </Grid.Item>
+            </Grid>
+          </Layout.Body>
+        </Layout>
       </Box>
     </Modal>
   </Flipped>

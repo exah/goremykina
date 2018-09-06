@@ -24,7 +24,7 @@ import {
 } from './constants'
 
 import { messages } from './data/intl'
-import { AppLayout } from './containers'
+import { AppRoutes } from './containers'
 
 const theme = createTheme(THEME)
 
@@ -51,13 +51,13 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path={ROUTE_PAGE}>
-            {({ match }) => (
+            {(data) => (
               <IntlProvider
                 defaultLocale={DEFAULT_LANG}
-                locale={match.params.lang}
-                messages={messages[match.params.lang]}
+                locale={data.match.params.lang}
+                messages={messages[data.match.params.lang]}
               >
-                <AppLayout match={match} />
+                <AppRoutes {...data} />
               </IntlProvider>
             )}
           </Route>
