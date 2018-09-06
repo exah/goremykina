@@ -25,13 +25,12 @@ const Home = ({
   langAlt,
   isLoading,
   children,
-  hideActivePicture,
   pictures = [],
   onPictureChange,
   activePicture,
   activePictureIndex
 }) => (
-  <Layout bg='site-background' ovh>
+  <Layout ovh>
     <Layout.Item comp='header' pd={2}>
       <FlexBox>
         <FlexBox.Item>
@@ -54,23 +53,14 @@ const Home = ({
         >
           {pictures.map((pic, index) => (
             <Slideshow.Item key={pic.id} position='relative' ht>
-              {activePictureIndex === index ? !hideActivePicture && (
-                <Flipped flipId={'pic-' + pic.id}>
-                  <Picture
-                    src={pic.url}
-                    width={pic.width}
-                    height={pic.height}
-                    alt=''
-                  />
-                </Flipped>
-              ) : (
+              <Flipped flipId={'pic-' + pic.id}>
                 <Picture
                   src={pic.url}
                   width={pic.width}
                   height={pic.height}
                   alt=''
                 />
-              )}
+              </Flipped>
             </Slideshow.Item>
           ))}
         </Slideshow>

@@ -41,13 +41,12 @@ class AppRoutes extends Component {
           <html lang={lang} />
           <title>{_t('title')}</title>
         </Helmet>
-        <FlipperBox flipKey={match.params.page} ht>
+        <FlipperBox flipKey={match.params.page} bg='site-background' ht>
           <RouteWithProps
             path={ROUTE_HOME}
             component={Home}
             pictures={pictures}
             onPictureChange={this.handlePictureChange}
-            hideActivePicture={match.params.page === 'about'}
             activePictureIndex={activePictureIndex}
             activePicture={activePicture}
             exact

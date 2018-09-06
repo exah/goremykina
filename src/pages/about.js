@@ -25,7 +25,6 @@ const Img = styled('img')`
 
 const transition = ($el, start, end, next) => {
   if (end === 0) {
-    $el.style.backgroundColor = 'transparent'
     $el.querySelector('[data-hide]').style.visibility = 'hidden'
   }
 
@@ -58,7 +57,7 @@ const About = ({
   photo
 }) => (
   <Flipped flipId='about-page' onAppear={onAppear} onExit={onExit}>
-    <Modal bg='site-background'>
+    <Modal>
       <Box ht ovsy ovtouch>
         <Layout>
           <Layout.Item pd={2} mgl='auto'>
