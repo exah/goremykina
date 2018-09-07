@@ -49,10 +49,8 @@
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-standard": "^4.0.0",
-    "mini-css-extract-plugin": "^0.4.2",
     "nodemon": "^1.18.4",
     "react-hot-loader": "^4.3.5",
-    "stats-webpack-plugin": "^0.7.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   },
@@ -76,6 +74,7 @@
     "husky": "^0.14.3",
     "intl": "^1.2.5",
     "lint-staged": "^7.2.2",
+    "mini-css-extract-plugin": "^0.4.2",
     "ms": "^2.1.1",
     "path-to-regexp": "^2.4.0",
     "pss": "^2.3.1",
@@ -95,6 +94,7 @@
     "remark": "^9.0.0",
     "remark-react": "^4.0.3",
     "rimraf": "^2.6.2",
-    "serialize-javascript": "^1.5.0"
+    "serialize-javascript": "^1.5.0",
+    "stats-webpack-plugin": "^0.7.0"
   }
 }
