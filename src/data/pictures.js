@@ -1,6 +1,7 @@
 const pictures = [
   {
     id: 0,
+    slug: 'shore',
     name: 'Берег',
     description: 'холст, масло, 100x80',
     url: '/pictures/shore.jpg',
@@ -9,6 +10,7 @@ const pictures = [
   },
   {
     id: 1,
+    slug: 'evening',
     name: 'Вечер',
     description: 'холст, масло, 54x77',
     url: '/pictures/evening.jpg',
@@ -17,6 +19,7 @@ const pictures = [
   },
   {
     id: 2,
+    slug: 'illusions-04',
     name: 'Иллюзии',
     description: 'холст, масло, 90x140',
     url: '/pictures/illusions-04.jpg',
@@ -25,6 +28,7 @@ const pictures = [
   },
   {
     id: 3,
+    slug: 'illusions-05',
     name: 'Иллюзии',
     description: 'холст, масло, 90x140',
     url: '/pictures/illusions-05.jpg',
@@ -33,6 +37,7 @@ const pictures = [
   },
   {
     id: 4,
+    slug: 'landscape-with-birds',
     name: 'Пейзаж с птицами',
     description: 'холст, масло, 80x100',
     url: '/pictures/landscape-with-birds.jpg',

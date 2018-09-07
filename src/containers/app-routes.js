@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Flipper } from 'react-flip-toolkit'
+import { Switch, Redirect } from 'react-router'
 import Helmet from 'react-helmet'
 import { compose } from 'recompose'
 import { withData } from 'react-universal-data'
@@ -9,6 +10,7 @@ import { getPicturs } from '../api'
 import { withIntl } from '../hocs'
 
 import {
+  ROUTE_LANG,
   ROUTE_HOME,
   ROUTE_ABOUT
 } from '../constants'
@@ -18,22 +20,52 @@ import About from '../pages/about'
 
 const FlipperBox = Box.withComponent(Flipper)
 
+const isPictureUpdated = (prev, next) => (prev != null && next != null && prev.id !== next.id)
+
 class AppRoutes extends Component {
   static defaultProps = {
     pictures: []
   }
-  state = {
-    activePictureIndex: 0
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      activePictureIndex: 0,
+      activePicture: props.pictures[0]
+    }
+
+    if (props.match.params.slug != null && props.pictures.length > 0) {
+      const activePictureIndex = props.pictures.findIndex((p) => p.slug === props.match.params.slug)
+
+      if (activePictureIndex === -1) return
+
+      this.state = {
+        activePictureIndex,
+        activePicture: props.pictures[activePictureIndex]
+      }
+    }
   }
   handlePictureChange = ({ currentViewIndex }) => {
-    this.setState({
-      activePictureIndex: currentViewIndex
+    this.setState((state, props) => {
+      if (state.activePictureIndex !== currentViewIndex) {
+        return {
+          activePictureIndex: currentViewIndex,
+          activePicture: props.pictures[currentViewIndex]
+        }
+      }
     })
   }
+  componentDidUpdate (prevProps, prevState) {
+    const { _link, history } = this.props
+    const { activePicture } = this.state
+
+    if (isPictureUpdated(prevState.activePicture, activePicture)) {
+      history.replace(_link(ROUTE_HOME, activePicture))
+    }
+  }
   render () {
-    const { _t, lang, isLoading, match, pictures } = this.props
-    const { activePictureIndex } = this.state
-    const activePicture = pictures[activePictureIndex]
+    const { _t, _link, lang, isLoading, match, pictures } = this.props
+    const { activePictureIndex, activePicture } = this.state
 
     return (
       <>
@@ -42,15 +74,19 @@ class AppRoutes extends Component {
           <title>{_t('title')}</title>
         </Helmet>
         <FlipperBox flipKey={match.params.page} bg='site-background' ht>
-          <RouteWithProps
-            path={ROUTE_HOME}
-            component={Home}
-            pictures={pictures}
-            onPictureChange={this.handlePictureChange}
-            activePictureIndex={activePictureIndex}
-            activePicture={activePicture}
-            exact
-          />
+          <Switch>
+            <RouteWithProps
+              path={ROUTE_HOME}
+              component={Home}
+              pictures={pictures}
+              onPictureChange={this.handlePictureChange}
+              activePictureIndex={activePictureIndex}
+              activePicture={activePicture}
+              isLoading={isLoading}
+              exact
+            />
+            <Redirect from={ROUTE_LANG} to={_link(ROUTE_HOME)} exact />
+          </Switch>
           <RouteWithProps
             path={ROUTE_ABOUT}
             component={About}
@@ -64,12 +100,11 @@ class AppRoutes extends Component {
 }
 
 export default compose(
+  withIntl,
   withData(
     ({ match }) => getPicturs(match.params).then((res) => ({
       pictures: res.data
     })),
-    (prev, next) =>
-      prev.match.params.lang !== next.match.params.lang
-  ),
-  withIntl
+    (prev, next) => prev.lang !== next.lang
+  )
 )(AppRoutes)

@@ -68,7 +68,7 @@ const About = ({
           <Layout.Body pdx={2}>
             <Grid spacex={2}>
               <Grid.Item col={1} position='sticky' bottom mgt='auto' pdb={2}>
-                <AppLink path={ROUTE_HOME} title={_t('nav.back')}>
+                <AppLink path={ROUTE_HOME} data={activePicture} title={_t('nav.back')}>
                   {activePicture ? (
                     <Flipped flipId={'pic-' + activePicture.id}>
                       <Box data-hide>
