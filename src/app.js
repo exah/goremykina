@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
 import { createTheme } from 'pss'
+import { CurrentMediaProvider } from 'pss-components'
 import en from 'react-intl/locale-data/en'
 import ru from 'react-intl/locale-data/ru'
 
@@ -49,20 +50,22 @@ class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <Switch>
-          <Route path={ROUTE_PAGE}>
-            {(data) => (
-              <IntlProvider
-                defaultLocale={DEFAULT_LANG}
-                locale={data.match.params.lang}
-                messages={messages[data.match.params.lang]}
-              >
-                <AppRoutes {...data} />
-              </IntlProvider>
-            )}
-          </Route>
-          <Redirect from='/' to={'/' + userLang} exact />
-        </Switch>
+        <CurrentMediaProvider>
+          <Switch>
+            <Route path={ROUTE_PAGE}>
+              {(data) => (
+                <IntlProvider
+                  defaultLocale={DEFAULT_LANG}
+                  locale={data.match.params.lang}
+                  messages={messages[data.match.params.lang]}
+                >
+                  <AppRoutes {...data} />
+                </IntlProvider>
+              )}
+            </Route>
+            <Redirect from='/' to={'/' + userLang} exact />
+          </Switch>
+        </CurrentMediaProvider>
       </ThemeProvider>
     )
   }

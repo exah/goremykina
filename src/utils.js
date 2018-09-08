@@ -68,9 +68,36 @@ const throttle = (fn = identity) => {
   }
 }
 
+function loop (cb = identity) {
+  let wait = false
+  let timeout = null
+  let frame = null
+
+  const run = (now) => {
+    cb(now)
+    wait = false
+    tick()
+  }
+
+  const tick = () => {
+    if (wait) return
+    wait = true
+    timeout = setTimeout(() => {
+      frame = window.requestAnimationFrame(run)
+    }, 0)
+  }
+  tick()
+
+  return () => {
+    clearTimeout(timeout)
+    window.cancelAnimationFrame(frame)
+  }
+}
+
 export {
   renderMarkdown,
   dedent,
   listen,
+  loop,
   throttle
 }
