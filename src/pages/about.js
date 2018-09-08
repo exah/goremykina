@@ -47,9 +47,6 @@ const transition = ($el, start, end, next) => {
 }
 
 class About extends Component {
-  $scroller = createRef()
-  $photo = createRef()
-  $pic = createRef()
   state = {
     isAppeared: false,
     isPhotoReady: false
@@ -65,6 +62,9 @@ class About extends Component {
   handleExit = (el, index, next) => {
     transition(el, 1, 0, next)
   }
+  $scroller = createRef()
+  $photo = createRef()
+  $pic = createRef()
   updateRects = () => {
     const isPhotoImgNode = this.$photo.current.firstChild != null
     this.photoRect = this.$photo.current.getBoundingClientRect()
@@ -162,14 +162,13 @@ class About extends Component {
 }
 
 export default compose(
+  withIntl,
   withData(
-    ({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
+    ({ lang }) => getPage({ lang, slug: 'about' }).then((res) => ({
       status: res.status,
       ...res.data
     })),
-    (prev, next) =>
-      prev.match.params.lang !== next.match.params.lang
+    (prev, next) => prev.lang !== next.lang
   ),
-  withIntl,
   withCurrentMedia
 )(About)
