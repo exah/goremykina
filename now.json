@@ -1,0 +1,5 @@
+{
+  "alias": "goremykina",
+  "type": "docker",
+  "public": true
+}
