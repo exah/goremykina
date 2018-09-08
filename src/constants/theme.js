@@ -3,6 +3,7 @@ const THEME = {
   media: {
     D: '(min-width: 1025px)',
     T: '(max-width: 1024px)',
+    L: '(min-width: 601px)',
     M: '(max-width: 600px)'
   },
   space: {

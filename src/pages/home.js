@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'react-emotion'
-import { Layout, FlexBox, Text } from 'pss-components'
+import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_HOME, ROUTE_ABOUT } from '../constants'
 import { withIntl } from '../hocs'
@@ -13,11 +13,15 @@ const Picture = styled('img')`
   bottom: 0;
   left: 0;
   right: 0;
-  max-height: 75%;
-  max-width: 75%;
+  max-height: 80%;
+  max-width: 90%;
   width: auto;
   height: auto;
   margin: auto;
+
+  @media ${(props) => props.theme.media.M} {
+    max-width: 100%;
+  }
 `
 
 const Home = ({
@@ -32,7 +36,12 @@ const Home = ({
 }) => (
   <Layout ovh>
     <Layout.Item comp='header' pd={2}>
-      <FlexBox>
+      <FlexBox alignM='center'>
+        <FlexBox.Item hideL mgr='auto'>
+          <AppLink path={ROUTE_ABOUT}>
+            <Text>{_t('nav.about')}</Text>
+          </AppLink>
+        </FlexBox.Item>
         <FlexBox.Item>
           <AppLink path={ROUTE_HOME}>
             <Logo title={_t('nav.home')} />
@@ -52,15 +61,17 @@ const Home = ({
           onChange={onPictureChange}
         >
           {pictures.map((pic, index) => (
-            <Slideshow.Item key={pic.id} position='relative' ht>
-              <Flipped flipId={'pic-' + pic.id}>
-                <Picture
-                  src={pic.url}
-                  width={pic.width}
-                  height={pic.height}
-                  alt=''
-                />
-              </Flipped>
+            <Slideshow.Item key={pic.id} ht pdx={2}>
+              <Box position='relative' ht>
+                <Flipped flipId={'pic-' + pic.id}>
+                  <Picture
+                    src={pic.url}
+                    width={pic.width}
+                    height={pic.height}
+                    alt=''
+                  />
+                </Flipped>
+              </Box>
             </Slideshow.Item>
           ))}
         </Slideshow>
@@ -68,19 +79,19 @@ const Home = ({
     </Layout.Body>
     <Layout.Item comp='footer' pd={2}>
       <FlexBox justify align='flex-end'>
-        <FlexBox.Item>
+        <FlexBox.Item hideM>
           <AppLink path={ROUTE_ABOUT}>
             <Text>{_t('nav.about')}</Text>
           </AppLink>
         </FlexBox.Item>
         {activePicture && (
-          <FlexBox.Item>
-            <Text align='right'>
+          <FlexBox.Item mgxM='auto'>
+            <Text align='right' alignM='center'>
               <Text mgb>
-                {isLoading ? _t('label.loading') : activePicture.name}
+                {isLoading ? <>&nbsp;</> : activePicture.name}
               </Text>
               <Text textStyle='caption'>
-                {isLoading ? <>&nbsp;</> : activePicture.description}
+                {isLoading ? _t('label.loading') : activePicture.description}
               </Text>
             </Text>
           </FlexBox.Item>

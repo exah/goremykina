@@ -60,14 +60,19 @@ const About = ({
     <Modal>
       <Box ht ovsy ovtouch>
         <Layout>
-          <Layout.Item pd={2} mgl='auto'>
+          <Layout.Item pd={2} mgl='auto' hideM>
             <AppLink path={ROUTE_ABOUT} lang={langAlt}>
               <Text>{_t('nav.lang')}</Text>
             </AppLink>
           </Layout.Item>
           <Layout.Body pdx={2}>
             <Grid spacex={2}>
-              <Grid.Item col={1} position='sticky' bottom mgt='auto' pdb={2}>
+              <Grid.Item
+                position='sticky' bottom
+                col={1} colM={4}
+                mgt='auto' mgtM={0}
+                pdy={2}
+              >
                 <AppLink path={ROUTE_HOME} data={activePicture} title={_t('nav.back')}>
                   {activePicture ? (
                     <Flipped flipId={'pic-' + activePicture.id}>
@@ -78,12 +83,12 @@ const About = ({
                   ) : _t('nav.back')}
                 </AppLink>
               </Grid.Item>
-              <Grid.Item mgx='auto' col={6}>
+              <Grid.Item mgx='auto' col={6} colM={16} orderM={1}>
                 <Box data-fade pdt={2}>
                   {renderMarkdown(content)}
                 </Box>
               </Grid.Item>
-              <Grid.Item col={3}>
+              <Grid.Item col={3} colM={12}>
                 <ScaleBox position='sticky' top pdt={2}>
                   {photo && (
                     <Img
