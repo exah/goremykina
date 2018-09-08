@@ -79,7 +79,7 @@ class About extends Component {
       if (this.props.currentMediaKey.includes('L')) return
 
       const { scrollTop } = this.$scroller.current
-      if (scrollTop === prevScrollTop) return
+      if (scrollTop === prevScrollTop || scrollTop < 0) return
       prevScrollTop = scrollTop
 
       const scale = 1 - (scrollTop / this.photoRect.bottom)
