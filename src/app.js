@@ -39,6 +39,9 @@ class App extends Component {
     super(props)
 
     injectGlobal({
+      'html': {
+        overflow: 'hidden'
+      },
       'html, body, #app': {
         height: '100%'
       },

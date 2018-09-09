@@ -1,4 +1,5 @@
 import 'intl'
+import 'pepjs'
 import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
