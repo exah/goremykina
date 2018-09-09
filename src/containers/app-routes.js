@@ -11,12 +11,12 @@ import { withIntl } from '../hocs'
 
 import {
   ROUTE_LANG,
-  ROUTE_HOME,
+  ROUTE_PICTURE,
   ROUTE_ABOUT
 } from '../constants'
 
-import Home from '../pages/home'
-import About from '../pages/about'
+import PicturePage from '../pages/picture'
+import AboutPage from '../pages/about'
 
 const FlipperBox = Box.withComponent(Flipper)
 
@@ -60,7 +60,7 @@ class AppRoutes extends Component {
     const { activePicture } = this.state
 
     if (isPictureUpdated(prevState.activePicture, activePicture)) {
-      history.replace(_link(ROUTE_HOME, activePicture))
+      history.replace(_link(ROUTE_PICTURE, activePicture))
     }
   }
   render () {
@@ -76,8 +76,8 @@ class AppRoutes extends Component {
         <FlipperBox flipKey={match.params.page} bg='site-background' ht>
           <Switch>
             <RouteWithProps
-              path={ROUTE_HOME}
-              component={Home}
+              path={ROUTE_PICTURE}
+              component={PicturePage}
               pictures={pictures}
               onPictureChange={this.handlePictureChange}
               activePictureIndex={activePictureIndex}
@@ -85,11 +85,11 @@ class AppRoutes extends Component {
               isLoading={isLoading}
               exact
             />
-            <Redirect from={ROUTE_LANG} to={_link(ROUTE_HOME)} exact />
+            <Redirect from={ROUTE_LANG} to={_link(ROUTE_PICTURE)} exact />
           </Switch>
           <RouteWithProps
             path={ROUTE_ABOUT}
-            component={About}
+            component={AboutPage}
             isLoading={isLoading}
             activePicture={activePicture}
           />

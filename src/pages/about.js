@@ -5,7 +5,7 @@ import { withData } from 'react-universal-data'
 import anime from 'animejs'
 import { Layout, Box, Grid, Text, withCurrentMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_HOME, ROUTE_ABOUT } from '../constants'
+import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { AppLink } from '../containers'
 import { Modal } from '../components'
 import { withIntl } from '../hocs'
@@ -46,7 +46,7 @@ const transition = ($el, start, end, next) => {
   Promise.all([ fadeAnime, scaleAnime ]).then(next)
 }
 
-class About extends Component {
+class AboutPage extends Component {
   state = {
     isAppeared: false,
     isPhotoReady: false
@@ -121,7 +121,7 @@ class About extends Component {
                     mgt='auto' mgtM={0}
                     pdy={2}
                   >
-                    <AppLink path={ROUTE_HOME} data={activePicture} title={_t('nav.back')}>
+                    <AppLink path={ROUTE_PICTURE} data={activePicture} title={_t('nav.back')}>
                       {activePicture ? (
                         <Flipped flipId={'pic-' + activePicture.id}>
                           <Box data-hide innerRef={this.$pic}>
@@ -171,4 +171,4 @@ export default compose(
     (prev, next) => prev.lang !== next.lang
   ),
   withCurrentMedia
-)(About)
+)(AboutPage)

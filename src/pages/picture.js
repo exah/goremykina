@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_HOME, ROUTE_ABOUT } from '../constants'
+import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { withIntl } from '../hocs'
 import { Logo, Slideshow } from '../components'
 import { AppLink } from '../containers'
 
-const Picture = styled('img')`
+const Img = styled('img')`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -24,7 +24,7 @@ const Picture = styled('img')`
   }
 `
 
-const Home = ({
+const PicturePage = ({
   _t,
   langAlt,
   isLoading,
@@ -43,12 +43,12 @@ const Home = ({
           </AppLink>
         </FlexBox.Item>
         <FlexBox.Item>
-          <AppLink path={ROUTE_HOME}>
+          <AppLink path={ROUTE_PICTURE}>
             <Logo title={_t('nav.home')} />
           </AppLink>
         </FlexBox.Item>
         <FlexBox.Item mgl='auto'>
-          <AppLink path={ROUTE_HOME} lang={langAlt}>
+          <AppLink path={ROUTE_PICTURE} lang={langAlt}>
             <Text>{_t('nav.lang')}</Text>
           </AppLink>
         </FlexBox.Item>
@@ -64,7 +64,7 @@ const Home = ({
             <Slideshow.Item key={pic.id} ht pdx={2}>
               <Box position='relative' ht>
                 <Flipped flipId={'pic-' + pic.id}>
-                  <Picture
+                  <Img
                     src={pic.url}
                     width={pic.width}
                     height={pic.height}
@@ -101,4 +101,4 @@ const Home = ({
   </Layout>
 )
 
-export default withIntl(Home)
+export default withIntl(PicturePage)
