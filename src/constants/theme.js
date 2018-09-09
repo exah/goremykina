@@ -11,7 +11,17 @@ const THEME = {
     M: [ 0, 6, 16, 32 ]
   },
   color: {
-    'site-background': '#E4E4E4'
+    gray: '#E4E4E4'
+  },
+  palette: {
+    default: {
+      bg: '#E4E4E4',
+      fg: '#000000'
+    },
+    zoomed: {
+      bg: 'transparent',
+      fg: '#ffffff'
+    }
   },
   textStyle: {
     root: {
