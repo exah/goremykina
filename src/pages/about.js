@@ -98,7 +98,7 @@ class AboutPage extends Component {
     const {
       _t,
       langAlt,
-      activePicture,
+      activePicture: pic,
       content,
       photo
     } = this.props
@@ -121,11 +121,11 @@ class AboutPage extends Component {
                     mgt='auto' mgtM={0}
                     pdy={2}
                   >
-                    <AppLink path={ROUTE_PICTURE} data={activePicture} title={_t('nav.back')}>
-                      {activePicture ? (
-                        <Flipped flipId={'pic-' + activePicture.id}>
+                    <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
+                      {pic ? (
+                        <Flipped flipId={'pic-' + pic.id}>
                           <Box data-hide innerRef={this.$pic}>
-                            <Img src={activePicture.url} alt='' />
+                            <Img src={pic.url} alt='' />
                           </Box>
                         </Flipped>
                       ) : _t('nav.back')}

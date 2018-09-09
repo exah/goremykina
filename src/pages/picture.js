@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
+import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
 import { withIntl } from '../hocs'
 import { Logo, Slideshow } from '../components'
 import { AppLink } from '../containers'
@@ -63,14 +63,16 @@ const PicturePage = ({
           {pictures.map((pic, index) => (
             <Slideshow.Item key={pic.id} ht pdx={2}>
               <Box position='relative' ht>
-                <Flipped flipId={'pic-' + pic.id}>
-                  <Img
-                    src={pic.url}
-                    width={pic.width}
-                    height={pic.height}
-                    alt=''
-                  />
-                </Flipped>
+                <AppLink path={ROUTE_PICTURE_ZOOM} data={pic}>
+                  <Flipped flipId={'pic-' + pic.id}>
+                    <Img
+                      src={pic.url}
+                      width={pic.width}
+                      height={pic.height}
+                      alt=''
+                    />
+                  </Flipped>
+                </AppLink>
               </Box>
             </Slideshow.Item>
           ))}

@@ -12,10 +12,12 @@ import { withIntl } from '../hocs'
 import {
   ROUTE_LANG,
   ROUTE_PICTURE,
+  ROUTE_PICTURE_ZOOM,
   ROUTE_ABOUT
 } from '../constants'
 
 import PicturePage from '../pages/picture'
+import PictureZoomPage from '../pages/picture-zoom'
 import AboutPage from '../pages/about'
 
 const FlipperBox = Box.withComponent(Flipper)
@@ -87,6 +89,12 @@ class AppRoutes extends Component {
             />
             <Redirect from={ROUTE_LANG} to={_link(ROUTE_PICTURE)} exact />
           </Switch>
+          <RouteWithProps
+            path={ROUTE_PICTURE_ZOOM}
+            component={PictureZoomPage}
+            activePicture={activePicture}
+            isLoading={isLoading}
+          />
           <RouteWithProps
             path={ROUTE_ABOUT}
             component={AboutPage}

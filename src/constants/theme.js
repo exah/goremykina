@@ -44,4 +44,6 @@ const THEME = {
   }
 }
 
-export { THEME }
+export {
+  THEME
+}
