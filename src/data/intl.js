@@ -5,7 +5,8 @@ const messages = {
     'nav.about': 'About Irina',
     'nav.lang': 'Русский',
     'nav.back': 'Back',
-    'label.loading': 'Loading...'
+    'ui.loading': 'Loading...',
+    'ui.close': 'Close'
   },
   ru: {
     'title': 'Ирина Горемыкина',
@@ -13,7 +14,8 @@ const messages = {
     'nav.about': 'Об Ирине',
     'nav.lang': 'English',
     'nav.back': 'Назад',
-    'label.loading': 'Загрузка...'
+    'ui.loading': 'Загрузка...',
+    'ui.close': 'Закрыть'
   }
 }
 

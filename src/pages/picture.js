@@ -93,7 +93,7 @@ const PicturePage = ({
                 {isLoading ? <>&nbsp;</> : activePicture.name}
               </Text>
               <Text textStyle='caption'>
-                {isLoading ? _t('label.loading') : activePicture.description}
+                {isLoading ? _t('ui.loading') : activePicture.description}
               </Text>
             </Text>
           </FlexBox.Item>
