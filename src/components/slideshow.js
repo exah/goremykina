@@ -2,7 +2,12 @@ import React, { PureComponent } from 'react'
 import styled from 'react-emotion'
 import { Box } from 'pss-components'
 import SwipeableViews from 'react-swipeable-views'
+import { bindKeyboard } from 'react-swipeable-views-utils'
 import { listen, throttle } from '../utils'
+
+const SwipeableViewsWithKeyboard = bindKeyboard(({ innerRef, ...rest }) => (
+  <SwipeableViews ref={innerRef} {...rest} />
+))
 
 class SlideshowItemBase extends PureComponent {
   handleDrag = (e) => {
@@ -142,8 +147,8 @@ class Slideshow extends PureComponent {
     } = this.state
 
     return (
-      <SwipeableViews
-        ref={this.setIntance}
+      <SwipeableViewsWithKeyboard
+        innerRef={this.setIntance}
         index={currentViewIndex}
         onChangeIndex={this.handleViewChange}
         animateHeight={animateHeight}
@@ -158,7 +163,7 @@ class Slideshow extends PureComponent {
         onClick={this.handleClick}
       >
         {views}
-      </SwipeableViews>
+      </SwipeableViewsWithKeyboard>
     )
   }
 }
