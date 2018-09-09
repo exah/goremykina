@@ -1,4 +1,5 @@
 import React, { PureComponent, createRef } from 'react'
+import { css, cx } from 'emotion'
 
 class PanZoom extends PureComponent {
   static defaultProps = {
@@ -15,35 +16,25 @@ class PanZoom extends PureComponent {
 
     const { dx, dy, zoom } = props
 
-    const defaultDragData = {
+    const dragData = {
       dx,
       dy,
       x: 0,
       y: 0
     }
 
+    const matrix = [
+      zoom, 0, 0, zoom, dx, dy
+    ]
+
     this.state = {
-      dragData: defaultDragData,
       isDragging: false,
-      matrix: [
-        zoom, 0, 0, zoom, dx, dy
-      ]
+      dragData,
+      matrix,
+      className: css`
+        user-select: none;
+      `
     }
-  }
-
-  static getDerivedStateFromProps ({ zoom }, { matrix }) {
-    if (matrix[0] !== zoom) {
-      const nextMatrix = [ ...matrix ]
-
-      nextMatrix[0] = zoom || nextMatrix[0]
-      nextMatrix[3] = zoom || nextMatrix[3]
-
-      return {
-        matrix: nextMatrix
-      }
-    }
-
-    return null
   }
 
   getNewMatrixData = (x, y) => {
@@ -116,6 +107,7 @@ class PanZoom extends PureComponent {
 
   render () {
     const {
+      className,
       onPan,
       dx,
       dy,
@@ -126,11 +118,11 @@ class PanZoom extends PureComponent {
     return (
       <div
         ref={this.$panWrapper}
+        className={cx(this.state.className, className)}
         onPointerDown={this.handleMouseDown}
         onPointerUp={this.handleMouseUp}
         onPointerMove={this.handleMouseMove}
         touch-action='none'
-        style={{ userSelect: 'none' }}
         {...rest}
       />
     )
