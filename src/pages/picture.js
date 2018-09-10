@@ -1,4 +1,5 @@
 import React from 'react'
+import { css } from 'emotion'
 import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
@@ -13,7 +14,7 @@ const Img = styled('img')`
   bottom: 0;
   left: 0;
   right: 0;
-  max-height: 80%;
+  max-height: 85%;
   max-width: 90%;
   width: auto;
   height: auto;
@@ -22,6 +23,10 @@ const Img = styled('img')`
   @media ${(props) => props.theme.media.M} {
     max-width: 100%;
   }
+`
+
+const zoomCursor = css`
+  cursor: zoom-in;
 `
 
 const PicturePage = ({
@@ -63,12 +68,17 @@ const PicturePage = ({
           {pictures.map((pic, index) => (
             <Slideshow.Item key={pic.id} ht pdx={2}>
               <Box position='relative' ht>
-                <AppLink path={ROUTE_PICTURE_ZOOM} data={pic}>
+                <AppLink
+                  path={ROUTE_PICTURE_ZOOM}
+                  data={pic}
+                  className={pic.zoomed && zoomCursor}
+                  disable={!pic.zoomed}
+                >
                   <Flipped flipId={'pic-' + pic.id}>
                     <Img
-                      src={pic.url}
-                      width={pic.width}
-                      height={pic.height}
+                      src={pic.original.url}
+                      width={pic.original.width}
+                      height={pic.original.height}
                       alt=''
                     />
                   </Flipped>
@@ -93,7 +103,9 @@ const PicturePage = ({
                 {isLoading ? <>&nbsp;</> : activePicture.name}
               </Text>
               <Text textStyle='caption'>
-                {isLoading ? _t('ui.loading') : activePicture.description}
+                {isLoading ? _t('ui.loading') : (
+                  <>{activePicture.material}, {activePicture.size}</>
+                )}
               </Text>
             </Text>
           </FlexBox.Item>

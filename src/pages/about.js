@@ -126,7 +126,7 @@ class AboutPage extends Component {
                       {pic ? (
                         <Flipped flipId={'pic-' + pic.id}>
                           <Box data-hide innerRef={this.$pic}>
-                            <Img src={pic.url} alt='' />
+                            <Img src={pic.original.url} alt='' />
                           </Box>
                         </Flipped>
                       ) : _t('nav.back')}

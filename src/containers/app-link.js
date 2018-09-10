@@ -14,9 +14,13 @@ const AppLink = ({
   replace,
   innerRef,
   children,
+  disable,
   ...rest
 }) => {
+  if (disable) return (<>{children}</>)
+
   const target = to || _link(path, data)
+
   return (
     <RouterLink to={target} replace={replace} innerRef={innerRef} {...rest}>
       {children}

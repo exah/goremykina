@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { css } from 'emotion'
 import styled from 'react-emotion'
 import { Flipped } from 'react-flip-toolkit'
@@ -48,52 +48,70 @@ const Img = styled('img')`
   }}
 `
 
-const PictureZoomPage = ({ _t, activePicture: pic }) => (
-  <Modal tm='zoomed' ovh>
-    {pic && (
-      <>
-        <Overlay ht wdM>
-          <Text ht pd={2} align='right' alignM='center'>
-            <FlexBox column ht>
-              <FlexBox.Item>
-                <AppLink
-                  title={_t('ui.close')}
-                  className={enablePointerEvents}
-                  path={ROUTE_PICTURE}
-                  data={pic}
-                >
-                  <IconClose />
-                </AppLink>
-              </FlexBox.Item>
-              <FlexBox.Item mgt='auto'>
-                <AppLink
-                  className={enablePointerEvents}
-                  path={ROUTE_PICTURE}
-                  data={pic}
-                >
-                  <Text mgb>
-                    {pic.name}
-                  </Text>
-                  <Text textStyle='caption'>
-                    {pic.description}
-                  </Text>
-                </AppLink>
-              </FlexBox.Item>
-            </FlexBox>
-          </Text>
-        </Overlay>
-        <PanZoom>
-          <Flipped flipId={'pic-' + pic.id}>
-            <Img
-              src={pic.url}
-              width={pic.width}
-              height={pic.height}
-            />
-          </Flipped>
-        </PanZoom>
-      </>
-    )}
-  </Modal>
-)
+class PictureZoomPage extends Component {
+  state = {
+    isAppeared: this.props.history.action === 'POP'
+  }
+
+  handleAppear = () => {
+    this.setState({
+      isAppeared: true
+    })
+  }
+
+  render () {
+    const { _t, activePicture: pic } = this.props
+    const { isAppeared } = this.state
+
+    return (
+      <Modal tm='zoomed' ovh>
+        {pic && pic.zoomed && (
+          <>
+            <Overlay ht wdM>
+              <Text ht pd={2} align='right' alignM='center'>
+                <FlexBox column ht>
+                  <FlexBox.Item>
+                    <AppLink
+                      title={_t('ui.close')}
+                      className={enablePointerEvents}
+                      path={ROUTE_PICTURE}
+                      data={pic}
+                    >
+                      <IconClose />
+                    </AppLink>
+                  </FlexBox.Item>
+                  <FlexBox.Item mgt='auto'>
+                    <AppLink
+                      className={enablePointerEvents}
+                      path={ROUTE_PICTURE}
+                      data={pic}
+                    >
+                      <Text mgb>
+                        {pic.name}
+                      </Text>
+                      <Text textStyle='caption'>
+                        {pic.material}, {pic.size}
+                      </Text>
+                    </AppLink>
+                  </FlexBox.Item>
+                </FlexBox>
+              </Text>
+            </Overlay>
+            <PanZoom>
+              <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
+                <Img
+                  src={isAppeared ? pic.zoomed.url : pic.original.url}
+                  width={pic.zoomed.width}
+                  height={pic.zoomed.height}
+                  alt=''
+                />
+              </Flipped>
+            </PanZoom>
+          </>
+        )}
+      </Modal>
+    )
+  }
+}
 
 export default withIntl(PictureZoomPage)
