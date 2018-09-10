@@ -98,6 +98,7 @@ class AboutPage extends Component {
     const {
       _t,
       langAlt,
+      isLoading,
       activePicture: pic,
       content,
       photo
@@ -133,7 +134,7 @@ class AboutPage extends Component {
                   </Grid.Item>
                   <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
                     <Box data-fade pdt={2}>
-                      {renderMarkdown(content)}
+                      {isLoading ? _t('ui.loading') : renderMarkdown(content)}
                     </Box>
                   </Grid.Item>
                   <Grid.Item col={3} colT={4} colM={12} position='sticky' top>
