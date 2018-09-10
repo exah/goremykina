@@ -70,7 +70,6 @@ const throttle = (fn = identity) => {
 
 function loop (cb = identity) {
   let wait = false
-  let timeout = null
   let frame = null
 
   const run = (now) => {
@@ -82,14 +81,12 @@ function loop (cb = identity) {
   const tick = () => {
     if (wait) return
     wait = true
-    timeout = setTimeout(() => {
-      frame = window.requestAnimationFrame(run)
-    }, 0)
+    frame = window.requestAnimationFrame(run)
   }
+
   tick()
 
   return () => {
-    clearTimeout(timeout)
     window.cancelAnimationFrame(frame)
   }
 }
