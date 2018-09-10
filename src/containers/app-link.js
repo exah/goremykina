@@ -5,6 +5,7 @@ import { withIntl } from '../hocs'
 const AppLink = ({
   _t,
   _link,
+  intl,
   lang,
   langAlt,
   to,
