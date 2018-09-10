@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react'
 import styled from 'react-emotion'
 import { Box } from 'pss-components'
+import isHotkey from 'is-hotkey'
 import SwipeableViews from 'react-swipeable-views'
-import { bindKeyboard } from 'react-swipeable-views-utils'
-import { listen, throttle } from '../utils'
-
-const SwipeableViewsWithKeyboard = bindKeyboard(({ innerRef, ...rest }) => (
-  <SwipeableViews ref={innerRef} {...rest} />
-))
+import EventListener from 'react-event-listener'
+import { throttle } from '../utils'
 
 class SlideshowItemBase extends PureComponent {
   handleDrag = (e) => {
@@ -64,26 +61,19 @@ class Slideshow extends PureComponent {
   }
   componentDidMount () {
     this.updateSize()
-
-    this.destroyResize = listen(window, 'resize', throttle(this.updateSize))
   }
   componentDidUpdate () {
     this.updateSize()
   }
-  componentWillUnmount () {
-    this.destroyResize()
-  }
   setIntance = (ref) => {
     this.instance = ref
   }
-  handleClickPrev = (e) => {
-    e.stopPropagation()
+  toPrevSlide = () => {
     const { currentViewIndex } = this.state
 
     this.handleViewChange(Math.max(currentViewIndex - 1, 0))
   }
-  handleClickNext = (e) => {
-    e.stopPropagation()
+  toNextSlide = () => {
     const { currentViewIndex, lastViewIndex } = this.state
 
     this.handleViewChange(Math.min(currentViewIndex + 1, lastViewIndex))
@@ -113,13 +103,25 @@ class Slideshow extends PureComponent {
     const position = this.getMousePosition(e)
 
     if (position > 0.6) {
-      this.handleClickNext(e)
+      e.stopPropagation()
+      this.toNextSlide()
     }
 
     if (position < 0.4) {
-      this.handleClickPrev(e)
+      e.stopPropagation()
+      this.toPrevSlide()
     }
   }
+  handleKeyDown = (e) => {
+    if (isHotkey('left', e)) {
+      this.toPrevSlide()
+    } else if (isHotkey('right', e)) {
+      this.toNextSlide()
+    }
+  }
+  handleResize = throttle(() => {
+    this.updateSize()
+  })
   updateSize = () => {
     const { containerNode, updateHeight } = this.instance
 
@@ -147,23 +149,25 @@ class Slideshow extends PureComponent {
     } = this.state
 
     return (
-      <SwipeableViewsWithKeyboard
-        innerRef={this.setIntance}
-        index={currentViewIndex}
-        onChangeIndex={this.handleViewChange}
-        animateHeight={animateHeight}
-        springConfig={{ duration, easeFunction, delay }}
-        hysteresis={hysteresis}
-        ignoreNativeScroll={ignoreNativeScroll}
-        resistance={resistance}
-        enableMouseEvents={enableMouseEvents}
-        style={{ height: '100%', overflow: 'visible' }}
-        containerStyle={{ height: '100%' }}
-        slideStyle={{ overflow: 'visible' }}
-        onClick={this.handleClick}
-      >
-        {views}
-      </SwipeableViewsWithKeyboard>
+      <EventListener target='window' onKeyDown={this.handleKeyDown} onResize={this.handleResize}>
+        <SwipeableViews
+          ref={this.setIntance}
+          index={currentViewIndex}
+          onChangeIndex={this.handleViewChange}
+          animateHeight={animateHeight}
+          springConfig={{ duration, easeFunction, delay }}
+          hysteresis={hysteresis}
+          ignoreNativeScroll={ignoreNativeScroll}
+          resistance={resistance}
+          enableMouseEvents={enableMouseEvents}
+          style={{ height: '100%', overflow: 'visible' }}
+          containerStyle={{ height: '100%' }}
+          slideStyle={{ overflow: 'visible' }}
+          onClick={this.handleClick}
+        >
+          {views}
+        </SwipeableViews>
+      </EventListener>
     )
   }
 }
