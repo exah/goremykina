@@ -42,7 +42,7 @@ const pictures = [
     slug: 'evening',
     name: 'Вечер',
     material: 'холст / масло',
-    color: '#F2D8DB',
+    color: '#F3ECEC',
     size: '54x77',
     original: {
       url: '/pictures/evening-original.jpg',
