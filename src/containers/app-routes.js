@@ -68,6 +68,7 @@ class AppRoutes extends Component {
   render () {
     const { _t, _link, lang, isLoading, match, pictures } = this.props
     const { activePictureIndex, activePicture } = this.state
+    const style = activePicture ? { backgroundColor: activePicture.color } : {}
 
     return (
       <>
@@ -75,32 +76,34 @@ class AppRoutes extends Component {
           <html lang={lang} />
           <title>{_t('title')}</title>
         </Helmet>
-        <FlipperBox flipKey={match.params.page} tm ht>
-          <Switch>
-            <RouteWithProps
-              path={ROUTE_PICTURE}
-              component={PicturePage}
-              pictures={pictures}
-              onPictureChange={this.handlePictureChange}
-              activePictureIndex={activePictureIndex}
-              activePicture={activePicture}
-              isLoading={isLoading}
-              exact
-            />
-            <RouteWithProps
-              path={ROUTE_PICTURE_ZOOM}
-              component={PictureZoomPage}
-              activePicture={activePicture}
-              isLoading={isLoading}
-            />
-            <RouteWithProps
-              path={ROUTE_ABOUT}
-              component={AboutPage}
-              isLoading={isLoading}
-              activePicture={activePicture}
-            />
-            <Redirect from={ROUTE_LANG} to={_link(ROUTE_PICTURE)} exact />
-          </Switch>
+        <FlipperBox flipKey={match.params.page} ht>
+          <Box tm ht transition='all .5s' style={style}>
+            <Switch>
+              <RouteWithProps
+                path={ROUTE_PICTURE}
+                component={PicturePage}
+                pictures={pictures}
+                onPictureChange={this.handlePictureChange}
+                activePictureIndex={activePictureIndex}
+                activePicture={activePicture}
+                isLoading={isLoading}
+                exact
+              />
+              <RouteWithProps
+                path={ROUTE_PICTURE_ZOOM}
+                component={PictureZoomPage}
+                activePicture={activePicture}
+                isLoading={isLoading}
+              />
+              <RouteWithProps
+                path={ROUTE_ABOUT}
+                component={AboutPage}
+                isLoading={isLoading}
+                activePicture={activePicture}
+              />
+              <Redirect from={ROUTE_LANG} to={_link(ROUTE_PICTURE)} exact />
+            </Switch>
+          </Box>
         </FlipperBox>
       </>
     )

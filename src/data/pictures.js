@@ -5,6 +5,7 @@ const pictures = [
     slug: 'landscape-with-birds',
     name: 'Пейзаж с птицами',
     material: 'холст / масло',
+    color: '#F6F1ED',
     size: '80x100',
     original: {
       url: '/pictures/landscape-with-birds-original.jpg',
@@ -41,6 +42,7 @@ const pictures = [
     slug: 'evening',
     name: 'Вечер',
     material: 'холст / масло',
+    color: '#F2D8DB',
     size: '54x77',
     original: {
       url: '/pictures/evening-original.jpg',
@@ -59,6 +61,7 @@ const pictures = [
     slug: 'unnamed-1',
     name: 'Без названия',
     material: 'холст / масло',
+    color: '#AFACBF',
     size: '???x??',
     original: {
       url: '/pictures/unnamed-1-original.jpg',
@@ -163,6 +166,7 @@ const pictures = [
     slug: 'angel',
     name: 'Ангел',
     material: 'холст / масло',
+    color: '#ECEADF',
     size: '58x80',
     original: {
       url: '/pictures/angel-original.jpg',
@@ -181,6 +185,7 @@ const pictures = [
     slug: 'unnamed-2',
     name: 'Без названия',
     material: 'холст / масло',
+    color: '#D4DDDC',
     size: '??x??',
     original: {
       url: '/pictures/unnamed-2-original.jpg',
@@ -199,6 +204,7 @@ const pictures = [
     slug: 'fok',
     name: 'Фок',
     material: 'холст / масло',
+    color: '#C2C5CE',
     size: '120x100',
     original: {
       url: '/pictures/fok-original.jpg',
@@ -217,6 +223,7 @@ const pictures = [
     slug: 'rain',
     name: 'Дождь',
     material: 'холст / масло',
+    color: '#D0E8ED',
     size: '50x40',
     original: {
       url: '/pictures/rain-original.jpg',
