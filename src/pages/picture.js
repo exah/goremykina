@@ -1,5 +1,4 @@
 import React from 'react'
-import { css } from 'emotion'
 import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
@@ -23,10 +22,6 @@ const Img = styled('img')`
   @media ${(props) => props.theme.media.M} {
     max-width: 100%;
   }
-`
-
-const zoomCursor = css`
-  cursor: zoom-in;
 `
 
 const PicturePage = ({
@@ -81,8 +76,8 @@ const PicturePage = ({
                   <AppLink
                     path={ROUTE_PICTURE_ZOOM}
                     data={pic}
-                    className={pic.zoomed && zoomCursor}
                     disable={!pic.zoomed}
+                    style={{ cursor: 'zoom-in' }}
                   >
                     <Flipped flipId={'pic-' + pic.id}>
                       <Img

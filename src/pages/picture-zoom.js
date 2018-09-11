@@ -17,7 +17,8 @@ const Overlay = styled(Box)`
   pointer-events: none;
 `
 
-const enablePointerEvents = css`
+// Restore pointer-events inside
+const OverlayItem = styled('span')`
   pointer-events: auto;
 `
 
@@ -71,28 +72,23 @@ class PictureZoomPage extends Component {
               <Text ht pd={2} align='right' alignM='center'>
                 <FlexBox column ht>
                   <FlexBox.Item>
-                    <AppLink
-                      title={_t('ui.close')}
-                      className={enablePointerEvents}
-                      path={ROUTE_PICTURE}
-                      data={pic}
-                    >
-                      <IconClose />
-                    </AppLink>
+                    <OverlayItem>
+                      <AppLink path={ROUTE_PICTURE} data={pic} title={_t('ui.close')}>
+                        <IconClose />
+                      </AppLink>
+                    </OverlayItem>
                   </FlexBox.Item>
                   <FlexBox.Item mgt='auto'>
-                    <AppLink
-                      className={enablePointerEvents}
-                      path={ROUTE_PICTURE}
-                      data={pic}
-                    >
-                      <Text mgb>
-                        {pic.name}
-                      </Text>
-                      <Text textStyle='caption'>
-                        {pic.material}, {pic.size}
-                      </Text>
-                    </AppLink>
+                    <OverlayItem>
+                      <AppLink path={ROUTE_PICTURE} data={pic}>
+                        <Text mgb>
+                          {pic.name}
+                        </Text>
+                        <Text textStyle='caption'>
+                          {pic.material}, {pic.size}
+                        </Text>
+                      </AppLink>
+                    </OverlayItem>
                   </FlexBox.Item>
                 </FlexBox>
               </Text>

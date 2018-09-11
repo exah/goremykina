@@ -40,9 +40,12 @@ class App extends Component {
 
     injectGlobal({
       'html': {
+        position: 'fixed',
+        width: '100%',
+        height: '100%',
         overflow: 'hidden'
       },
-      'html, body, #app': {
+      'body, #app': {
         height: '100%'
       },
       ':root': theme.textStyle.root

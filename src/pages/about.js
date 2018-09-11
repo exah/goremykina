@@ -9,37 +9,42 @@ import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { AppLink } from '../containers'
 import { withIntl } from '../hocs'
 import { getPage } from '../api'
-import { renderMarkdown, loop } from '../utils'
+import { renderMarkdown } from '../utils'
 
 const PhotoBox = styled(Box)`
   transform-origin: top right;
 `
 
 const Img = styled('img')`
-  display: block;
   width: 100%;
   height: auto;
 `
 
-const transition = ($el, start, end, next) => {
+const animate = (opts) => anime({
+  ...opts,
+  duration: 400,
+  easing: 'easeInOutSine'
+}).finished
+
+const transition = ($el, start, end, next, isStuck) => {
   if (end === 0) {
+    $el.querySelector('[data-transparent]').style.backgroundColor = 'transparent'
     $el.querySelector('[data-hide]').style.visibility = 'hidden'
   }
 
-  const fadeAnime = anime({
+  const fadeAnime = animate({
     targets: $el.querySelectorAll('[data-fade]'),
-    opacity: [ start, end ],
-    duration: 400,
-    easing: 'easeInOutSine'
-  }).finished
+    opacity: [ start, end ]
+  })
 
-  const scaleAnime = anime({
+  const scaleAnime = isStuck ? animate({
+    targets: $el.querySelectorAll(PhotoBox),
+    opacity: [ start, end ]
+  }) : animate({
     targets: $el.querySelectorAll(PhotoBox),
     scale: [ start, end ],
-    opacity: [ start, end ],
-    duration: 400,
-    easing: 'easeInOutSine'
-  }).finished
+    opacity: [ start, end ]
+  })
 
   Promise.all([ fadeAnime, scaleAnime ]).then(next)
 }
@@ -47,7 +52,8 @@ const transition = ($el, start, end, next) => {
 class AboutPage extends Component {
   state = {
     isAppeared: false,
-    isPhotoReady: false
+    isPhotoReady: false,
+    isStuck: false
   }
 
   $scroller = createRef()
@@ -65,7 +71,7 @@ class AboutPage extends Component {
   }
 
   handleExit = (el, index, next) => {
-    transition(el, 1, 0, next)
+    transition(el, 1, 0, next, this.state.isStuck)
   }
 
   updateRects = () => {
@@ -75,30 +81,54 @@ class AboutPage extends Component {
     this.minScale = isPhotoImgNode ? (this.picRect.height / this.photoRect.height) : 1
   }
 
+  prevScrollTop = null
+
+  handleScroll = (e) => {
+    const { currentMediaKey } = this.props
+    const { isStuck } = this.state
+
+    if (currentMediaKey.includes('L')) return
+
+    const { scrollTop } = this.$scroller.current
+    if (scrollTop === this.prevScrollTop || scrollTop < 0) return
+    this.prevScrollTop = scrollTop
+
+    const scale = 1 - (scrollTop / this.photoRect.bottom)
+    if (scale < this.minScale) {
+      if (isStuck === false) {
+        this.setState({
+          isStuck: true
+        })
+
+        this.$photo.current.style.transform = `scale(${this.minScale})`
+      }
+
+      return
+    }
+
+    if (isStuck === true) {
+      this.setState({
+        isStuck: false
+      })
+    }
+
+    this.$photo.current.style.transform = `scale(${scale})`
+  }
+
   componentDidMount () {
     this.updateRects()
-
-    let prevScrollTop
-    this.off = loop((now) => {
-      if (this.props.currentMediaKey.includes('L')) return
-
-      const { scrollTop } = this.$scroller.current
-      if (scrollTop === prevScrollTop || scrollTop < 0) return
-      prevScrollTop = scrollTop
-
-      const scale = 1 - (scrollTop / this.photoRect.bottom)
-      if (scale < this.minScale) return
-
-      this.$photo.current.style.transform = `scale(${scale})`
-    })
   }
 
-  componentWillUnmount () {
-    this.off()
-  }
+  componentDidUpdate (prevProps, prevState) {
+    const shouldUpdateRects = (
+      this.props.currentMediaKey !== prevProps.currentMediaKey ||
+      this.state.isPhotoReady !== prevState.isPhotoReady ||
+      this.state.isAppeared !== prevState.isAppeared
+    )
 
-  componentDidUpdate () {
-    this.updateRects()
+    if (shouldUpdateRects) {
+      this.updateRects()
+    }
   }
 
   render () {
@@ -111,46 +141,70 @@ class AboutPage extends Component {
       photo
     } = this.props
 
+    const {
+      isStuck
+    } = this.state
+
     return (
       <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-        <Box ht ovsy ovtouch innerRef={this.$scroller}>
+        <Box ht ovsy innerRef={this.$scroller} onScroll={this.handleScroll}>
           <Layout>
             <Layout.Item pd={2} mgl='auto' hideM>
               <AppLink path={ROUTE_ABOUT} lang={langAlt}>
                 <Text>{_t('nav.lang')}</Text>
               </AppLink>
             </Layout.Item>
-            <Layout.Body pdx={2}>
+            <Layout.Body
+              pdx={2}
+              style={{ isolation: 'isolate', backgroundColor: pic ? pic.color : '' }}
+              data-transparent
+            >
               <Grid spacex={2} alignItems='flex-start'>
-                <Grid.Item
-                  position='sticky' bottomL topM
-                  col={1} colT={3} colM={4}
-                  mgt='auto' mgtM={0}
-                  pdy={2}
-                >
-                  <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
-                    {pic ? (
-                      <Flipped flipId={'pic-' + pic.id}>
-                        <Box data-hide innerRef={this.$pic}>
-                          <Img src={pic.original.url} alt='' />
-                        </Box>
-                      </Flipped>
-                    ) : _t('nav.back')}
-                  </AppLink>
+                <Grid.Item col={1} colT={3} colM={4}>
+                  <Box
+                    position='fixed'
+                    topM
+                    bottomL
+                    pdy={2}
+                    wd={(1 / 16)}
+                    wdT={(2 / 16)}
+                    wdM={(3 / 16)}
+                  >
+                    <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
+                      {pic ? (
+                        <Flipped flipId={'pic-' + pic.id}>
+                          <Box
+                            innerRef={this.$pic}
+                            ratio={pic.original.width / pic.original.height}
+                            data-hide
+                          >
+                            <Img
+                              src={pic.original.url}
+                              width={pic.original.width}
+                              height={pic.original.height}
+                              alt=''
+                            />
+                          </Box>
+                        </Flipped>
+                      ) : _t('nav.back')}
+                    </AppLink>
+                  </Box>
                 </Grid.Item>
                 <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
                   <Box data-fade pdt={2}>
                     {isLoading ? _t('ui.loading') : renderMarkdown(content)}
                   </Box>
                 </Grid.Item>
-                <Grid.Item col={3} colT={4} colM={12} position='sticky' top css={{ mixBlendMode: 'multiply' }}>
+                <Grid.Item
+                  col={3} colT={4} colM={12}
+                  position='sticky' top
+                  style={isStuck ? {} : { mixBlendMode: 'multiply' }}
+                >
                   <Box pdt={2}>
                     <PhotoBox innerRef={this.$photo} ratio={photo && photo.width / photo.height}>
                       {photo && (
                         <Img
                           src={photo.url}
-                          width={photo.width}
-                          height={photo.height}
                           onLoad={this.handlePhotoLoad}
                           alt=''
                         />
