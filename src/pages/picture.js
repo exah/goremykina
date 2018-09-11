@@ -62,30 +62,41 @@ const PicturePage = ({
     <Layout.Body comp='main'>
       <Layout.Content>
         <Slideshow
-          currentViewIndex={activePictureIndex}
+          defaultViewIndex={activePictureIndex}
+          slideCount={pictures.length}
           onChange={onPictureChange}
         >
-          {pictures.map((pic, index) => (
-            <Slideshow.Item key={pic.id} ht pdx={2}>
-              <Box position='relative' ht>
-                <AppLink
-                  path={ROUTE_PICTURE_ZOOM}
-                  data={pic}
-                  className={pic.zoomed && zoomCursor}
-                  disable={!pic.zoomed}
-                >
-                  <Flipped flipId={'pic-' + pic.id}>
-                    <Img
-                      src={pic.original.url}
-                      width={pic.original.width}
-                      height={pic.original.height}
-                      alt=''
-                    />
-                  </Flipped>
-                </AppLink>
-              </Box>
-            </Slideshow.Item>
-          ))}
+          {({ index, key }) => {
+            const pic = pictures[index]
+
+            if (pic == null) {
+              return (
+                <Slideshow.Item key={key} />
+              )
+            }
+
+            return (
+              <Slideshow.Item key={key} ht pdx={2}>
+                <Box position='relative' ht>
+                  <AppLink
+                    path={ROUTE_PICTURE_ZOOM}
+                    data={pic}
+                    className={pic.zoomed && zoomCursor}
+                    disable={!pic.zoomed}
+                  >
+                    <Flipped flipId={'pic-' + pic.id}>
+                      <Img
+                        src={pic.original.url}
+                        width={pic.original.width}
+                        height={pic.original.height}
+                        alt=''
+                      />
+                    </Flipped>
+                  </AppLink>
+                </Box>
+              </Slideshow.Item>
+            )
+          }}
         </Slideshow>
       </Layout.Content>
     </Layout.Body>
