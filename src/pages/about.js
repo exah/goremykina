@@ -7,14 +7,12 @@ import { Layout, Box, Grid, Text, withCurrentMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { AppLink } from '../containers'
-import { Modal } from '../components'
 import { withIntl } from '../hocs'
 import { getPage } from '../api'
 import { renderMarkdown, loop } from '../utils'
 
 const PhotoBox = styled(Box)`
   transform-origin: top right;
-  mix-blend-mode: multiply;
 `
 
 const Img = styled('img')`
@@ -106,57 +104,55 @@ class AboutPage extends Component {
 
     return (
       <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-        <Modal>
-          <Box ht ovsy ovtouch innerRef={this.$scroller}>
-            <Layout>
-              <Layout.Item pd={2} mgl='auto' hideM>
-                <AppLink path={ROUTE_ABOUT} lang={langAlt}>
-                  <Text>{_t('nav.lang')}</Text>
-                </AppLink>
-              </Layout.Item>
-              <Layout.Body pdx={2}>
-                <Grid spacex={2} alignItems='flex-start'>
-                  <Grid.Item
-                    position='sticky' bottomL topM
-                    col={1} colT={3} colM={4}
-                    mgt='auto' mgtM={0}
-                    pdy={2}
-                  >
-                    <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
-                      {pic ? (
-                        <Flipped flipId={'pic-' + pic.id}>
-                          <Box data-hide innerRef={this.$pic}>
-                            <Img src={pic.original.url} alt='' />
-                          </Box>
-                        </Flipped>
-                      ) : _t('nav.back')}
-                    </AppLink>
-                  </Grid.Item>
-                  <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
-                    <Box data-fade pdt={2}>
-                      {isLoading ? _t('ui.loading') : renderMarkdown(content)}
-                    </Box>
-                  </Grid.Item>
-                  <Grid.Item col={3} colT={4} colM={12} position='sticky' top>
-                    <Box pdt={2}>
-                      <PhotoBox innerRef={this.$photo} ratio={photo && photo.width / photo.height}>
-                        {photo && (
-                          <Img
-                            src={photo.url}
-                            width={photo.width}
-                            height={photo.height}
-                            onLoad={this.handlePhotoLoad}
-                            alt=''
-                          />
-                        )}
-                      </PhotoBox>
-                    </Box>
-                  </Grid.Item>
-                </Grid>
-              </Layout.Body>
-            </Layout>
-          </Box>
-        </Modal>
+        <Box ht ovsy ovtouch innerRef={this.$scroller}>
+          <Layout>
+            <Layout.Item pd={2} mgl='auto' hideM>
+              <AppLink path={ROUTE_ABOUT} lang={langAlt}>
+                <Text>{_t('nav.lang')}</Text>
+              </AppLink>
+            </Layout.Item>
+            <Layout.Body pdx={2}>
+              <Grid spacex={2} alignItems='flex-start'>
+                <Grid.Item
+                  position='sticky' bottomL topM
+                  col={1} colT={3} colM={4}
+                  mgt='auto' mgtM={0}
+                  pdy={2}
+                >
+                  <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
+                    {pic ? (
+                      <Flipped flipId={'pic-' + pic.id}>
+                        <Box data-hide innerRef={this.$pic}>
+                          <Img src={pic.original.url} alt='' />
+                        </Box>
+                      </Flipped>
+                    ) : _t('nav.back')}
+                  </AppLink>
+                </Grid.Item>
+                <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
+                  <Box data-fade pdt={2}>
+                    {isLoading ? _t('ui.loading') : renderMarkdown(content)}
+                  </Box>
+                </Grid.Item>
+                <Grid.Item col={3} colT={4} colM={12} position='sticky' top css={{ mixBlendMode: 'multiply' }}>
+                  <Box pdt={2}>
+                    <PhotoBox innerRef={this.$photo} ratio={photo && photo.width / photo.height}>
+                      {photo && (
+                        <Img
+                          src={photo.url}
+                          width={photo.width}
+                          height={photo.height}
+                          onLoad={this.handlePhotoLoad}
+                          alt=''
+                        />
+                      )}
+                    </PhotoBox>
+                  </Box>
+                </Grid.Item>
+              </Grid>
+            </Layout.Body>
+          </Layout>
+        </Box>
       </Flipped>
     )
   }

@@ -6,7 +6,7 @@ import { Box, Text, FlexBox } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
 import { AppLink } from '../containers'
-import { PanZoom, Modal, IconClose } from '../components'
+import { PanZoom, IconClose } from '../components'
 
 const Overlay = styled(Box)`
   position: absolute;
@@ -64,7 +64,7 @@ class PictureZoomPage extends Component {
     const { isAppeared } = this.state
 
     return (
-      <Modal tm='zoomed' ovh>
+      <Box tm='zoomed' ovh>
         {pic && pic.zoomed && (
           <>
             <Overlay ht wdM>
@@ -109,7 +109,7 @@ class PictureZoomPage extends Component {
             </PanZoom>
           </>
         )}
-      </Modal>
+      </Box>
     )
   }
 }
