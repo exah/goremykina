@@ -5,7 +5,6 @@ import isHotkey from 'is-hotkey'
 import SwipeableViews from 'react-swipeable-views'
 import { virtualize } from 'react-swipeable-views-utils'
 import EventListener from 'react-event-listener'
-import { throttle } from '../utils'
 
 const SwipeableViewsVirtualized = virtualize(({ innerRef, ...rest }) => (
   <SwipeableViews ref={innerRef} {...rest} />
@@ -43,15 +42,13 @@ class Slideshow extends PureComponent {
     hysteresis: 0.4,
     duration: '0.4s',
     easeFunction: 'cubic-bezier(0.15, 0.3, 0.25, 1)',
+    slideCount: 0,
     children: () => undefined,
     onChange: () => undefined,
     delay: '0s'
   }
   state = {
     currentViewIndex: this.props.defaultViewIndex
-  }
-  componentDidMount () {
-    this.updateSize()
   }
   setIntance = (ref) => {
     this.instance = ref
@@ -108,18 +105,6 @@ class Slideshow extends PureComponent {
       this.toNextSlide()
     }
   }
-  handleResize = throttle(() => {
-    this.updateSize()
-  })
-  updateSize = () => {
-    const { containerNode, updateHeight } = this.instance
-
-    containerNode.style.width = ''
-    const nextWidth = Math.ceil(containerNode.getBoundingClientRect().width)
-    containerNode.style.width = nextWidth + 'px'
-
-    updateHeight()
-  }
   render () {
     const {
       duration,
@@ -139,7 +124,7 @@ class Slideshow extends PureComponent {
     } = this.state
 
     return (
-      <EventListener target='window' onKeyDown={this.handleKeyDown} onResize={this.handleResize}>
+      <EventListener target='window' onKeyDown={this.handleKeyDown}>
         <SwipeableViewsVirtualized
           innerRef={this.setIntance}
           index={currentViewIndex}
