@@ -33,6 +33,7 @@ const SlideshowItem = styled(SlideshowItemBase)`
 
 class Slideshow extends PureComponent {
   static Item = SlideshowItem
+
   static defaultProps = {
     defaultViewIndex: 0,
     animateHeight: false,
@@ -47,23 +48,28 @@ class Slideshow extends PureComponent {
     onChange: () => undefined,
     delay: '0s'
   }
+
   state = {
     currentViewIndex: this.props.defaultViewIndex
   }
+
   setIntance = (ref) => {
     this.instance = ref
   }
+
   toPrevSlide = () => {
     const { currentViewIndex } = this.state
 
     this.handleViewChange(Math.max(currentViewIndex - 1, 0))
   }
+
   toNextSlide = () => {
     const { slideCount } = this.props
     const { currentViewIndex } = this.state
 
     this.handleViewChange(Math.min(currentViewIndex + 1, slideCount - 1))
   }
+
   handleViewChange = (index) => {
     const { onChange } = this.props
 
@@ -78,33 +84,39 @@ class Slideshow extends PureComponent {
       onChange(this.state)
     })
   }
+
   getMousePosition = (event) => {
     const rect = event.currentTarget.getBoundingClientRect()
     return (event.clientX - rect.left) / rect.width
   }
+
   handleClick = (e) => {
     if (this.props.enableMouseEvents === false) return
     if (this.instance.isSwiping) return
 
     const position = this.getMousePosition(e)
 
-    if (position > 0.6) {
-      e.stopPropagation()
-      this.toNextSlide()
-    }
-
     if (position < 0.4) {
       e.stopPropagation()
       this.toPrevSlide()
     }
-  }
-  handleKeyDown = (e) => {
-    if (isHotkey('left', e)) {
-      this.toPrevSlide()
-    } else if (isHotkey('right', e)) {
+
+    if (position > 0.6) {
+      e.stopPropagation()
       this.toNextSlide()
     }
   }
+
+  handleKeyDown = (e) => {
+    if (isHotkey('left', e)) {
+      this.toPrevSlide()
+    }
+
+    if (isHotkey('right', e)) {
+      this.toNextSlide()
+    }
+  }
+
   render () {
     const {
       duration,

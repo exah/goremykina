@@ -28,6 +28,7 @@ class AppRoutes extends Component {
   static defaultProps = {
     pictures: []
   }
+
   constructor (props) {
     super(props)
 
@@ -47,6 +48,7 @@ class AppRoutes extends Component {
       }
     }
   }
+
   handlePictureChange = ({ currentViewIndex }) => {
     this.setState((state, props) => {
       if (state.activePictureIndex !== currentViewIndex) {
@@ -57,6 +59,7 @@ class AppRoutes extends Component {
       }
     })
   }
+
   componentDidUpdate (prevProps, prevState) {
     const { _link, history } = this.props
     const { activePicture } = this.state
@@ -65,6 +68,7 @@ class AppRoutes extends Component {
       history.replace(_link(ROUTE_PICTURE, activePicture))
     }
   }
+
   render () {
     const { _t, _link, lang, isLoading, match, pictures } = this.props
     const { activePictureIndex, activePicture } = this.state

@@ -49,26 +49,32 @@ class AboutPage extends Component {
     isAppeared: false,
     isPhotoReady: false
   }
+
+  $scroller = createRef()
+  $photo = createRef()
+  $pic = createRef()
+
   handlePhotoLoad = () => {
     this.setState({ isPhotoReady: true })
   }
+
   handleAppear = (el) => {
     transition(el, 0, 1, () => {
       this.setState({ isAppeared: true })
     })
   }
+
   handleExit = (el, index, next) => {
     transition(el, 1, 0, next)
   }
-  $scroller = createRef()
-  $photo = createRef()
-  $pic = createRef()
+
   updateRects = () => {
     const isPhotoImgNode = this.$photo.current.firstChild != null
     this.photoRect = this.$photo.current.getBoundingClientRect()
     this.picRect = this.$pic.current.getBoundingClientRect()
     this.minScale = isPhotoImgNode ? (this.picRect.height / this.photoRect.height) : 1
   }
+
   componentDidMount () {
     this.updateRects()
 
@@ -86,12 +92,15 @@ class AboutPage extends Component {
       this.$photo.current.style.transform = `scale(${scale})`
     })
   }
+
   componentWillUnmount () {
     this.off()
   }
+
   componentDidUpdate () {
     this.updateRects()
   }
+
   render () {
     const {
       _t,
