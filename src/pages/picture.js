@@ -77,7 +77,7 @@ const PicturePage = ({
                     path={ROUTE_PICTURE_ZOOM}
                     data={pic}
                     disable={!pic.zoomed}
-                    style={{ cursor: 'zoom-in' }}
+                    cursor={pic.zoomed && 'zoom-in'}
                   >
                     <Flipped flipId={'pic-' + pic.id}>
                       <Img
