@@ -28,12 +28,12 @@ const animate = (opts) => anime({
 
 const transition = ($el, start, end, next, isStuck) => {
   if (end === 0) {
-    $el.querySelector('[data-transparent]').style.backgroundColor = 'transparent'
-    $el.querySelector('[data-hide]').style.visibility = 'hidden'
+    $el.querySelector('[data-transition-transparent]').style.backgroundColor = 'transparent'
+    $el.querySelector('[data-transition-hide]').style.visibility = 'hidden'
   }
 
   const fadeAnime = animate({
-    targets: $el.querySelectorAll('[data-fade]'),
+    targets: $el.querySelectorAll('[data-transition-fade]'),
     opacity: [ start, end ]
   })
 
@@ -157,7 +157,7 @@ class AboutPage extends Component {
             <Layout.Body
               pdx={2}
               style={{ isolation: 'isolate', backgroundColor: pic ? pic.color : '' }}
-              data-transparent
+              data-transition-transparent
             >
               <Grid spacex={2} alignItems='flex-start'>
                 <Grid.Item col={1} colT={3} colM={4}>
@@ -176,7 +176,7 @@ class AboutPage extends Component {
                           <Box
                             innerRef={this.$pic}
                             ratio={pic.original.width / pic.original.height}
-                            data-hide
+                            data-transition-hide
                           >
                             <Img
                               src={pic.original.url}
@@ -191,7 +191,7 @@ class AboutPage extends Component {
                   </Box>
                 </Grid.Item>
                 <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
-                  <Box data-fade pdt={2}>
+                  <Box pdt={2} data-transition-fade>
                     {isLoading ? _t('ui.loading') : renderMarkdown(content)}
                   </Box>
                 </Grid.Item>
