@@ -1,13 +1,10 @@
 import express from 'express'
 import requestLanguage from 'express-request-language'
-import * as emotion from 'emotion'
 import { SUPPORTED_LANGS } from './constants'
 import api from './server/api'
 import renderApp from './server/render-app'
 
 export default function serverRender ({ files }) {
-  emotion.flush() // Fresh styles on re-build
-
   const router = express.Router()
 
   router.use(api)
