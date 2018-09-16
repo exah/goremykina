@@ -43,12 +43,12 @@ const PicturePage = ({
           </AppLink>
         </FlexBox.Item>
         <FlexBox.Item>
-          <AppLink path={ROUTE_PICTURE}>
+          <AppLink path={ROUTE_PICTURE} data={activePicture}>
             <Logo title={_t('nav.home')} />
           </AppLink>
         </FlexBox.Item>
         <FlexBox.Item mgl='auto'>
-          <AppLink path={ROUTE_PICTURE} lang={langAlt}>
+          <AppLink path={ROUTE_PICTURE} lang={langAlt} data={activePicture}>
             <Text>{_t('nav.lang')}</Text>
           </AppLink>
         </FlexBox.Item>
