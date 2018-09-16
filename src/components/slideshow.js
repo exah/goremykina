@@ -5,6 +5,7 @@ import isHotkey from 'is-hotkey'
 import SwipeableViews from 'react-swipeable-views'
 import { virtualize } from 'react-swipeable-views-utils'
 import EventListener from 'react-event-listener'
+import { noop } from '../utils'
 
 const SwipeableViewsVirtualized = virtualize(({ innerRef, ...rest }) => (
   <SwipeableViews ref={innerRef} {...rest} />
@@ -44,8 +45,8 @@ class Slideshow extends PureComponent {
     duration: '0.4s',
     easeFunction: 'cubic-bezier(0.15, 0.3, 0.25, 1)',
     slideCount: 0,
-    children: () => undefined,
-    onChange: () => undefined,
+    children: noop,
+    onChange: noop,
     delay: '0s'
   }
 
