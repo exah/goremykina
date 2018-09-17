@@ -187,7 +187,7 @@ class AboutPage extends Component {
                   col={3} colT={4} colM={12}
                   position='sticky' top
                 >
-                  <Box pdt={2}>
+                  <Box pd={2}>
                     <PhotoBox
                       innerRef={this.$photo}
                       ratio={photo && photo.width / photo.height}

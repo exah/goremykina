@@ -71,16 +71,18 @@ class PictureZoomPage extends Component {
         {pic && pic.zoomed && (
           <>
             <Overlay ht wdM>
-              <Text ht pd={2} align='right' alignM='center'>
+              <Text ht align='right' alignM='center'>
                 <FlexBox column ht>
                   <FlexBox.Item>
                     <OverlayItem>
                       <AppLink path={ROUTE_PICTURE} data={pic} title={_t('ui.close')}>
-                        <IconClose />
+                        <Box pd={2}>
+                          <IconClose />
+                        </Box>
                       </AppLink>
                     </OverlayItem>
                   </FlexBox.Item>
-                  <FlexBox.Item mgt='auto'>
+                  <FlexBox.Item mgt='auto' pdb={2}>
                     <OverlayItem>
                       <AppLink path={ROUTE_PICTURE} data={pic}>
                         <Text mgb>
