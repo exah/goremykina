@@ -2,6 +2,7 @@ const path = require('path')
 const config = require('config')
 const CSSPlugin = require('mini-css-extract-plugin')
 const StatsPlugin = require('stats-webpack-plugin')
+const cssnano = require('cssnano')
 
 const nodeEnv = config.isProd
   ? 'production'
@@ -9,7 +10,18 @@ const nodeEnv = config.isProd
 
 const css = {
   test: /\.css$/,
-  use: [ CSSPlugin.loader, 'css-loader' ]
+  use: [
+    CSSPlugin.loader,
+    'css-loader',
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: config.isProd ? [
+          cssnano({ preset: [ 'default', { discardComments: { removeAll: true } } ] })
+        ] : []
+      }
+    }
+  ]
 }
 
 const javascript = {
