@@ -69,7 +69,7 @@ const clientConfig = {
       filename: getFilename('css')
     })
   ].concat(config.isProd
-    ? [ new StatsPlugin('clientStats.json', { chunkModules: true }) ]
+    ? [ new StatsPlugin('clientStats.json') ]
     : []
   )
 }
@@ -94,7 +94,7 @@ const serverConfig = {
   performance: { hints: false },
   optimization: { nodeEnv },
   plugins: [].concat(config.isProd
-    ? [ new StatsPlugin('serverStats.json', { chunkModules: true }) ]
+    ? [ new StatsPlugin('serverStats.json') ]
     : []
   )
 }
