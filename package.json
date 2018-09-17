@@ -94,7 +94,7 @@
     "react-swipeable-views": "^0.12.17",
     "react-swipeable-views-utils": "^0.12.17",
     "react-tree-walker": "^4.3.0",
-    "react-universal-data": "^2.2.1",
+    "react-universal-data": "^2.2.2",
     "recompose": "^0.30.0",
     "remark": "^9.0.0",
     "remark-react": "^4.0.3",

@@ -5045,9 +5045,9 @@ react-tree-walker@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.3.0.tgz#b7cae498cebb490281e9e99a01bdb9c6b4926cd3"
 
-react-universal-data@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-2.2.1.tgz#f8a17c761b31ec5c926c1a5cc94936aa6013cb64"
+react-universal-data@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-2.2.2.tgz#078e60a00a8730cc3eb3db066d4c519b0cf4503f"
   dependencies:
     "@babel/runtime" "^7.0.0"
     react-tree-walker "^4.3.0"
