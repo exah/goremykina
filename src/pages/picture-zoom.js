@@ -53,7 +53,8 @@ const Img = styled('img')`
 
 class PictureZoomPage extends Component {
   state = {
-    isAppeared: this.props.history.action === 'POP'
+    isAppeared: this.props.history.action === 'POP',
+    isReady: this.props.history.action === 'POP'
   }
 
   handleAppear = () => {
@@ -62,9 +63,24 @@ class PictureZoomPage extends Component {
     })
   }
 
+  componentDidMount () {
+    if (this.state.isReady) return
+
+    const pic = this.props.activePicture.zoomed
+    const image = new window.Image(pic.width, pic.height)
+
+    image.src = pic.url
+    image.onload = () => this.setState({ isReady: true }, () => {
+      document.body.removeChild(image)
+    })
+
+    // Firefox needs to actually insert image in DOM
+    document.body.appendChild(image)
+  }
+
   render () {
     const { _t, activePicture: pic } = this.props
-    const { isAppeared } = this.state
+    const { isReady, isAppeared } = this.state
 
     return (
       <Box tm='zoomed' ovh>
@@ -100,7 +116,7 @@ class PictureZoomPage extends Component {
             <PanZoom>
               <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
                 <Img
-                  src={isAppeared ? pic.zoomed.url : pic.original.url}
+                  src={isReady && isAppeared ? pic.zoomed.url : pic.original.url}
                   width={pic.zoomed.width}
                   height={pic.zoomed.height}
                   alt=''
