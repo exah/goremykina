@@ -11,13 +11,29 @@ import { withIntl } from '../hocs'
 import { getPage } from '../api'
 import { renderMarkdown } from '../utils'
 
-const PhotoBox = styled(Box)`
-  transform-origin: top right;
-`
-
 const Img = styled('img')`
   width: 100%;
   height: auto;
+`
+
+const PhotoBox = styled(Box)`
+  position: relative;
+  transform-origin: top right;
+
+  &::before {
+    position: relative;
+    width: 100%;
+    background-color: ${(props) => props.overlayColor};
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  & > ${Img} {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  }
 `
 
 const animate = (opts) => anime({
@@ -28,7 +44,6 @@ const animate = (opts) => anime({
 
 const transition = ($el, start, end, next, isStuck) => {
   if (end === 0) {
-    $el.querySelector('[data-transition-transparent]').style.backgroundColor = 'transparent'
     $el.querySelector('[data-transition-hide]').style.visibility = 'hidden'
   }
 
@@ -52,8 +67,7 @@ const transition = ($el, start, end, next, isStuck) => {
 class AboutPage extends Component {
   state = {
     isAppeared: false,
-    isPhotoReady: false,
-    isStuck: false
+    isPhotoReady: false
   }
 
   $scroller = createRef()
@@ -71,7 +85,7 @@ class AboutPage extends Component {
   }
 
   handleExit = (el, index, next) => {
-    transition(el, 1, 0, next, this.state.isStuck)
+    transition(el, 1, 0, next, this.isStuck)
   }
 
   updateRects = () => {
@@ -82,10 +96,10 @@ class AboutPage extends Component {
   }
 
   prevScrollTop = null
+  isStuck = false // photo and picture is not scaling with scroll
 
   handleScroll = (e) => {
     const { currentMediaKey } = this.props
-    const { isStuck } = this.state
 
     if (currentMediaKey.includes('L')) return
 
@@ -95,24 +109,16 @@ class AboutPage extends Component {
 
     const scale = 1 - (scrollTop / this.photoRect.bottom)
     if (scale < this.minScale) {
-      if (isStuck === false) {
-        this.setState({
-          isStuck: true
-        })
-
+      if (this.isStuck === false) {
+        this.isStuck = true
         this.$photo.current.style.transform = `scale(${this.minScale})`
       }
 
       return
     }
 
-    if (isStuck === true) {
-      this.setState({
-        isStuck: false
-      })
-    }
-
     this.$photo.current.style.transform = `scale(${scale})`
+    this.isStuck = false
   }
 
   componentDidMount () {
@@ -141,10 +147,6 @@ class AboutPage extends Component {
       photo
     } = this.props
 
-    const {
-      isStuck
-    } = this.state
-
     return (
       <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
         <Box ht ovsy innerRef={this.$scroller} onScroll={this.handleScroll}>
@@ -154,11 +156,7 @@ class AboutPage extends Component {
                 <Text>{_t('nav.lang')}</Text>
               </AppLink>
             </Layout.Item>
-            <Layout.Body
-              pdx={2}
-              style={{ isolation: 'isolate', backgroundColor: pic ? pic.color : '' }}
-              data-transition-transparent
-            >
+            <Layout.Body pdx={2}>
               <Grid spacex={2} alignItems='flex-start'>
                 <Grid.Item col={1} colT={3} colM={4}>
                   <Box
@@ -198,10 +196,13 @@ class AboutPage extends Component {
                 <Grid.Item
                   col={3} colT={4} colM={12}
                   position='sticky' top
-                  style={isStuck ? {} : { mixBlendMode: 'multiply' }}
                 >
                   <Box pdt={2}>
-                    <PhotoBox innerRef={this.$photo} ratio={photo && photo.width / photo.height}>
+                    <PhotoBox
+                      innerRef={this.$photo}
+                      ratio={photo && photo.width / photo.height}
+                      overlayColor={pic && pic.color}
+                    >
                       {photo && (
                         <Img
                           src={photo.url}
