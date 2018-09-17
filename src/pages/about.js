@@ -23,6 +23,7 @@ const PhotoBox = styled(Box)`
   &::before {
     position: relative;
     width: 100%;
+    margin-left: 0;
     background-color: ${(props) => props.overlayColor};
     z-index: 1;
     mix-blend-mode: multiply;
@@ -157,7 +158,7 @@ class AboutPage extends Component {
               </AppLink>
             </Layout.Item>
             <Layout.Body pdx={2}>
-              <Grid spacex={2} alignItems='flex-start' wd>
+              <Grid spacex={2} alignItems='flex-start' minWd>
                 <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
                   <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
                     {pic ? (
@@ -187,7 +188,7 @@ class AboutPage extends Component {
                   col={3} colT={4} colM={12}
                   position='sticky' top
                 >
-                  <Box pd={2}>
+                  <Box pdy={2}>
                     <PhotoBox
                       innerRef={this.$photo}
                       ratio={photo && photo.width / photo.height}
