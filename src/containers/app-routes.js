@@ -35,8 +35,8 @@ class AppRoutes extends PureComponent {
           <html lang={lang} />
           <title>{_t('title')}</title>
         </Helmet>
-        <FlipperBox flipKey={page} ht>
-          <Box tm ht transition='all .5s' style={style}>
+        <Box tm ht transition='background-color .5s' style={style}>
+          <FlipperBox flipKey={page} ht>
             <Switch>
               <RouteWithProps
                 path={ROUTE_PICTURE}
@@ -46,20 +46,20 @@ class AppRoutes extends PureComponent {
                 activePicture={activePicture}
                 exact
               />
-              <RouteWithProps
-                path={ROUTE_PICTURE_ZOOM}
-                component={PictureZoomPage}
-                activePicture={activePicture}
-              />
-              <RouteWithProps
-                path={ROUTE_ABOUT}
-                component={AboutPage}
-                activePicture={activePicture}
-              />
               <Redirect from={ROUTE_LANG} to={_link(ROUTE_PICTURE)} exact />
             </Switch>
-          </Box>
-        </FlipperBox>
+            <RouteWithProps
+              path={ROUTE_PICTURE_ZOOM}
+              component={PictureZoomPage}
+              activePicture={activePicture}
+            />
+            <RouteWithProps
+              path={ROUTE_ABOUT}
+              component={AboutPage}
+              activePicture={activePicture}
+            />
+          </FlipperBox>
+        </Box>
       </>
     )
   }
