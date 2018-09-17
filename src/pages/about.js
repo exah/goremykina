@@ -149,7 +149,7 @@ class AboutPage extends Component {
 
     return (
       <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-        <Box ht ovsy innerRef={this.$scroller} onScroll={this.handleScroll}>
+        <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>
           <Layout>
             <Layout.Item pd={2} mgl='auto' hideM>
               <AppLink path={ROUTE_ABOUT} lang={langAlt}>
@@ -157,36 +157,26 @@ class AboutPage extends Component {
               </AppLink>
             </Layout.Item>
             <Layout.Body pdx={2}>
-              <Grid spacex={2} alignItems='flex-start'>
-                <Grid.Item col={1} colT={3} colM={4}>
-                  <Box
-                    position='fixed'
-                    topM
-                    bottomL
-                    pdy={2}
-                    wd={(1 / 16)}
-                    wdT={(2 / 16)}
-                    wdM={(3 / 16)}
-                  >
-                    <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
-                      {pic ? (
-                        <Flipped flipId={'pic-' + pic.id}>
-                          <Box
-                            innerRef={this.$pic}
-                            ratio={pic.original.width / pic.original.height}
-                            data-transition-hide
-                          >
-                            <Img
-                              src={pic.original.url}
-                              width={pic.original.width}
-                              height={pic.original.height}
-                              alt=''
-                            />
-                          </Box>
-                        </Flipped>
-                      ) : _t('nav.back')}
-                    </AppLink>
-                  </Box>
+              <Grid spacex={2} alignItems='flex-start' wd>
+                <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
+                  <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
+                    {pic ? (
+                      <Flipped flipId={'pic-' + pic.id}>
+                        <Box
+                          innerRef={this.$pic}
+                          ratio={pic.original.width / pic.original.height}
+                          data-transition-hide
+                        >
+                          <Img
+                            src={pic.original.url}
+                            width={pic.original.width}
+                            height={pic.original.height}
+                            alt=''
+                          />
+                        </Box>
+                      </Flipped>
+                    ) : _t('nav.back')}
+                  </AppLink>
                 </Grid.Item>
                 <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
                   <Box pdt={2} data-transition-fade>
