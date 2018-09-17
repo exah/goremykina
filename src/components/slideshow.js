@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component, PureComponent } from 'react'
 import styled from 'react-emotion'
 import { Box } from 'pss-components'
 import isHotkey from 'is-hotkey'
@@ -32,11 +32,11 @@ const SlideshowItem = styled(SlideshowItemBase)`
   }
 `
 
-class Slideshow extends PureComponent {
+class Slideshow extends Component {
   static Item = SlideshowItem
 
   static defaultProps = {
-    defaultViewIndex: 0,
+    defaultIndex: 0,
     animateHeight: false,
     enableMouseEvents: true,
     resistance: true,
@@ -51,7 +51,7 @@ class Slideshow extends PureComponent {
   }
 
   state = {
-    currentViewIndex: this.props.defaultViewIndex
+    index: this.props.defaultIndex
   }
 
   setIntance = (ref) => {
@@ -59,30 +59,26 @@ class Slideshow extends PureComponent {
   }
 
   toPrevSlide = () => {
-    const { currentViewIndex } = this.state
+    const { index } = this.state
 
-    this.handleViewChange(Math.max(currentViewIndex - 1, 0))
+    this.handleViewChange(Math.max(index - 1, 0))
   }
 
   toNextSlide = () => {
     const { slideCount } = this.props
-    const { currentViewIndex } = this.state
+    const { index } = this.state
 
-    this.handleViewChange(Math.min(currentViewIndex + 1, slideCount - 1))
+    this.handleViewChange(Math.min(index + 1, slideCount - 1))
   }
 
   handleViewChange = (index) => {
-    const { onChange } = this.props
+    this.setState((state, props) => {
+      if (state.index === index) return null
 
-    this.setState((s) => {
-      if (s.currentViewIndex === index) return
+      const nextState = { index }
 
-      return {
-        currentViewIndex: index
-      }
-    }, () => {
-      this.instance.rootNode.style.transform = ''
-      onChange(this.state)
+      props.onChange(nextState)
+      return nextState
     })
   }
 
@@ -118,6 +114,10 @@ class Slideshow extends PureComponent {
     }
   }
 
+  shouldComponentUpdate (props, state) {
+    return (props.slideCount !== this.props.slideCount || this.state.index !== state.index)
+  }
+
   render () {
     const {
       duration,
@@ -133,14 +133,14 @@ class Slideshow extends PureComponent {
     } = this.props
 
     const {
-      currentViewIndex
+      index
     } = this.state
 
     return (
       <EventListener target='window' onKeyDown={this.handleKeyDown}>
         <SwipeableViewsVirtualized
           innerRef={this.setIntance}
-          index={currentViewIndex}
+          index={index}
           onChangeIndex={this.handleViewChange}
           animateHeight={animateHeight}
           springConfig={{ duration, easeFunction, delay }}

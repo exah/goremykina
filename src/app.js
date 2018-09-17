@@ -21,6 +21,7 @@ import {
 import {
   THEME,
   DEFAULT_LANG,
+  ROUTE_LANG,
   ROUTE_PAGE
 } from './constants'
 
@@ -58,17 +59,20 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <CurrentMediaProvider>
           <Switch>
-            <Route path={ROUTE_PAGE}>
-              {(data) => (
+            <Route
+              path={ROUTE_LANG}
+              render={({ match }) => (
                 <IntlProvider
                   defaultLocale={DEFAULT_LANG}
-                  locale={data.match.params.lang}
-                  messages={messages[data.match.params.lang]}
+                  locale={match.params.lang}
+                  messages={messages[match.params.lang]}
                 >
-                  <AppRoutes {...data} />
+                  <Route path={ROUTE_PAGE} render={(data) => (
+                    <AppRoutes {...data.match.params} />
+                  )} />
                 </IntlProvider>
               )}
-            </Route>
+            />
             <Redirect from='/' to={'/' + userLang} exact />
           </Switch>
         </CurrentMediaProvider>
