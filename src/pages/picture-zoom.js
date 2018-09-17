@@ -35,14 +35,16 @@ const Img = styled('img')`
 
     return p.width > p.height ? css`
       top: 50%;
-      margin-top: -50vmax;
       left: 50%;
+      margin-top: -50vmax;
       margin-left: -${vmax(ratio / 2)};
       width: ${vmax(ratio)};
       height: 100vmax;
     ` : css`
       top: 50%;
+      left: 50%;
       margin-top: -${vmax(1 / ratio / 2)};
+      margin-left: -50vmax;
       width: 100vmax;
       height: ${vmax(1 / ratio)};
     `
