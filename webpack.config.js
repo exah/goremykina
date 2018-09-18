@@ -24,15 +24,18 @@ const css = {
   ]
 }
 
-const javascript = {
+const javascript = (isServer) => ({
   test: /\.js$/,
   include: config.paths.src,
   loader: 'babel-loader',
   options: {
     cacheDirectory: true,
-    plugins: [ 'react-hot-loader/babel' ]
+    plugins: [
+      isServer ? 'babel-plugin-dynamic-import-node' : '@babel/plugin-syntax-dynamic-import',
+      'react-hot-loader/babel'
+    ]
   }
-}
+})
 
 const getFilename = (ext) => config.isProd
   ? `[name].[hash].${ext}`
@@ -59,7 +62,7 @@ const clientConfig = {
   module: {
     rules: [
       css,
-      javascript
+      javascript()
     ]
   },
   optimization: {
@@ -100,7 +103,9 @@ const serverConfig = {
     libraryTarget: 'commonjs2'
   },
   module: {
-    rules: [ javascript ]
+    rules: [
+      javascript(true)
+    ]
   },
   externals: Object.keys(require('./package.json').dependencies),
   performance: { hints: false },
