@@ -98,7 +98,7 @@ class PictureZoomPage extends Component {
                       </AppLink>
                     </OverlayItem>
                   </FlexBox.Item>
-                  <FlexBox.Item mgt='auto' pdb={2}>
+                  <FlexBox.Item mgt='auto' pd={2}>
                     <OverlayItem>
                       <AppLink path={ROUTE_PICTURE} data={pic}>
                         <Text mgb>
