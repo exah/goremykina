@@ -79,7 +79,7 @@ class PictureZoomPage extends Component {
   }
 
   render () {
-    const { _t, activePicture: pic } = this.props
+    const { intl, activePicture: pic } = this.props
     const { isReady, isAppeared } = this.state
 
     return (
@@ -91,7 +91,7 @@ class PictureZoomPage extends Component {
                 <FlexBox column ht>
                   <FlexBox.Item>
                     <OverlayItem>
-                      <AppLink path={ROUTE_PICTURE} data={pic} title={_t('ui.close')}>
+                      <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>
                         <Box pd={2}>
                           <IconClose />
                         </Box>

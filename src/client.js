@@ -15,8 +15,7 @@ hydrateData(initialData)
 
 // Test & import polyfills, then render app
 Promise.all([
-  Promise.resolve(window.PointerEvent == null && import(/* webpackChunkName: 'pointer-events' */ 'pepjs')),
-  Promise.resolve(window.Intl == null && import(/* webpackChunkName: 'intl' */ 'intl'))
+  Promise.resolve(window.PointerEvent == null && import(/* webpackChunkName: 'pointer-events' */ 'pepjs'))
 ]).then(() =>
   ReactDOM.hydrate((
     <Router>

@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
-import { withIntl } from '../hocs'
 import { Logo, Slideshow } from '../components'
 import { AppLink } from '../containers'
+import { withIntl } from '../hocs'
+
+import {
+  ROUTE_PICTURE,
+  ROUTE_PICTURE_ZOOM,
+  ROUTE_ABOUT
+} from '../constants'
 
 const Img = styled('img')`
   position: absolute;
@@ -46,7 +51,7 @@ class PicturePage extends Component {
       if (state.index !== index) {
         const activePicture = props.pictures[index]
 
-        props.history.replace(props._link(ROUTE_PICTURE, activePicture))
+        props.history.replace(props.intl.link(ROUTE_PICTURE, activePicture))
         props.onPictureChange(activePicture)
 
         return {
@@ -61,12 +66,13 @@ class PicturePage extends Component {
   shouldComponentUpdate (props, state) {
     return (
       props.lang !== this.props.lang ||
+      props.isLoading !== this.props.isLoading ||
       isPictureUpdated(props.activePicture, this.props.activePicture)
     )
   }
 
   render () {
-    const { _t, langAlt, isLoading, pictures, activePicture } = this.props
+    const { intl, isLoading, pictures, activePicture } = this.props
     const { index } = this.state
 
     return (
@@ -75,17 +81,17 @@ class PicturePage extends Component {
           <FlexBox alignM='center'>
             <FlexBox.Item hideL mgr='auto'>
               <AppLink path={ROUTE_ABOUT}>
-                <Text>{_t('nav.about')}</Text>
+                <Text>{intl.t('nav.about')}</Text>
               </AppLink>
             </FlexBox.Item>
             <FlexBox.Item>
               <AppLink path={ROUTE_PICTURE} data={activePicture}>
-                <Logo title={_t('nav.home')} />
+                <Logo title={intl.t('nav.home')} />
               </AppLink>
             </FlexBox.Item>
             <FlexBox.Item mgl='auto'>
-              <AppLink path={ROUTE_PICTURE} lang={langAlt} data={activePicture}>
-                <Text>{_t('nav.lang')}</Text>
+              <AppLink path={ROUTE_PICTURE} data={activePicture} alternate>
+                <Text>{intl.t('nav.lang')}</Text>
               </AppLink>
             </FlexBox.Item>
           </FlexBox>
@@ -135,7 +141,7 @@ class PicturePage extends Component {
           <FlexBox justify align='flex-end'>
             <FlexBox.Item hideM>
               <AppLink path={ROUTE_ABOUT}>
-                <Text>{_t('nav.about')}</Text>
+                <Text>{intl.t('nav.about')}</Text>
               </AppLink>
             </FlexBox.Item>
             {activePicture && (
@@ -145,7 +151,7 @@ class PicturePage extends Component {
                     {isLoading ? <>&nbsp;</> : activePicture.name}
                   </Text>
                   <Text textStyle='caption'>
-                    {isLoading ? _t('ui.loading') : (
+                    {isLoading ? intl.t('ui.loading') : (
                       <>{activePicture.material}, {activePicture.size}</>
                     )}
                   </Text>

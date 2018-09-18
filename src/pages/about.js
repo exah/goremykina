@@ -6,10 +6,10 @@ import anime from 'animejs'
 import { Layout, Box, Grid, Text, withCurrentMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
+import { renderMarkdown } from '../utils'
 import { AppLink } from '../containers'
 import { withIntl } from '../hocs'
 import { getPage } from '../api'
-import { renderMarkdown } from '../utils'
 
 const Img = styled('img')`
   width: 100%;
@@ -140,8 +140,7 @@ class AboutPage extends Component {
 
   render () {
     const {
-      _t,
-      langAlt,
+      intl,
       isLoading,
       activePicture: pic,
       content,
@@ -153,14 +152,14 @@ class AboutPage extends Component {
         <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>
           <Layout>
             <Layout.Item pd={2} mgl='auto' hideM>
-              <AppLink path={ROUTE_ABOUT} lang={langAlt}>
-                <Text>{_t('nav.lang')}</Text>
+              <AppLink path={ROUTE_ABOUT} alternate>
+                <Text>{intl.t('nav.lang')}</Text>
               </AppLink>
             </Layout.Item>
             <Layout.Body pdx={2}>
               <Grid spacex={2} alignItems='flex-start' minWd>
                 <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
-                  <AppLink path={ROUTE_PICTURE} data={pic} title={_t('nav.back')}>
+                  <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
                     {pic ? (
                       <Flipped flipId={'pic-' + pic.id}>
                         <Box
@@ -176,12 +175,12 @@ class AboutPage extends Component {
                           />
                         </Box>
                       </Flipped>
-                    ) : _t('nav.back')}
+                    ) : intl.t('nav.back')}
                   </AppLink>
                 </Grid.Item>
                 <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
                   <Box pdt={2} data-transition-fade>
-                    {isLoading ? _t('ui.loading') : renderMarkdown(content)}
+                    {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
                   </Box>
                 </Grid.Item>
                 <Grid.Item
@@ -216,11 +215,11 @@ class AboutPage extends Component {
 export default compose(
   withIntl,
   withData(
-    ({ lang }) => getPage({ lang, slug: 'about' }).then((res) => ({
+    ({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
       status: res.status,
       ...res.data
     })),
-    (prev, next) => prev.lang !== next.lang
+    (prev, next) => prev.match.params.lang !== next.match.params.lang
   ),
   withCurrentMedia
 )(AboutPage)

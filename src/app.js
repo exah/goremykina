@@ -4,13 +4,7 @@ import { injectGlobal } from 'emotion'
 import { ThemeProvider } from 'emotion-theming'
 import { createTheme } from 'pss'
 import { CurrentMediaProvider } from 'pss-components'
-import en from 'react-intl/locale-data/en'
-import ru from 'react-intl/locale-data/ru'
-
-import {
-  addLocaleData,
-  IntlProvider
-} from 'react-intl'
+import { IntlProvider } from './contexts'
 
 import {
   Switch,
@@ -20,7 +14,6 @@ import {
 
 import {
   THEME,
-  DEFAULT_LANG,
   ROUTE_LANG,
   ROUTE_PAGE
 } from './constants'
@@ -29,11 +22,6 @@ import { messages } from './data/intl'
 import { AppRoutes } from './containers'
 
 const theme = createTheme(THEME)
-
-addLocaleData([
-  ...en,
-  ...ru
-])
 
 class App extends Component {
   constructor (props) {
@@ -62,13 +50,9 @@ class App extends Component {
             <Route
               path={ROUTE_LANG}
               render={({ match }) => (
-                <IntlProvider
-                  defaultLocale={DEFAULT_LANG}
-                  locale={match.params.lang}
-                  messages={messages[match.params.lang]}
-                >
+                <IntlProvider lang={match.params.lang} messages={messages}>
                   <Route path={ROUTE_PAGE} render={(data) => (
-                    <AppRoutes {...data.match.params} />
+                    <AppRoutes {...data} />
                   )} />
                 </IntlProvider>
               )}

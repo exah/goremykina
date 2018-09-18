@@ -3,18 +3,18 @@ import { compose, withStateHandlers } from 'recompose'
 import { getPicturs } from '../api'
 
 const withPicturesData = withData(
-  ({ lang }) => getPicturs({ lang }).then((res) => ({
+  ({ match }) => getPicturs(match.params).then((res) => ({
     pictures: res.data
   })),
-  (prev, next) => prev.lang !== next.lang
+  (prev, next) => prev.match.params.lang !== next.match.params.lang
 )
 
-const picturesState = withStateHandlers(({ slug, pictures }) => {
+const picturesState = withStateHandlers(({ match, pictures }) => {
   if (pictures == null) return {}
 
   return {
-    activePicture: slug != null
-      ? pictures.find((p) => p.slug === slug)
+    activePicture: match.params.slug != null
+      ? pictures.find((p) => p.slug === match.params.slug)
       : pictures[0]
   }
 }, {
