@@ -1,5 +1,3 @@
-import 'intl'
-import 'pepjs'
 import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -15,9 +13,14 @@ const { cssIds, initialData, userLang } = (window._ssr || {})
 hydrateCSS(cssIds)
 hydrateData(initialData)
 
-// Render app
-ReactDOM.hydrate((
-  <Router>
-    <App userLang={userLang} />
-  </Router>
-), document.getElementById('app'))
+// Test & import polyfills, then render app
+Promise.all([
+  Promise.resolve(window.PointerEvent == null && import(/* webpackChunkName: 'pointer-events' */ 'pepjs')),
+  Promise.resolve(window.Intl == null && import(/* webpackChunkName: 'intl' */ 'intl'))
+]).then(() =>
+  ReactDOM.hydrate((
+    <Router>
+      <App userLang={userLang} />
+    </Router>
+  ), document.getElementById('app'))
+)
