@@ -1,6 +1,11 @@
 import React, { PureComponent, createRef } from 'react'
 import { css, cx } from 'emotion'
 
+const containerStyle = css`
+  touch-action: none;
+  user-select: none;
+`
+
 class PanZoom extends PureComponent {
   static defaultProps = {
     onPan: () => undefined,
@@ -30,10 +35,7 @@ class PanZoom extends PureComponent {
     this.state = {
       isDragging: false,
       dragData,
-      matrix,
-      className: css`
-        user-select: none;
-      `
+      matrix
     }
   }
 
@@ -118,7 +120,7 @@ class PanZoom extends PureComponent {
     return (
       <div
         ref={this.$panWrapper}
-        className={cx(this.state.className, className)}
+        className={cx(containerStyle, className)}
         onPointerDown={this.handleMouseDown}
         onPointerUp={this.handleMouseUp}
         onPointerMove={this.handleMouseMove}

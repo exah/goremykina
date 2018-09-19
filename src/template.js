@@ -13,7 +13,7 @@ export default ({
       ${app.head.title}
       ${app.head.meta}
       ${app.head.link}
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
       ${files.css.map(file => html`<link rel="stylesheet" href="${file}" />`)}
       <style>${app.css}</style>
       <script>
