@@ -47,12 +47,11 @@ class PicturePage extends Component {
   }
 
   handlePictureChange = ({ index }) => {
-    this.setState((state, props) => {
+    this.setState((state, { pictures, history, intl }) => {
       if (state.index !== index) {
-        const activePicture = props.pictures[index]
+        const activePicture = pictures[index]
 
-        props.history.replace(props.intl.link(ROUTE_PICTURE, activePicture))
-        props.onPictureChange(activePicture)
+        history.replace(intl.link(ROUTE_PICTURE, activePicture))
 
         return {
           index

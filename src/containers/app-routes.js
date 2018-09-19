@@ -25,7 +25,7 @@ class AppRoutes extends PureComponent {
   }
 
   render () {
-    const { intl, match, isLoading, pictures, activePicture, changeActivePicture } = this.props
+    const { intl, match, isLoading, pictures, activePicture } = this.props
     const style = activePicture ? { backgroundColor: activePicture.color } : {}
 
     return (
@@ -40,7 +40,6 @@ class AppRoutes extends PureComponent {
               <RouteWithProps
                 path={ROUTE_PICTURE}
                 component={PicturePage}
-                onPictureChange={changeActivePicture}
                 pictures={pictures}
                 activePicture={activePicture}
                 isLoading={isLoading}
