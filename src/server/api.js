@@ -11,11 +11,16 @@ import * as picturesData from '../data/pictures'
 const router = express.Router()
 
 router.get(API_GET_PAGE, (req, res) => {
-  if (req.params.slug === aboutData.slug) {
+  const { slug, lang } = req.params
+
+  if (slug === aboutData.slug) {
     res.status(200).json({
       status: 200,
       message: 'ok',
-      data: aboutData
+      data: {
+        photo: aboutData.photo,
+        content: aboutData.content[lang]
+      }
     })
 
     return
@@ -29,10 +34,15 @@ router.get(API_GET_PAGE, (req, res) => {
 })
 
 router.get(API_GET_PICTURES, (req, res) => {
+  const { lang } = req.params
+
   res.status(200).json({
     status: 200,
     message: 'ok',
-    data: picturesData.pictures
+    data: picturesData.pictures.map(({ locales, ...data }) => ({
+      ...data,
+      ...locales[lang]
+    }))
   })
 })
 

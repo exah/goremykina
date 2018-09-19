@@ -3,10 +3,18 @@ const pictures = [
     id: 0,
     year: 2011,
     slug: 'landscape-with-birds',
-    name: 'Пейзаж с птицами',
-    material: 'холст / масло',
-    color: '#F6F1ED',
+    locales: {
+      ru: {
+        name: 'Пейзаж с птицами',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Landscape with Birds',
+        material: 'oil on canvas'
+      }
+    },
     size: '80x100',
+    color: '#F6F1ED',
     original: {
       url: '/pictures/landscape-with-birds-original.jpg',
       width: 1800,
@@ -22,8 +30,16 @@ const pictures = [
     id: 1,
     year: 2010,
     slug: 'shore',
-    name: 'Берег',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Берег',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Shore',
+        material: 'oil on canvas'
+      }
+    },
     size: '100x80',
     original: {
       url: '/pictures/shore-original.jpg',
@@ -40,8 +56,16 @@ const pictures = [
     id: 2,
     year: 2011,
     slug: 'evening',
-    name: 'Вечер',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Вечер',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Evening',
+        material: 'oil on canvas'
+      }
+    },
     color: '#F3ECEC',
     size: '54x77',
     original: {
@@ -59,10 +83,18 @@ const pictures = [
     id: 3,
     year: 2011,
     slug: 'unnamed-1',
-    name: 'Без названия',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: null,
+        material: 'холст / масло'
+      },
+      en: {
+        name: null,
+        material: 'oil on canvas'
+      }
+    },
     color: '#AFACBF',
-    size: '???x??',
+    size: null,
     original: {
       url: '/pictures/unnamed-1-original.jpg',
       width: 1507,
@@ -78,8 +110,16 @@ const pictures = [
     id: 4,
     year: 2011,
     slug: 'illusions-1',
-    name: 'Иллюзии',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Иллюзии',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions',
+        material: 'oil on canvas'
+      }
+    },
     size: '70x140',
     original: {
       url: '/pictures/illusions-1-original.jpg',
@@ -95,8 +135,16 @@ const pictures = [
   {
     id: 5,
     slug: 'illusions-2',
-    name: 'Иллюзии',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Иллюзии',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions',
+        material: 'oil on canvas'
+      }
+    },
     size: '70x140',
     original: {
       url: '/pictures/illusions-2-original.jpg',
@@ -112,8 +160,16 @@ const pictures = [
   {
     id: 6,
     slug: 'illusions-3',
-    name: 'Иллюзии',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Иллюзии',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions',
+        material: 'oil on canvas'
+      }
+    },
     size: '70x100',
     original: {
       url: '/pictures/illusions-3-original.jpg',
@@ -129,8 +185,16 @@ const pictures = [
   {
     id: 7,
     slug: 'illusions-4',
-    name: 'Иллюзии',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Иллюзии',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions',
+        material: 'oil on canvas'
+      }
+    },
     size: '90x140',
     original: {
       url: '/pictures/illusions-4-original.jpg',
@@ -146,8 +210,16 @@ const pictures = [
   {
     id: 8,
     slug: 'illusions-5',
-    name: 'Иллюзии',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Иллюзии',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions',
+        material: 'oil on canvas'
+      }
+    },
     size: '90x140',
     original: {
       url: '/pictures/illusions-5-original.jpg',
@@ -164,8 +236,16 @@ const pictures = [
     id: 9,
     year: 2011,
     slug: 'angel',
-    name: 'Ангел',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Ангел',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Angel',
+        material: 'oil on canvas'
+      }
+    },
     color: '#ECEADF',
     size: '58x80',
     original: {
@@ -183,10 +263,18 @@ const pictures = [
     id: 10,
     year: 2016,
     slug: 'unnamed-2',
-    name: 'Без названия',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: null,
+        material: 'холст / масло'
+      },
+      en: {
+        name: null,
+        material: 'oil on canvas'
+      }
+    },
     color: '#D4DDDC',
-    size: '??x??',
+    size: null,
     original: {
       url: '/pictures/unnamed-2-original.jpg',
       width: 1537,
@@ -202,8 +290,16 @@ const pictures = [
     id: 11,
     year: 2010,
     slug: 'fok',
-    name: 'Фок',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Фок',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Fok',
+        material: 'oil on canvas'
+      }
+    },
     color: '#C2C5CE',
     size: '120x100',
     original: {
@@ -221,8 +317,16 @@ const pictures = [
     id: 12,
     year: 2008,
     slug: 'rain',
-    name: 'Дождь',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Дождь',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Rain',
+        material: 'oil on canvas'
+      }
+    },
     color: '#D0E8ED',
     size: '50x40',
     original: {
@@ -240,8 +344,16 @@ const pictures = [
     id: 13,
     year: 2007,
     slug: 'legend-of-the-kara-dag',
-    name: 'Легенда Карадага',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Легенда Карадага',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Legend of The Kara Dag',
+        material: 'oil on canvas'
+      }
+    },
     size: '100x120',
     original: {
       url: '/pictures/legend-of-the-kara-dag-original.jpg',
@@ -258,8 +370,16 @@ const pictures = [
     id: 14,
     year: 2008,
     slug: 'evening-2',
-    name: 'Вечер',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Вечер',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Evening',
+        material: 'oil on canvas'
+      }
+    },
     size: '55x70',
     original: {
       url: '/pictures/evening-2-original.jpg',
@@ -276,8 +396,16 @@ const pictures = [
     id: 15,
     year: 2007,
     slug: 'violet-music',
-    name: 'Фиолетовая музыка',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Фиолетовая музыка',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Violet Music',
+        material: 'oil on canvas'
+      }
+    },
     size: '100x80',
     original: {
       url: '/pictures/violet-music-original.jpg',
@@ -294,8 +422,16 @@ const pictures = [
     id: 16,
     year: 2007,
     slug: 'self-portrait',
-    name: 'Автопортрет с цветком',
-    material: 'холст / масло',
+    locales: {
+      ru: {
+        name: 'Автопортрет с цветком',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Self-portait with Flower',
+        material: 'oil on canvas'
+      }
+    },
     size: '100x80',
     original: {
       url: '/pictures/self-portrait-original.jpg',
