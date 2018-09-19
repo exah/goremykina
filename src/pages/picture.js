@@ -3,7 +3,7 @@ import styled from 'react-emotion'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
-import { AppLink } from '../containers'
+import { AppLink, PictureDescription } from '../containers'
 import { withIntl } from '../hocs'
 
 import {
@@ -145,16 +145,10 @@ class PicturePage extends Component {
             </FlexBox.Item>
             {activePicture && (
               <FlexBox.Item mgxM='auto'>
-                <Text align='right' alignM='center'>
-                  <Text mgb>
-                    {isLoading ? <>&nbsp;</> : activePicture.name}
-                  </Text>
-                  <Text textStyle='caption'>
-                    {isLoading ? intl.t('ui.loading') : (
-                      <>{activePicture.material}, {activePicture.size}</>
-                    )}
-                  </Text>
-                </Text>
+                <PictureDescription
+                  isLoading={isLoading}
+                  {...activePicture}
+                />
               </FlexBox.Item>
             )}
           </FlexBox>

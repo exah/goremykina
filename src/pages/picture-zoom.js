@@ -5,7 +5,7 @@ import { Flipped } from 'react-flip-toolkit'
 import { Box, Text, FlexBox } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
-import { AppLink } from '../containers'
+import { AppLink, PictureDescription } from '../containers'
 import { PanZoom, IconClose } from '../components'
 
 const Overlay = styled(Box)`
@@ -101,12 +101,7 @@ class PictureZoomPage extends Component {
                   <FlexBox.Item mgt='auto' pd={2}>
                     <OverlayItem>
                       <AppLink path={ROUTE_PICTURE} data={pic}>
-                        <Text mgb>
-                          {pic.name}
-                        </Text>
-                        <Text textStyle='caption'>
-                          {pic.material}, {pic.size}
-                        </Text>
+                        <PictureDescription {...pic} />
                       </AppLink>
                     </OverlayItem>
                   </FlexBox.Item>
