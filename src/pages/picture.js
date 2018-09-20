@@ -37,6 +37,10 @@ const isPictureUpdated = (prev, next) => (
 )
 
 class PicturePage extends Component {
+  static defaultProps = {
+    pictures: []
+  }
+
   constructor (props) {
     super(props)
 
@@ -77,12 +81,23 @@ class PicturePage extends Component {
     const { intl, isLoading, pictures, activePicture } = this.props
     const { index } = this.state
 
+    const first = pictures[0]
+    const prev = pictures[index - 1]
+    const next = pictures[index + 1]
+    const last = pictures[pictures.length - 1]
+
     return (
       <>
         {activePicture && (
           <Helmet>
             <title>{activePicture.name}</title>
-            <link rel='canonical' href={intl.link(ROUTE_PICTURE, activePicture)} />
+            <link rel='canonical' href={intl.href(ROUTE_PICTURE, activePicture)} />
+            <link rel='alternate' href={intl.href(ROUTE_PICTURE, activePicture)} hrefLang='x-default' />
+            <link rel='alternate' href={intl.href(ROUTE_PICTURE, activePicture, intl.langAlt)} hrefLang={intl.langAlt} />
+            {first && <link rel='first' href={intl.href(ROUTE_PICTURE, first)} />}
+            {last && <link rel='last' href={intl.href(ROUTE_PICTURE, last)} />}
+            {prev && <link rel='prev' href={intl.href(ROUTE_PICTURE, prev)} />}
+            {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
           </Helmet>
         )}
         <Layout ovh>

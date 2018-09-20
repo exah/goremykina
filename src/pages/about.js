@@ -152,6 +152,20 @@ class AboutPage extends Component {
       <>
         <Helmet>
           <title>{intl.t('title.about')}</title>
+          <link
+            rel='canonical'
+            href={intl.href(ROUTE_ABOUT)}
+          />
+          <link
+            rel='alternate'
+            href={intl.href(ROUTE_ABOUT)}
+            hrefLang='x-default'
+          />
+          <link
+            rel='alternate'
+            href={intl.href(ROUTE_ABOUT, null, intl.langAlt)}
+            hrefLang={intl.langAlt}
+          />
         </Helmet>
         <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
           <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>

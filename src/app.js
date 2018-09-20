@@ -1,3 +1,4 @@
+import config from 'config'
 import { hot } from 'react-hot-loader'
 import React, { Component } from 'react'
 import { injectGlobal } from 'emotion'
@@ -14,6 +15,7 @@ import {
 
 import {
   THEME,
+  ALT_LANG,
   ROUTE_LANG,
   ROUTE_PAGE
 } from './constants'
@@ -50,7 +52,12 @@ class App extends Component {
             <Route
               path={ROUTE_LANG}
               render={({ match }) => (
-                <IntlProvider lang={match.params.lang} messages={messages}>
+                <IntlProvider
+                  lang={match.params.lang}
+                  langAlt={ALT_LANG[match.params.lang]}
+                  messages={messages}
+                  siteUrl={config.public.siteUrl}
+                >
                   <Route path={ROUTE_PAGE} render={(data) => (
                     <AppRoutes {...data} />
                   )} />

@@ -24,7 +24,8 @@ const config = {
     distClient: resolvePath('./dist/client'),
     distServer: resolvePath('./dist/server'),
     src: resolvePath('./src')
-  }
+  },
+  public: { siteUrl }
 }
 
 module.exports = Object.assign({}, universalConfig, config)

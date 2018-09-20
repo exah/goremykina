@@ -4,7 +4,6 @@ import { compose } from 'recompose'
 import { system } from 'pss'
 import { withRouter } from 'react-router-dom'
 import { createBaseComponent } from 'pss-components'
-import { ALT_LANG } from '../constants'
 import { withIntl } from '../hocs'
 import { noop } from '../utils'
 
@@ -20,9 +19,7 @@ class AppLink extends Component {
 
   getLocation = () => {
     const { intl, to, data, path, alternate } = this.props
-
-    const lang = alternate === true ? ALT_LANG[intl.lang] : intl.lang
-    const location = to || intl.link(path, { lang, ...data })
+    const location = to || intl.link(path, data, alternate ? intl.langAlt : intl.lang)
 
     return (typeof location === 'string')
       ? { pathname: location }

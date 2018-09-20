@@ -88,7 +88,7 @@ class PictureZoomPage extends Component {
         {pic && (
           <Helmet>
             <title>{pic.name}</title>
-            <link rel='canonical' href={intl.link(ROUTE_PICTURE, pic)} />
+            <link rel='canonical' href={intl.href(ROUTE_PICTURE, pic)} />
           </Helmet>
         )}
         <Box tm='zoomed' ovh>
