@@ -35,6 +35,9 @@ class AppRoutes extends PureComponent {
           titleTemplate={'%s — ' + intl.t('title')}
         >
           <html lang={intl.lang} />
+          <link rel='icon' sizes='192x192' href='/icon.png' />
+          <link rel='apple-touch-icon' href='/apple-icon.png' />
+          {activePicture && (<meta name='theme-color' content={activePicture.color} />)}
         </Helmet>
         <Box tm ht transition='background-color .5s' style={style}>
           <FlipperBox flipKey={match.params.page} ht>
