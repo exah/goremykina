@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Helmet from 'react-helmet'
 import { css } from 'emotion'
 import styled from 'react-emotion'
 import { Flipped } from 'react-flip-toolkit'
@@ -83,44 +84,52 @@ class PictureZoomPage extends Component {
     const { isReady, isAppeared } = this.state
 
     return (
-      <Box tm='zoomed' ovh>
-        {pic && pic.zoomed && (
-          <>
-            <Overlay ht wdM>
-              <Text ht align='right' alignM='center'>
-                <FlexBox column ht>
-                  <FlexBox.Item>
-                    <OverlayItem>
-                      <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>
-                        <Box pd={2}>
-                          <IconClose />
-                        </Box>
-                      </AppLink>
-                    </OverlayItem>
-                  </FlexBox.Item>
-                  <FlexBox.Item mgt='auto' pd={2}>
-                    <OverlayItem>
-                      <AppLink path={ROUTE_PICTURE} data={pic}>
-                        <PictureDescription {...pic} />
-                      </AppLink>
-                    </OverlayItem>
-                  </FlexBox.Item>
-                </FlexBox>
-              </Text>
-            </Overlay>
-            <PanZoom>
-              <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
-                <Img
-                  src={isReady && isAppeared ? pic.zoomed.url : pic.original.url}
-                  width={pic.zoomed.width}
-                  height={pic.zoomed.height}
-                  alt=''
-                />
-              </Flipped>
-            </PanZoom>
-          </>
+      <>
+        {pic && (
+          <Helmet>
+            <title>{pic.name}</title>
+            <link rel='canonical' href={intl.link(ROUTE_PICTURE, pic)} />
+          </Helmet>
         )}
-      </Box>
+        <Box tm='zoomed' ovh>
+          {pic && pic.zoomed && (
+            <>
+              <Overlay ht wdM>
+                <Text ht align='right' alignM='center'>
+                  <FlexBox column ht>
+                    <FlexBox.Item>
+                      <OverlayItem>
+                        <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>
+                          <Box pd={2}>
+                            <IconClose />
+                          </Box>
+                        </AppLink>
+                      </OverlayItem>
+                    </FlexBox.Item>
+                    <FlexBox.Item mgt='auto' pd={2}>
+                      <OverlayItem>
+                        <AppLink path={ROUTE_PICTURE} data={pic}>
+                          <PictureDescription {...pic} />
+                        </AppLink>
+                      </OverlayItem>
+                    </FlexBox.Item>
+                  </FlexBox>
+                </Text>
+              </Overlay>
+              <PanZoom>
+                <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
+                  <Img
+                    src={isReady && isAppeared ? pic.zoomed.url : pic.original.url}
+                    width={pic.zoomed.width}
+                    height={pic.zoomed.height}
+                    alt=''
+                  />
+                </Flipped>
+              </PanZoom>
+            </>
+          )}
+        </Box>
+      </>
     )
   }
 }

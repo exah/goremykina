@@ -30,9 +30,11 @@ class AppRoutes extends PureComponent {
 
     return (
       <>
-        <Helmet>
+        <Helmet
+          defaultTitle={intl.t('title')}
+          titleTemplate={'%s — ' + intl.t('title')}
+        >
           <html lang={intl.lang} />
-          <title>{intl.t('title')}</title>
         </Helmet>
         <Box tm ht transition='background-color .5s' style={style}>
           <FlipperBox flipKey={match.params.page} ht>

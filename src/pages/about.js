@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import Helmet from 'react-helmet'
 import styled from 'react-emotion'
 import { compose } from 'recompose'
 import { withData } from 'react-universal-data'
@@ -148,66 +149,71 @@ class AboutPage extends Component {
     } = this.props
 
     return (
-      <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-        <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>
-          <Layout>
-            <Layout.Item pd={2} mgl='auto' hideM>
-              <AppLink path={ROUTE_ABOUT} alternate>
-                <Text>{intl.t('nav.lang')}</Text>
-              </AppLink>
-            </Layout.Item>
-            <Layout.Body pdx={2}>
-              <Grid spacex={2} alignItems='flex-start' minWd>
-                <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
-                  <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
-                    {pic ? (
-                      <Flipped flipId={'pic-' + pic.id}>
-                        <Box
-                          innerRef={this.$pic}
-                          ratio={pic.original.width / pic.original.height}
-                          data-transition-hide
-                        >
+      <>
+        <Helmet>
+          <title>{intl.t('title.about')}</title>
+        </Helmet>
+        <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
+          <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>
+            <Layout>
+              <Layout.Item pd={2} mgl='auto' hideM>
+                <AppLink path={ROUTE_ABOUT} alternate>
+                  <Text>{intl.t('nav.lang')}</Text>
+                </AppLink>
+              </Layout.Item>
+              <Layout.Body pdx={2}>
+                <Grid spacex={2} alignItems='flex-start' minWd>
+                  <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
+                    <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
+                      {pic ? (
+                        <Flipped flipId={'pic-' + pic.id}>
+                          <Box
+                            innerRef={this.$pic}
+                            ratio={pic.original.width / pic.original.height}
+                            data-transition-hide
+                          >
+                            <Img
+                              src={pic.original.url}
+                              width={pic.original.width}
+                              height={pic.original.height}
+                              alt=''
+                            />
+                          </Box>
+                        </Flipped>
+                      ) : intl.t('nav.back')}
+                    </AppLink>
+                  </Grid.Item>
+                  <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
+                    <Box pdt={2} data-transition-fade>
+                      {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
+                    </Box>
+                  </Grid.Item>
+                  <Grid.Item
+                    col={3} colT={4} colM={12}
+                    position='sticky' top
+                  >
+                    <Box pdy={2}>
+                      <PhotoBox
+                        innerRef={this.$photo}
+                        ratio={photo && photo.width / photo.height}
+                        overlayColor={pic && pic.color}
+                      >
+                        {photo && (
                           <Img
-                            src={pic.original.url}
-                            width={pic.original.width}
-                            height={pic.original.height}
+                            src={photo.url}
+                            onLoad={this.handlePhotoLoad}
                             alt=''
                           />
-                        </Box>
-                      </Flipped>
-                    ) : intl.t('nav.back')}
-                  </AppLink>
-                </Grid.Item>
-                <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
-                  <Box pdt={2} data-transition-fade>
-                    {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
-                  </Box>
-                </Grid.Item>
-                <Grid.Item
-                  col={3} colT={4} colM={12}
-                  position='sticky' top
-                >
-                  <Box pdy={2}>
-                    <PhotoBox
-                      innerRef={this.$photo}
-                      ratio={photo && photo.width / photo.height}
-                      overlayColor={pic && pic.color}
-                    >
-                      {photo && (
-                        <Img
-                          src={photo.url}
-                          onLoad={this.handlePhotoLoad}
-                          alt=''
-                        />
-                      )}
-                    </PhotoBox>
-                  </Box>
-                </Grid.Item>
-              </Grid>
-            </Layout.Body>
-          </Layout>
-        </Box>
-      </Flipped>
+                        )}
+                      </PhotoBox>
+                    </Box>
+                  </Grid.Item>
+                </Grid>
+              </Layout.Body>
+            </Layout>
+          </Box>
+        </Flipped>
+      </>
     )
   }
 }
