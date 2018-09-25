@@ -1,7 +1,12 @@
+<center>
+  <a href="https://next.goremykina.com" target="_blank">
+    <img src="./screenshot.png" alt="" />
+  </a>
+</center>
+
 # Irina Goremykina
 
 > Personal Web Site
-
 
 ## Requirements
 
