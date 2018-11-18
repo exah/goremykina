@@ -1,14 +1,12 @@
 import React from 'react'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
+import { toArr } from '@exah/utils'
 import { Text } from 'pss-components'
-
-const noop = () => undefined
-const toArray = (src) => src == null ? [] : [].concat(src)
 
 const markdown = remark().use(reactRenderer, {
   remarkReactComponents: {
-    p: (props) => <Text comp='p' mgb={2} {...props} />
+    p: (props) => <Text as='p' mgb={2} {...props} />
   }
 })
 
@@ -41,7 +39,7 @@ const dedent = (strings, ...values) => {
       const indent = getIndent(trimmed.slice(1))
 
       parts.push(
-        toArray(values[stringIndex]).join('\n' + ''.padStart(indent))
+        toArr(values[stringIndex]).join('\n' + ''.padStart(indent))
       )
     }
   }
@@ -51,6 +49,5 @@ const dedent = (strings, ...values) => {
 
 export {
   renderMarkdown,
-  dedent,
-  noop
+  dedent
 }

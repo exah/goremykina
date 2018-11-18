@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import Helmet from 'react-helmet'
-import { compose } from 'recompose'
+import { compose } from '@exah/utils'
 import { Flipper } from 'react-flip-toolkit'
 import { Switch, Redirect } from 'react-router-dom'
 import { Box } from 'pss-components'

@@ -1,11 +1,11 @@
 import React, { Component, PureComponent } from 'react'
+import { noop } from '@exah/utils'
 import styled from 'react-emotion'
 import { Box } from 'pss-components'
 import isHotkey from 'is-hotkey'
 import SwipeableViews from 'react-swipeable-views'
 import { virtualize } from 'react-swipeable-views-utils'
 import EventListener from 'react-event-listener'
-import { noop } from '../utils'
 
 const SwipeableViewsVirtualized = virtualize(({ innerRef, ...rest }) => (
   <SwipeableViews ref={innerRef} {...rest} />

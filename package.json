@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
+    "@exah/utils": "^1.5.0",
     "@exah/webpack-universal-hot-middleware": "^1.1.0",
     "animejs": "^2.2.0",
     "axios": "^0.18.0",
@@ -82,7 +83,7 @@
     "pepjs": "^0.4.3",
     "prop-types": "^15.6.2",
     "pss": "^2.5.0",
-    "pss-components": "^1.2.0",
+    "pss-components": "^2.0.0",
     "react": "16.5",
     "react-dom": "16.5",
     "react-emotion": "^9.2.12",

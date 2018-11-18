@@ -1,10 +1,10 @@
 import React, { Component, createRef } from 'react'
+import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from 'react-emotion'
-import { compose } from 'recompose'
+import { compose } from '@exah/utils'
 import { withData } from 'react-universal-data'
-import anime from 'animejs'
-import { Layout, Box, Grid, Text, withCurrentMedia } from 'pss-components'
+import { Layout, Box, FlexGrid, Text, withCurrentMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
@@ -176,8 +176,8 @@ class AboutPage extends Component {
                 </AppLink>
               </Layout.Item>
               <Layout.Body pdx={2}>
-                <Grid spacex={2} alignItems='flex-start' minWd>
-                  <Grid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
+                <FlexGrid spacex={2} alignItems='flex-start' minWd>
+                  <FlexGrid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
                     <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
                       {pic ? (
                         <Flipped flipId={'pic-' + pic.id}>
@@ -196,13 +196,13 @@ class AboutPage extends Component {
                         </Flipped>
                       ) : intl.t('nav.back')}
                     </AppLink>
-                  </Grid.Item>
-                  <Grid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
+                  </FlexGrid.Item>
+                  <FlexGrid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
                     <Box pdt={2} data-transition-fade>
                       {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
                     </Box>
-                  </Grid.Item>
-                  <Grid.Item
+                  </FlexGrid.Item>
+                  <FlexGrid.Item
                     col={3} colT={4} colM={12}
                     position='sticky' top
                   >
@@ -221,8 +221,8 @@ class AboutPage extends Component {
                         )}
                       </PhotoBox>
                     </Box>
-                  </Grid.Item>
-                </Grid>
+                  </FlexGrid.Item>
+                </FlexGrid>
               </Layout.Body>
             </Layout>
           </Box>

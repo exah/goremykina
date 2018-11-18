@@ -1,5 +1,6 @@
 import { withData } from 'react-universal-data'
-import { compose, withPropsOnChange } from 'recompose'
+import { compose } from '@exah/utils'
+import { withProps } from 'pss-components'
 import { getPicturs } from '../api'
 
 const withPicturesData = withData(
@@ -12,8 +13,7 @@ const withPicturesData = withData(
   (prev, next) => prev.match.params.lang !== next.match.params.lang
 )
 
-const activePictureProps = withPropsOnChange(
-  (prev, next) => next.match.params.slug != null,
+const activePictureProps = withProps(
   ({ match, pictures = [], activePicture }) => ({
     activePicture: match.params.slug == null
       ? activePicture

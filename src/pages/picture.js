@@ -101,7 +101,7 @@ class PicturePage extends Component {
           </Helmet>
         )}
         <Layout ovh>
-          <Layout.Item comp='header' pd={2}>
+          <Layout.Item as='header' pd={2}>
             <FlexBox alignM='center'>
               <FlexBox.Item hideL mgr='auto'>
                 <AppLink path={ROUTE_ABOUT}>
@@ -120,7 +120,7 @@ class PicturePage extends Component {
               </FlexBox.Item>
             </FlexBox>
           </Layout.Item>
-          <Layout.Body comp='main'>
+          <Layout.Body as='main'>
             <Layout.Content>
               <Slideshow
                 defaultIndex={index}
@@ -161,7 +161,7 @@ class PicturePage extends Component {
               </Slideshow>
             </Layout.Content>
           </Layout.Body>
-          <Layout.Item comp='footer' pd={2}>
+          <Layout.Item as='footer' pd={2}>
             <FlexBox justify align='flex-end'>
               <FlexBox.Item hideM>
                 <AppLink path={ROUTE_ABOUT}>
