@@ -4,7 +4,7 @@ module.exports = {
   presets: [
     [
       '@babel/preset-env', {
-        useBuiltIns: 'usage',
+        useBuiltIns: false,
         modules: false
       }
     ],
@@ -20,8 +20,7 @@ module.exports = {
     [
       'emotion', {
         sourceMap: config.isDev,
-        autoLabel: config.isDev,
-        hoist: config.isProd
+        autoLabel: config.isDev
       }
     ]
   ]
