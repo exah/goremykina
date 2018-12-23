@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
+import { mq } from 'pss'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
@@ -25,7 +26,7 @@ const Img = styled('img')`
   height: auto;
   margin: auto;
 
-  @media ${(props) => props.theme.media.M} {
+  ${mq('sm')} {
     max-width: 100%;
   }
 `
@@ -102,8 +103,8 @@ class PicturePage extends Component {
         )}
         <Layout ovh>
           <Layout.Item as='header' pd={2}>
-            <FlexBox alignItems={{ M: 'center' }}>
-              <FlexBox.Item hideOn='L' mgr='auto'>
+            <FlexBox alignItems={{ sm: 'center' }}>
+              <FlexBox.Item hideOn='md' mgr='auto'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
@@ -163,13 +164,13 @@ class PicturePage extends Component {
           </Layout.Body>
           <Layout.Item as='footer' pd={2}>
             <FlexBox justifyContent='space-between' alignItems='flex-end'>
-              <FlexBox.Item hideOn='M'>
+              <FlexBox.Item hideOn='sm'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
               </FlexBox.Item>
               {activePicture && (
-                <FlexBox.Item mgx={{ M: 'auto' }}>
+                <FlexBox.Item mgx={{ sm: 'auto' }}>
                   <PictureDescription
                     isLoading={isLoading}
                     {...activePicture}

@@ -94,8 +94,8 @@ class PictureZoomPage extends Component {
         <Box tm='zoomed' ovh>
           {pic && pic.zoomed && (
             <>
-              <Overlay width={{ M: '100%' }} height='100%'>
-                <Text textAlign={{ all: 'right', M: 'center' }} height='100%'>
+              <Overlay width={{ sm: '100%' }} height='100%'>
+                <Text textAlign={{ all: 'right', sm: 'center' }} height='100%'>
                   <FlexBox flexDirection='column' height='100%'>
                     <FlexBox.Item>
                       <OverlayItem>

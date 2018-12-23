@@ -1,14 +1,13 @@
 const THEME = {
   grid: 16,
   media: {
-    D: '(min-width: 1025px)',
-    T: '(max-width: 1024px)',
-    L: '(min-width: 601px)',
-    M: '(max-width: 600px)'
+    lg: '(min-width: 1025px)',
+    md: '(min-width: 601px)',
+    sm: '(max-width: 600px)'
   },
   space: {
     default: [ 0, 6, 24, 72 ],
-    M: [ 0, 6, 16, 32 ]
+    sm: [ 0, 6, 16, 32 ]
   },
   color: {
     gray: '#E4E4E4'

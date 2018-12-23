@@ -103,7 +103,7 @@ class AboutPage extends Component {
   handleScroll = (e) => {
     const { currentMediaKey } = this.props
 
-    if (currentMediaKey.includes('L')) return
+    if (currentMediaKey.includes('md')) return
 
     const { scrollTop } = this.$scroller.current
     if (scrollTop === this.prevScrollTop || scrollTop < 0) return
@@ -170,7 +170,7 @@ class AboutPage extends Component {
         <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
           <Box height ovsy ovtouch ref={this.$scroller} onScroll={this.handleScroll}>
             <Layout>
-              <Layout.Item pd={2} mgl='auto' hideOn='M'>
+              <Layout.Item pd={2} mgl='auto' hideOn='sm'>
                 <AppLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
                 </AppLink>
@@ -178,11 +178,11 @@ class AboutPage extends Component {
               <Layout.Body pdx={2}>
                 <FlexGrid spacex={2} alignItems='flex-start' minWidth='100%'>
                   <FlexGrid.Item
-                    col={{ all: 1, T: 3, M: 4 }}
+                    col={{ sm: 4, md: 3, lg: 2 }}
                     position='sticky'
-                    top={{ M: 0 }}
-                    bottom={{ L: 0 }}
-                    mgt={{ L: 'auto' }}
+                    top={{ sm: 0 }}
+                    bottom={{ 'md': 0 }}
+                    mgt={{ 'md': 'auto' }}
                     pdy={2}
                   >
                     <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
@@ -205,8 +205,8 @@ class AboutPage extends Component {
                     </AppLink>
                   </FlexGrid.Item>
                   <FlexGrid.Item
-                    col={{ all: 6, T: 8, M: 16 }}
-                    order={{ M: 1 }}
+                    col={{ sm: 16, md: 8, lg: 6 }}
+                    order={{ sm: 1 }}
                     mgx='auto'
                   >
                     <Box pdt={2} data-transition-fade>
@@ -214,7 +214,7 @@ class AboutPage extends Component {
                     </Box>
                   </FlexGrid.Item>
                   <FlexGrid.Item
-                    col={{ all: 3, T: 4, M: 12 }}
+                    col={{ sm: 12, md: 4, lg: 3 }}
                     position='sticky'
                     top={0}
                   >
