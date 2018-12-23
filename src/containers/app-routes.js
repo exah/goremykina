@@ -5,7 +5,7 @@ import { Flipper } from 'react-flip-toolkit'
 import { Switch, Redirect } from 'react-router-dom'
 import { Box } from 'pss-components'
 import { RouteWithProps } from '../components'
-import { withIntl, withPicturesDataState } from '../hocs'
+import { withIntl, withPicturesData } from '../hocs'
 import PicturePage from '../pages/picture'
 import PictureZoomPage from '../pages/picture-zoom'
 import AboutPage from '../pages/about'
@@ -21,11 +21,28 @@ const FlipperBox = Box.withComponent(Flipper)
 
 class AppRoutes extends PureComponent {
   static defaultProps = {
+    match: { params: {} },
+    activePicture: null,
     pictures: []
   }
 
+  static getDerivedStateFromProps ({ pictures, match }) {
+    if (match.params.slug == null) {
+      return null
+    }
+
+    return {
+      activePicture: pictures.find((p) => p.slug === match.params.slug)
+    }
+  }
+
+  state = {
+    activePicture: this.props.activePicture
+  }
+
   render () {
-    const { intl, match, isLoading, pictures, activePicture } = this.props
+    const { intl, match, isLoading, pictures } = this.props
+    const { activePicture } = this.state
     const style = activePicture ? { backgroundColor: activePicture.color } : {}
 
     return (
@@ -73,5 +90,5 @@ class AppRoutes extends PureComponent {
 
 export default compose(
   withIntl,
-  withPicturesDataState
+  withPicturesData
 )(AppRoutes)
