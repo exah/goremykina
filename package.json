@@ -82,7 +82,7 @@
     "path-to-regexp": "^2.4.0",
     "pepjs": "^0.4.3",
     "prop-types": "^15.6.2",
-    "pss-components": "^4.0.2",
+    "pss-components": "^4.0.3",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-event-listener": "^0.6.4",

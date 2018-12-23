@@ -5539,23 +5539,23 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-pss-components@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/pss-components/-/pss-components-4.0.2.tgz#3c02c30c8e14c4c334afbf048e57eea1e55fad06"
-  integrity sha512-8d7o+4cKL3FkIWHJ/lxPLc8RVx3OF9Wiyy8Y/tjvGuatdNwJPAJBz8TKdNaZE/d5aESinPUiJT/vyK2XXOLqAg==
+pss-components@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/pss-components/-/pss-components-4.0.3.tgz#044d2a0a48ef08d0e9a38bd1292ec605cba26542"
+  integrity sha512-A7GDqWonerK8DVTKmANVelzfzUqhBDq4+70zK0aW5qkn2vJSIeHyqGsEQj6FMApGsn1tflVvo+Tc8ZJxpUKGSg==
   dependencies:
     "@babel/runtime" "7.2.0"
     "@emotion/core" "^10.0.5"
     "@emotion/styled" "^10.0.5"
     "@exah/utils" "^2.0.0"
     emotion-theming "^10.0.5"
-    pss "^4.0.0"
+    pss "^4.1.1"
     react-styled-base "^2.0.1"
 
-pss@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/pss/-/pss-4.0.0.tgz#38d9523b04aea11281117a5b295b34f1a290bdde"
-  integrity sha512-Q3gXkvT+6tBySOHmKir90q+nejz7fp+X0vMqf8y5OPyGw6NUTz/gtaERJ4BRraAbbFwfqrperm8JlTiFelr2MA==
+pss@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/pss/-/pss-4.1.1.tgz#84bac712373dd2d9cfd6e664ed6cc9b6a6df583f"
+  integrity sha512-PpA3hk2WV7iUh8Z5GkGUXv0otxGbjvrZ8nb7wkPWMHGavIzMA34RoY2qEwRCfMbTNRjm1Fz54euk63oO9YMAAg==
   dependencies:
     "@exah/utils" "^2.0.0"
     prop-types "^15.6.2"
