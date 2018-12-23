@@ -148,9 +148,9 @@ class Slideshow extends Component {
           ignoreNativeScroll={ignoreNativeScroll}
           resistance={resistance}
           enableMouseEvents={enableMouseEvents}
-          style={{ height: '100%', overflow: 'visible' }}
+          style={{ position: 'absolute', width: '100%', height: '100%', overflow: 'visible' }}
           containerStyle={{ height: '100%' }}
-          slideStyle={{ overflow: 'visible' }}
+          slideStyle={{ overflow: 'visible', height: '100%' }}
           onClick={this.handleClick}
           slideCount={slideCount}
           slideRenderer={children}

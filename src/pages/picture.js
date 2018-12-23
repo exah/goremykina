@@ -122,7 +122,7 @@ class PicturePage extends Component {
             </FlexBox>
           </Layout.Item>
           <Layout.Body as='main'>
-            <Layout.Content>
+            <Layout.Content position='relative'>
               <Slideshow
                 defaultIndex={index}
                 slideCount={pictures.length}
@@ -138,8 +138,8 @@ class PicturePage extends Component {
                   }
 
                   return (
-                    <Slideshow.Item key={slide.key} height pdx={2}>
-                      <Box position='relative' height>
+                    <Slideshow.Item key={slide.key} height='100%' pdx={2}>
+                      <Box position='relative' height='100%'>
                         <AppLink
                           path={ROUTE_PICTURE_ZOOM}
                           data={pic}
