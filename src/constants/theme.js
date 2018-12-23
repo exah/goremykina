@@ -25,27 +25,27 @@ const THEME = {
   textStyle: {
     root: {
       fontSize: 16,
-      fontFamily: 'system-ui',
+      fontFamily: 'system-ui, sans-serif',
       lineHeight: 19 / 16,
       letterSpacing: 0.18
     },
     default: {
       fontSize: '1rem',
-      fontFamily: 'system-ui',
+      fontFamily: 'system-ui, sans-serif',
       lineHeight: 19 / 16,
       letterSpacing: 0.18,
       fontWeight: 500
     },
     text: {
       fontSize: `${(19 / 16)}rem`,
-      fontFamily: 'system-ui',
+      fontFamily: 'system-ui, sans-serif',
       lineHeight: 21 / 19,
       letterSpacing: 0.2,
       fontWeight: 400
     },
     caption: {
       fontSize: `${(12 / 16)}rem`,
-      fontFamily: 'system-ui',
+      fontFamily: 'system-ui, sans-serif',
       lineHeight: 14 / 12,
       letterSpacing: 0.18,
       fontWeight: 300
