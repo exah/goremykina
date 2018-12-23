@@ -5638,10 +5638,10 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-pss-components@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/pss-components/-/pss-components-4.0.3.tgz#044d2a0a48ef08d0e9a38bd1292ec605cba26542"
-  integrity sha512-A7GDqWonerK8DVTKmANVelzfzUqhBDq4+70zK0aW5qkn2vJSIeHyqGsEQj6FMApGsn1tflVvo+Tc8ZJxpUKGSg==
+pss-components@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/pss-components/-/pss-components-4.1.0.tgz#b16456f06a6c0ce457c452a26e6968cf8615560d"
+  integrity sha512-TFRevfJYYA4otAyga1+tTuHdowEYXC1FS+shpcoqtocX7STyBLS6zxUT53ZuBE9FjFK/xpny2vK36Md7/nRdyg==
   dependencies:
     "@babel/runtime" "7.2.0"
     "@emotion/core" "^10.0.5"
@@ -5913,10 +5913,10 @@ react-tree-walker@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.3.0.tgz#b7cae498cebb490281e9e99a01bdb9c6b4926cd3"
 
-react-universal-data@^2.3.0-0:
-  version "2.3.0-0"
-  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-2.3.0-0.tgz#e13e53390f65d693c084031c4b603ac0fefeb595"
-  integrity sha512-EYbE+6bKz6QrgkBia66rx6naDU5T5+E6n3HZZH7lMD33IyoMFblwdC7GC7R2eyTIlVobGWy612Eu/hoJH+r1gQ==
+react-universal-data@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-2.3.0.tgz#ed207c192233d55cc866012e7c20ff33e508c514"
+  integrity sha512-oV1pT0B7le9e/5iNa+S9W0T0rto9DNC6zezqzGi6KMkr4ppoIqtsN2bBsK/kaHQJz+ljeTX2t4qLRgdNvpz51w==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@exah/react-tree-walker" "^4.3.1"

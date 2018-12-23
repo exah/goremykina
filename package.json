@@ -28,7 +28,7 @@
       "react/prop-types": 0
     }
   },
-  "browserslist": "> 1%",
+  "browserslist": "> 1%, iOS 10",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
@@ -82,7 +82,7 @@
     "path-to-regexp": "^2.4.0",
     "pepjs": "^0.4.3",
     "prop-types": "^15.6.2",
-    "pss-components": "^4.0.3",
+    "pss-components": "^4.1.0",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-event-listener": "^0.6.4",
@@ -93,7 +93,7 @@
     "react-swipeable-views": "^0.13.0",
     "react-swipeable-views-utils": "^0.13.0",
     "react-tree-walker": "^4.3.0",
-    "react-universal-data": "^2.3.0-0",
+    "react-universal-data": "^2.3.0",
     "recompose": "^0.30.0",
     "remark": "^10.0.1",
     "remark-react": "^5.0.1",
