@@ -48,7 +48,7 @@ class AppRoutes extends PureComponent {
     return (
       <>
         <Helmet
-          defaultTitle={intl.t('title')}
+          defaultTitle={intl.t('title').toString()}
           titleTemplate={'%s — ' + intl.t('title')}
         >
           <html lang={intl.lang} />

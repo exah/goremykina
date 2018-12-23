@@ -1,5 +1,6 @@
 import React, { PureComponent, createContext } from 'react'
 import { compile as compilePath } from 'path-to-regexp'
+import { toArr } from '@exah/utils'
 import { DEFAULT_LANG, ALT_LANG } from '../constants'
 
 const INITIAL = {
@@ -13,29 +14,30 @@ const { Provider, Consumer } = createContext(INITIAL)
 
 class IntlProvider extends PureComponent {
   static defaultProps = INITIAL
-  pathCache = {}
-  getMessage = (id, langOpt) => {
+  compiledPaths = {}
+  getMessages = (id, langOpt) => {
     const lang = langOpt || this.props.lang
     const messages = this.props.messages[lang]
+    const fallback = toArr(id)
 
     if (messages == null) {
-      console.warn(`Please provide messages for lang='${lang}'`)
-      return id
+      console.warn(`Please provide 'messages' for lang='${lang}'`)
+      return fallback
     }
 
-    const text = messages[id]
+    const value = messages[id]
 
-    if (text == null) {
-      console.warn(`No message for '${id}' for lang='${lang}'`)
-      return id
+    if (value == null) {
+      console.warn(`No '${id}' message for lang='${lang}'`)
+      return fallback
     }
 
-    return text.toString()
+    return toArr(value)
   }
   getLink = (path, data, langOpt) => {
     const lang = langOpt || this.props.lang
 
-    const getPath = this.pathCache[path] = this.pathCache[path] || compilePath(path)
+    const getPath = this.compiledPaths[path] = (this.compiledPaths[path] || compilePath(path))
     return getPath({ lang, ...data })
   }
   getHref = (...args) => this.props.siteUrl + this.getLink(...args)
@@ -45,7 +47,7 @@ class IntlProvider extends PureComponent {
     const data = {
       lang,
       langAlt,
-      t: this.getMessage,
+      t: this.getMessages,
       link: this.getLink,
       href: this.getHref
     }
