@@ -39,8 +39,8 @@ class AppRoutes extends PureComponent {
           <link rel='apple-touch-icon' href='/apple-icon.png' />
           {activePicture && (<meta name='theme-color' content={activePicture.color} />)}
         </Helmet>
-        <Box tm ht transition='background-color .5s' style={style}>
-          <FlipperBox flipKey={match.params.page} ht>
+        <Box tm height={1} transition='background-color .5s' style={style}>
+          <FlipperBox flipKey={match.params.page} height>
             <Switch>
               <RouteWithProps
                 path={ROUTE_PICTURE}

@@ -15,7 +15,6 @@ export default ({
       ${app.head.meta}
       ${app.head.link}
       ${files.css.map(file => html`<link rel="stylesheet" href="${file}" />`)}
-      <style>${app.css}</style>
       <script>
         (function(html) {
           html.classList.remove('no-js')

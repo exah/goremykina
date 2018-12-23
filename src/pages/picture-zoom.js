@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
-import { css } from 'emotion'
-import styled from 'react-emotion'
+import { css } from '@emotion/core'
+import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
 import { Box, Text, FlexBox } from 'pss-components'
 import { withIntl } from '../hocs'
@@ -94,9 +94,9 @@ class PictureZoomPage extends Component {
         <Box tm='zoomed' ovh>
           {pic && pic.zoomed && (
             <>
-              <Overlay ht wdM>
-                <Text ht align='right' alignM='center'>
-                  <FlexBox column ht>
+              <Overlay width={{ M: '100%' }} height='100%'>
+                <Text alignItems={{ all: 'right', M: 'center' }} height='100%'>
+                  <FlexBox flexDirection='column' height='100%'>
                     <FlexBox.Item>
                       <OverlayItem>
                         <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>

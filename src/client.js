@@ -3,14 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { hydrateData } from 'react-universal-data'
-import { hydrate as hydrateCSS } from 'emotion'
 import App from './app'
 
 // Get server state
-const { cssIds, initialData, userLang } = (window._ssr || {})
+const { initialData, userLang } = (window._ssr || {})
 
-// Restore emotion css ids and withData state
-hydrateCSS(cssIds)
+// Restore withData state
 hydrateData(initialData)
 
 // Test & import polyfills, then render app

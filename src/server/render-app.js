@@ -1,7 +1,6 @@
 import config from 'config'
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { extractCritical } from 'emotion-server'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
 import { getInitialData } from 'react-universal-data'
@@ -10,13 +9,11 @@ import template from '../template'
 import App from '../app'
 
 const renderApp = (tree) => {
-  const { ids, html, css } = extractCritical(renderToString(tree))
+  const html = renderToString(tree)
   const head = Helmet.renderStatic()
 
   return {
     head,
-    css,
-    cssIds: ids,
     html
   }
 }
@@ -64,7 +61,6 @@ const renderAppMiddleware = (files) => (req, res, next) => {
 
       const ssrData = {
         config: config.public,
-        cssIds: app.cssIds,
         initialData,
         userLang
       }

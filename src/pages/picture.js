@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
@@ -102,8 +102,8 @@ class PicturePage extends Component {
         )}
         <Layout ovh>
           <Layout.Item as='header' pd={2}>
-            <FlexBox alignM='center'>
-              <FlexBox.Item hideL mgr='auto'>
+            <FlexBox alignItems={{ M: 'center' }}>
+              <FlexBox.Item hideOn='L' mgr='auto'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
@@ -137,8 +137,8 @@ class PicturePage extends Component {
                   }
 
                   return (
-                    <Slideshow.Item key={slide.key} ht pdx={2}>
-                      <Box position='relative' ht>
+                    <Slideshow.Item key={slide.key} height pdx={2}>
+                      <Box position='relative' height>
                         <AppLink
                           path={ROUTE_PICTURE_ZOOM}
                           data={pic}
@@ -162,14 +162,14 @@ class PicturePage extends Component {
             </Layout.Content>
           </Layout.Body>
           <Layout.Item as='footer' pd={2}>
-            <FlexBox justify align='flex-end'>
-              <FlexBox.Item hideM>
+            <FlexBox justifyContent='space-between' alignItems='flex-end'>
+              <FlexBox.Item hideOn='M'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
               </FlexBox.Item>
               {activePicture && (
-                <FlexBox.Item mgxM='auto'>
+                <FlexBox.Item mgx={{ M: 'auto' }}>
                   <PictureDescription
                     isLoading={isLoading}
                     {...activePicture}

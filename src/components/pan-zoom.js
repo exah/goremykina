@@ -1,5 +1,5 @@
 import React, { PureComponent, createRef } from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 
 const containerStyle = css`
   touch-action: none;
@@ -120,7 +120,7 @@ class PanZoom extends PureComponent {
     return (
       <div
         ref={this.$panWrapper}
-        className={cx(containerStyle, className)}
+        className={[ containerStyle, className ].join(' ')}
         onPointerDown={this.handleMouseDown}
         onPointerUp={this.handleMouseUp}
         onPointerMove={this.handleMouseMove}

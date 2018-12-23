@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react'
 import anime from 'animejs'
 import Helmet from 'react-helmet'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
 import { withData } from 'react-universal-data'
 import { Layout, Box, FlexGrid, Text, withCurrentMedia } from 'pss-components'
@@ -168,21 +168,28 @@ class AboutPage extends Component {
           />
         </Helmet>
         <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-          <Box ht ovsy ovtouch innerRef={this.$scroller} onScroll={this.handleScroll}>
+          <Box height ovsy ovtouch ref={this.$scroller} onScroll={this.handleScroll}>
             <Layout>
-              <Layout.Item pd={2} mgl='auto' hideM>
+              <Layout.Item pd={2} mgl='auto' hideOn='M'>
                 <AppLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
                 </AppLink>
               </Layout.Item>
               <Layout.Body pdx={2}>
-                <FlexGrid spacex={2} alignItems='flex-start' minWd>
-                  <FlexGrid.Item col={1} colT={3} colM={4} position='sticky' topM bottomL mgtL='auto' pdy={2}>
+                <FlexGrid spacex={2} alignItems='flex-start' minWidth='100%'>
+                  <FlexGrid.Item
+                    col={{ all: 1, T: 3, M: 4 }}
+                    position='sticky'
+                    top={{ M: 0 }}
+                    bottom={{ L: 0 }}
+                    mgt={{ L: 'auto' }}
+                    pdy={2}
+                  >
                     <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
                       {pic ? (
                         <Flipped flipId={'pic-' + pic.id}>
                           <Box
-                            innerRef={this.$pic}
+                            ref={this.$pic}
                             ratio={pic.original.width / pic.original.height}
                             data-transition-hide
                           >
@@ -197,18 +204,23 @@ class AboutPage extends Component {
                       ) : intl.t('nav.back')}
                     </AppLink>
                   </FlexGrid.Item>
-                  <FlexGrid.Item mgx='auto' col={6} colT={8} colM={16} orderM={1}>
+                  <FlexGrid.Item
+                    col={{ all: 6, T: 8, M: 16 }}
+                    order={{ M: 1 }}
+                    mgx='auto'
+                  >
                     <Box pdt={2} data-transition-fade>
                       {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
                     </Box>
                   </FlexGrid.Item>
                   <FlexGrid.Item
-                    col={3} colT={4} colM={12}
-                    position='sticky' top
+                    col={{ all: 3, T: 4, M: 12 }}
+                    position='sticky'
+                    top={0}
                   >
                     <Box pdy={2}>
                       <PhotoBox
-                        innerRef={this.$photo}
+                        ref={this.$photo}
                         ratio={photo && photo.width / photo.height}
                         overlayColor={pic && pic.color}
                       >

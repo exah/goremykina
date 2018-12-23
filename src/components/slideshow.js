@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import { noop } from '@exah/utils'
-import styled from 'react-emotion'
+import styled from '@emotion/styled'
 import { Box } from 'pss-components'
 import isHotkey from 'is-hotkey'
 import SwipeableViews from 'react-swipeable-views'
