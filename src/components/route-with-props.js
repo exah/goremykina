@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route } from 'react-router'
 
 const routeRender = (Component, rest) =>
   (props) => <Component {...props} {...rest} /> // eslint-disable-line

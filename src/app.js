@@ -10,7 +10,7 @@ import {
   Switch,
   Route,
   Redirect
-} from 'react-router-dom'
+} from 'react-router'
 
 import {
   THEME,

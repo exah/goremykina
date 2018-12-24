@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import { compose, noop } from '@exah/utils'
 import { system } from 'pss'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { createBase } from 'pss-components'
 import { withIntl } from '../hocs'
 

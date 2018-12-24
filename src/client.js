@@ -1,7 +1,8 @@
 import 'defaults.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Router } from 'react-router'
+import { createBrowserHistory } from 'history'
 import { hydrateData } from 'react-universal-data'
 import App from './app'
 
@@ -16,7 +17,7 @@ Promise.all([
   Promise.resolve(window.PointerEvent == null && import(/* webpackChunkName: 'pointer-events' */ 'pepjs'))
 ]).then(() =>
   ReactDOM.hydrate((
-    <Router>
+    <Router history={createBrowserHistory()}>
       <App userLang={userLang} />
     </Router>
   ), document.getElementById('app'))
