@@ -1,6 +1,22 @@
 import React from 'react'
-import { toArr } from '@exah/utils'
 import { Text } from 'pss-components'
+import { toArr } from '@exah/utils'
+
+export const createApi = (baseUrl = '') => {
+  const api = (url, options) => global.fetch(baseUrl + url, options).then((res) => {
+    if (res.status >= 200 && res.status < 300) {
+      return res.json()
+    }
+
+    return res.json().then((data) => {
+      throw Object.assign(new Error(res.statusText), { ...res, data })
+    })
+  })
+
+  api.get = (input, options) => api(input, options)
+
+  return api
+}
 
 const renderMarkdown = (src = '') =>
   src.split('\n\n').map((children, index) => (

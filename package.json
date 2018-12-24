@@ -63,7 +63,6 @@
     "@exah/utils": "^2.0.0",
     "@exah/webpack-universal-hot-middleware": "^1.1.0",
     "animejs": "^2.2.0",
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "config": "^3.0.1",
@@ -80,6 +79,7 @@
     "lint-staged": "^8.1.0",
     "mini-css-extract-plugin": "^0.5.0",
     "ms": "^2.1.1",
+    "node-fetch": "^2.3.0",
     "path-to-regexp": "^2.4.0",
     "pepjs": "^0.4.3",
     "prop-types": "^15.6.2",
@@ -97,6 +97,7 @@
     "recompose": "^0.30.0",
     "rimraf": "^2.6.2",
     "serialize-javascript": "^1.5.0",
-    "stats-webpack-plugin": "^0.7.0"
+    "stats-webpack-plugin": "^0.7.0",
+    "unfetch": "^4.0.1"
   }
 }

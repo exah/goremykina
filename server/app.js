@@ -5,6 +5,7 @@ const compression = require('compression')
 const bodyParser = require('body-parser')
 const webpackUniversalAndHot = require('@exah/webpack-universal-hot-middleware')
 const webpackConfig = require(config.paths.root + '/webpack.config.js')
+const fetch = require('node-fetch')
 
 const app = express()
 
@@ -25,4 +26,5 @@ app.use(webpackUniversalAndHot({
   serverStatsFileName: 'serverStats.json'
 }))
 
+global.fetch = fetch
 module.exports = app

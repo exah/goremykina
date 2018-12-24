@@ -1,13 +1,8 @@
 import config from 'config'
-import axios from 'axios'
+import { createApi } from '../utils'
 
-const api = axios.create({
-  baseURL: config.isServer ? `http://${config.host}:${config.port}` : '/'
-})
-
-const apiResponseInterceptor = api.interceptors.response.use((res) => res.data)
+const api = createApi(config.isServer ? `http://${config.host}:${config.port}` : '')
 
 export {
-  api,
-  apiResponseInterceptor
+  api
 }
