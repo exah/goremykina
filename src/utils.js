@@ -1,17 +1,13 @@
 import React from 'react'
-import remark from 'remark'
-import reactRenderer from 'remark-react'
 import { toArr } from '@exah/utils'
 import { Text } from 'pss-components'
 
-const markdown = remark().use(reactRenderer, {
-  remarkReactComponents: {
-    p: (props) => <Text as='p' mgb={2} {...props} />
-  }
-})
-
 const renderMarkdown = (src = '') =>
-  markdown.processSync(src).contents
+  src.split('\n\n').map((children, index) => (
+    <Text key={index} as='p' mgb={2}>
+      {children}
+    </Text>
+  ))
 
 const getIndent = (lines) => {
   const lengths = lines
