@@ -41,7 +41,7 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-emotion": "^10.0.5",
-    "css-loader": "^2.0.2",
+    "css-loader": "^2.1.0",
     "eslint": "^5.11.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
@@ -83,7 +83,7 @@
     "path-to-regexp": "^2.4.0",
     "pepjs": "^0.4.3",
     "prop-types": "^15.6.2",
-    "pss-components": "^4.1.0",
+    "pss-components": "^4.1.1",
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-event-listener": "^0.6.4",
@@ -96,7 +96,7 @@
     "react-universal-data": "^2.3.0",
     "recompose": "^0.30.0",
     "rimraf": "^2.6.2",
-    "serialize-javascript": "^1.5.0",
+    "serialize-javascript": "^1.6.0",
     "stats-webpack-plugin": "^0.7.0",
     "unfetch": "^4.0.1"
   }
