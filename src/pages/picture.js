@@ -104,7 +104,7 @@ class PicturePage extends Component {
         <Layout ovh>
           <Layout.Item as='header' pd={2}>
             <FlexBox alignItems={{ sm: 'center' }}>
-              <FlexBox.Item hideOn='md' mgr='auto'>
+              <FlexBox.Item mgr='auto' width={1 / 3} hideOn='md'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
@@ -114,9 +114,9 @@ class PicturePage extends Component {
                   <Logo title={intl.t('nav.home')} />
                 </AppLink>
               </FlexBox.Item>
-              <FlexBox.Item mgl='auto'>
+              <FlexBox.Item mgl='auto' width={1 / 3}>
                 <AppLink path={ROUTE_PICTURE} data={activePicture} alternate>
-                  <Text>{intl.t('nav.lang')}</Text>
+                  <Text textAlign='right'>{intl.t('nav.lang')}</Text>
                 </AppLink>
               </FlexBox.Item>
             </FlexBox>
