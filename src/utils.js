@@ -20,7 +20,7 @@ export const createApi = (baseUrl = '') => {
 
 export const renderMarkdown = (src = '') =>
   src.split('\n\n').map((children, index) => (
-    <Text key={index} as='p' mgb={2}>
+    <Text key={index} as='p' mgb={2} variant='text'>
       {children}
     </Text>
   ))

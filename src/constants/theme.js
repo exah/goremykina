@@ -24,10 +24,15 @@ const THEME = {
   },
   textStyle: {
     root: {
-      fontSize: 16,
-      fontFamily: 'system-ui, sans-serif',
-      lineHeight: 19 / 16,
-      letterSpacing: 0.18
+      all: {
+        fontSize: 18,
+        fontFamily: 'system-ui, sans-serif',
+        lineHeight: 19 / 16,
+        letterSpacing: 0.18
+      },
+      sm: {
+        fontSize: 16
+      }
     },
     default: {
       fontSize: '1rem',
@@ -37,11 +42,16 @@ const THEME = {
       fontWeight: 500
     },
     text: {
-      fontSize: `${(19 / 16)}rem`,
-      fontFamily: 'system-ui, sans-serif',
-      lineHeight: 21 / 19,
-      letterSpacing: 0.2,
-      fontWeight: 400
+      all: {
+        fontSize: `${(20 / 18)}rem`,
+        fontFamily: 'system-ui, sans-serif',
+        lineHeight: 21 / 19,
+        letterSpacing: 0.2,
+        fontWeight: 400
+      },
+      sm: {
+        fontSize: `${(20 / 16)}rem`
+      }
     },
     caption: {
       fontSize: `${(12 / 16)}rem`,

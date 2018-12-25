@@ -1,7 +1,6 @@
 import config from 'config'
 import { hot } from 'react-hot-loader'
 import React, { Component } from 'react'
-import { Global, css } from '@emotion/core'
 import { ThemeProvider } from 'emotion-theming'
 import { CurrentMediaProvider } from 'pss-components'
 import { IntlProvider } from './contexts'
@@ -20,28 +19,7 @@ import {
 } from './constants'
 
 import { messages } from './data/intl'
-import { AppRoutes } from './containers'
-
-const AppGlobalStyles = () => (
-  <Global
-    styles={css`
-      :root {
-        ${THEME.textStyle.root}
-      }
-
-      html, body, #app {
-        height: 100%;
-        height: 100%;
-      }
-
-      html {
-        position: fixed;
-        width: 100%;
-        overflow: hidden;
-      }
-    `}
-  />
-)
+import { AppGlobalStyles, AppRoutes } from './containers'
 
 class App extends Component {
   render () {
