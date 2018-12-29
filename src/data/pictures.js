@@ -82,26 +82,26 @@ const pictures = [
   {
     id: 3,
     year: 2011,
-    slug: 'unnamed-1',
+    slug: 'illusions-0',
     locales: {
       ru: {
-        name: null,
+        name: 'Иллюзии',
         material: 'холст / масло'
       },
       en: {
-        name: null,
+        name: 'Illusions',
         material: 'oil on canvas'
       }
     },
     color: '#AFACBF',
     size: null,
     original: {
-      url: '/pictures/unnamed-1-original.jpg',
+      url: '/pictures/illusions-0-original.jpg',
       width: 1507,
       height: 1800
     },
     zoomed: {
-      url: '/pictures/unnamed-1.jpg',
+      url: '/pictures/illusions-0.jpg',
       width: 1760,
       height: 2102
     }
