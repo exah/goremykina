@@ -37,17 +37,23 @@ const THEME = {
     default: {
       fontSize: '1rem',
       fontFamily: 'system-ui, sans-serif',
+      fontWeight: 500,
       lineHeight: 19 / 16,
-      letterSpacing: 0.18,
-      fontWeight: 500
+      letterSpacing: 0.18
+    },
+    title: {
+      fontSize: `${24 / 20}rem`,
+      lineHeight: 19 / 16,
+      fontWeight: 400,
+      letterSpacing: 0.18
     },
     text: {
       all: {
         fontSize: `${(20 / 18)}rem`,
         fontFamily: 'system-ui, sans-serif',
+        fontWeight: 400,
         lineHeight: 21 / 19,
-        letterSpacing: 0.2,
-        fontWeight: 400
+        letterSpacing: 0.2
       },
       sm: {
         fontSize: `${(20 / 16)}rem`
@@ -56,9 +62,9 @@ const THEME = {
     caption: {
       fontSize: `${(12 / 16)}rem`,
       fontFamily: 'system-ui, sans-serif',
+      fontWeight: 300,
       lineHeight: 14 / 12,
-      letterSpacing: 0.18,
-      fontWeight: 300
+      letterSpacing: 0.18
     }
   }
 }

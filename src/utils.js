@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'pss-components'
-import { toArr } from '@exah/utils'
+import { toArr, reduceObj } from '@exah/utils'
 
 export const createApi = (baseUrl = '') => {
   const api = (url, options) => global.fetch(baseUrl + url, options).then((res) => {
@@ -18,12 +18,31 @@ export const createApi = (baseUrl = '') => {
   return api
 }
 
+const BLOCK_PATTERNS = {
+  H1: /^(#\s)/
+}
+
+const COMPS = {
+  H1: (props) => <Text as='h1' mgb={2} variant='title' {...props} />,
+  default: (props) => <Text as='p' mgb={2} variant='text' {...props} />
+}
+
+const matchComp = (str) => reduceObj((acc, key, value) => {
+  if (acc !== null) {
+    return acc
+  }
+
+  if (value && value.test(str) && COMPS[key]) {
+    return { Comp: COMPS[key], props: { children: str.replace(value, '') } }
+  }
+
+  return { Comp: COMPS.default, props: { children: str } }
+}, null, BLOCK_PATTERNS)
+
 export const renderMarkdown = (src = '') =>
-  src.split('\n\n').map((children, index) => (
-    <Text key={index} as='p' mgb={2} variant='text'>
-      {children}
-    </Text>
-  ))
+  src.split('\n\n')
+    .map((text) => matchComp(text))
+    .map(({ Comp, props }, index) => (<Comp key={index} {...props} />))
 
 export const getIndentation = (str) => {
   const match = str.match(/^[ \t]*(?=\S)/gm)
