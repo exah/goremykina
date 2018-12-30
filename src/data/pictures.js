@@ -540,7 +540,6 @@ const pictures = [
         material: 'oil on canvas'
       }
     },
-    color: '#a0949b',
     size: '100x90',
     original: {
       url: '/pictures/red-sea-original.jpg',
@@ -568,7 +567,6 @@ const pictures = [
         material: 'oil on canvas'
       }
     },
-    color: '#839e95',
     size: '80x100',
     original: {
       url: '/pictures/to-the-sea-original.jpg',
