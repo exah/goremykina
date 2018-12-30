@@ -36,14 +36,10 @@ const content = {
 
     A little bit of solitude is an attempt to clear your mind from social limits, look at our world with different eyes, see its purity, feel the responsibility and depth of the events in our life. When I return to Moscow, I reevaluate many situations and bring back with me a great stock of inspiration and ideas.
 
-    Almost all my works are dedicated to Crimea, to the places where painters, poets and writers of the last century, such as painter I.Aivazovsky, K.Bogoevsky, poet and painter M.Voloshin, writer A.Grin, lived and created their art. In Crimea I do a lot of sketches and long etudes. Afterwards I use all this creative material in my work. In Moscow I make big paintings, I often paint series of works, for example the series “Dreams and visions”, “Illusions”, “Sea music”, “Moonlight sonata”.
+    Almost all my works are dedicated to Crimea, to the places where painters, poets and writers of the last century, such as painter I.Aivazovsky, K.Bogoevsky, poet and painter M.Voloshin, writer A.Grin, lived and created their art. In Crimea I do a lot of sketches and long etudes. Afterwards I use all this creative material in my work. In Moscow I make big paintings, I often paint series of works, for example the series “Dreams and Visions”, “Illusions”, “Music of the Sea, “Moonlight Sonata”.
 
     I actively participated in exhibitions since 2005. I’ve held a series of personal exhibitions in Moscow and abroad.
   `
 }
 
-export {
-  slug,
-  photo,
-  content
-}
+export { slug, photo, content }
