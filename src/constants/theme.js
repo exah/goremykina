@@ -6,8 +6,8 @@ const THEME = {
     sm: '(max-width: 600px)'
   },
   space: {
-    default: [ 0, 6, 24, 72 ],
-    sm: [ 0, 6, 16, 32 ]
+    all: [0, 6, 24, 72],
+    sm: [0, 6, 16, 32]
   },
   color: {
     gray: '#E4E4E4'
@@ -27,6 +27,7 @@ const THEME = {
       all: {
         fontSize: 18,
         fontFamily: 'system-ui, sans-serif',
+        fontWeight: 400,
         lineHeight: 19 / 16,
         letterSpacing: 0.18
       },
@@ -37,7 +38,7 @@ const THEME = {
     default: {
       fontSize: '1rem',
       fontFamily: 'system-ui, sans-serif',
-      fontWeight: 500,
+      fontWeight: 400,
       lineHeight: 19 / 16,
       letterSpacing: 0.18
     },
@@ -49,18 +50,18 @@ const THEME = {
     },
     text: {
       all: {
-        fontSize: `${(20 / 18)}rem`,
+        fontSize: `${20 / 18}rem`,
         fontFamily: 'system-ui, sans-serif',
         fontWeight: 400,
         lineHeight: 21 / 19,
         letterSpacing: 0.2
       },
       sm: {
-        fontSize: `${(20 / 16)}rem`
+        fontSize: `${20 / 16}rem`
       }
     },
     caption: {
-      fontSize: `${(12 / 16)}rem`,
+      fontSize: `${12 / 16}rem`,
       fontFamily: 'system-ui, sans-serif',
       fontWeight: 300,
       lineHeight: 14 / 12,
@@ -69,6 +70,4 @@ const THEME = {
   }
 }
 
-export {
-  THEME
-}
+export { THEME }
