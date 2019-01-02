@@ -38,11 +38,12 @@ const PhotoBox = styled(Box)`
   }
 `
 
-const animate = (opts) => anime({
-  ...opts,
-  duration: 400,
-  easing: 'easeInOutSine'
-}).finished
+const animate = (opts) =>
+  anime({
+    ...opts,
+    duration: 400,
+    easing: 'easeInOutSine'
+  }).finished
 
 const transition = ($el, start, end, next, isStuck) => {
   if (end === 0) {
@@ -51,19 +52,21 @@ const transition = ($el, start, end, next, isStuck) => {
 
   const fadeAnime = animate({
     targets: $el.querySelectorAll('[data-transition-fade]'),
-    opacity: [ start, end ]
+    opacity: [start, end]
   })
 
-  const scaleAnime = isStuck ? animate({
-    targets: $el.querySelectorAll(PhotoBox),
-    opacity: [ start, end ]
-  }) : animate({
-    targets: $el.querySelectorAll(PhotoBox),
-    scale: [ start, end ],
-    opacity: [ start, end ]
-  })
+  const scaleAnime = isStuck
+    ? animate({
+      targets: $el.querySelectorAll(PhotoBox),
+      opacity: [start, end]
+    })
+    : animate({
+      targets: $el.querySelectorAll(PhotoBox),
+      scale: [start, end],
+      opacity: [start, end]
+    })
 
-  Promise.all([ fadeAnime, scaleAnime ]).then(next)
+  Promise.all([fadeAnime, scaleAnime]).then(next)
 }
 
 class AboutPage extends Component {
@@ -94,7 +97,9 @@ class AboutPage extends Component {
     const isPhotoImgNode = this.$photo.current.firstChild != null
     this.photoRect = this.$photo.current.getBoundingClientRect()
     this.picRect = this.$pic.current.getBoundingClientRect()
-    this.minScale = isPhotoImgNode ? (this.picRect.height / this.photoRect.height) : 1
+    this.minScale = isPhotoImgNode
+      ? this.picRect.height / this.photoRect.height
+      : 1
   }
 
   prevScrollTop = null
@@ -109,7 +114,7 @@ class AboutPage extends Component {
     if (scrollTop === this.prevScrollTop || scrollTop < 0) return
     this.prevScrollTop = scrollTop
 
-    const scale = 1 - (scrollTop / this.photoRect.bottom)
+    const scale = 1 - scrollTop / this.photoRect.bottom
     if (scale < this.minScale) {
       if (this.isStuck === false) {
         this.isStuck = true
@@ -128,11 +133,10 @@ class AboutPage extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    const shouldUpdateRects = (
+    const shouldUpdateRects =
       this.props.currentMediaKey !== prevProps.currentMediaKey ||
       this.state.isPhotoReady !== prevState.isPhotoReady ||
       this.state.isAppeared !== prevState.isAppeared
-    )
 
     if (shouldUpdateRects) {
       this.updateRects()
@@ -140,22 +144,13 @@ class AboutPage extends Component {
   }
 
   render () {
-    const {
-      intl,
-      isLoading,
-      activePicture: pic,
-      content,
-      photo
-    } = this.props
+    const { intl, isLoading, activePicture: pic, content, photo } = this.props
 
     return (
       <>
         <Helmet>
           <title>{intl.t('title.about')}</title>
-          <link
-            rel='canonical'
-            href={intl.href(ROUTE_ABOUT)}
-          />
+          <link rel='canonical' href={intl.href(ROUTE_ABOUT)} />
           <link
             rel='alternate'
             href={intl.href(ROUTE_ABOUT)}
@@ -167,8 +162,18 @@ class AboutPage extends Component {
             hrefLang={intl.langAlt}
           />
         </Helmet>
-        <Flipped flipId='about-page' onAppear={this.handleAppear} onExit={this.handleExit}>
-          <Box height ovsy ovtouch ref={this.$scroller} onScroll={this.handleScroll}>
+        <Flipped
+          flipId='about-page'
+          onAppear={this.handleAppear}
+          onExit={this.handleExit}
+        >
+          <Box
+            height
+            ovsy
+            ovtouch
+            ref={this.$scroller}
+            onScroll={this.handleScroll}
+          >
             <Layout>
               <Layout.Item pd={2} mgl='auto' hideOn='sm'>
                 <AppLink path={ROUTE_ABOUT} alternate>
@@ -181,11 +186,15 @@ class AboutPage extends Component {
                     col={{ sm: 4, md: 3, lg: 2 }}
                     position='sticky'
                     top={{ sm: 0 }}
-                    bottom={{ 'md': 0 }}
-                    mgt={{ 'md': 'auto' }}
+                    bottom={{ md: 0 }}
+                    mgt={{ md: 'auto' }}
                     pdy={2}
                   >
-                    <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('nav.back')}>
+                    <AppLink
+                      path={ROUTE_PICTURE}
+                      data={pic}
+                      title={intl.t('nav.back')}
+                    >
                       {pic ? (
                         <Flipped flipId={'pic-' + pic.id}>
                           <Box
@@ -201,7 +210,9 @@ class AboutPage extends Component {
                             />
                           </Box>
                         </Flipped>
-                      ) : intl.t('nav.back')}
+                      ) : (
+                        intl.t('nav.back')
+                      )}
                     </AppLink>
                   </FlexGrid.Item>
                   <FlexGrid.Item
@@ -210,7 +221,25 @@ class AboutPage extends Component {
                     mgx='auto'
                   >
                     <Box pdt={2} data-transition-fade>
-                      {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
+                      {isLoading
+                        ? intl.t('ui.loading')
+                        : renderMarkdown(content)}
+                      <Box
+                        position={{ lg: 'absolute' }}
+                        bottom={0}
+                        right={0}
+                        pdy={{ sm: 3, md: 2 }}
+                        pdx={{ lg: 2 }}
+                      >
+                        <Text
+                          textAlign={{ sm: 'center' }}
+                          variant={{ all: 'text', lg: 'default' }}
+                        >
+                          <a as='a' href='mailto:contact@goremykina.com'>
+                            💬 contact@goremykina.com
+                          </a>
+                        </Text>
+                      </Box>
                     </Box>
                   </FlexGrid.Item>
                   <FlexGrid.Item
@@ -247,10 +276,11 @@ class AboutPage extends Component {
 export default compose(
   withIntl,
   withData(
-    ({ match }) => getPage({ ...match.params, slug: 'about' }).then((res) => ({
-      status: res.status,
-      ...res.data
-    })),
+    ({ match }) =>
+      getPage({ ...match.params, slug: 'about' }).then((res) => ({
+        status: res.status,
+        ...res.data
+      })),
     (prev, next) => prev.match.params.lang !== next.match.params.lang
   ),
   withCurrentMedia
