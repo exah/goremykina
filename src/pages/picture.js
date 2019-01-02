@@ -7,12 +7,9 @@ import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
 import { AppLink, PictureDescription } from '../containers'
 import { withIntl } from '../hocs'
+import { join } from '../utils'
 
-import {
-  ROUTE_PICTURE,
-  ROUTE_PICTURE_ZOOM,
-  ROUTE_ABOUT
-} from '../constants'
+import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
 
 const Img = styled('img')`
   position: absolute;
@@ -31,11 +28,8 @@ const Img = styled('img')`
   }
 `
 
-const isPictureUpdated = (prev, next) => (
-  prev != null &&
-  next != null &&
-  prev.id !== next.id
-)
+const isPictureUpdated = (prev, next) =>
+  prev != null && next != null && prev.id !== next.id
 
 class PicturePage extends Component {
   static defaultProps = {
@@ -45,9 +39,10 @@ class PicturePage extends Component {
   constructor (props) {
     super(props)
 
-    const index = props.activePicture != null
-      ? props.pictures.findIndex((p) => p.slug === props.activePicture.slug)
-      : 0
+    const index =
+      props.activePicture != null
+        ? props.pictures.findIndex((p) => p.slug === props.activePicture.slug)
+        : 0
 
     this.state = {
       index: index !== -1 ? index : 0
@@ -86,16 +81,45 @@ class PicturePage extends Component {
     const prev = pictures[index - 1]
     const next = pictures[index + 1]
     const last = pictures[pictures.length - 1]
+    const canonicalUrl = intl.href(ROUTE_PICTURE, activePicture)
 
     return (
       <>
         {activePicture && (
           <Helmet>
             <title>{activePicture.name}</title>
-            <link rel='canonical' href={intl.href(ROUTE_PICTURE, activePicture)} />
-            <link rel='alternate' href={intl.href(ROUTE_PICTURE, activePicture)} hrefLang='x-default' />
-            <link rel='alternate' href={intl.href(ROUTE_PICTURE, activePicture, intl.langAlt)} hrefLang={intl.langAlt} />
-            {first && <link rel='first' href={intl.href(ROUTE_PICTURE, first)} />}
+            <meta property='og:url' content={canonicalUrl} />
+            <meta property='og:title' content={activePicture.name} />
+            <meta
+              property='og:description'
+              content={join(
+                activePicture.material,
+                activePicture.size,
+                activePicture.year
+              )}
+            />
+            <meta
+              property='og:image'
+              content={intl.href(activePicture.original.url)}
+            />
+            <meta
+              property='og:image:width'
+              content={activePicture.original.width}
+            />
+            <meta
+              property='og:image:height'
+              content={activePicture.original.height}
+            />
+            <link rel='canonical' href={canonicalUrl} />
+            <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
+            <link
+              rel='alternate'
+              href={intl.href(ROUTE_PICTURE, activePicture, intl.langAlt)}
+              hrefLang={intl.langAlt}
+            />
+            {first && (
+              <link rel='first' href={intl.href(ROUTE_PICTURE, first)} />
+            )}
             {last && <link rel='last' href={intl.href(ROUTE_PICTURE, last)} />}
             {prev && <link rel='prev' href={intl.href(ROUTE_PICTURE, prev)} />}
             {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
@@ -132,9 +156,7 @@ class PicturePage extends Component {
                   const pic = pictures[slide.index]
 
                   if (pic == null) {
-                    return (
-                      <Slideshow.Item key={slide.key} />
-                    )
+                    return <Slideshow.Item key={slide.key} />
                   }
 
                   return (

@@ -52,6 +52,7 @@ class AppRoutes extends PureComponent {
           titleTemplate={'%s — ' + intl.t('title')}
         >
           <html lang={intl.lang} />
+          <meta property='og:site_name' content={intl.t('title')} />
           <link rel='icon' sizes='192x192' href='/icon.png' />
           <link rel='apple-touch-icon' href='/apple-icon.png' />
           {activePicture && (<meta name='theme-color' content={activePicture.color} />)}
