@@ -499,33 +499,6 @@ const pictures = [
     }
   },
   {
-    id: 19,
-    year: 2008,
-    slug: 'stones',
-    locales: {
-      ru: {
-        name: 'Камни',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Stones',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#c7d1d0',
-    size: '100x120',
-    original: {
-      url: '/pictures/stones-original.jpg',
-      width: 1800,
-      height: 1489
-    },
-    zoomed: {
-      url: '/pictures/stones.jpg',
-      width: 2220,
-      height: 1836
-    }
-  },
-  {
     // Красное море - х.м. - 100x90 - 2009
     id: 20,
     year: 2009,
@@ -550,117 +523,6 @@ const pictures = [
       url: '/pictures/red-sea.jpg',
       width: 1944,
       height: 2172
-    }
-  },
-  {
-    // К морю - х.м. - 80x100 - 2006
-    id: 21,
-    year: 2006,
-    slug: 'to-the-sea',
-    locales: {
-      ru: {
-        name: 'К морю',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'To the Sea',
-        material: 'oil on canvas'
-      }
-    },
-    size: '80x100',
-    original: {
-      url: '/pictures/to-the-sea-original.jpg',
-      width: 1800,
-      height: 1433
-    },
-    zoomed: {
-      url: '/pictures/to-the-sea.jpg',
-      width: 2200,
-      height: 1752
-    }
-  },
-  {
-    // Чайки - х.м. - 50x70 - 2007
-    id: 22,
-    year: 2007,
-    slug: 'seagulls',
-    locales: {
-      ru: {
-        name: 'Чайки',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'The Seagulls',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#e0e2d3',
-    size: '50x70',
-    original: {
-      url: '/pictures/seagulls-original.jpg',
-      width: 1800,
-      height: 1408
-    },
-    zoomed: {
-      url: '/pictures/seagulls.jpg',
-      width: 2122,
-      height: 1660
-    }
-  },
-  {
-    // Пейзаж с неопознаным объектом - х.м. - 80x100 - 2007
-    id: 23,
-    year: 2007,
-    slug: 'landscape-with-unidentified-object',
-    locales: {
-      ru: {
-        name: 'Пейзаж с неопознаным объектом',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Landscape with Unidentified Object',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#bebbb2',
-    size: '80x100',
-    original: {
-      url: '/pictures/landscape-with-unidentified-object.jpg',
-      width: 1200,
-      height: 952
-    },
-    zoomed: {
-      url: '/pictures/landscape-with-unidentified-object.jpg',
-      width: 1200,
-      height: 952
-    }
-  },
-  {
-    // Крым. Этюд. - х.м. - 40x30 - 2007
-    id: 24,
-    year: 2007,
-    slug: 'crimea-study',
-    locales: {
-      ru: {
-        name: 'Крым. Этюд.',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Crimea. Study.',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#94a2a2',
-    size: '80x100',
-    original: {
-      url: '/pictures/crimea-study-original.jpg',
-      width: 1362,
-      height: 1800
-    },
-    zoomed: {
-      url: '/pictures/crimea-study.jpg',
-      width: 1792,
-      height: 2368
     }
   },
   {
@@ -719,6 +581,35 @@ const pictures = [
     }
   },
   {
+    // Диптих - Волна - х.м. - 100x120 - 2009.jpg
+    // Диптих - Алегро - х.м. - 100x120 - 2008.jpg
+    id: 34,
+    year: 2009,
+    slug: 'diptych',
+    locales: {
+      ru: {
+        name: 'Диптих. Волна / Алегро',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Diptych. Wave / Alegro',
+        material: 'oil on canvas'
+      }
+    },
+    color: '#BBC6C8',
+    size: '100x120',
+    original: {
+      url: '/pictures/diptych.jpg',
+      width: 1800,
+      height: 990
+    },
+    zoomed: {
+      url: '/pictures/diptych.jpg',
+      width: 3869,
+      height: 2128
+    }
+  },
+  {
     // Музка моря - х.м. - 30x35 - 2007
     id: 27,
     year: 2007,
@@ -733,7 +624,6 @@ const pictures = [
         material: 'oil on canvas'
       }
     },
-    color: '#cbcfce',
     size: '30x35',
     original: {
       url: '/pictures/music-of-the-sea-original.jpg',
@@ -798,6 +688,143 @@ const pictures = [
       url: '/pictures/park.jpg',
       width: 1762,
       height: 2218
+    }
+  },
+  {
+    // К морю - х.м. - 80x100 - 2006
+    id: 21,
+    year: 2006,
+    slug: 'to-the-sea',
+    locales: {
+      ru: {
+        name: 'К морю',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'To the Sea',
+        material: 'oil on canvas'
+      }
+    },
+    size: '80x100',
+    original: {
+      url: '/pictures/to-the-sea-original.jpg',
+      width: 1800,
+      height: 1433
+    },
+    zoomed: {
+      url: '/pictures/to-the-sea.jpg',
+      width: 2200,
+      height: 1752
+    }
+  },
+  {
+    // Чайки - х.м. - 50x70 - 2007
+    id: 22,
+    year: 2007,
+    slug: 'seagulls',
+    locales: {
+      ru: {
+        name: 'Чайки',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'The Seagulls',
+        material: 'oil on canvas'
+      }
+    },
+    size: '50x70',
+    original: {
+      url: '/pictures/seagulls-original.jpg',
+      width: 1800,
+      height: 1408
+    },
+    zoomed: {
+      url: '/pictures/seagulls.jpg',
+      width: 2122,
+      height: 1660
+    }
+  },
+  {
+    id: 19,
+    year: 2008,
+    slug: 'stones',
+    locales: {
+      ru: {
+        name: 'Камни',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Stones',
+        material: 'oil on canvas'
+      }
+    },
+    color: '#c7d1d0',
+    size: '100x120',
+    original: {
+      url: '/pictures/stones-original.jpg',
+      width: 1800,
+      height: 1489
+    },
+    zoomed: {
+      url: '/pictures/stones.jpg',
+      width: 2220,
+      height: 1836
+    }
+  },
+  {
+    // Пейзаж с неопознаным объектом - х.м. - 80x100 - 2007
+    id: 23,
+    year: 2007,
+    slug: 'landscape-with-unidentified-object',
+    locales: {
+      ru: {
+        name: 'Пейзаж с неопознаным объектом',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Landscape with Unidentified Object',
+        material: 'oil on canvas'
+      }
+    },
+    color: '#c8c9c3',
+    size: '80x100',
+    original: {
+      url: '/pictures/landscape-with-unidentified-object.jpg',
+      width: 1200,
+      height: 952
+    },
+    zoomed: {
+      url: '/pictures/landscape-with-unidentified-object.jpg',
+      width: 1200,
+      height: 952
+    }
+  },
+  {
+    // Крым. Этюд. - х.м. - 40x30 - 2007
+    id: 24,
+    year: 2007,
+    slug: 'crimea-study',
+    locales: {
+      ru: {
+        name: 'Крым. Этюд.',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Crimea. Study.',
+        material: 'oil on canvas'
+      }
+    },
+    color: '#94a2a2',
+    size: '80x100',
+    original: {
+      url: '/pictures/crimea-study-original.jpg',
+      width: 1362,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/crimea-study.jpg',
+      width: 1792,
+      height: 2368
     }
   },
   {
@@ -870,7 +897,6 @@ const pictures = [
         material: 'acrylic on canvas'
       }
     },
-    color: '#c0bfcd',
     size: '100x60',
     original: {
       url: '/pictures/nostalgia-original.jpg',
@@ -909,35 +935,6 @@ const pictures = [
       url: '/pictures/music-relaxation.jpg',
       width: 1200,
       height: 951
-    }
-  },
-  {
-    // Диптих - Волна - х.м. - 100x120 - 2009.jpg
-    // Диптих - Алегро - х.м. - 100x120 - 2008.jpg
-    id: 34,
-    year: 2006,
-    slug: 'diptych',
-    locales: {
-      ru: {
-        name: 'Диптих. Волна / Алегро',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Diptych. Wave / Alegro',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#BBC6C8',
-    size: '100x120',
-    original: {
-      url: '/pictures/diptych.jpg',
-      width: 1800,
-      height: 990
-    },
-    zoomed: {
-      url: '/pictures/diptych.jpg',
-      width: 3869,
-      height: 2128
     }
   }
 ]
