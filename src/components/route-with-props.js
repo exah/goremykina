@@ -1,9 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router'
 
-const routeRender = (Component, rest) =>
-  (props) => <Component {...props} {...rest} /> // eslint-disable-line
-
 const RouteWithProps = ({
   path,
   exact,
@@ -19,10 +16,8 @@ const RouteWithProps = ({
     strict={strict}
     location={location}
     sensitive={sensitive}
-    render={routeRender(Component, { path, ...rest })}
+    render={(data) => <Component {...data} {...rest} />}
   />
 )
 
-export {
-  RouteWithProps
-}
+export { RouteWithProps }
