@@ -21,9 +21,9 @@ const App = ({ userLang }) => (
             render={({ match }) => (
               <IntlProvider
                 lang={match.params.lang}
-                langAlt={ALT_LANG[match.params.lang]}
                 messages={messages}
-                siteUrl={config.public.siteUrl}
+                baseUrl={config.public.siteUrl}
+                langAlt={ALT_LANG[match.params.lang]}
               >
                 <Route
                   path={ROUTE_PAGE}
