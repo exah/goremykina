@@ -145,17 +145,19 @@ class AboutPage extends Component {
 
   render () {
     const { intl, isLoading, activePicture: pic, content, photo } = this.props
+    const canonicalUrl = intl.href(ROUTE_ABOUT)
 
     return (
       <>
         <Helmet>
           <title>{intl.t('title.about')}</title>
-          <link rel='canonical' href={intl.href(ROUTE_ABOUT)} />
-          <link
-            rel='alternate'
-            href={intl.href(ROUTE_ABOUT)}
-            hrefLang='x-default'
-          />
+          <meta property='og:url' content={canonicalUrl} />
+          <meta property='og:title' content={intl.t('title')} />
+          {photo && <meta property='og:image' content={intl.href(photo.url)} />}
+          {photo && <meta property='og:image:width' content={photo.width} />}
+          {photo && <meta property='og:image:height' content={photo.height} />}
+          <link rel='canonical' href={canonicalUrl} />
+          <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
           <link
             rel='alternate'
             href={intl.href(ROUTE_ABOUT, null, intl.langAlt)}
@@ -235,7 +237,7 @@ class AboutPage extends Component {
                           textAlign={{ sm: 'center' }}
                           variant={{ all: 'text', lg: 'default' }}
                         >
-                          <a as='a' href='mailto:contact@goremykina.com'>
+                          <a href='mailto:contact@goremykina.com'>
                             💬 contact@goremykina.com
                           </a>
                         </Text>
@@ -250,7 +252,7 @@ class AboutPage extends Component {
                     <Box pdy={2}>
                       <PhotoBox
                         ref={this.$photo}
-                        ratio={photo && photo.width / photo.height}
+                        ratio={photo && photo.ratio}
                         overlayColor={pic && pic.color}
                       >
                         {photo && (

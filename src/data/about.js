@@ -4,9 +4,9 @@ const slug = 'about'
 
 const photo = {
   url: '/photo/default.jpg',
-  width: 2912,
-  height: 4368,
-  ratio: 0.666666667
+  width: 640,
+  height: 960,
+  ratio: 640 / 960
 }
 
 const content = {
