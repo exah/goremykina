@@ -8,7 +8,7 @@ import { THEME, ALT_LANG, ROUTE_LANG, ROUTE_PAGE } from '../constants'
 import { IntlProvider } from '../contexts'
 import { messages } from '../data/intl'
 import AppGlobalStyles from './app-global-styles'
-import AppRoutes from './app-routes'
+import AppRoot from './app-root'
 
 const App = ({ userLang }) => (
   <ThemeProvider theme={THEME}>
@@ -27,7 +27,7 @@ const App = ({ userLang }) => (
               >
                 <Route
                   path={ROUTE_PAGE}
-                  render={(data) => <AppRoutes {...data} />}
+                  render={(data) => <AppRoot {...data} />}
                 />
               </IntlProvider>
             )}
