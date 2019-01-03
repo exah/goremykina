@@ -3,14 +3,12 @@ import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-import { withData } from 'react-universal-data'
 import { Layout, Box, FlexGrid, Text, withCurrentMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
 import { AppLink } from '../containers'
-import { withIntl } from '../hocs'
-import { getPage } from '../api'
+import { withIntl, withPageData } from '../hocs'
 
 const Img = styled('img')`
   width: 100%;
@@ -277,13 +275,6 @@ class AboutPage extends Component {
 
 export default compose(
   withIntl,
-  withData(
-    ({ match }) =>
-      getPage({ ...match.params, slug: 'about' }).then((res) => ({
-        status: res.status,
-        ...res.data
-      })),
-    (prev, next) => prev.match.params.lang !== next.match.params.lang
-  ),
+  withPageData('about'),
   withCurrentMedia
 )(AboutPage)
