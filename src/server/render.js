@@ -5,20 +5,10 @@ import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
 import { getInitialData } from 'react-universal-data'
 import { DEFAULT_LANG } from '../constants'
-import template from '../template'
-import App from '../app'
+import template from './template'
+import App from '../containers/app'
 
-const renderApp = (tree) => {
-  const html = renderToString(tree)
-  const head = Helmet.renderStatic()
-
-  return {
-    head,
-    html
-  }
-}
-
-const renderAppMiddleware = (files) => (req, res, next) => {
+const render = (files) => (req, res, next) => {
   const userLang = req.language || DEFAULT_LANG
 
   const context = {
@@ -40,7 +30,11 @@ const renderAppMiddleware = (files) => (req, res, next) => {
       context.status = error.status || 500
       context.statusText = error.statusText || 'Unknown error'
 
-      if (context.status >= 300 && context.status < 400 && error.data.location) {
+      if (
+        context.status >= 300 &&
+        context.status < 400 &&
+        error.data.location
+      ) {
         context.url = error.data.location
       }
 
@@ -57,23 +51,25 @@ const renderAppMiddleware = (files) => (req, res, next) => {
         return
       }
 
-      const app = renderApp(appElement)
+      const html = renderToString(appElement)
+      const head = Helmet.renderStatic()
 
-      const ssrData = {
+      const ssr = {
         config: config.public,
         initialData,
         userLang
       }
 
-      res.send(template({
-        app,
-        ssrData,
-        files
-      }))
+      res.send(
+        template({
+          app: { html, head, ssr },
+          files
+        })
+      )
     })
     .catch((error) => {
       next(error)
     })
 }
 
-export default renderAppMiddleware
+export default render

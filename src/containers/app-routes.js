@@ -55,7 +55,9 @@ class AppRoutes extends PureComponent {
           <meta property='og:site_name' content={intl.t('title')} />
           <link rel='icon' sizes='192x192' href='/icon.png' />
           <link rel='apple-touch-icon' href='/apple-icon.png' />
-          {activePicture && (<meta name='theme-color' content={activePicture.color} />)}
+          {activePicture && (
+            <meta name='theme-color' content={activePicture.color} />
+          )}
         </Helmet>
         <Box tm height={1} transition='background-color .5s' style={style}>
           <FlipperBox flipKey={match.params.page} height>

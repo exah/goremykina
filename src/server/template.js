@@ -1,10 +1,9 @@
 import serialize from 'serialize-javascript'
-import { dedent as html } from './utils'
+import { dedent as html } from '../utils'
 
 export default ({
   app,
-  files,
-  ssrData = {}
+  files
 }) => html`
   <!DOCTYPE html>
   <html class="no-js" ${app.head.htmlAttributes}>
@@ -25,7 +24,7 @@ export default ({
       <div id="app">${app.html}</div>
       <script>
         (function () {
-          window._ssr = ${serialize(ssrData, { isJSON: true })};
+          window._ssr = ${serialize(app.ssr || {}, { isJSON: true })};
         })();
       </script>
       <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>

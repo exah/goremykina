@@ -1,10 +1,5 @@
 import express from 'express'
-
-import {
-  API_GET_PAGE,
-  API_GET_PICTURES
-} from '../constants'
-
+import { API_GET_PAGE, API_GET_PICTURES } from '../constants'
 import * as aboutData from '../data/about'
 import * as picturesData from '../data/pictures'
 

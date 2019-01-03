@@ -4,9 +4,7 @@ const CSSPlugin = require('mini-css-extract-plugin')
 const StatsPlugin = require('stats-webpack-plugin')
 const cssnano = require('cssnano')
 
-const nodeEnv = config.isProd
-  ? 'production'
-  : 'development'
+const nodeEnv = config.isProd ? 'production' : 'development'
 
 const css = {
   test: /\.css$/,
@@ -16,9 +14,13 @@ const css = {
     {
       loader: 'postcss-loader',
       options: {
-        plugins: config.isProd ? [
-          cssnano({ preset: [ 'default', { discardComments: { removeAll: true } } ] })
-        ] : []
+        plugins: config.isProd
+          ? [
+            cssnano({
+              preset: ['default', { discardComments: { removeAll: true } }]
+            })
+          ]
+          : []
       }
     }
   ]
@@ -31,22 +33,23 @@ const javascript = (isServer) => ({
   options: {
     cacheDirectory: true,
     plugins: [
-      isServer ? 'babel-plugin-dynamic-import-node' : '@babel/plugin-syntax-dynamic-import',
+      isServer
+        ? 'babel-plugin-dynamic-import-node'
+        : '@babel/plugin-syntax-dynamic-import',
       'react-hot-loader/babel'
     ]
   }
 })
 
-const getFilename = (ext) => config.isProd
-  ? `[name].[hash].${ext}`
-  : `[name].${ext}`
+const getFilename = (ext) =>
+  config.isProd ? `[name].[hash].${ext}` : `[name].${ext}`
 
 const clientConfig = {
   name: 'client',
   target: 'web',
   mode: nodeEnv,
   entry: {
-    main: './src/client.js'
+    main: './src/client'
   },
   output: {
     path: config.paths.distClient,
@@ -56,14 +59,11 @@ const clientConfig = {
   },
   resolve: {
     alias: {
-      'config$': path.resolve(config.paths.config, './universal.js')
+      config$: path.resolve(config.paths.config, './universal.js')
     }
   },
   module: {
-    rules: [
-      css,
-      javascript()
-    ]
+    rules: [css, javascript()]
   },
   optimization: {
     runtimeChunk: {
@@ -83,10 +83,7 @@ const clientConfig = {
     new CSSPlugin({
       filename: getFilename('css')
     })
-  ].concat(config.isProd
-    ? [ new StatsPlugin('clientStats.json') ]
-    : []
-  )
+  ].concat(config.isProd ? [new StatsPlugin('clientStats.json')] : [])
 }
 
 const serverConfig = {
@@ -94,7 +91,7 @@ const serverConfig = {
   target: 'node',
   mode: config.isProd ? 'none' : 'development',
   entry: {
-    server: './src/server.js'
+    server: './src/server'
   },
   output: {
     path: config.paths.distServer,
@@ -103,20 +100,12 @@ const serverConfig = {
     libraryTarget: 'commonjs2'
   },
   module: {
-    rules: [
-      javascript(true)
-    ]
+    rules: [javascript(true)]
   },
   externals: Object.keys(require('./package.json').dependencies),
   performance: { hints: false },
   optimization: { nodeEnv },
-  plugins: [].concat(config.isProd
-    ? [ new StatsPlugin('serverStats.json') ]
-    : []
-  )
+  plugins: [].concat(config.isProd ? [new StatsPlugin('serverStats.json')] : [])
 }
 
-module.exports = [
-  clientConfig,
-  serverConfig
-]
+module.exports = [clientConfig, serverConfig]
