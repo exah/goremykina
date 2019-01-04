@@ -5,11 +5,21 @@ import { mq } from 'pss'
 import { Layout, Box, FlexBox, Text } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
+import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
 import { AppLink, PictureDescription } from '../containers'
 import { withIntl } from '../hocs'
 import { join } from '../utils'
 
-import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
+const slideshowStyles = {
+  style: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    overflow: 'visible'
+  },
+  containerStyle: { height: '100%' },
+  slideStyle: { overflow: 'visible', height: '100%' }
+}
 
 const Img = styled('img')`
   position: absolute;
@@ -151,6 +161,7 @@ class PicturePage extends Component {
                 defaultIndex={index}
                 slideCount={pictures.length}
                 onChange={this.handlePictureChange}
+                {...slideshowStyles}
               >
                 {(slide) => {
                   const pic = pictures[slide.index]
