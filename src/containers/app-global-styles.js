@@ -15,13 +15,12 @@ const AppGlobalStyles = ({ theme }) => (
 
       html, body, #app {
         height: 100%;
-        height: 100%;
       }
 
-      html {
+      body {
         position: fixed;
-        width: 100%;
         overflow: hidden;
+        width: 100%;
       }
     `}
   />
