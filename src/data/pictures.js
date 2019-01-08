@@ -80,156 +80,160 @@ const pictures = [
     }
   },
   {
-    id: 3,
-    year: 2011,
-    slug: 'illusions-0',
-    locales: {
-      ru: {
-        name: 'Иллюзии',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Illusions',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#AFACBF',
-    size: null,
-    original: {
-      url: '/pictures/illusions-0-original.jpg',
-      width: 1507,
-      height: 1800
-    },
-    zoomed: {
-      url: '/pictures/illusions-0.jpg',
-      width: 1760,
-      height: 2102
-    }
-  },
-  {
     id: 4,
     year: 2011,
-    slug: 'illusions-1',
+    slug: 'illusions-i',
     locales: {
       ru: {
-        name: 'Иллюзии',
+        name: 'Иллюзии I',
         material: 'холст / масло'
       },
       en: {
-        name: 'Illusions',
+        name: 'Illusions I',
         material: 'oil on canvas'
       }
     },
     size: '70x140',
     original: {
-      url: '/pictures/illusions-1-original.jpg',
+      url: '/pictures/illusions-i-original.jpg',
       width: 1800,
       height: 905
     },
     zoomed: {
-      url: '/pictures/illusions-1.jpg',
+      url: '/pictures/illusions-i.jpg',
       width: 5129,
       height: 2578
     }
   },
   {
     id: 5,
-    slug: 'illusions-2',
+    year: 2012,
+    slug: 'illusions-ii',
     locales: {
       ru: {
-        name: 'Иллюзии',
+        name: 'Иллюзии II',
         material: 'холст / масло'
       },
       en: {
-        name: 'Illusions',
+        name: 'Illusions II',
         material: 'oil on canvas'
       }
     },
     size: '70x140',
     original: {
-      url: '/pictures/illusions-2-original.jpg',
+      url: '/pictures/illusions-ii-original.jpg',
       width: 1800,
       height: 899
     },
     zoomed: {
-      url: '/pictures/illusions-2.jpg',
+      url: '/pictures/illusions-ii.jpg',
       width: 5119,
       height: 2556
     }
   },
   {
     id: 6,
-    slug: 'illusions-3',
+    year: 2012,
+    slug: 'illusions-iii',
     locales: {
       ru: {
-        name: 'Иллюзии',
+        name: 'Иллюзии III',
         material: 'холст / масло'
       },
       en: {
-        name: 'Illusions',
+        name: 'Illusions III',
         material: 'oil on canvas'
       }
     },
     size: '70x100',
     original: {
-      url: '/pictures/illusions-3-original.jpg',
+      url: '/pictures/illusions-iii-original.jpg',
       width: 1800,
       height: 1268
     },
     zoomed: {
-      url: '/pictures/illusions-3.jpg',
+      url: '/pictures/illusions-iii.jpg',
       width: 4978,
       height: 3506
     }
   },
   {
     id: 7,
-    slug: 'illusions-4',
+    year: 2012,
+    slug: 'illusions-v',
     locales: {
       ru: {
-        name: 'Иллюзии',
+        name: 'Иллюзии V',
         material: 'холст / масло'
       },
       en: {
-        name: 'Illusions',
+        name: 'Illusions V',
         material: 'oil on canvas'
       }
     },
     size: '90x140',
     original: {
-      url: '/pictures/illusions-4-original.jpg',
+      url: '/pictures/illusions-v-original.jpg',
       width: 1800,
       height: 1162
     },
     zoomed: {
-      url: '/pictures/illusions-4.jpg',
+      url: '/pictures/illusions-v.jpg',
       width: 5065,
       height: 3261
     }
   },
   {
     id: 8,
-    slug: 'illusions-5',
+    year: 2012,
+    slug: 'illusions-vi',
     locales: {
       ru: {
-        name: 'Иллюзии',
+        name: 'Иллюзии VI',
         material: 'холст / масло'
       },
       en: {
-        name: 'Illusions',
+        name: 'Illusions VI',
         material: 'oil on canvas'
       }
     },
     size: '90x140',
     original: {
-      url: '/pictures/illusions-5-original.jpg',
+      url: '/pictures/illusions-vi-original.jpg',
       width: 1800,
       height: 1155
     },
     zoomed: {
-      url: '/pictures/illusions-5.jpg',
+      url: '/pictures/illusions-vi.jpg',
       width: 5081,
       height: 3261
+    }
+  },
+  {
+    id: 3,
+    year: 2012,
+    slug: 'illusions-vii',
+    locales: {
+      ru: {
+        name: 'Иллюзии VII',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Illusions VII',
+        material: 'oil on canvas'
+      }
+    },
+    color: '#AFACBF',
+    size: '60x50',
+    original: {
+      url: '/pictures/illusions-vii-original.jpg',
+      width: 1507,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/illusions-vii.jpg',
+      width: 1760,
+      height: 2102
     }
   },
   {
@@ -262,19 +266,19 @@ const pictures = [
   {
     id: 10,
     year: 2016,
-    slug: '2',
+    slug: 'sergey-burov',
     locales: {
       ru: {
-        name: null,
+        name: 'Сергей Буров',
         material: 'холст / масло'
       },
       en: {
-        name: null,
+        name: 'Sergey Burov',
         material: 'oil on canvas'
       }
     },
     color: '#D4DDDC',
-    size: null,
+    size: '30x35',
     original: {
       url: '/pictures/unnamed-2-original.jpg',
       width: 1537,
@@ -364,33 +368,6 @@ const pictures = [
       url: '/pictures/legend-of-the-kara-dag.jpg',
       width: 2204,
       height: 1855
-    }
-  },
-  {
-    id: 14,
-    year: 2008,
-    slug: 'evening-2',
-    locales: {
-      ru: {
-        name: 'Вечер',
-        material: 'холст / масло'
-      },
-      en: {
-        name: 'Evening',
-        material: 'oil on canvas'
-      }
-    },
-    color: '#d5d8e1',
-    size: '55x70',
-    original: {
-      url: '/pictures/evening-2-original.jpg',
-      width: 1800,
-      height: 1179
-    },
-    zoomed: {
-      url: '/pictures/evening-2.jpg',
-      width: 2416,
-      height: 1582
     }
   },
   {
@@ -585,19 +562,19 @@ const pictures = [
     // Диптих - Алегро - х.м. - 100x120 - 2008.jpg
     id: 34,
     year: 2009,
-    slug: 'diptych',
+    slug: 'diptych-wave',
     locales: {
       ru: {
-        name: 'Диптих. Волна / Алегро',
+        name: 'Диптих. Волна',
         material: 'холст / масло'
       },
       en: {
-        name: 'Diptych. Wave / Alegro',
+        name: 'Diptych. Wave',
         material: 'oil on canvas'
       }
     },
     color: '#BBC6C8',
-    size: '100x120',
+    size: '100x120 / 100x60',
     original: {
       url: '/pictures/diptych.jpg',
       width: 1800,
@@ -638,20 +615,20 @@ const pictures = [
   },
   {
     id: 28,
-    year: null,
-    slug: '3',
+    year: 2008,
+    slug: 'allegro',
     locales: {
       ru: {
-        name: null,
+        name: 'Аллегро',
         material: 'холст / масло'
       },
       en: {
-        name: null,
+        name: 'Allegro',
         material: 'oil on canvas'
       }
     },
     color: '#d7dade',
-    size: null,
+    size: '100x120',
     original: {
       url: '/pictures/unnamed-3-original.jpg',
       width: 1800,
