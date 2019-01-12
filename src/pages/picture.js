@@ -163,15 +163,9 @@ class PicturePage extends Component {
                 onChange={this.handlePictureChange}
                 {...slideshowStyles}
               >
-                {(slide) => {
-                  const pic = pictures[slide.index]
-
-                  if (pic == null) {
-                    return <Slideshow.Item key={slide.key} />
-                  }
-
-                  return (
-                    <Slideshow.Item key={slide.key} height='100%' pdx={2}>
+                {(slide) => pictures.map((pic, slideIndex) => (
+                  slide.shouldRender(slideIndex)) ? (
+                    <Slideshow.Item key={pic.slug} height='100%' pdx={2}>
                       <Box position='relative' height='100%'>
                         <AppLink
                           path={ROUTE_PICTURE_ZOOM}
@@ -190,8 +184,7 @@ class PicturePage extends Component {
                         </AppLink>
                       </Box>
                     </Slideshow.Item>
-                  )
-                }}
+                  ) : <span key={pic.slug} />)}
               </Slideshow>
             </Layout.Content>
           </Layout.Body>

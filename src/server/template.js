@@ -28,7 +28,7 @@ export default ({
         })();
       </script>
       <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-      ${files.js.map(file => html`<script defer async src="${file}"></script>`)}
+      ${files.js.map(file => html`<script async src="${file}"></script>`)}
     </body>
   </html>
 `
