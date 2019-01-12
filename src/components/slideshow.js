@@ -28,8 +28,6 @@ class SwipeableViewsVirtualized extends PureComponent {
 
   state = { index: this.props.index || 0 }
 
-  timer = null
-
   componentWillMount () {
     this.setWindow(this.state.index)
   }
@@ -41,10 +39,6 @@ class SwipeableViewsVirtualized extends PureComponent {
       const indexDiff = index - this.props.index
       this.setIndex(index, this.state.indexContainer + indexDiff, indexDiff)
     }
-  }
-
-  componentWillUnmount () {
-    clearTimeout(this.timer)
   }
 
   setIndex (index, indexContainer, indexDiff) {
@@ -80,7 +74,7 @@ class SwipeableViewsVirtualized extends PureComponent {
     this.setState(nextState)
   }
 
-  setWindow (index = this.state.index) {
+  setWindow (index) {
     const { slideCount } = this.props
 
     let beforeAhead = this.props.overscanSlideBefore
@@ -122,11 +116,7 @@ class SwipeableViewsVirtualized extends PureComponent {
   }
 
   handleTransitionEnd = () => {
-    // Delay the update of the window to fix an issue with react-motion.
-    this.timer = setTimeout(() => {
-      this.setWindow()
-    }, 0)
-
+    this.setWindow(this.state.index)
     this.props.onTransitionEnd()
   }
 
