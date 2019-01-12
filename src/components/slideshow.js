@@ -1,6 +1,6 @@
 import React, { Component, PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { noop } from '@exah/utils'
+import { noop, toArr } from '@exah/utils'
 import styled from '@emotion/styled'
 import { Box } from 'pss-components'
 import isHotkey from 'is-hotkey'
@@ -32,20 +32,12 @@ class Slideshow extends Component {
   static propTypes = {
     ...SwipeableViews.propTypes,
     defaultIndex: PropTypes.number,
-    children: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    slideCount: PropTypes.number.isRequired,
-    slideCountAfter: PropTypes.number.isRequired,
-    slideCountBefore: PropTypes.number.isRequired
+    onChange: PropTypes.func.isRequired
   }
 
   static defaultProps = {
     defaultIndex: 0,
-    children: noop,
     onChange: noop,
-    slideCount: 0,
-    slideCountAfter: 1,
-    slideCountBefore: 1,
     animateHeight: false,
     enableMouseEvents: true,
     resistance: true,
@@ -71,10 +63,10 @@ class Slideshow extends Component {
   }
 
   toNextSlide = () => {
-    const { slideCount } = this.props
+    const { children } = this.props
     const { index } = this.state
 
-    this.handleViewChange(Math.min(index + 1, slideCount - 1))
+    this.handleViewChange(Math.min(index + 1, toArr(children).length - 1))
   }
 
   handleViewChange = (index) => {
@@ -120,20 +112,8 @@ class Slideshow extends Component {
     }
   }
 
-  shouldRenderSlide = (slideIndex) => {
-    const { index } = this.state
-
-    const indexStart = index - this.props.slideCountBefore
-    const indexStop = index + this.props.slideCountAfter
-
-    return slideIndex >= indexStart && slideIndex <= indexStop
-  }
-
   shouldComponentUpdate (props, state) {
-    return (
-      props.slideCount !== this.props.slideCount ||
-      this.state.index !== state.index
-    )
+    return (this.state.index !== state.index)
   }
 
   render () {
@@ -142,10 +122,7 @@ class Slideshow extends Component {
       duration,
       easeFunction,
       delay,
-      slideCount,
-      slideCountBefore,
-      slideCountAfter,
-      children: renderSlides,
+      children,
       ...rest
     } = this.props
 
@@ -159,7 +136,7 @@ class Slideshow extends Component {
           onClick={this.handleClick}
           {...rest}
         >
-          {renderSlides({ shouldRender: this.shouldRenderSlide })}
+          {children}
         </SwipeableViews>
       </EventListener>
     )
