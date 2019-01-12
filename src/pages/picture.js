@@ -41,8 +41,8 @@ const Img = styled('img')`
 const isPicUpdated = (prev, next) =>
   prev != null && next != null && prev.id !== next.id
 
-const picInRange = (index, current, before = 1, after = 1) =>
-  current >= (index - before) && current <= (index + after)
+const picInRange = (index, current, visible = 2) =>
+  current >= (index - visible) && current <= (index + visible)
 
 class PicturePage extends Component {
   static defaultProps = {
