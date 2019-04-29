@@ -970,11 +970,6 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.2.tgz#63985d3d8b02530e0869962f4da09142ee8e200e"
   integrity sha512-n/VQ4mbfr81aqkx/XmVicOLjviMuy02eenSdJY33SVA7S2J42EU0P1H0mOogfYedb3wXA0d/LVtBrgTSm04WEA==
 
-"@exah/react-tree-walker@^4.3.1":
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/@exah/react-tree-walker/-/react-tree-walker-4.3.1.tgz#a3473a5c3175351bfcff32482319e5c1357ede22"
-  integrity sha512-ji1Q1y88El8iT85/oIqCUhjG81CoNmNlLaENu0xtEXWyQvM2GXgvCJb0adZVZsRiD8DNS40pOg5WR5NP0DtR2Q==
-
 "@exah/utils@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@exah/utils/-/utils-2.0.0.tgz#3a551bd4bb6e2f1e894357d3d945ac1867194f00"
@@ -4967,6 +4962,11 @@ object-copy@^0.1.0:
     define-property "^0.2.5"
     kind-of "^3.0.3"
 
+object-is@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.1.tgz#0aa60ec9989a0b3ed795cf4d06f62cf1ad6539b6"
+  integrity sha1-CqYOyZiaCz7Xlc9NBvYs8a1lObY=
+
 object-keys@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
@@ -6012,6 +6012,13 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
+react-ssr-prepass@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-ssr-prepass/-/react-ssr-prepass-1.0.4.tgz#a74ebccd2610d002008e491d830b9b40af7ca5ea"
+  integrity sha512-aQNtHE7q6/zzJLuID1LOXU6yHY1aSJIEuK81PlGFxYmGKoVYXQoNLZ/ZJx4SmZiLt37otIbw3Qoqdth1Go+0Vg==
+  dependencies:
+    object-is "^1.0.1"
+
 react-styled-base@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-styled-base/-/react-styled-base-3.0.0.tgz#3791ae162fecc8ab33452e3fb4c371ba34757a00"
@@ -6057,13 +6064,13 @@ react-tree-walker@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.3.0.tgz#b7cae498cebb490281e9e99a01bdb9c6b4926cd3"
 
-react-universal-data@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-2.3.0.tgz#ed207c192233d55cc866012e7c20ff33e508c514"
-  integrity sha512-oV1pT0B7le9e/5iNa+S9W0T0rto9DNC6zezqzGi6KMkr4ppoIqtsN2bBsK/kaHQJz+ljeTX2t4qLRgdNvpz51w==
+react-universal-data@^3.0.0-0:
+  version "3.0.0-0"
+  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-3.0.0-0.tgz#8b4922ce7672161d7907a7aa58c0906d428b3eb8"
+  integrity sha512-KnxmcrrzrlUSy4Uzei2JFDeGJj1cPv4a12b4QwNfufkef66OqhwBhkKaFo+LA0XBwYHl805htTzH5KTOd8aJxg==
   dependencies:
     "@babel/runtime" "^7.0.0"
-    "@exah/react-tree-walker" "^4.3.1"
+    react-ssr-prepass "^1.0.4"
     recompose "^0.30.0"
 
 react@16.8.6:
