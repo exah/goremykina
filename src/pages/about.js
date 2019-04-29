@@ -3,7 +3,7 @@ import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-import { Layout, Box, FlexGrid, Text, withCurrentMedia } from 'pss-components'
+import { Layout, Box, FlexGrid, Text, withMatchMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
@@ -104,9 +104,9 @@ class AboutPage extends Component {
   isStuck = false // photo and picture is not scaling with scroll
 
   handleScroll = (e) => {
-    const { currentMediaKey } = this.props
+    const { matchMedia } = this.props
 
-    if (currentMediaKey.includes('md')) return
+    if (matchMedia.matches.includes('md')) return
 
     const { scrollTop } = this.$scroller.current
     if (scrollTop === this.prevScrollTop || scrollTop < 0) return
@@ -132,7 +132,7 @@ class AboutPage extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     const shouldUpdateRects =
-      this.props.currentMediaKey !== prevProps.currentMediaKey ||
+      this.props.matchMedia.matches !== prevProps.matchMedia.matches ||
       this.state.isPhotoReady !== prevState.isPhotoReady ||
       this.state.isAppeared !== prevState.isAppeared
 
@@ -168,27 +168,32 @@ class AboutPage extends Component {
           onExit={this.handleExit}
         >
           <Box
-            height
-            ovsy
-            ovtouch
+            height='100%'
+            overflow='hidden auto touch'
             ref={this.$scroller}
             onScroll={this.handleScroll}
           >
             <Layout>
-              <Layout.Item pd={2} mgl='auto' hideOn='sm'>
+              <Box p={2} ml='auto' hide='sm'>
                 <AppLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
                 </AppLink>
-              </Layout.Item>
-              <Layout.Body pdx={2}>
-                <FlexGrid spacex={2} alignItems='flex-start' minWidth='100%'>
+              </Box>
+              <Layout.Content px={2}>
+                <FlexGrid
+                  columns={16}
+                  spacex={2}
+                  alignItems='flex-start'
+                  minWidth='100%'
+                  height='100%'
+                >
                   <FlexGrid.Item
-                    col={{ sm: 4, md: 3, lg: 2 }}
+                    column={{ sm: 4, md: 3, lg: 2 }}
                     position='sticky'
                     top={{ sm: 0 }}
                     bottom={{ md: 0 }}
-                    mgt={{ md: 'auto' }}
-                    pdy={2}
+                    mt={{ md: 'auto' }}
+                    py={2}
                   >
                     <AppLink
                       path={ROUTE_PICTURE}
@@ -216,11 +221,11 @@ class AboutPage extends Component {
                     </AppLink>
                   </FlexGrid.Item>
                   <FlexGrid.Item
-                    col={{ sm: 16, md: 8, lg: 6 }}
+                    column={{ sm: 16, md: 8, lg: 6 }}
                     order={{ sm: 1 }}
-                    mgx='auto'
+                    mx='auto'
                   >
-                    <Box pdt={2} data-transition-fade>
+                    <Box pt={2} data-transition-fade>
                       {isLoading
                         ? intl.t('ui.loading')
                         : renderMarkdown(content)}
@@ -228,8 +233,8 @@ class AboutPage extends Component {
                         position={{ lg: 'absolute' }}
                         bottom={0}
                         right={0}
-                        pdy={{ sm: 3, md: 2 }}
-                        pdx={{ lg: 2 }}
+                        py={{ sm: 3, md: 2 }}
+                        px={{ lg: 2 }}
                       >
                         <Text
                           textAlign={{ sm: 'center' }}
@@ -243,11 +248,11 @@ class AboutPage extends Component {
                     </Box>
                   </FlexGrid.Item>
                   <FlexGrid.Item
-                    col={{ sm: 12, md: 4, lg: 3 }}
+                    column={{ sm: 12, md: 4, lg: 3 }}
                     position='sticky'
                     top={0}
                   >
-                    <Box pdy={2}>
+                    <Box py={2}>
                       <PhotoBox
                         ref={this.$photo}
                         ratio={photo && photo.ratio}
@@ -264,7 +269,7 @@ class AboutPage extends Component {
                     </Box>
                   </FlexGrid.Item>
                 </FlexGrid>
-              </Layout.Body>
+              </Layout.Content>
             </Layout>
           </Box>
         </Flipped>
@@ -276,5 +281,5 @@ class AboutPage extends Component {
 export default compose(
   withIntl,
   withPageData('about'),
-  withCurrentMedia
+  withMatchMedia
 )(AboutPage)

@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import styled from '@emotion/styled'
 import { compose, noop } from '@exah/utils'
-import { system } from 'pss'
 import { withRouter } from 'react-router'
-import { createBase } from 'pss-components'
+import { Text } from 'pss-components'
 import { withIntl } from '../hocs'
 
 const DEFAULT_COMP = 'a'
-
-const StyledLink = styled(createBase(DEFAULT_COMP))(system)
 
 class AppLink extends Component {
   static defaultProps = {
@@ -64,14 +60,14 @@ class AppLink extends Component {
     }
 
     return (
-      <StyledLink
+      <Text
         href={comp === DEFAULT_COMP ? this.getHref() : undefined}
         onClick={this.handleClick}
         as={comp}
         {...rest}
       >
         {children}
-      </StyledLink>
+      </Text>
     )
   }
 }

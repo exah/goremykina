@@ -1,5 +1,4 @@
 const THEME = {
-  grid: 16,
   media: {
     lg: '(min-width: 1025px)',
     md: '(min-width: 601px)',

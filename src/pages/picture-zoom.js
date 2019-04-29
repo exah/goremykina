@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
-import { Box, Text, FlexBox } from 'pss-components'
+import { Box, Text, Flex } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
 import { AppLink, PictureDescription } from '../containers'
@@ -91,29 +91,29 @@ class PictureZoomPage extends Component {
             <link rel='canonical' href={intl.href(ROUTE_PICTURE, pic)} />
           </Helmet>
         )}
-        <Box tm='zoomed' ovh>
+        <Box tm='zoomed' overflow='hidden'>
           {pic && pic.zoomed && (
             <>
               <Overlay width={{ sm: '100%' }} height='100%'>
                 <Text textAlign={{ all: 'right', sm: 'center' }} height='100%'>
-                  <FlexBox flexDirection='column' height='100%'>
-                    <FlexBox.Item>
+                  <Flex flexDirection='column' height='100%'>
+                    <Box>
                       <OverlayItem>
                         <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>
-                          <Box pd={2}>
+                          <Box p={2}>
                             <IconClose />
                           </Box>
                         </AppLink>
                       </OverlayItem>
-                    </FlexBox.Item>
-                    <FlexBox.Item mgt='auto' pd={2}>
+                    </Box>
+                    <Box mt='auto' p={2}>
                       <OverlayItem>
                         <AppLink path={ROUTE_PICTURE} data={pic}>
                           <PictureDescription {...pic} />
                         </AppLink>
                       </OverlayItem>
-                    </FlexBox.Item>
-                  </FlexBox>
+                    </Box>
+                  </Flex>
                 </Text>
               </Overlay>
               <PanZoom>

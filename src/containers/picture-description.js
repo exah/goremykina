@@ -12,7 +12,7 @@ const PictureDescription = ({
   year
 }) => (
   <Text textAlign={{ all: 'right', sm: 'center' }}>
-    <Text mgb>{isLoading || name == null ? <Noop /> : name}</Text>
+    <Text mb>{isLoading || name == null ? <Noop /> : name}</Text>
     <Text variant='caption'>
       {isLoading ? intl.t('ui.loading') : join(material, size, year)}
     </Text>

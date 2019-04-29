@@ -2,7 +2,7 @@ import config from 'config'
 import { hot } from 'react-hot-loader'
 import React from 'react'
 import { ThemeProvider } from 'emotion-theming'
-import { CurrentMediaProvider } from 'pss-components'
+import { MatchMediaProvider } from 'pss-components'
 import { Switch, Route, Redirect } from 'react-router'
 import { THEME, ALT_LANG, ROUTE_LANG, ROUTE_PAGE } from '../constants'
 import { IntlProvider } from '../contexts'
@@ -14,7 +14,7 @@ const App = ({ userLang }) => (
   <ThemeProvider theme={THEME}>
     <>
       <AppGlobalStyles />
-      <CurrentMediaProvider>
+      <MatchMediaProvider>
         <Switch>
           <Route
             path={ROUTE_LANG}
@@ -34,7 +34,7 @@ const App = ({ userLang }) => (
           />
           <Redirect from='/' to={'/' + userLang} exact />
         </Switch>
-      </CurrentMediaProvider>
+      </MatchMediaProvider>
     </>
   </ThemeProvider>
 )
