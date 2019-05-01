@@ -6064,14 +6064,13 @@ react-tree-walker@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-tree-walker/-/react-tree-walker-4.3.0.tgz#b7cae498cebb490281e9e99a01bdb9c6b4926cd3"
 
-react-universal-data@^3.0.0-0:
-  version "3.0.0-0"
-  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-3.0.0-0.tgz#8b4922ce7672161d7907a7aa58c0906d428b3eb8"
-  integrity sha512-KnxmcrrzrlUSy4Uzei2JFDeGJj1cPv4a12b4QwNfufkef66OqhwBhkKaFo+LA0XBwYHl805htTzH5KTOd8aJxg==
+react-universal-data@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-universal-data/-/react-universal-data-3.0.0.tgz#2662c5bbfe287fad97ffcd046c8ff25787cf1e73"
+  integrity sha512-RyxwcGm1lW4hy04/tJbhjMXVZEL5xcEOPTnNOw4jEDtJSsjO0ACwXY2n63JxUREOD4XqT6Ou5z9LuLSqd2rOmA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     react-ssr-prepass "^1.0.4"
-    recompose "^0.30.0"
 
 react@16.8.6:
   version "16.8.6"

@@ -93,7 +93,7 @@
     "react-router": "^4.3.1",
     "react-swipeable-views": "^0.13.0",
     "react-tree-walker": "^4.3.0",
-    "react-universal-data": "^3.0.0-0",
+    "react-universal-data": "^3.0.0",
     "recompose": "^0.30.0",
     "rimraf": "^2.6.2",
     "serialize-javascript": "^1.6.0",
