@@ -52,6 +52,7 @@ class AppLink extends Component {
       children,
       alternate,
       onClick, // used in handleClick
+      staticContext,
       ...rest
     } = this.props
 
@@ -63,7 +64,7 @@ class AppLink extends Component {
       <Text
         href={comp === DEFAULT_COMP ? this.getHref() : undefined}
         onClick={this.handleClick}
-        as={comp}
+        use={comp}
         {...rest}
       >
         {children}

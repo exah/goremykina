@@ -46,7 +46,7 @@ class AppRoot extends PureComponent {
             <meta name='theme-color' content={activePicture.color} />
           )}
         </Helmet>
-        <Box as={Flipper} flipKey={match.params.page} height='100%'>
+        <Box use={Flipper} flipKey={match.params.page} height='100%'>
           <AppRoutes
             pictures={pictures}
             activePicture={activePicture}

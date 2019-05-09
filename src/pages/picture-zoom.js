@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
-import { Box, Text, Flex } from 'pss-components'
+import { Box, Text, Flex, Image } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
 import { AppLink, PictureDescription } from '../containers'
@@ -25,10 +25,9 @@ const OverlayItem = styled('span')`
 
 const vmax = (num) => (num * 100) + 'vmax'
 
-const Img = styled('img')`
+const ZoomedImage = styled(Image)`
   position: absolute;
   z-index: 0;
-  display: block;
   max-width: none;
 
   ${p => {
@@ -118,7 +117,7 @@ class PictureZoomPage extends Component {
               </Overlay>
               <PanZoom>
                 <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
-                  <Img
+                  <ZoomedImage
                     src={isReady && isAppeared ? pic.zoomed.url : pic.original.url}
                     width={pic.zoomed.width}
                     height={pic.zoomed.height}

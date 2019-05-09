@@ -24,8 +24,8 @@ const BLOCK_PATTERNS = {
 }
 
 const COMPS = {
-  H1: (props) => <Text as='h1' mb={2} variant='title' {...props} />,
-  default: (props) => <Text as='p' mb={2} variant='text' {...props} />
+  H1: (props) => <Text use='h1' mb={2} variant='title' {...props} />,
+  default: (props) => <Text use='p' mb={2} variant='text' {...props} />
 }
 
 const matchComp = (str) =>

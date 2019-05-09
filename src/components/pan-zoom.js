@@ -1,8 +1,8 @@
 import React, { PureComponent, createRef } from 'react'
 import styled from '@emotion/styled'
-import { createBase } from 'pss-components'
+import { Box } from 'pss-components'
 
-const PanZoomBox = styled(createBase('div', { whitelist: 'touch-action' }))`
+const PanZoomBox = styled(Box)`
   touch-action: none;
   user-select: none;
 `

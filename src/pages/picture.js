@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { mq } from 'pss'
-import { Layout, Box, Flex, Text } from 'pss-components'
+import { Layout, Box, Flex, Text, Image } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
 import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
@@ -21,7 +21,7 @@ const slideshowStyles = {
   slideStyle: { overflow: 'visible', height: '100%' }
 }
 
-const Img = styled('img')`
+const PictureImage = styled(Image)`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -138,8 +138,8 @@ class PicturePage extends Component {
             {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
           </Helmet>
         )}
-        <Layout overflow='hidden'>
-          <Box as='header' p={2}>
+        <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
+          <Box use='header' p={2}>
             <Flex alignItems={{ sm: 'center' }}>
               <Box mr='auto' width={1 / 3} hide='md'>
                 <AppLink path={ROUTE_ABOUT}>
@@ -158,7 +158,7 @@ class PicturePage extends Component {
               </Box>
             </Flex>
           </Box>
-          <Layout.Content as='main' position='relative'>
+          <Layout.Content use='main' position='relative'>
             <Slideshow
               defaultIndex={index}
               onChange={this.handlePictureChange}
@@ -174,7 +174,7 @@ class PicturePage extends Component {
                       cursor={pic.zoomed && 'zoom-in'}
                     >
                       <Flipped flipId={'pic-' + pic.id}>
-                        <Img
+                        <PictureImage
                           src={pic.original.url}
                           width={pic.original.width}
                           height={pic.original.height}
@@ -187,7 +187,7 @@ class PicturePage extends Component {
               ) : <span key={pic.slug} />)}
             </Slideshow>
           </Layout.Content>
-          <Box as='footer' p={2}>
+          <Box use='footer' p={2}>
             <Flex justifyContent='space-between' alignItems='flex-end'>
               <Box hide='sm'>
                 <AppLink path={ROUTE_ABOUT}>

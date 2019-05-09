@@ -3,17 +3,12 @@ import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-import { Layout, Box, FlexGrid, Text, withMatchMedia } from 'pss-components'
+import { Layout, Box, FlexGrid, Text, Image, withMatchMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
 import { AppLink } from '../containers'
 import { withIntl, withPageData } from '../hocs'
-
-const Img = styled('img')`
-  width: 100%;
-  height: auto;
-`
 
 const PhotoBox = styled(Box)`
   position: relative;
@@ -28,7 +23,7 @@ const PhotoBox = styled(Box)`
     mix-blend-mode: multiply;
   }
 
-  & > ${Img} {
+  & > ${Image} {
     position: absolute;
     left: 0;
     top: 0;
@@ -173,7 +168,7 @@ class AboutPage extends Component {
             ref={this.$scroller}
             onScroll={this.handleScroll}
           >
-            <Layout>
+            <Layout flexDirection='column' minHeight='100%'>
               <Box p={2} ml='auto' hide='sm'>
                 <AppLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
@@ -206,10 +201,10 @@ class AboutPage extends Component {
                           ratio={pic.original.width / pic.original.height}
                           data-transition-hide
                         >
-                          <Img
+                          <Image
                             src={pic.original.url}
-                            width={pic.original.width}
-                            height={pic.original.height}
+                            width='100%'
+                            height='100%'
                             alt=''
                           />
                         </Box>
@@ -258,7 +253,7 @@ class AboutPage extends Component {
                       overlayColor={pic && pic.color}
                     >
                       {photo && (
-                        <Img
+                        <Image
                           src={photo.url}
                           onLoad={this.handlePhotoLoad}
                           alt=''
