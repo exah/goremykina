@@ -139,7 +139,7 @@ class PicturePage extends Component {
           </Helmet>
         )}
         <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
-          <Box use='header' p={2}>
+          <Box as='header' p={2}>
             <Flex alignItems={{ sm: 'center' }}>
               <Box mr='auto' width={1 / 3} hide='md'>
                 <AppLink path={ROUTE_ABOUT}>
@@ -158,7 +158,7 @@ class PicturePage extends Component {
               </Box>
             </Flex>
           </Box>
-          <Layout.Content use='main' position='relative'>
+          <Layout.Content as='main' position='relative'>
             <Slideshow
               defaultIndex={index}
               onChange={this.handlePictureChange}
@@ -187,7 +187,7 @@ class PicturePage extends Component {
               ) : <span key={pic.slug} />)}
             </Slideshow>
           </Layout.Content>
-          <Box use='footer' p={2}>
+          <Box as='footer' p={2}>
             <Flex justifyContent='space-between' alignItems='flex-end'>
               <Box hide='sm'>
                 <AppLink path={ROUTE_ABOUT}>

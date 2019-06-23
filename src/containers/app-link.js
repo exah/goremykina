@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { compose, noop } from '@exah/utils'
 import { withRouter } from 'react-router'
-import { Text } from 'pss-components'
+import { Link } from 'pss-components'
 import { withIntl } from '../hocs'
 
-const DEFAULT_COMP = 'a'
+const ANCHOR_ELEMENT = 'a'
 
 class AppLink extends Component {
   static defaultProps = {
-    comp: DEFAULT_COMP,
+    as: ANCHOR_ELEMENT,
     onClick: noop
   }
 
@@ -25,11 +25,11 @@ class AppLink extends Component {
     this.props.history.createHref(this.getLocation())
 
   handleClick = (event) => {
-    const { comp, onClick, href, target, history, replace } = this.props
+    const { as, onClick, href, target, history, replace } = this.props
 
     onClick(event)
 
-    if ((href == null && target == null) || comp !== DEFAULT_COMP) {
+    if ((href == null && target == null) || as !== ANCHOR_ELEMENT) {
       event.preventDefault()
 
       const location = this.getLocation()
@@ -47,7 +47,7 @@ class AppLink extends Component {
       to,
       data,
       path,
-      comp,
+      as,
       disable,
       children,
       alternate,
@@ -61,14 +61,14 @@ class AppLink extends Component {
     }
 
     return (
-      <Text
-        href={comp === DEFAULT_COMP ? this.getHref() : undefined}
+      <Link
+        href={as === ANCHOR_ELEMENT ? this.getHref() : undefined}
         onClick={this.handleClick}
-        use={comp}
+        as={as}
         {...rest}
       >
         {children}
-      </Text>
+      </Link>
     )
   }
 }
