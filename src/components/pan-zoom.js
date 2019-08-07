@@ -1,8 +1,11 @@
-import React, { PureComponent, createRef } from 'react'
-import { createBase } from 'react-styled-base'
+import React, { PureComponent, createRef, forwardRef } from 'react'
 import styled from '@emotion/styled'
 
-const PanZoomContainer = styled(createBase('div', { whitelist: [ 'touch-action' ] }))`
+const PanZoomBase = forwardRef((props, ref) => (
+  <div ref={ref} touch-action='none' {...props} />
+))
+
+const PanZoomBox = styled(PanZoomBase)`
   touch-action: none;
   user-select: none;
 `
@@ -118,12 +121,11 @@ class PanZoom extends PureComponent {
     } = this.props
 
     return (
-      <PanZoomContainer
+      <PanZoomBox
         ref={this.$panWrapper}
         onPointerDown={this.handleMouseDown}
         onPointerUp={this.handleMouseUp}
         onPointerMove={this.handleMouseMove}
-        touch-action='none'
         {...rest}
       />
     )

@@ -3,17 +3,12 @@ import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-import { Layout, Box, FlexGrid, Text, withCurrentMedia } from 'pss-components'
+import { Layout, Box, FlexGrid, Text, Image, withMatchMedia } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
 import { AppLink } from '../containers'
 import { withIntl, withPageData } from '../hocs'
-
-const Img = styled('img')`
-  width: 100%;
-  height: auto;
-`
 
 const PhotoBox = styled(Box)`
   position: relative;
@@ -28,7 +23,7 @@ const PhotoBox = styled(Box)`
     mix-blend-mode: multiply;
   }
 
-  & > ${Img} {
+  & > ${Image} {
     position: absolute;
     left: 0;
     top: 0;
@@ -104,9 +99,9 @@ class AboutPage extends Component {
   isStuck = false // photo and picture is not scaling with scroll
 
   handleScroll = (e) => {
-    const { currentMediaKey } = this.props
+    const { matchMedia } = this.props
 
-    if (currentMediaKey.includes('md')) return
+    if (matchMedia.matches.includes('md')) return
 
     const { scrollTop } = this.$scroller.current
     if (scrollTop === this.prevScrollTop || scrollTop < 0) return
@@ -132,7 +127,7 @@ class AboutPage extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     const shouldUpdateRects =
-      this.props.currentMediaKey !== prevProps.currentMediaKey ||
+      this.props.matchMedia.matches !== prevProps.matchMedia.matches ||
       this.state.isPhotoReady !== prevState.isPhotoReady ||
       this.state.isAppeared !== prevState.isAppeared
 
@@ -168,103 +163,106 @@ class AboutPage extends Component {
           onExit={this.handleExit}
         >
           <Box
-            height
-            ovsy
-            ovtouch
+            height='100%'
+            overflow='hidden auto touch'
             ref={this.$scroller}
             onScroll={this.handleScroll}
           >
-            <Layout>
-              <Layout.Item pd={2} mgl='auto' hideOn='sm'>
+            <Layout flexDirection='column' minHeight='100%'>
+              <Box p={2} ml='auto' hide='sm'>
                 <AppLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
                 </AppLink>
-              </Layout.Item>
-              <Layout.Body pdx={2}>
-                <FlexGrid spacex={2} alignItems='flex-start' minWidth='100%'>
-                  <FlexGrid.Item
-                    col={{ sm: 4, md: 3, lg: 2 }}
-                    position='sticky'
-                    top={{ sm: 0 }}
-                    bottom={{ md: 0 }}
-                    mgt={{ md: 'auto' }}
-                    pdy={2}
+              </Box>
+              <FlexGrid
+                flex='1 1 auto'
+                columns={16}
+                spacex={2}
+                px={2}
+                alignItems='flex-start'
+              >
+                <FlexGrid.Item
+                  column={{ sm: 4, md: 3, lg: 2 }}
+                  position='sticky'
+                  top={{ sm: 0 }}
+                  bottom={{ md: 0 }}
+                  mt={{ md: 'auto' }}
+                  py={2}
+                >
+                  <AppLink
+                    path={ROUTE_PICTURE}
+                    data={pic}
+                    title={intl.t('nav.back')}
                   >
-                    <AppLink
-                      path={ROUTE_PICTURE}
-                      data={pic}
-                      title={intl.t('nav.back')}
-                    >
-                      {pic ? (
-                        <Flipped flipId={'pic-' + pic.id}>
-                          <Box
-                            ref={this.$pic}
-                            ratio={pic.original.width / pic.original.height}
-                            data-transition-hide
-                          >
-                            <Img
-                              src={pic.original.url}
-                              width={pic.original.width}
-                              height={pic.original.height}
-                              alt=''
-                            />
-                          </Box>
-                        </Flipped>
-                      ) : (
-                        intl.t('nav.back')
-                      )}
-                    </AppLink>
-                  </FlexGrid.Item>
-                  <FlexGrid.Item
-                    col={{ sm: 16, md: 8, lg: 6 }}
-                    order={{ sm: 1 }}
-                    mgx='auto'
-                  >
-                    <Box pdt={2} data-transition-fade>
-                      {isLoading
-                        ? intl.t('ui.loading')
-                        : renderMarkdown(content)}
-                      <Box
-                        position={{ lg: 'absolute' }}
-                        bottom={0}
-                        right={0}
-                        pdy={{ sm: 3, md: 2 }}
-                        pdx={{ lg: 2 }}
-                      >
-                        <Text
-                          textAlign={{ sm: 'center' }}
-                          variant={{ all: 'text', lg: 'default' }}
+                    {pic ? (
+                      <Flipped flipId={'pic-' + pic.id}>
+                        <Box
+                          ref={this.$pic}
+                          ratio={pic.original.width / pic.original.height}
+                          data-transition-hide
                         >
-                          <a href='mailto:contact@goremykina.com'>
-                            💬 contact@goremykina.com
-                          </a>
-                        </Text>
-                      </Box>
-                    </Box>
-                  </FlexGrid.Item>
-                  <FlexGrid.Item
-                    col={{ sm: 12, md: 4, lg: 3 }}
-                    position='sticky'
-                    top={0}
-                  >
-                    <Box pdy={2}>
-                      <PhotoBox
-                        ref={this.$photo}
-                        ratio={photo && photo.ratio}
-                        overlayColor={pic && pic.color}
-                      >
-                        {photo && (
-                          <Img
-                            src={photo.url}
-                            onLoad={this.handlePhotoLoad}
+                          <Image
+                            src={pic.original.url}
+                            width='100%'
+                            height='100%'
                             alt=''
                           />
-                        )}
-                      </PhotoBox>
+                        </Box>
+                      </Flipped>
+                    ) : (
+                      intl.t('nav.back')
+                    )}
+                  </AppLink>
+                </FlexGrid.Item>
+                <FlexGrid.Item
+                  column={{ sm: 16, md: 8, lg: 6 }}
+                  order={{ sm: 1 }}
+                  mx='auto'
+                >
+                  <Box pt={2} data-transition-fade>
+                    {isLoading
+                      ? intl.t('ui.loading')
+                      : renderMarkdown(content)}
+                    <Box
+                      position={{ lg: 'absolute' }}
+                      bottom={0}
+                      right={0}
+                      py={{ sm: 3, md: 2 }}
+                      px={{ lg: 2 }}
+                    >
+                      <Text
+                        textAlign={{ sm: 'center' }}
+                        variant={{ all: 'text', lg: 'default' }}
+                      >
+                        <a href='mailto:contact@goremykina.com'>
+                          💬 contact@goremykina.com
+                        </a>
+                      </Text>
                     </Box>
-                  </FlexGrid.Item>
-                </FlexGrid>
-              </Layout.Body>
+                  </Box>
+                </FlexGrid.Item>
+                <FlexGrid.Item
+                  column={{ sm: 12, md: 4, lg: 3 }}
+                  position='sticky'
+                  top={0}
+                >
+                  <Box py={2}>
+                    <PhotoBox
+                      ref={this.$photo}
+                      ratio={photo && photo.ratio}
+                      overlayColor={pic && pic.color}
+                    >
+                      {photo && (
+                        <Image
+                          src={photo.url}
+                          onLoad={this.handlePhotoLoad}
+                          alt=''
+                        />
+                      )}
+                    </PhotoBox>
+                  </Box>
+                </FlexGrid.Item>
+              </FlexGrid>
             </Layout>
           </Box>
         </Flipped>
@@ -276,5 +274,5 @@ class AboutPage extends Component {
 export default compose(
   withIntl,
   withPageData('about'),
-  withCurrentMedia
+  withMatchMedia
 )(AboutPage)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { mq } from 'pss'
-import { Layout, Box, FlexBox, Text } from 'pss-components'
+import { Layout, Box, Flex, Text, Image } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { Logo, Slideshow } from '../components'
 import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
@@ -21,7 +21,7 @@ const slideshowStyles = {
   slideStyle: { overflow: 'visible', height: '100%' }
 }
 
-const Img = styled('img')`
+const PictureImage = styled(Image)`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -138,74 +138,72 @@ class PicturePage extends Component {
             {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
           </Helmet>
         )}
-        <Layout ovh>
-          <Layout.Item as='header' pd={2}>
-            <FlexBox alignItems={{ sm: 'center' }}>
-              <FlexBox.Item mgr='auto' width={1 / 3} hideOn='md'>
+        <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
+          <Box as='header' p={2}>
+            <Flex alignItems={{ sm: 'center' }}>
+              <Box mr='auto' width={1 / 3} hide='md'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
-              </FlexBox.Item>
-              <FlexBox.Item>
+              </Box>
+              <Box>
                 <AppLink path={ROUTE_PICTURE} data={activePicture}>
                   <Logo title={intl.t('nav.home')} />
                 </AppLink>
-              </FlexBox.Item>
-              <FlexBox.Item mgl='auto' width={1 / 3}>
+              </Box>
+              <Box ml='auto' width={1 / 3}>
                 <AppLink path={ROUTE_PICTURE} data={activePicture} alternate>
                   <Text textAlign='right'>{intl.t('nav.lang')}</Text>
                 </AppLink>
-              </FlexBox.Item>
-            </FlexBox>
-          </Layout.Item>
-          <Layout.Body as='main'>
-            <Layout.Content position='relative'>
-              <Slideshow
-                defaultIndex={index}
-                onChange={this.handlePictureChange}
-                {...slideshowStyles}
-              >
-                {pictures.map((pic, picIndex) => (picInRange(index, picIndex)) ? (
-                  <Slideshow.Item key={pic.slug} height='100%' pdx={2}>
-                    <Box position='relative' height='100%'>
-                      <AppLink
-                        path={ROUTE_PICTURE_ZOOM}
-                        data={pic}
-                        disable={!pic.zoomed}
-                        cursor={pic.zoomed && 'zoom-in'}
-                      >
-                        <Flipped flipId={'pic-' + pic.id}>
-                          <Img
-                            src={pic.original.url}
-                            width={pic.original.width}
-                            height={pic.original.height}
-                            alt=''
-                          />
-                        </Flipped>
-                      </AppLink>
-                    </Box>
-                  </Slideshow.Item>
-                ) : <span key={pic.slug} />)}
-              </Slideshow>
-            </Layout.Content>
-          </Layout.Body>
-          <Layout.Item as='footer' pd={2}>
-            <FlexBox justifyContent='space-between' alignItems='flex-end'>
-              <FlexBox.Item hideOn='sm'>
+              </Box>
+            </Flex>
+          </Box>
+          <Layout.Content as='main' position='relative'>
+            <Slideshow
+              defaultIndex={index}
+              onChange={this.handlePictureChange}
+              {...slideshowStyles}
+            >
+              {pictures.map((pic, picIndex) => (picInRange(index, picIndex)) ? (
+                <Slideshow.Item key={pic.slug} height='100%' px={2}>
+                  <Box position='relative' height='100%'>
+                    <AppLink
+                      path={ROUTE_PICTURE_ZOOM}
+                      data={pic}
+                      disable={!pic.zoomed}
+                      cursor={pic.zoomed && 'zoom-in'}
+                    >
+                      <Flipped flipId={'pic-' + pic.id}>
+                        <PictureImage
+                          src={pic.original.url}
+                          width={pic.original.width}
+                          height={pic.original.height}
+                          alt=''
+                        />
+                      </Flipped>
+                    </AppLink>
+                  </Box>
+                </Slideshow.Item>
+              ) : <span key={pic.slug} />)}
+            </Slideshow>
+          </Layout.Content>
+          <Box as='footer' p={2}>
+            <Flex justifyContent='space-between' alignItems='flex-end'>
+              <Box hide='sm'>
                 <AppLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
                 </AppLink>
-              </FlexBox.Item>
+              </Box>
               {activePicture && (
-                <FlexBox.Item mgx={{ sm: 'auto' }}>
+                <Box mx={{ sm: 'auto' }}>
                   <PictureDescription
                     isLoading={isLoading}
                     {...activePicture}
                   />
-                </FlexBox.Item>
+                </Box>
               )}
-            </FlexBox>
-          </Layout.Item>
+            </Flex>
+          </Box>
         </Layout>
       </>
     )
