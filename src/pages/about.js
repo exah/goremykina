@@ -3,7 +3,17 @@ import anime from 'animejs'
 import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-import { Layout, Box, FlexGrid, Text, Image, withMatchMedia } from 'pss-components'
+
+import {
+  Layout,
+  Box,
+  FlexGrid,
+  Text,
+  Image,
+  Link,
+  withMatchMedia
+} from 'pss-components'
+
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
@@ -220,9 +230,7 @@ class AboutPage extends Component {
                   mx='auto'
                 >
                   <Box pt={2} data-transition-fade>
-                    {isLoading
-                      ? intl.t('ui.loading')
-                      : renderMarkdown(content)}
+                    {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
                     <Box
                       position={{ lg: 'absolute' }}
                       bottom={0}
@@ -234,9 +242,9 @@ class AboutPage extends Component {
                         textAlign={{ sm: 'center' }}
                         variant={{ all: 'text', lg: 'default' }}
                       >
-                        <a href='mailto:contact@goremykina.com'>
+                        <Link href='mailto:contact@goremykina.com'>
                           💬 contact@goremykina.com
-                        </a>
+                        </Link>
                       </Text>
                     </Box>
                   </Box>

@@ -1,30 +1,8 @@
 const path = require('path')
 const config = require('config')
-const CSSPlugin = require('mini-css-extract-plugin')
 const StatsPlugin = require('stats-webpack-plugin')
-const cssnano = require('cssnano')
 
 const nodeEnv = config.isProd ? 'production' : 'development'
-
-const css = {
-  test: /\.css$/,
-  use: [
-    CSSPlugin.loader,
-    'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        plugins: config.isProd
-          ? [
-            cssnano({
-              preset: ['default', { discardComments: { removeAll: true } }]
-            })
-          ]
-          : []
-      }
-    }
-  ]
-}
 
 const javascript = (isServer) => ({
   test: /\.js$/,
@@ -63,7 +41,7 @@ const clientConfig = {
     }
   },
   module: {
-    rules: [css, javascript()]
+    rules: [javascript()]
   },
   optimization: {
     runtimeChunk: {
@@ -79,11 +57,7 @@ const clientConfig = {
       }
     }
   },
-  plugins: [
-    new CSSPlugin({
-      filename: getFilename('css')
-    })
-  ].concat(config.isProd ? [new StatsPlugin('clientStats.json')] : [])
+  plugins: config.isProd ? [new StatsPlugin('clientStats.json')] : []
 }
 
 const serverConfig = {
@@ -105,7 +79,7 @@ const serverConfig = {
   externals: Object.keys(require('./package.json').dependencies),
   performance: { hints: false },
   optimization: { nodeEnv },
-  plugins: [].concat(config.isProd ? [new StatsPlugin('serverStats.json')] : [])
+  plugins: config.isProd ? [new StatsPlugin('serverStats.json')] : []
 }
 
 module.exports = [clientConfig, serverConfig]

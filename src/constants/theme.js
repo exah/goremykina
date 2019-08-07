@@ -1,3 +1,9 @@
+import { css } from '@emotion/core'
+
+const Link = css`
+  text-decoration: none;
+`
+
 const THEME = {
   media: {
     lg: '(min-width: 1025px)',
@@ -66,7 +72,8 @@ const THEME = {
       lineHeight: 14 / 12,
       letterSpacing: 0.18
     }
-  }
+  },
+  Link
 }
 
 export { THEME }

@@ -1,4 +1,3 @@
-import 'defaults.css'
 import unfetch from 'unfetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
