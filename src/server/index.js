@@ -4,7 +4,7 @@ import { SUPPORTED_LANGS } from '../constants'
 import render from './render'
 import api from './api'
 
-export default function serverRender ({ files }) {
+export default function serverRender({ files }) {
   const router = express.Router()
 
   router.use(api)

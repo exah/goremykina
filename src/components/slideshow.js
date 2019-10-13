@@ -14,7 +14,8 @@ class SlideshowItemBase extends PureComponent {
       e.preventDefault()
     }
   }
-  render () {
+
+  render() {
     return <Box onDragStart={this.handleDrag} {...this.props} />
   }
 }
@@ -112,11 +113,11 @@ class Slideshow extends Component {
     }
   }
 
-  shouldComponentUpdate (props, state) {
-    return (this.state.index !== state.index)
+  shouldComponentUpdate(props, state) {
+    return this.state.index !== state.index
   }
 
-  render () {
+  render() {
     const {
       defaultIndex,
       duration,

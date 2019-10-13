@@ -3,11 +3,7 @@ import { IntlConsumer } from '../contexts'
 
 const withIntl = (Comp) => {
   const HOC = (props) => (
-    <IntlConsumer>
-      {(intl) => (
-        <Comp {...props} intl={intl} />
-      )}
-    </IntlConsumer>
+    <IntlConsumer>{(intl) => <Comp {...props} intl={intl} />}</IntlConsumer>
   )
 
   HOC.displayName = `withIntl(${Comp.displayName || 'Component'})`
@@ -15,6 +11,4 @@ const withIntl = (Comp) => {
   return HOC
 }
 
-export {
-  withIntl
-}
+export { withIntl }

@@ -14,15 +14,13 @@ class AppLink extends Component {
 
   getLocation = () => {
     const { intl, to, data, path, alternate } = this.props
-    const location = to || intl.link(path, data, alternate ? intl.langAlt : intl.lang)
+    const location =
+      to || intl.link(path, data, alternate ? intl.langAlt : intl.lang)
 
-    return (typeof location === 'string')
-      ? { pathname: location }
-      : location
+    return typeof location === 'string' ? { pathname: location } : location
   }
 
-  getHref = () =>
-    this.props.history.createHref(this.getLocation())
+  getHref = () => this.props.history.createHref(this.getLocation())
 
   handleClick = (event) => {
     const { as, onClick, href, target, history, replace } = this.props
@@ -42,7 +40,7 @@ class AppLink extends Component {
     }
   }
 
-  render () {
+  render() {
     const {
       to,
       data,
@@ -57,7 +55,7 @@ class AppLink extends Component {
     } = this.props
 
     if (disable) {
-      return (<>{children}</>)
+      return <>{children}</>
     }
 
     return (

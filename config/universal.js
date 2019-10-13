@@ -8,5 +8,5 @@ module.exports = {
   isServer,
   isDev,
   isProd,
-  public: isClient ? ((window._ssr || {}).config || {}) : {}
+  public: isClient ? (window._ssr || {}).config || {} : {}
 }

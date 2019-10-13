@@ -38,14 +38,15 @@ class IntlProvider extends PureComponent {
 
   getLink = (path, data, langOpt) => {
     const lang = langOpt || this.props.lang
-    const getPath = this.compiledPaths[path] = (this.compiledPaths[path] || compilePath(path))
+    const getPath = (this.compiledPaths[path] =
+      this.compiledPaths[path] || compilePath(path))
 
     return getPath({ lang, ...data })
   }
 
   getHref = (...args) => this.props.baseUrl + this.getLink(...args)
 
-  render () {
+  render() {
     const { children, ...rest } = this.props
 
     const data = {
@@ -55,15 +56,8 @@ class IntlProvider extends PureComponent {
       ...rest
     }
 
-    return (
-      <Provider value={data}>
-        {children}
-      </Provider>
-    )
+    return <Provider value={data}>{children}</Provider>
   }
 }
 
-export {
-  IntlProvider,
-  Consumer as IntlConsumer
-}
+export { IntlProvider, Consumer as IntlConsumer }

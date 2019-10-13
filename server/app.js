@@ -12,19 +12,23 @@ const app = express()
 app.use(bodyParser.json())
 app.use(compression({ threshold: 0 }))
 
-app.use(express.static(config.paths.public, {
-  maxAge: config.isDev ? 0 : ms('7 days')
-}))
+app.use(
+  express.static(config.paths.public, {
+    maxAge: config.isDev ? 0 : ms('7 days')
+  })
+)
 
-app.use(webpackUniversalAndHot({
-  webpackConfig,
-  isDev: config.isDev,
-  isHot: true,
-  clientEntry: 'main',
-  serverEntry: 'server',
-  clientStatsFileName: 'clientStats.json',
-  serverStatsFileName: 'serverStats.json'
-}))
+app.use(
+  webpackUniversalAndHot({
+    webpackConfig,
+    isDev: config.isDev,
+    isHot: true,
+    clientEntry: 'main',
+    serverEntry: 'server',
+    clientStatsFileName: 'clientStats.json',
+    serverStatsFileName: 'serverStats.json'
+  })
+)
 
 global.fetch = fetch
 module.exports = app

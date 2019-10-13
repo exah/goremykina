@@ -20,7 +20,7 @@ class PanZoom extends PureComponent {
 
   $panWrapper = createRef()
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     const { dx, dy, zoom } = props
@@ -32,9 +32,7 @@ class PanZoom extends PureComponent {
       y: 0
     }
 
-    const matrix = [
-      zoom, 0, 0, zoom, dx, dy
-    ]
+    const matrix = [zoom, 0, 0, zoom, dx, dy]
 
     this.state = {
       isDragging: false,
@@ -111,14 +109,8 @@ class PanZoom extends PureComponent {
     }
   }
 
-  render () {
-    const {
-      onPan,
-      dx,
-      dy,
-      zoom,
-      ...rest
-    } = this.props
+  render() {
+    const { onPan, dx, dy, zoom, ...rest } = this.props
 
     return (
       <PanZoomBox
@@ -132,6 +124,4 @@ class PanZoom extends PureComponent {
   }
 }
 
-export {
-  PanZoom
-}
+export { PanZoom }

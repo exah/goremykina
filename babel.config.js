@@ -3,7 +3,8 @@ const config = require('config')
 module.exports = {
   presets: [
     [
-      '@babel/preset-env', {
+      '@babel/preset-env',
+      {
         useBuiltIns: false,
         modules: false
       }
@@ -13,12 +14,14 @@ module.exports = {
   plugins: [
     '@babel/plugin-proposal-class-properties',
     [
-      '@babel/plugin-transform-runtime', {
+      '@babel/plugin-transform-runtime',
+      {
         useESModules: true
       }
     ],
     [
-      'emotion', {
+      'emotion',
+      {
         sourceMap: config.isDev,
         autoLabel: config.isDev
       }

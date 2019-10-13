@@ -1,6 +1,6 @@
 const messages = {
   en: {
-    'title': 'Irina Goremykina',
+    title: 'Irina Goremykina',
     'title.about': 'About',
     'nav.home': 'Irina Goremykina',
     'nav.about': 'About Irina',
@@ -10,7 +10,7 @@ const messages = {
     'ui.close': 'Close'
   },
   ru: {
-    'title': 'Ирина Горемыкина',
+    title: 'Ирина Горемыкина',
     'title.about': 'Об Ирине',
     'nav.home': 'Ирина Горемыкина',
     'nav.about': 'Об Ирине',

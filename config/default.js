@@ -1,10 +1,8 @@
 const path = require('path')
 const universalConfig = require('./universal')
 
-const resolvePath = (...paths) => path.resolve(
-  path.resolve(__dirname, '../'),
-  ...paths
-)
+const resolvePath = (...paths) =>
+  path.resolve(path.resolve(__dirname, '../'), ...paths)
 
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 3000
