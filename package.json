@@ -84,7 +84,7 @@
     "react-dom": "16.10.2",
     "react-event-listener": "^0.6.6",
     "react-flip-toolkit": "4",
-    "react-helmet": "^5.2.1",
+    "react-helmet-async": "^1.0.3",
     "react-router": "^5.1.2",
     "react-swipeable-views": "^0.13.3",
     "react-tree-walker": "^4.3.0",

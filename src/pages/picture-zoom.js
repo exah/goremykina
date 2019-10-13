@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
@@ -23,31 +23,33 @@ const OverlayItem = styled('span')`
   pointer-events: auto;
 `
 
-const vmax = (num) => (num * 100) + 'vmax'
+const vmax = (num) => num * 100 + 'vmax'
 
 const ZoomedImage = styled(Image)`
   position: absolute;
   z-index: 0;
   max-width: none;
 
-  ${p => {
-    const ratio = (p.width / p.height)
+  ${(p) => {
+    const ratio = p.width / p.height
 
-    return p.width > p.height ? css`
-      top: 50%;
-      left: 50%;
-      margin-top: -50vmax;
-      margin-left: -${vmax(ratio / 2)};
-      width: ${vmax(ratio)};
-      height: 100vmax;
-    ` : css`
-      top: 50%;
-      left: 50%;
-      margin-top: -${vmax(1 / ratio / 2)};
-      margin-left: -50vmax;
-      width: 100vmax;
-      height: ${vmax(1 / ratio)};
-    `
+    return p.width > p.height
+      ? css`
+          top: 50%;
+          left: 50%;
+          margin-top: -50vmax;
+          margin-left: -${vmax(ratio / 2)};
+          width: ${vmax(ratio)};
+          height: 100vmax;
+        `
+      : css`
+          top: 50%;
+          left: 50%;
+          margin-top: -${vmax(1 / ratio / 2)};
+          margin-left: -50vmax;
+          width: 100vmax;
+          height: ${vmax(1 / ratio)};
+        `
   }}
 `
 
@@ -63,22 +65,23 @@ class PictureZoomPage extends Component {
     })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (this.state.isReady) return
 
     const pic = this.props.activePicture.zoomed
     const image = new window.Image(pic.width, pic.height)
 
     image.src = pic.url
-    image.onload = () => this.setState({ isReady: true }, () => {
-      document.body.removeChild(image)
-    })
+    image.onload = () =>
+      this.setState({ isReady: true }, () => {
+        document.body.removeChild(image)
+      })
 
     // Firefox needs to actually insert image in DOM
     document.body.appendChild(image)
   }
 
-  render () {
+  render() {
     const { intl, activePicture: pic } = this.props
     const { isReady, isAppeared } = this.state
 
@@ -98,7 +101,11 @@ class PictureZoomPage extends Component {
                   <Flex flexDirection='column' height='100%'>
                     <Box>
                       <OverlayItem>
-                        <AppLink path={ROUTE_PICTURE} data={pic} title={intl.t('ui.close')}>
+                        <AppLink
+                          path={ROUTE_PICTURE}
+                          data={pic}
+                          title={intl.t('ui.close')}
+                        >
                           <Box p={2}>
                             <IconClose />
                           </Box>
@@ -116,9 +123,14 @@ class PictureZoomPage extends Component {
                 </Text>
               </Overlay>
               <PanZoom>
-                <Flipped flipId={'pic-' + pic.id} onComplete={this.handleAppear}>
+                <Flipped
+                  flipId={'pic-' + pic.id}
+                  onComplete={this.handleAppear}
+                >
                   <ZoomedImage
-                    src={isReady && isAppeared ? pic.zoomed.url : pic.original.url}
+                    src={
+                      isReady && isAppeared ? pic.zoomed.url : pic.original.url
+                    }
                     width={pic.zoomed.width}
                     height={pic.zoomed.height}
                     alt=''

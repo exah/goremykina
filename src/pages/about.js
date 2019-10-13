@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react'
+import { Helmet } from 'react-helmet-async'
 import anime from 'animejs'
-import Helmet from 'react-helmet'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
 
@@ -60,14 +60,14 @@ const transition = ($el, start, end, next, isStuck) => {
 
   const scaleAnime = isStuck
     ? animate({
-      targets: $el.querySelectorAll(PhotoBox),
-      opacity: [start, end]
-    })
+        targets: $el.querySelectorAll(PhotoBox),
+        opacity: [start, end]
+      })
     : animate({
-      targets: $el.querySelectorAll(PhotoBox),
-      scale: [start, end],
-      opacity: [start, end]
-    })
+        targets: $el.querySelectorAll(PhotoBox),
+        scale: [start, end],
+        opacity: [start, end]
+      })
 
   Promise.all([fadeAnime, scaleAnime]).then(next)
 }
@@ -131,11 +131,11 @@ class AboutPage extends Component {
     this.isStuck = false
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.updateRects()
   }
 
-  componentDidUpdate (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const shouldUpdateRects =
       this.props.matchMedia.matches !== prevProps.matchMedia.matches ||
       this.state.isPhotoReady !== prevState.isPhotoReady ||
@@ -146,7 +146,7 @@ class AboutPage extends Component {
     }
   }
 
-  render () {
+  render() {
     const { intl, isLoading, activePicture: pic, content, photo } = this.props
     const canonicalUrl = intl.href(ROUTE_ABOUT)
 

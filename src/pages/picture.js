@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import styled from '@emotion/styled'
 import { mq } from 'pss'
 import { Layout, Box, Flex, Text, Image } from 'pss-components'
@@ -42,14 +42,14 @@ const isPicUpdated = (prev, next) =>
   prev != null && next != null && prev.id !== next.id
 
 const picInRange = (index, current, visible = 2) =>
-  current >= (index - visible) && current <= (index + visible)
+  current >= index - visible && current <= index + visible
 
 class PicturePage extends Component {
   static defaultProps = {
     pictures: []
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     const index =
@@ -78,7 +78,7 @@ class PicturePage extends Component {
     })
   }
 
-  shouldComponentUpdate (props) {
+  shouldComponentUpdate(props) {
     return (
       props.lang !== this.props.lang ||
       props.isLoading !== this.props.isLoading ||
@@ -86,7 +86,7 @@ class PicturePage extends Component {
     )
   }
 
-  render () {
+  render() {
     const { intl, isLoading, pictures, activePicture } = this.props
     const { index } = this.state
 
@@ -164,27 +164,31 @@ class PicturePage extends Component {
               onChange={this.handlePictureChange}
               {...slideshowStyles}
             >
-              {pictures.map((pic, picIndex) => (picInRange(index, picIndex)) ? (
-                <Slideshow.Item key={pic.slug} height='100%' px={2}>
-                  <Box position='relative' height='100%'>
-                    <AppLink
-                      path={ROUTE_PICTURE_ZOOM}
-                      data={pic}
-                      disable={!pic.zoomed}
-                      cursor={pic.zoomed && 'zoom-in'}
-                    >
-                      <Flipped flipId={'pic-' + pic.id}>
-                        <PictureImage
-                          src={pic.original.url}
-                          width={pic.original.width}
-                          height={pic.original.height}
-                          alt=''
-                        />
-                      </Flipped>
-                    </AppLink>
-                  </Box>
-                </Slideshow.Item>
-              ) : <span key={pic.slug} />)}
+              {pictures.map((pic, picIndex) =>
+                picInRange(index, picIndex) ? (
+                  <Slideshow.Item key={pic.slug} height='100%' px={2}>
+                    <Box position='relative' height='100%'>
+                      <AppLink
+                        path={ROUTE_PICTURE_ZOOM}
+                        data={pic}
+                        disable={!pic.zoomed}
+                        cursor={pic.zoomed && 'zoom-in'}
+                      >
+                        <Flipped flipId={'pic-' + pic.id}>
+                          <PictureImage
+                            src={pic.original.url}
+                            width={pic.original.width}
+                            height={pic.original.height}
+                            alt=''
+                          />
+                        </Flipped>
+                      </AppLink>
+                    </Box>
+                  </Slideshow.Item>
+                ) : (
+                  <span key={pic.slug} />
+                )
+              )}
             </Slideshow>
           </Layout.Content>
           <Box as='footer' p={2}>

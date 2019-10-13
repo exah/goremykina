@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import Helmet from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { compose } from '@exah/utils'
 import { Flipper } from 'react-flip-toolkit'
 import { Box } from 'pss-components'
@@ -13,7 +13,7 @@ class AppRoot extends PureComponent {
     pictures: []
   }
 
-  static getDerivedStateFromProps ({ pictures, match }) {
+  static getDerivedStateFromProps({ pictures, match }) {
     if (match.params.slug == null) {
       return null
     }
@@ -27,7 +27,7 @@ class AppRoot extends PureComponent {
     activePicture: this.props.activePicture
   }
 
-  render () {
+  render() {
     const { intl, match, isLoading, pictures } = this.props
     const { activePicture } = this.state
     const style = activePicture ? { backgroundColor: activePicture.color } : {}

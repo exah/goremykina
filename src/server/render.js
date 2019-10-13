@@ -1,6 +1,5 @@
 import config from 'config'
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter as Router } from 'react-router'
 import { getInitialData } from 'react-universal-data'
@@ -16,9 +15,11 @@ const render = (files) => (req, res, next) => {
     statusText: 'OK'
   }
 
+  const helmetContext = {}
+
   const appElement = (
     <Router location={req.url} context={context}>
-      <App userLang={userLang} />
+      <App userLang={userLang} helmetContext={helmetContext} />
     </Router>
   )
 
@@ -52,7 +53,7 @@ const render = (files) => (req, res, next) => {
       }
 
       const html = renderToString(appElement)
-      const head = Helmet.renderStatic()
+      const head = helmetContext.helmet
 
       const ssr = {
         config: config.public,
