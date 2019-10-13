@@ -99,6 +99,7 @@
     "rimraf": "^3.0.0",
     "serialize-javascript": "^2.1.0",
     "stats-webpack-plugin": "^0.7.0",
-    "unfetch": "^4.1.0"
+    "unfetch": "^4.1.0",
+    "ya-fetch": "^1.1.0"
   }
 }
