@@ -1,5 +1,5 @@
 import React, { PureComponent, createContext } from 'react'
-import { compile as compilePath } from 'path-to-regexp'
+import { generatePath } from 'react-router'
 import { toArr } from '@exah/utils'
 import { DEFAULT_LANG } from '../constants'
 
@@ -34,12 +34,9 @@ class IntlProvider extends PureComponent {
     return toArr(value)
   }
 
-  compiledPaths = {}
-
   getLink = (path, data, langOpt) => {
     const lang = langOpt || this.props.lang
-    const getPath = (this.compiledPaths[path] =
-      this.compiledPaths[path] || compilePath(path))
+    const getPath = (params) => generatePath(path, params)
 
     return getPath({ lang, ...data })
   }

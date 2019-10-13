@@ -83,7 +83,6 @@
     "lint-staged": "^9.4.2",
     "ms": "^2.1.2",
     "node-fetch": "^2.6.0",
-    "path-to-regexp": "^3.1.0",
     "pepjs": "^0.5.2",
     "prop-types": "^15.7.2",
     "pss-components": "^5.0.1",
