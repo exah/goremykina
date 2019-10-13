@@ -4,6 +4,10 @@ const StatsPlugin = require('stats-webpack-plugin')
 
 const nodeEnv = config.isProd ? 'production' : 'development'
 
+const alias = {
+  'react-dom': '@hot-loader/react-dom'
+}
+
 const javascript = (isServer) => ({
   test: /\.js$/,
   include: config.paths.src,
@@ -37,6 +41,7 @@ const clientConfig = {
   },
   resolve: {
     alias: {
+      ...alias,
       config$: path.resolve(config.paths.config, './universal.js')
     }
   },
@@ -72,6 +77,9 @@ const serverConfig = {
     publicPath: '/',
     filename: '[name].js',
     libraryTarget: 'commonjs2'
+  },
+  resolve: {
+    alias
   },
   module: {
     rules: [javascript(true)]
