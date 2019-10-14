@@ -14,6 +14,9 @@ const THEME = {
     all: [0, 6, 24, 72],
     sm: [0, 6, 16, 32]
   },
+  size: {
+    overlay: '3px'
+  },
   color: {
     gray: '#E4E4E4'
   },
@@ -25,6 +28,10 @@ const THEME = {
     zoomed: {
       bg: 'transparent',
       fg: '#ffffff'
+    },
+    overlay: {
+      bg: '#333333',
+      fg: '#E7E7E7'
     }
   },
   textStyle: {

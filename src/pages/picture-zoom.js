@@ -107,7 +107,7 @@ class PictureZoomPage extends Component {
                           title={intl.t('ui.close')}
                         >
                           <Box p={2}>
-                            <IconClose />
+                            <IconClose ml='auto' />
                           </Box>
                         </AppLink>
                       </OverlayItem>

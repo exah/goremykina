@@ -4,11 +4,12 @@ import styled from '@emotion/styled'
 import { mq } from 'pss'
 import { Layout, Box, Flex, Text, Image } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
-import { Logo, Slideshow } from '../components'
 import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
 import { AppLink, PictureDescription } from '../containers'
+import { Logo, Slideshow } from '../components'
 import { withIntl } from '../hocs'
 import { join } from '../utils'
+import ExhibitionModal from './exhibition-modal'
 
 const slideshowStyles = {
   style: {
@@ -138,6 +139,7 @@ class PicturePage extends Component {
             {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
           </Helmet>
         )}
+        <ExhibitionModal />
         <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
           <Box as='header' p={2}>
             <Flex alignItems={{ sm: 'center' }}>
