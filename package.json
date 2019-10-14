@@ -30,6 +30,8 @@
     "rules": {
       "prettier/prettier": 2,
       "react/prop-types": 0,
+      "react/jsx-curly-newline": 0,
+      "no-irregular-whitespace": 0,
       "no-shadow": 2
     }
   },
@@ -93,6 +95,7 @@
     "react-helmet-async": "^1.0.3",
     "react-router": "^5.1.2",
     "react-swipeable-views": "^0.13.3",
+    "react-transition-group": "^4.3.0",
     "react-tree-walker": "^4.3.0",
     "react-universal-data": "^3.0.0",
     "recompose": "^0.30.0",
