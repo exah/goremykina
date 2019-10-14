@@ -1,5 +1,5 @@
 # Base
-FROM node:8.11-alpine AS base
+FROM node:8.16.2-alpine AS base
 
 ENV APP_DIR /app/
 ENV NPM_CONFIG_PRODUCTION false
