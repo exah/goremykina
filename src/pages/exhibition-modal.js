@@ -9,12 +9,14 @@ import { withIntl } from '../hocs'
 const source = {
   en: {
     notification: `“Between Sky and Earth” from 15th October — 5th November at Svetlany Sazhinoy's Gallery`,
+    notificationShort: `“Between Sky and Earth” 15.10-5.11`,
     title: `Personal exhibition: “Between Sky and Earth”`,
     dates: `15th October - 5th November`,
     location: `Svetlany Sazhinoy's Gallery`
   },
   ru: {
     notification: `«Между небом и землей» с 15 октября — 5 ноября в галереи «Светланы Сажиной»`,
+    notificationShort: `«Между небом и землей» 15.10-5.11`,
     title: `Персональная выставка: «Между небом и землей»`,
     dates: `15 октября - 5 ноября`,
     location: `Галерея «Светланы Сажиной»`
@@ -59,7 +61,7 @@ function ExhibitionModal({ intl, duration = 300, easing = 'easeInOutSine' }) {
               onClose={() => setHidden(true)}
             >
               <Box hide='sm'>🥂 {messages.notification}</Box>
-              <Box hide='md'>🥂 {messages.dates}</Box>
+              <Box hide='md'>🥂 {messages.notificationShort}</Box>
             </Notification>
           </Flipped>
         ) : (
