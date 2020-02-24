@@ -17,6 +17,7 @@ export default ({ app, files }) => html`
             <link rel="stylesheet" href="${file}" />
           `
       )}
+      <script async defer src="https://cdn.coollabs.io/save.js"></script>
       <script>
         ;(function(html) {
           html.classList.remove('no-js')
