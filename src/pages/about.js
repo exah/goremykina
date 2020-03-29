@@ -3,7 +3,10 @@ import { Helmet } from 'react-helmet-async'
 import anime from 'animejs'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
-
+import { Flipped } from 'react-flip-toolkit'
+import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
+import { renderMarkdown } from '../utils'
+import { withIntl, withPageData } from '../hocs'
 import {
   Layout,
   Box,
@@ -11,14 +14,9 @@ import {
   Text,
   Image,
   Link,
-  withMatchMedia
-} from 'pss-components'
-
-import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
-import { renderMarkdown } from '../utils'
-import { AppLink } from '../containers'
-import { withIntl, withPageData } from '../hocs'
+  withMatchMedia,
+  RouteLink
+} from '../components'
 
 const PhotoBox = styled(Box)`
   position: relative;
@@ -180,9 +178,9 @@ class AboutPage extends Component {
           >
             <Layout flexDirection='column' minHeight='100%'>
               <Box p={2} ml='auto' hide='sm'>
-                <AppLink path={ROUTE_ABOUT} alternate>
+                <RouteLink path={ROUTE_ABOUT} alternate>
                   <Text>{intl.t('nav.lang')}</Text>
-                </AppLink>
+                </RouteLink>
               </Box>
               <FlexGrid
                 flex='1 1 auto'
@@ -199,7 +197,7 @@ class AboutPage extends Component {
                   mt={{ md: 'auto' }}
                   py={2}
                 >
-                  <AppLink
+                  <RouteLink
                     path={ROUTE_PICTURE}
                     data={pic}
                     title={intl.t('nav.back')}
@@ -222,7 +220,7 @@ class AboutPage extends Component {
                     ) : (
                       intl.t('nav.back')
                     )}
-                  </AppLink>
+                  </RouteLink>
                 </FlexGrid.Item>
                 <FlexGrid.Item
                   column={{ sm: 16, md: 8, lg: 6 }}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Global, css } from '@emotion/core'
 import { useTheme } from 'pss-components'
 
-const AppGlobalStyles = () => {
+export function GlobalStyles() {
   const theme = useTheme()
 
   return (
@@ -34,5 +34,3 @@ const AppGlobalStyles = () => {
     />
   )
 }
-
-export default AppGlobalStyles

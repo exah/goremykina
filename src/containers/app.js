@@ -1,20 +1,20 @@
-import config from 'config'
 import { hot } from 'react-hot-loader'
+import config from 'config'
 import React from 'react'
 import { HelmetProvider } from 'react-helmet-async'
 import { MatchMediaProvider, ThemeProvider } from 'pss-components'
 import { Switch, Route, Redirect } from 'react-router'
 import { THEME, ALT_LANG, ROUTE_LANG, ROUTE_PAGE } from '../constants'
 import { IntlProvider } from '../contexts'
+import { GlobalStyles } from '../components'
 import { messages } from '../data/intl'
-import AppGlobalStyles from './app-global-styles'
 import AppRoot from './app-root'
 
 const App = ({ userLang, helmetContext }) => (
   <HelmetProvider context={helmetContext}>
     <ThemeProvider theme={THEME}>
       <>
-        <AppGlobalStyles />
+        <GlobalStyles />
         <MatchMediaProvider>
           <Switch>
             <Route

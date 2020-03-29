@@ -2,13 +2,21 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet-async'
 import styled from '@emotion/styled'
 import { mq } from 'pss'
-import { Layout, Box, Flex, Text, Image } from 'pss-components'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
-import { AppLink, PictureDescription } from '../containers'
-import { Logo, Slideshow } from '../components'
+import { PictureDescription } from '../containers'
 import { withIntl } from '../hocs'
 import { join } from '../utils'
+import {
+  Layout,
+  Box,
+  Flex,
+  Text,
+  Image,
+  Logo,
+  Slideshow,
+  RouteLink
+} from '../components'
 
 const slideshowStyles = {
   style: {
@@ -142,19 +150,19 @@ class PicturePage extends Component {
           <Box as='header' p={2}>
             <Flex alignItems={{ sm: 'center' }}>
               <Box mr='auto' width={1 / 3} hide='md'>
-                <AppLink path={ROUTE_ABOUT}>
+                <RouteLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
-                </AppLink>
+                </RouteLink>
               </Box>
               <Box>
-                <AppLink path={ROUTE_PICTURE} data={activePicture}>
+                <RouteLink path={ROUTE_PICTURE} data={activePicture}>
                   <Logo title={intl.t('nav.home')} />
-                </AppLink>
+                </RouteLink>
               </Box>
               <Box ml='auto' width={1 / 3}>
-                <AppLink path={ROUTE_PICTURE} data={activePicture} alternate>
+                <RouteLink path={ROUTE_PICTURE} data={activePicture} alternate>
                   <Text textAlign='right'>{intl.t('nav.lang')}</Text>
-                </AppLink>
+                </RouteLink>
               </Box>
             </Flex>
           </Box>
@@ -168,7 +176,7 @@ class PicturePage extends Component {
                 picInRange(index, picIndex) ? (
                   <Slideshow.Item key={pic.slug} height='100%' px={2}>
                     <Box position='relative' height='100%'>
-                      <AppLink
+                      <RouteLink
                         path={ROUTE_PICTURE_ZOOM}
                         data={pic}
                         disable={!pic.zoomed}
@@ -182,7 +190,7 @@ class PicturePage extends Component {
                             alt=''
                           />
                         </Flipped>
-                      </AppLink>
+                      </RouteLink>
                     </Box>
                   </Slideshow.Item>
                 ) : (
@@ -194,9 +202,9 @@ class PicturePage extends Component {
           <Box as='footer' p={2}>
             <Flex justifyContent='space-between' alignItems='flex-end'>
               <Box hide='sm'>
-                <AppLink path={ROUTE_ABOUT}>
+                <RouteLink path={ROUTE_ABOUT}>
                   <Text>{intl.t('nav.about')}</Text>
-                </AppLink>
+                </RouteLink>
               </Box>
               {activePicture && (
                 <Box mx={{ sm: 'auto' }}>

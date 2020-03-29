@@ -3,11 +3,18 @@ import { Helmet } from 'react-helmet-async'
 import { css } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
-import { Box, Text, Flex, Image } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
-import { AppLink, PictureDescription } from '../containers'
-import { Pan, IconClose } from '../components'
+import { PictureDescription } from '../containers'
+import {
+  Box,
+  Text,
+  Flex,
+  Image,
+  Pan,
+  IconClose,
+  RouteLink
+} from '../components'
 
 const Overlay = styled(Box)`
   position: absolute;
@@ -101,7 +108,7 @@ class PictureZoomPage extends Component {
                   <Flex flexDirection='column' height='100%'>
                     <Box>
                       <OverlayItem>
-                        <AppLink
+                        <RouteLink
                           path={ROUTE_PICTURE}
                           data={pic}
                           title={intl.t('ui.close')}
@@ -109,14 +116,14 @@ class PictureZoomPage extends Component {
                           <Box p={2}>
                             <IconClose ml='auto' />
                           </Box>
-                        </AppLink>
+                        </RouteLink>
                       </OverlayItem>
                     </Box>
                     <Box mt='auto' p={2}>
                       <OverlayItem>
-                        <AppLink path={ROUTE_PICTURE} data={pic}>
+                        <RouteLink path={ROUTE_PICTURE} data={pic}>
                           <PictureDescription {...pic} />
-                        </AppLink>
+                        </RouteLink>
                       </OverlayItem>
                     </Box>
                   </Flex>

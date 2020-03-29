@@ -9,7 +9,7 @@ const INITIAL = {
   messages: {}
 }
 
-const { Provider, Consumer } = createContext(INITIAL)
+const IntlContext = createContext(INITIAL)
 
 class IntlProvider extends PureComponent {
   static defaultProps = INITIAL
@@ -53,8 +53,8 @@ class IntlProvider extends PureComponent {
       ...rest
     }
 
-    return <Provider value={data}>{children}</Provider>
+    return <IntlContext.Provider value={data}>{children}</IntlContext.Provider>
   }
 }
 
-export { IntlProvider, Consumer as IntlConsumer }
+export { IntlProvider, IntlContext }

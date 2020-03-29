@@ -1,9 +1,11 @@
 import React from 'react'
-import { IntlConsumer } from '../contexts'
+import { IntlContext } from '../contexts'
 
 const withIntl = (Comp) => {
   const HOC = (props) => (
-    <IntlConsumer>{(intl) => <Comp {...props} intl={intl} />}</IntlConsumer>
+    <IntlContext.Consumer>
+      {(intl) => <Comp {...props} intl={intl} />}
+    </IntlContext.Consumer>
   )
 
   HOC.displayName = `withIntl(${Comp.displayName || 'Component'})`
