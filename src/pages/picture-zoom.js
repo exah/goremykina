@@ -7,7 +7,7 @@ import { Box, Text, Flex, Image } from 'pss-components'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
 import { AppLink, PictureDescription } from '../containers'
-import { PanZoom, IconClose } from '../components'
+import { Pan, IconClose } from '../components'
 
 const Overlay = styled(Box)`
   position: absolute;
@@ -122,7 +122,7 @@ class PictureZoomPage extends Component {
                   </Flex>
                 </Text>
               </Overlay>
-              <PanZoom>
+              <Pan>
                 <Flipped
                   flipId={'pic-' + pic.id}
                   onComplete={this.handleAppear}
@@ -136,7 +136,7 @@ class PictureZoomPage extends Component {
                     alt=''
                   />
                 </Flipped>
-              </PanZoom>
+              </Pan>
             </>
           )}
         </Box>
