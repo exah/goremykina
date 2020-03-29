@@ -9,7 +9,6 @@ import { AppLink, PictureDescription } from '../containers'
 import { Logo, Slideshow } from '../components'
 import { withIntl } from '../hocs'
 import { join } from '../utils'
-import ExhibitionModal from './exhibition-modal'
 
 const slideshowStyles = {
   style: {
@@ -139,7 +138,6 @@ class PicturePage extends Component {
             {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
           </Helmet>
         )}
-        <ExhibitionModal />
         <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
           <Box as='header' p={2}>
             <Flex alignItems={{ sm: 'center' }}>
