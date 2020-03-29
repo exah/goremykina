@@ -13,7 +13,7 @@ import {
   Pan,
   IconClose,
   RouteLink,
-  PictureDescription
+  Description
 } from '../components'
 
 const Overlay = styled(Box)`
@@ -122,7 +122,7 @@ class PictureZoomPage extends Component {
                     <Box mt='auto' p={2}>
                       <OverlayItem>
                         <RouteLink path={ROUTE_PICTURE} data={pic}>
-                          <PictureDescription {...pic} />
+                          <Description {...pic} />
                         </RouteLink>
                       </OverlayItem>
                     </Box>

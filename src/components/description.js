@@ -3,7 +3,7 @@ import { Text } from 'pss-components'
 import { Noop, join } from '../utils'
 import { useIntl } from '../hooks'
 
-export function PictureDescription({ isLoading, name, size, material, year }) {
+export function Description({ isLoading, name, size, material, year }) {
   const intl = useIntl()
 
   return (

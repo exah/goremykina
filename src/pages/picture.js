@@ -15,7 +15,7 @@ import {
   Logo,
   Slideshow,
   RouteLink,
-  PictureDescription
+  Description
 } from '../components'
 
 const slideshowStyles = {
@@ -208,10 +208,7 @@ class PicturePage extends Component {
               </Box>
               {activePicture && (
                 <Box mx={{ sm: 'auto' }}>
-                  <PictureDescription
-                    isLoading={isLoading}
-                    {...activePicture}
-                  />
+                  <Description isLoading={isLoading} {...activePicture} />
                 </Box>
               )}
             </Flex>
