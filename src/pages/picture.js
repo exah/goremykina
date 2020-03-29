@@ -1,217 +1,147 @@
-import React, { Component } from 'react'
-import { Helmet } from 'react-helmet-async'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
-import { mq } from 'pss'
-import { Layout, Box, Flex, Text, Image } from 'pss-components'
+import { css } from '@emotion/core'
+import { useHistory } from 'react-router'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
-import { AppLink, PictureDescription } from '../containers'
-import { Logo, Slideshow } from '../components'
-import { withIntl } from '../hocs'
-import { join } from '../utils'
+import { Helmet } from 'react-helmet-async'
+import { useIntl } from '../hooks'
+import {
+  Box,
+  Text,
+  Flex,
+  Image,
+  Pan,
+  IconClose,
+  RouteLink,
+  Description
+} from '../components'
+import { ROUTE_MAIN } from '../constants'
 
-const slideshowStyles = {
-  style: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    overflow: 'visible'
-  },
-  containerStyle: { height: '100%' },
-  slideStyle: { overflow: 'visible', height: '100%' }
-}
-
-const PictureImage = styled(Image)`
+const Overlay = styled(Box)`
   position: absolute;
   top: 0;
-  bottom: 0;
-  left: 0;
   right: 0;
-  max-height: 85%;
-  max-width: 90%;
-  width: auto;
-  height: auto;
-  margin: auto;
-
-  ${mq('sm')} {
-    max-width: 100%;
-  }
+  z-index: 1;
+  height: 100%;
+  pointer-events: none;
 `
 
-const isPicUpdated = (prev, next) =>
-  prev != null && next != null && prev.id !== next.id
+// Restore pointer-events inside
+const OverlayItem = styled('span')`
+  pointer-events: auto;
+`
 
-const picInRange = (index, current, visible = 2) =>
-  current >= index - visible && current <= index + visible
+const vmax = (num) => num * 100 + 'vmax'
 
-class PicturePage extends Component {
-  static defaultProps = {
-    pictures: []
-  }
+const ZoomedImage = styled(Image)`
+  position: absolute;
+  z-index: 0;
+  max-width: none;
 
-  constructor(props) {
-    super(props)
+  ${(p) => {
+    const ratio = p.width / p.height
 
-    const index =
-      props.activePicture != null
-        ? props.pictures.findIndex((p) => p.slug === props.activePicture.slug)
-        : 0
+    return p.width > p.height
+      ? css`
+          top: 50%;
+          left: 50%;
+          margin-top: -50vmax;
+          margin-left: -${vmax(ratio / 2)};
+          width: ${vmax(ratio)};
+          height: 100vmax;
+        `
+      : css`
+          top: 50%;
+          left: 50%;
+          margin-top: -${vmax(1 / ratio / 2)};
+          margin-left: -50vmax;
+          width: 100vmax;
+          height: ${vmax(1 / ratio)};
+        `
+  }}
+`
 
-    this.state = {
-      index: index !== -1 ? index : 0
+function PicturePage({ activePicture: picture }) {
+  const intl = useIntl()
+  const history = useHistory()
+
+  const [isReady, setReady] = useState(history.action === 'POP')
+  const [isAppeared, setAppeared] = useState(history.action === 'POP')
+
+  useEffect(() => {
+    if (isReady) return
+
+    const image = new window.Image(picture.zoomed.width, picture.zoomed.height)
+
+    image.src = picture.zoomed.url
+    image.onload = () => {
+      setReady(true)
+      document.body.removeChild(image)
     }
-  }
 
-  handlePictureChange = ({ index }) => {
-    this.setState((state, { pictures, history, intl }) => {
-      if (state.index !== index) {
-        const activePicture = pictures[index]
+    // Firefox requires image to be in the DOM
+    document.body.appendChild(image)
+  }, [isReady, picture])
 
-        history.replace(intl.link(ROUTE_PICTURE, activePicture))
-
-        return {
-          index
-        }
-      }
-
-      return null
-    })
-  }
-
-  shouldComponentUpdate(props) {
-    return (
-      props.lang !== this.props.lang ||
-      props.isLoading !== this.props.isLoading ||
-      isPicUpdated(props.activePicture, this.props.activePicture)
-    )
-  }
-
-  render() {
-    const { intl, isLoading, pictures, activePicture } = this.props
-    const { index } = this.state
-
-    const first = pictures[0]
-    const prev = pictures[index - 1]
-    const next = pictures[index + 1]
-    const last = pictures[pictures.length - 1]
-    const canonicalUrl = intl.href(ROUTE_PICTURE, activePicture)
-
-    return (
-      <>
-        {activePicture && (
-          <Helmet>
-            <title>{activePicture.name}</title>
-            <meta property='og:url' content={canonicalUrl} />
-            <meta property='og:title' content={activePicture.name} />
-            <meta
-              property='og:description'
-              content={join(
-                activePicture.material,
-                activePicture.size,
-                activePicture.year
-              )}
-            />
-            <meta
-              property='og:image'
-              content={intl.href(activePicture.original.url)}
-            />
-            <meta
-              property='og:image:width'
-              content={activePicture.original.width}
-            />
-            <meta
-              property='og:image:height'
-              content={activePicture.original.height}
-            />
-            <link rel='canonical' href={canonicalUrl} />
-            <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
-            <link
-              rel='alternate'
-              href={intl.href(ROUTE_PICTURE, activePicture, intl.langAlt)}
-              hrefLang={intl.langAlt}
-            />
-            {first && (
-              <link rel='first' href={intl.href(ROUTE_PICTURE, first)} />
-            )}
-            {last && <link rel='last' href={intl.href(ROUTE_PICTURE, last)} />}
-            {prev && <link rel='prev' href={intl.href(ROUTE_PICTURE, prev)} />}
-            {next && <link rel='next' href={intl.href(ROUTE_PICTURE, next)} />}
-          </Helmet>
-        )}
-        <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
-          <Box as='header' p={2}>
-            <Flex alignItems={{ sm: 'center' }}>
-              <Box mr='auto' width={1 / 3} hide='md'>
-                <AppLink path={ROUTE_ABOUT}>
-                  <Text>{intl.t('nav.about')}</Text>
-                </AppLink>
-              </Box>
-              <Box>
-                <AppLink path={ROUTE_PICTURE} data={activePicture}>
-                  <Logo title={intl.t('nav.home')} />
-                </AppLink>
-              </Box>
-              <Box ml='auto' width={1 / 3}>
-                <AppLink path={ROUTE_PICTURE} data={activePicture} alternate>
-                  <Text textAlign='right'>{intl.t('nav.lang')}</Text>
-                </AppLink>
-              </Box>
-            </Flex>
-          </Box>
-          <Layout.Content as='main' position='relative'>
-            <Slideshow
-              defaultIndex={index}
-              onChange={this.handlePictureChange}
-              {...slideshowStyles}
-            >
-              {pictures.map((pic, picIndex) =>
-                picInRange(index, picIndex) ? (
-                  <Slideshow.Item key={pic.slug} height='100%' px={2}>
-                    <Box position='relative' height='100%'>
-                      <AppLink
-                        path={ROUTE_PICTURE_ZOOM}
-                        data={pic}
-                        disable={!pic.zoomed}
-                        cursor={pic.zoomed && 'zoom-in'}
+  return (
+    <>
+      {picture && (
+        <Helmet>
+          <title>{picture.name}</title>
+          <link rel='canonical' href={intl.href(ROUTE_MAIN, picture)} />
+        </Helmet>
+      )}
+      <Box tm='zoomed' overflow='hidden'>
+        {picture && picture.zoomed && (
+          <>
+            <Overlay width={{ sm: '100%' }} height='100%'>
+              <Text textAlign={{ all: 'right', sm: 'center' }} height='100%'>
+                <Flex flexDirection='column' height='100%'>
+                  <Box>
+                    <OverlayItem>
+                      <RouteLink
+                        path={ROUTE_MAIN}
+                        data={picture}
+                        title={intl.t('ui.close')}
                       >
-                        <Flipped flipId={'pic-' + pic.id}>
-                          <PictureImage
-                            src={pic.original.url}
-                            width={pic.original.width}
-                            height={pic.original.height}
-                            alt=''
-                          />
-                        </Flipped>
-                      </AppLink>
-                    </Box>
-                  </Slideshow.Item>
-                ) : (
-                  <span key={pic.slug} />
-                )
-              )}
-            </Slideshow>
-          </Layout.Content>
-          <Box as='footer' p={2}>
-            <Flex justifyContent='space-between' alignItems='flex-end'>
-              <Box hide='sm'>
-                <AppLink path={ROUTE_ABOUT}>
-                  <Text>{intl.t('nav.about')}</Text>
-                </AppLink>
-              </Box>
-              {activePicture && (
-                <Box mx={{ sm: 'auto' }}>
-                  <PictureDescription
-                    isLoading={isLoading}
-                    {...activePicture}
-                  />
-                </Box>
-              )}
-            </Flex>
-          </Box>
-        </Layout>
-      </>
-    )
-  }
+                        <Box p={2}>
+                          <IconClose ml='auto' />
+                        </Box>
+                      </RouteLink>
+                    </OverlayItem>
+                  </Box>
+                  <Box mt='auto' p={2}>
+                    <OverlayItem>
+                      <RouteLink path={ROUTE_MAIN} data={picture}>
+                        <Description {...picture} />
+                      </RouteLink>
+                    </OverlayItem>
+                  </Box>
+                </Flex>
+              </Text>
+            </Overlay>
+            <Pan>
+              <Flipped
+                flipId={'pic-' + picture.id}
+                onComplete={() => setAppeared(true)}
+              >
+                <ZoomedImage
+                  src={
+                    isReady && isAppeared
+                      ? picture.zoomed.url
+                      : picture.original.url
+                  }
+                  width={picture.zoomed.width}
+                  height={picture.zoomed.height}
+                  alt=''
+                />
+              </Flipped>
+            </Pan>
+          </>
+        )}
+      </Box>
+    </>
+  )
 }
 
-export default withIntl(PicturePage)
+export default PicturePage

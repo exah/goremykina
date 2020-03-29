@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Router } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { hydrateInitialData } from 'react-universal-data'
-import App from '../containers/app'
+import App from '../app'
 
 hydrateInitialData(window._ssr.initialData)
 

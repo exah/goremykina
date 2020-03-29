@@ -4,7 +4,7 @@ import { Box, List, Link } from 'pss-components'
 import { Transition } from 'react-transition-group'
 import { Flipper, Flipped } from 'react-flip-toolkit'
 import { Modal, Notification } from '../components'
-import { withIntl } from '../hocs'
+import { useIntl } from '../hooks'
 
 const source = {
   en: {
@@ -27,7 +27,8 @@ function handleFlipComplete(element) {
   element.style = ''
 }
 
-function ExhibitionModal({ intl, duration = 300, easing = 'easeInOutSine' }) {
+function ExhibitionPage({ duration = 300, easing = 'easeInOutSine' }) {
+  const intl = useIntl()
   const [isHidden, setHidden] = useState(false)
   const [isOpen, setOpen] = useState(false)
   const messages = source[intl.lang]
@@ -99,4 +100,4 @@ function ExhibitionModal({ intl, duration = 300, easing = 'easeInOutSine' }) {
   )
 }
 
-export default withIntl(ExhibitionModal)
+export default ExhibitionPage

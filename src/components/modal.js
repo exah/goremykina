@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Button } from 'pss-components'
-import { FloatingBox } from './floating-box'
+import { Floating } from './floating'
 import { IconClose } from './icons'
 
 const ModalContent = (props) => <Box p='1rem' {...props} />
 
 export const Modal = ({ children, footer, onClose, ...rest }) => (
-  <FloatingBox {...rest}>
+  <Floating {...rest}>
     <Button
       position='absolute'
       top='overlay'
@@ -17,7 +17,7 @@ export const Modal = ({ children, footer, onClose, ...rest }) => (
       <IconClose />
     </Button>
     {children}
-  </FloatingBox>
+  </Floating>
 )
 
 Modal.Content = ModalContent

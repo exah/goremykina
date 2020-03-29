@@ -1,60 +1,49 @@
-import React, { PureComponent, createContext } from 'react'
+import React, { createContext, useMemo } from 'react'
 import { generatePath } from 'react-router'
-import { toArr } from '@exah/utils'
 import { DEFAULT_LANG } from '../constants'
 
-const INITIAL = {
-  lang: DEFAULT_LANG,
-  baseUrl: '',
-  messages: {}
+const IntlContext = createContext(null)
+
+function IntlProvider({
+  lang = DEFAULT_LANG,
+  messages = {},
+  baseUrl = '',
+  ...rest
+}) {
+  const value = useMemo(() => {
+    const getMessages = (id, langOpt = lang) => {
+      const fallback = [].concat(id)
+      const langMessages = messages[langOpt]
+
+      if (langMessages == null) {
+        console.warn(`Please provide 'messages' for lang='${langOpt}'`)
+        return fallback
+      }
+
+      const message = langMessages[id]
+
+      if (message == null) {
+        console.warn(`No '${id}' message for lang='${langOpt}'`)
+        return fallback
+      }
+
+      return [].concat(message)
+    }
+
+    const getLink = (path, params, langOpt = lang) =>
+      generatePath(path, { lang: langOpt, ...params })
+
+    const getHref = (...args) => baseUrl + getLink(...args)
+
+    return {
+      t: getMessages,
+      link: getLink,
+      href: getHref,
+      lang
+    }
+  }, [lang, messages])
+
+  return <IntlContext.Provider value={value} {...rest} />
 }
 
-const { Provider, Consumer } = createContext(INITIAL)
-
-class IntlProvider extends PureComponent {
-  static defaultProps = INITIAL
-
-  getMessages = (id, langOpt) => {
-    const lang = langOpt || this.props.lang
-    const messages = this.props.messages[lang]
-    const fallback = toArr(id)
-
-    if (messages == null) {
-      console.warn(`Please provide 'messages' for lang='${lang}'`)
-      return fallback
-    }
-
-    const value = messages[id]
-
-    if (value == null) {
-      console.warn(`No '${id}' message for lang='${lang}'`)
-      return fallback
-    }
-
-    return toArr(value)
-  }
-
-  getLink = (path, data, langOpt) => {
-    const lang = langOpt || this.props.lang
-    const getPath = (params) => generatePath(path, params)
-
-    return getPath({ lang, ...data })
-  }
-
-  getHref = (...args) => this.props.baseUrl + this.getLink(...args)
-
-  render() {
-    const { children, ...rest } = this.props
-
-    const data = {
-      t: this.getMessages,
-      link: this.getLink,
-      href: this.getHref,
-      ...rest
-    }
-
-    return <Provider value={data}>{children}</Provider>
-  }
-}
-
-export { IntlProvider, Consumer as IntlConsumer }
+export { IntlProvider, IntlContext }

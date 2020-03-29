@@ -1,10 +1,10 @@
 import React from 'react'
 import { Flex, Text, Button } from 'pss-components'
-import { FloatingBox } from './floating-box'
+import { Floating } from './floating'
 import { IconClose } from './icons'
 
 export const Notification = ({ children, onOpen, onClose, ...rest }) => (
-  <FloatingBox
+  <Floating
     p='overlay'
     top={{ md: '2rem' }}
     bottom={{ all: '0', md: 'auto' }}
@@ -20,5 +20,5 @@ export const Notification = ({ children, onOpen, onClose, ...rest }) => (
         <IconClose />
       </Button>
     </Flex>
-  </FloatingBox>
+  </Floating>
 )

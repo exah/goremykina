@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Box } from 'pss-components'
 
-export const FloatingBox = styled(Box)`
+export const Floating = styled(Box)`
   position: fixed;
   left: 50%;
   z-index: 1;
@@ -13,7 +13,7 @@ export const FloatingBox = styled(Box)`
   overflow: hidden;
 `
 
-FloatingBox.defaultProps = {
+Floating.defaultProps = {
   top: '50%',
   tm: 'overlay'
 }
