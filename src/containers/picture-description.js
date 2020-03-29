@@ -11,7 +11,7 @@ const PictureDescription = ({
   material,
   year
 }) => (
-  <Text mb={{ all: '3rem', md: 0 }} textAlign={{ all: 'right', sm: 'center' }}>
+  <Text textAlign={{ all: 'right', sm: 'center' }}>
     <Text mb>{isLoading || name == null ? <Noop /> : name}</Text>
     <Text variant='caption'>
       {isLoading ? intl.t('ui.loading') : join(material, size, year)}
