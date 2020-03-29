@@ -13,7 +13,7 @@ export function Providers({ helmetContext, children }) {
 
   return (
     <IntlProvider
-      lang={match.params.lang}
+      lang={match ? match.params.lang : null}
       messages={messages}
       baseUrl={config.public.siteUrl}
     >
