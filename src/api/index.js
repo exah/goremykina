@@ -7,8 +7,8 @@ export const api = YF.create({
   prefixUrl: config.isServer ? `http://${config.host}:${config.port}` : ''
 })
 
-export const getPage = (data) =>
+export const fetchPage = (data) =>
   api.get(generatePath(API_GET_PAGE, data)).json()
 
-export const getPicturs = (data) =>
+export const fetchPicturs = (data) =>
   api.get(generatePath(API_GET_PICTURES, data)).json()

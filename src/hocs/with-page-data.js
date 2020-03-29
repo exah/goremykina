@@ -1,14 +1,16 @@
-import { withData } from 'react-universal-data'
-import { getPage } from '../api'
+import React, { useCallback } from 'react'
+import { useFetchData } from 'react-universal-data'
+import { fetchPage } from '../api'
 
-const withPageData = (slug) =>
-  withData(
-    ({ match }) =>
-      getPage({ slug, ...match.params }).then((res) => ({
-        status: res.status,
-        ...res.data
-      })),
-    (prev, next) => prev.match.params.lang !== next.match.params.lang
-  )
+const withPageData = (slug) => (Comp) =>
+  function PageData(props) {
+    const { lang } = props.match.params
+    const { result, isLoading } = useFetchData(
+      useCallback(() => fetchPage({ lang, slug }), [lang, slug]),
+      `page-${slug}`
+    )
+
+    return <Comp {...props} isLoading={isLoading} {...result} />
+  }
 
 export { withPageData }

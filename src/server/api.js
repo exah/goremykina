@@ -10,35 +10,25 @@ router.get(API_GET_PAGE, (req, res) => {
 
   if (slug === aboutData.slug) {
     res.status(200).json({
-      status: 200,
-      message: 'ok',
-      data: {
-        photo: aboutData.photo,
-        content: aboutData.content[lang]
-      }
+      photo: aboutData.photo,
+      content: aboutData.content[lang]
     })
 
     return
   }
 
-  res.status(404).json({
-    status: 404,
-    message: 'Page Not Found',
-    data: null
-  })
+  res.status(404).json(null)
 })
 
 router.get(API_GET_PICTURES, (req, res) => {
   const { lang } = req.params
 
-  res.status(200).json({
-    status: 200,
-    message: 'ok',
-    data: picturesData.pictures.map(({ locales, ...data }) => ({
+  res.status(200).json(
+    picturesData.pictures.map(({ locales, ...data }) => ({
       ...data,
       ...locales[lang]
     }))
-  })
+  )
 })
 
 export default router

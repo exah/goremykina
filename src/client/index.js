@@ -1,19 +1,11 @@
-import unfetch from 'unfetch'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router } from 'react-router'
 import { createBrowserHistory } from 'history'
-import { hydrateData } from 'react-universal-data'
+import { hydrateInitialData } from 'react-universal-data'
 import App from '../containers/app'
 
-// fetch polyfill
-window.fetch = window.fetch || unfetch
-
-// Get server state
-const { initialData, userLang } = window._ssr || {}
-
-// Restore withData state
-hydrateData(initialData)
+hydrateInitialData(window._ssr.initialData)
 
 // Test & import polyfills, then render app
 Promise.all([
@@ -22,7 +14,7 @@ Promise.all([
 ]).then(() =>
   ReactDOM.hydrate(
     <Router history={createBrowserHistory()}>
-      <App userLang={userLang} />
+      <App userLang={window._ssr.userLang} />
     </Router>,
     document.getElementById('app')
   )

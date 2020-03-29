@@ -1,16 +1,26 @@
-import { withData } from 'react-universal-data'
-import { getPicturs } from '../api'
+import React, { useCallback } from 'react'
+import { useFetchData } from 'react-universal-data'
+import { fetchPicturs } from '../api'
 
-const withPicturesData = withData(
-  ({ match }) =>
-    getPicturs(match.params).then((res) => ({
-      pictures: res.data,
-      activePicture:
-        match.params.slug == null
-          ? res.data[0]
-          : res.data.find((p) => p.slug === match.params.slug)
-    })),
-  (prev, next) => prev.match.params.lang !== next.match.params.lang
-)
+const withPicturesData = (Comp) =>
+  function PicturesData(props) {
+    const { lang, slug } = props.match.params
+    const { result = [], isLoading } = useFetchData(
+      useCallback(() => fetchPicturs({ lang }), [lang]),
+      'pictures'
+    )
+
+    const active =
+      slug == null ? result[0] : result.find((p) => p.slug === slug)
+
+    return (
+      <Comp
+        {...props}
+        isLoading={isLoading}
+        pictures={result}
+        activePicture={active}
+      />
+    )
+  }
 
 export { withPicturesData }
