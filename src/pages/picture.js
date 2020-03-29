@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { mq } from 'pss'
 import { Flipped } from 'react-flip-toolkit'
 import { ROUTE_PICTURE, ROUTE_PICTURE_ZOOM, ROUTE_ABOUT } from '../constants'
-import { PictureDescription } from '../containers'
 import { withIntl } from '../hocs'
 import { join } from '../utils'
 import {
@@ -15,7 +14,8 @@ import {
   Image,
   Logo,
   Slideshow,
-  RouteLink
+  RouteLink,
+  PictureDescription
 } from '../components'
 
 const slideshowStyles = {

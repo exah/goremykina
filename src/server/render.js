@@ -5,7 +5,7 @@ import { StaticRouter as Router } from 'react-router'
 import { getInitialData } from 'react-universal-data'
 import { DEFAULT_LANG } from '../constants'
 import template from './template'
-import App from '../containers/app'
+import App from '../app'
 
 const render = (files) => (req, res, next) => {
   const userLang = req.language || DEFAULT_LANG

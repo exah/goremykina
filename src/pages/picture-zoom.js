@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
 import { withIntl } from '../hocs'
 import { ROUTE_PICTURE } from '../constants'
-import { PictureDescription } from '../containers'
 import {
   Box,
   Text,
@@ -13,7 +12,8 @@ import {
   Image,
   Pan,
   IconClose,
-  RouteLink
+  RouteLink,
+  PictureDescription
 } from '../components'
 
 const Overlay = styled(Box)`
