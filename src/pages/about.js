@@ -4,7 +4,7 @@ import anime from 'animejs'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
+import { ROUTE_MAIN, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
 import { withIntl, withPageData } from '../hocs'
 import {
@@ -198,7 +198,7 @@ class AboutPage extends Component {
                   py={2}
                 >
                   <RouteLink
-                    path={ROUTE_PICTURE}
+                    path={ROUTE_MAIN}
                     data={pic}
                     title={intl.t('nav.back')}
                   >

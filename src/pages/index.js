@@ -6,13 +6,13 @@ import { Box, RouteWithProps } from '../components'
 import { useIntl, useFetchPictures } from '../hooks'
 import {
   ROUTE_LANG,
+  ROUTE_MAIN,
   ROUTE_PICTURE,
-  ROUTE_PICTURE_ZOOM,
   ROUTE_ABOUT
 } from '../constants'
 
+import MainPage from './main'
 import PicturePage from './picture'
-import PictureZoomPage from './picture-zoom'
 import AboutPage from './about'
 
 export function Pages() {
@@ -44,18 +44,18 @@ export function Pages() {
       <Box as={Flipper} flipKey={page} height='100%'>
         <Switch>
           <RouteWithProps
-            path={ROUTE_PICTURE}
-            component={PicturePage}
+            path={ROUTE_MAIN}
+            component={MainPage}
             pictures={result}
             activePicture={activePicture}
             isLoading={!isReady}
             exact
           />
-          <Redirect from={ROUTE_LANG} to={intl.link(ROUTE_PICTURE)} exact />
+          <Redirect from={ROUTE_LANG} to={intl.link(ROUTE_MAIN)} exact />
         </Switch>
         <RouteWithProps
-          path={ROUTE_PICTURE_ZOOM}
-          component={PictureZoomPage}
+          path={ROUTE_PICTURE}
+          component={PicturePage}
           activePicture={activePicture}
           isLoading={!isReady}
         />

@@ -27,7 +27,7 @@ function handleFlipComplete(element) {
   element.style = ''
 }
 
-function ExhibitionModal({ intl, duration = 300, easing = 'easeInOutSine' }) {
+function Exhibition({ intl, duration = 300, easing = 'easeInOutSine' }) {
   const [isHidden, setHidden] = useState(false)
   const [isOpen, setOpen] = useState(false)
   const messages = source[intl.lang]
@@ -99,4 +99,4 @@ function ExhibitionModal({ intl, duration = 300, easing = 'easeInOutSine' }) {
   )
 }
 
-export default withIntl(ExhibitionModal)
+export default withIntl(Exhibition)
