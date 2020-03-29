@@ -15,16 +15,19 @@ import MainPage from './main'
 import PicturePage from './picture'
 import AboutPage from './about'
 
+const getActivePicture = (pictures, slug) =>
+  slug ? pictures.find((picture) => picture.slug === slug) : pictures[0]
+
 export function Pages() {
   const intl = useIntl()
   const { slug, page } = useParams()
   const { result = [], isReady } = useFetchPictures()
-  const [activePicture, setActivePicture] = useState(result[0])
+  const [activePicture, setActivePicture] = useState(() =>
+    getActivePicture(result, slug)
+  )
 
   useEffect(() => {
-    if (slug == null) return
-
-    setActivePicture(result.find((picture) => picture.slug === slug))
+    setActivePicture(getActivePicture(result, slug))
   }, [slug, result])
 
   return (
