@@ -52,7 +52,7 @@ const isPicUpdated = (prev, next) =>
 const picInRange = (index, current, visible = 2) =>
   current >= index - visible && current <= index + visible
 
-class Main extends Component {
+class MainPage extends Component {
   static defaultProps = {
     pictures: []
   }
@@ -217,4 +217,4 @@ class Main extends Component {
   }
 }
 
-export default withIntl(Main)
+export default withIntl(MainPage)
