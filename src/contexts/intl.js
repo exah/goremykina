@@ -1,6 +1,5 @@
 import React, { createContext, useMemo } from 'react'
 import { generatePath } from 'react-router'
-import { toArr } from '@exah/utils'
 import { DEFAULT_LANG } from '../constants'
 
 const IntlContext = createContext(null)
@@ -13,7 +12,7 @@ function IntlProvider({
 }) {
   const value = useMemo(() => {
     const getMessages = (id, langOpt = lang) => {
-      const fallback = toArr(id)
+      const fallback = [].concat(id)
       const langMessages = messages[langOpt]
 
       if (langMessages == null) {
@@ -28,7 +27,7 @@ function IntlProvider({
         return fallback
       }
 
-      return toArr(message)
+      return [].concat(message)
     }
 
     const getLink = (path, params, langOpt = lang) =>

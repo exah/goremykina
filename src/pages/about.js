@@ -1,12 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import anime from 'animejs'
 import styled from '@emotion/styled'
-import { compose } from '@exah/utils'
 import { Flipped } from 'react-flip-toolkit'
 import { ALT_LANG, ROUTE_MAIN, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
-import { withPageData } from '../hocs'
 import { useFetchPage, useIntl } from '../hooks'
 import {
   Layout,
@@ -15,8 +13,8 @@ import {
   Text,
   Image,
   Link,
-  withMatchMedia,
-  RouteLink
+  RouteLink,
+  useMatchMediaContext
 } from '../components'
 
 const PhotoBox = styled(Box)`
@@ -74,14 +72,30 @@ const transition = ($el, start, end, next, isStuck) => {
 function AboutPage({ activePicture, matchMedia }) {
   const intl = useIntl()
   const page = useFetchPage('about')
+  const isMobile = !useMatchMediaContext().matches.includes('md')
+  const canonicalUrl = intl.href(ROUTE_ABOUT)
 
   const photoRef = useRef(null)
   const pictureRef = useRef(null)
+
   const [isStuck, setStuck] = useState(false)
-  const canonicalUrl = intl.href(ROUTE_ABOUT)
+  const [isAppeared, setAppeared] = useState(false)
+  const [isLoaded, setLoaded] = useState(false)
+  const [rects, setRects] = useState([])
+
+  useEffect(() => {
+    if (isMobile) {
+      setRects([
+        pictureRef.current.getBoundingClientRect(),
+        photoRef.current.getBoundingClientRect()
+      ])
+    } else {
+      photoRef.current.style.transform = ''
+    }
+  }, [isLoaded, isAppeared, isMobile])
 
   const handleAppear = (el) => {
-    transition(el, 0, 1)
+    transition(el, 0, 1, () => setAppeared(true))
   }
 
   const handleExit = (el, _, next) => {
@@ -89,15 +103,13 @@ function AboutPage({ activePicture, matchMedia }) {
   }
 
   const handleScroll = (event) => {
-    if (matchMedia.matches.includes('md') || event.target.scrollTop < 0) {
+    if (!isMobile || event.target.scrollTop < 0) {
       return
     }
 
+    const [pictureRect, photoRect] = rects
+
     const hasFirstNode = photoRef.current.firstChild != null
-
-    const pictureRect = pictureRef.current.getBoundingClientRect()
-    const photoRect = photoRef.current.getBoundingClientRect()
-
     const minScale = hasFirstNode ? pictureRect.height / photoRect.height : 1
     const maxScale = 1 - event.target.scrollTop / photoRect.bottom
 
@@ -231,7 +243,11 @@ function AboutPage({ activePicture, matchMedia }) {
                     overlayColor={activePicture && activePicture.color}
                   >
                     {page.isReady && (
-                      <Image src={page.result.photo.url} alt='' />
+                      <Image
+                        src={page.result.photo.url}
+                        onLoad={() => setLoaded(true)}
+                        alt=''
+                      />
                     )}
                   </PhotoBox>
                 </Box>
@@ -244,7 +260,4 @@ function AboutPage({ activePicture, matchMedia }) {
   )
 }
 
-export default compose(
-  withPageData('about'),
-  withMatchMedia
-)(AboutPage)
+export default AboutPage
