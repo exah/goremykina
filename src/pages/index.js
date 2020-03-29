@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Switch, Redirect, useParams } from 'react-router'
 import { Flipper } from 'react-flip-toolkit'
@@ -19,8 +19,13 @@ export function Pages() {
   const intl = useIntl()
   const { slug, page } = useParams()
   const { result = [], isReady } = useFetchPictures()
-  const activePicture =
-    slug == null ? result[0] : result.find((picture) => picture.slug === slug)
+  const [activePicture, setActivePicture] = useState(result[0])
+
+  useEffect(() => {
+    if (slug == null) return
+
+    setActivePicture(result.find((picture) => picture.slug === slug))
+  }, [slug, result])
 
   return (
     <Box

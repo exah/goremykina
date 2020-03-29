@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router'
-import { Link } from '.'
+import { ALT_LANG } from '../constants'
+import { Link } from 'pss-components'
 import { useIntl } from '../hooks'
 
 export function RouteLink({
@@ -15,7 +16,7 @@ export function RouteLink({
   const intl = useIntl()
 
   const getLocation = () => ({
-    pathname: intl.link(path, data, alternate ? intl.langAlt : intl.lang)
+    pathname: intl.link(path, data, alternate ? ALT_LANG[intl.lang] : intl.lang)
   })
 
   const handleClick = (event) => {

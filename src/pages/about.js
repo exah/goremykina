@@ -1,12 +1,13 @@
-import React, { Component, createRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import anime from 'animejs'
 import styled from '@emotion/styled'
 import { compose } from '@exah/utils'
 import { Flipped } from 'react-flip-toolkit'
-import { ROUTE_MAIN, ROUTE_ABOUT } from '../constants'
+import { ALT_LANG, ROUTE_MAIN, ROUTE_ABOUT } from '../constants'
 import { renderMarkdown } from '../utils'
-import { withIntl, withPageData } from '../hocs'
+import { withPageData } from '../hocs'
+import { useFetchPage, useIntl } from '../hooks'
 import {
   Layout,
   Box,
@@ -70,215 +71,180 @@ const transition = ($el, start, end, next, isStuck) => {
   Promise.all([fadeAnime, scaleAnime]).then(next)
 }
 
-class AboutPage extends Component {
-  state = {
-    isAppeared: false,
-    isPhotoReady: false
+function AboutPage({ activePicture, matchMedia }) {
+  const intl = useIntl()
+  const page = useFetchPage('about')
+
+  const photoRef = useRef(null)
+  const pictureRef = useRef(null)
+  const [isStuck, setStuck] = useState(false)
+  const canonicalUrl = intl.href(ROUTE_ABOUT)
+
+  const handleAppear = (el) => {
+    transition(el, 0, 1)
   }
 
-  $scroller = createRef()
-  $photo = createRef()
-  $pic = createRef()
-
-  handlePhotoLoad = () => {
-    this.setState({ isPhotoReady: true })
+  const handleExit = (el, _, next) => {
+    transition(el, 1, 0, next, isStuck)
   }
 
-  handleAppear = (el) => {
-    transition(el, 0, 1, () => {
-      this.setState({ isAppeared: true })
-    })
-  }
+  const handleScroll = (event) => {
+    if (matchMedia.matches.includes('md') || event.target.scrollTop < 0) {
+      return
+    }
 
-  handleExit = (el, index, next) => {
-    transition(el, 1, 0, next, this.isStuck)
-  }
+    const hasFirstNode = photoRef.current.firstChild != null
 
-  updateRects = () => {
-    const isPhotoImgNode = this.$photo.current.firstChild != null
-    this.photoRect = this.$photo.current.getBoundingClientRect()
-    this.picRect = this.$pic.current.getBoundingClientRect()
-    this.minScale = isPhotoImgNode
-      ? this.picRect.height / this.photoRect.height
-      : 1
-  }
+    const pictureRect = pictureRef.current.getBoundingClientRect()
+    const photoRect = photoRef.current.getBoundingClientRect()
 
-  prevScrollTop = null
-  isStuck = false // photo and picture is not scaling with scroll
+    const minScale = hasFirstNode ? pictureRect.height / photoRect.height : 1
+    const maxScale = 1 - event.target.scrollTop / photoRect.bottom
 
-  handleScroll = (e) => {
-    const { matchMedia } = this.props
-
-    if (matchMedia.matches.includes('md')) return
-
-    const { scrollTop } = this.$scroller.current
-    if (scrollTop === this.prevScrollTop || scrollTop < 0) return
-    this.prevScrollTop = scrollTop
-
-    const scale = 1 - scrollTop / this.photoRect.bottom
-    if (scale < this.minScale) {
-      if (this.isStuck === false) {
-        this.isStuck = true
-        this.$photo.current.style.transform = `scale(${this.minScale})`
+    if (maxScale < minScale) {
+      if (isStuck === false) {
+        setStuck(true)
+        photoRef.current.style.transform = `scale(${minScale})`
       }
 
       return
     }
 
-    this.$photo.current.style.transform = `scale(${scale})`
-    this.isStuck = false
+    setStuck(false)
+    photoRef.current.style.transform = `scale(${maxScale})`
   }
 
-  componentDidMount() {
-    this.updateRects()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const shouldUpdateRects =
-      this.props.matchMedia.matches !== prevProps.matchMedia.matches ||
-      this.state.isPhotoReady !== prevState.isPhotoReady ||
-      this.state.isAppeared !== prevState.isAppeared
-
-    if (shouldUpdateRects) {
-      this.updateRects()
-    }
-  }
-
-  render() {
-    const { intl, isLoading, activePicture: pic, content, photo } = this.props
-    const canonicalUrl = intl.href(ROUTE_ABOUT)
-
-    return (
-      <>
-        <Helmet>
-          <title>{intl.t('title.about')}</title>
-          <meta property='og:url' content={canonicalUrl} />
-          <meta property='og:title' content={intl.t('title')} />
-          {photo && <meta property='og:image' content={intl.href(photo.url)} />}
-          {photo && <meta property='og:image:width' content={photo.width} />}
-          {photo && <meta property='og:image:height' content={photo.height} />}
-          <link rel='canonical' href={canonicalUrl} />
-          <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
-          <link
-            rel='alternate'
-            href={intl.href(ROUTE_ABOUT, null, intl.langAlt)}
-            hrefLang={intl.langAlt}
-          />
-        </Helmet>
-        <Flipped
-          flipId='about-page'
-          onAppear={this.handleAppear}
-          onExit={this.handleExit}
-        >
-          <Box
-            height='100%'
-            overflow='hidden auto touch'
-            ref={this.$scroller}
-            onScroll={this.handleScroll}
-          >
-            <Layout flexDirection='column' minHeight='100%'>
-              <Box p={2} ml='auto' hide='sm'>
-                <RouteLink path={ROUTE_ABOUT} alternate>
-                  <Text>{intl.t('nav.lang')}</Text>
-                </RouteLink>
-              </Box>
-              <FlexGrid
-                flex='1 1 auto'
-                columns={16}
-                spacex={2}
-                px={2}
-                alignItems='flex-start'
+  return (
+    <>
+      <Helmet>
+        <title>{intl.t('title.about')}</title>
+        <meta property='og:url' content={canonicalUrl} />
+        <meta property='og:title' content={intl.t('title')} />
+        {page.isReady && (
+          <>
+            <meta
+              property='og:image'
+              content={intl.href(page.result.photo.url)}
+            />
+            <meta property='og:image:width' content={page.result.photo.width} />
+            <meta
+              property='og:image:height'
+              content={page.result.photo.height}
+            />
+          </>
+        )}
+        <link rel='canonical' href={canonicalUrl} />
+        <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
+        <link
+          rel='alternate'
+          href={intl.href(ROUTE_ABOUT, null, ALT_LANG[intl.lang])}
+          hrefLang={ALT_LANG[intl.lang]}
+        />
+      </Helmet>
+      <Flipped flipId='about-page' onAppear={handleAppear} onExit={handleExit}>
+        <Box height='100%' overflow='hidden auto touch' onScroll={handleScroll}>
+          <Layout flexDirection='column' minHeight='100%'>
+            <Box p={2} ml='auto' hide='sm'>
+              <RouteLink path={ROUTE_ABOUT} alternate>
+                <Text>{intl.t('nav.lang')}</Text>
+              </RouteLink>
+            </Box>
+            <FlexGrid
+              flex='1 1 auto'
+              columns={16}
+              spacex={2}
+              px={2}
+              alignItems='flex-start'
+            >
+              <FlexGrid.Item
+                column={{ sm: 4, md: 3, lg: 2 }}
+                position='sticky'
+                top={{ sm: 0 }}
+                bottom={{ md: 0 }}
+                mt={{ md: 'auto' }}
+                py={2}
               >
-                <FlexGrid.Item
-                  column={{ sm: 4, md: 3, lg: 2 }}
-                  position='sticky'
-                  top={{ sm: 0 }}
-                  bottom={{ md: 0 }}
-                  mt={{ md: 'auto' }}
-                  py={2}
+                <RouteLink
+                  path={ROUTE_MAIN}
+                  data={activePicture}
+                  title={intl.t('nav.back')}
                 >
-                  <RouteLink
-                    path={ROUTE_MAIN}
-                    data={pic}
-                    title={intl.t('nav.back')}
-                  >
-                    {pic ? (
-                      <Flipped flipId={'pic-' + pic.id}>
-                        <Box
-                          ref={this.$pic}
-                          ratio={pic.original.width / pic.original.height}
-                          data-transition-hide
-                        >
-                          <Image
-                            src={pic.original.url}
-                            width='100%'
-                            height='100%'
-                            alt=''
-                          />
-                        </Box>
-                      </Flipped>
-                    ) : (
-                      intl.t('nav.back')
-                    )}
-                  </RouteLink>
-                </FlexGrid.Item>
-                <FlexGrid.Item
-                  column={{ sm: 16, md: 8, lg: 6 }}
-                  order={{ sm: 1 }}
-                  mx='auto'
-                >
-                  <Box pt={2} data-transition-fade>
-                    {isLoading ? intl.t('ui.loading') : renderMarkdown(content)}
-                    <Box
-                      position={{ lg: 'absolute' }}
-                      bottom={0}
-                      right={0}
-                      py={{ sm: 3, md: 2 }}
-                      px={{ lg: 2 }}
-                    >
-                      <Text
-                        textAlign={{ sm: 'center' }}
-                        variant={{ all: 'text', lg: 'default' }}
+                  {activePicture ? (
+                    <Flipped flipId={'pic-' + activePicture.id}>
+                      <Box
+                        ref={pictureRef}
+                        ratio={
+                          activePicture.original.width /
+                          activePicture.original.height
+                        }
+                        data-transition-hide
                       >
-                        <Link href='mailto:contact@goremykina.com'>
-                          💬 contact@goremykina.com
-                        </Link>
-                      </Text>
-                    </Box>
-                  </Box>
-                </FlexGrid.Item>
-                <FlexGrid.Item
-                  column={{ sm: 12, md: 4, lg: 3 }}
-                  position='sticky'
-                  top={0}
-                >
-                  <Box py={2}>
-                    <PhotoBox
-                      ref={this.$photo}
-                      ratio={photo && photo.ratio}
-                      overlayColor={pic && pic.color}
-                    >
-                      {photo && (
                         <Image
-                          src={photo.url}
-                          onLoad={this.handlePhotoLoad}
+                          src={activePicture.original.url}
+                          width='100%'
+                          height='100%'
                           alt=''
                         />
-                      )}
-                    </PhotoBox>
+                      </Box>
+                    </Flipped>
+                  ) : (
+                    intl.t('nav.back')
+                  )}
+                </RouteLink>
+              </FlexGrid.Item>
+              <FlexGrid.Item
+                column={{ sm: 16, md: 8, lg: 6 }}
+                order={{ sm: 1 }}
+                mx='auto'
+              >
+                <Box pt={2} data-transition-fade>
+                  {page.isReady
+                    ? renderMarkdown(page.result.content)
+                    : intl.t('ui.loading')}
+                  <Box
+                    position={{ lg: 'absolute' }}
+                    bottom={0}
+                    right={0}
+                    py={{ sm: 3, md: 2 }}
+                    px={{ lg: 2 }}
+                  >
+                    <Text
+                      textAlign={{ sm: 'center' }}
+                      variant={{ all: 'text', lg: 'default' }}
+                    >
+                      <Link href='mailto:contact@goremykina.com'>
+                        💬 contact@goremykina.com
+                      </Link>
+                    </Text>
                   </Box>
-                </FlexGrid.Item>
-              </FlexGrid>
-            </Layout>
-          </Box>
-        </Flipped>
-      </>
-    )
-  }
+                </Box>
+              </FlexGrid.Item>
+              <FlexGrid.Item
+                column={{ sm: 12, md: 4, lg: 3 }}
+                position='sticky'
+                top={0}
+              >
+                <Box py={2}>
+                  <PhotoBox
+                    ref={photoRef}
+                    ratio={page.isReady ? page.result.photo.ratio : null}
+                    overlayColor={activePicture && activePicture.color}
+                  >
+                    {page.isReady && (
+                      <Image src={page.result.photo.url} alt='' />
+                    )}
+                  </PhotoBox>
+                </Box>
+              </FlexGrid.Item>
+            </FlexGrid>
+          </Layout>
+        </Box>
+      </Flipped>
+    </>
+  )
 }
 
 export default compose(
-  withIntl,
   withPageData('about'),
   withMatchMedia
 )(AboutPage)

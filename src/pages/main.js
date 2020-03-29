@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { useHistory } from 'react-router'
 import { Flipped } from 'react-flip-toolkit'
 import { mq } from 'pss'
-import { ROUTE_MAIN, ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
+import { ALT_LANG, ROUTE_MAIN, ROUTE_PICTURE, ROUTE_ABOUT } from '../constants'
 import { useIntl } from '../hooks'
 import { join } from '../utils'
 import {
@@ -103,8 +103,8 @@ function MainPage({ pictures, activePicture, isLoading }) {
           <link rel='alternate' href={canonicalUrl} hrefLang='x-default' />
           <link
             rel='alternate'
-            href={intl.href(ROUTE_MAIN, activePicture, intl.langAlt)}
-            hrefLang={intl.langAlt}
+            href={intl.href(ROUTE_MAIN, activePicture, ALT_LANG[intl.lang])}
+            hrefLang={ALT_LANG[intl.lang]}
           />
           {first && <link rel='first' href={intl.href(ROUTE_MAIN, first)} />}
           {last && <link rel='last' href={intl.href(ROUTE_MAIN, last)} />}
@@ -138,21 +138,21 @@ function MainPage({ pictures, activePicture, isLoading }) {
             onChange={handlePictureChange}
             {...slideshowStyles}
           >
-            {pictures.map((pic, picIndex) =>
-              picInRange(index, picIndex) ? (
-                <Slideshow.Item key={pic.slug} height='100%' px={2}>
+            {pictures.map((picture, pictureIndex) =>
+              picInRange(index, pictureIndex) ? (
+                <Slideshow.Item key={picture.slug} height='100%' px={2}>
                   <Box position='relative' height='100%'>
                     <RouteLink
                       path={ROUTE_PICTURE}
-                      data={pic}
-                      disable={!pic.zoomed}
-                      cursor={pic.zoomed && 'zoom-in'}
+                      data={picture}
+                      disable={!picture.zoomed}
+                      cursor={picture.zoomed && 'zoom-in'}
                     >
-                      <Flipped flipId={'pic-' + pic.id}>
+                      <Flipped flipId={'pic-' + picture.id}>
                         <PictureImage
-                          src={pic.original.url}
-                          width={pic.original.width}
-                          height={pic.original.height}
+                          src={picture.original.url}
+                          width={picture.original.width}
+                          height={picture.original.height}
                           alt=''
                         />
                       </Flipped>
@@ -160,7 +160,7 @@ function MainPage({ pictures, activePicture, isLoading }) {
                   </Box>
                 </Slideshow.Item>
               ) : (
-                <span key={pic.slug} />
+                <span key={picture.slug} />
               )
             )}
           </Slideshow>

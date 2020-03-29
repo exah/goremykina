@@ -1,60 +1,50 @@
-import React, { PureComponent, createContext } from 'react'
+import React, { createContext, useMemo } from 'react'
 import { generatePath } from 'react-router'
 import { toArr } from '@exah/utils'
 import { DEFAULT_LANG } from '../constants'
 
-const INITIAL = {
-  lang: DEFAULT_LANG,
-  baseUrl: '',
-  messages: {}
-}
+const IntlContext = createContext(null)
 
-const IntlContext = createContext(INITIAL)
+function IntlProvider({
+  lang = DEFAULT_LANG,
+  messages = {},
+  baseUrl = '',
+  ...rest
+}) {
+  const value = useMemo(() => {
+    const getMessages = (id, langOpt = lang) => {
+      const fallback = toArr(id)
+      const langMessages = messages[langOpt]
 
-class IntlProvider extends PureComponent {
-  static defaultProps = INITIAL
+      if (langMessages == null) {
+        console.warn(`Please provide 'messages' for lang='${langOpt}'`)
+        return fallback
+      }
 
-  getMessages = (id, langOpt) => {
-    const lang = langOpt || this.props.lang
-    const messages = this.props.messages[lang]
-    const fallback = toArr(id)
+      const message = langMessages[id]
 
-    if (messages == null) {
-      console.warn(`Please provide 'messages' for lang='${lang}'`)
-      return fallback
+      if (message == null) {
+        console.warn(`No '${id}' message for lang='${langOpt}'`)
+        return fallback
+      }
+
+      return toArr(message)
     }
 
-    const value = messages[id]
+    const getLink = (path, params, langOpt = lang) =>
+      generatePath(path, { lang: langOpt, ...params })
 
-    if (value == null) {
-      console.warn(`No '${id}' message for lang='${lang}'`)
-      return fallback
+    const getHref = (...args) => baseUrl + getLink(...args)
+
+    return {
+      t: getMessages,
+      link: getLink,
+      href: getHref,
+      lang
     }
+  }, [lang, messages])
 
-    return toArr(value)
-  }
-
-  getLink = (path, data, langOpt) => {
-    const lang = langOpt || this.props.lang
-    const getPath = (params) => generatePath(path, params)
-
-    return getPath({ lang, ...data })
-  }
-
-  getHref = (...args) => this.props.baseUrl + this.getLink(...args)
-
-  render() {
-    const { children, ...rest } = this.props
-
-    const data = {
-      t: this.getMessages,
-      link: this.getLink,
-      href: this.getHref,
-      ...rest
-    }
-
-    return <IntlContext.Provider value={data}>{children}</IntlContext.Provider>
-  }
+  return <IntlContext.Provider value={value} {...rest} />
 }
 
 export { IntlProvider, IntlContext }
