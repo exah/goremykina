@@ -69,7 +69,7 @@ const transition = ($el, start, end, next, isStuck) => {
   Promise.all([fadeAnime, scaleAnime]).then(next)
 }
 
-function AboutPage({ activePicture, matchMedia }) {
+function AboutPage({ activePicture }) {
   const intl = useIntl()
   const page = useFetchPage('about')
   const isMobile = !useMatchMediaContext().matches.includes('md')

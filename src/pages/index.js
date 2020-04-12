@@ -15,14 +15,14 @@ import MainPage from './main'
 import PicturePage from './picture'
 import AboutPage from './about'
 
-const getActivePicture = (pictures, slug) =>
-  slug ? pictures.find((picture) => picture.slug === slug) : pictures[0]
+const getActivePicture = (pictures, slug) => (prevState = pictures[0]) =>
+  slug ? pictures.find((picture) => picture.slug === slug) : prevState
 
 export function Pages() {
   const intl = useIntl()
   const { slug, page } = useParams()
   const { result = [], isReady } = useFetchPictures()
-  const [activePicture, setActivePicture] = useState(() =>
+  const [activePicture, setActivePicture] = useState(
     getActivePicture(result, slug)
   )
 
