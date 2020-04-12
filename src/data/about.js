@@ -1,5 +1,3 @@
-import { dedent } from '../utils'
-
 const slug = 'about'
 
 const photo = {
@@ -10,7 +8,7 @@ const photo = {
 }
 
 const content = {
-  ru: dedent`
+  ru: `
     # Ирина Горемыкина
 
     «Если долго смотреть на луну, сияющую из глубины звездного неба, можно ощутить бесконечность бытия, почувствовать легкость и радость, оставляя пустое…»
@@ -25,7 +23,7 @@ const content = {
 
     Активной выставочной деятельностью занимаюсь с 2005 г. Провела серию персональных выставок в Москве и за рубежом.
   `,
-  en: dedent`
+  en: `
     # Irina Goremykina
 
     “If you look at the moon shining from the depth of the starry sky long enough, you can feel the eternity of being, feel the lightness and joy leaving the vain…”

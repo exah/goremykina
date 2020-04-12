@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text } from 'pss-components'
-import { Noop, join } from '../utils'
+import { join } from '../utils'
 import { useIntl } from '../hooks'
 
 export function Description({ isLoading, name, size, material, year }) {
@@ -8,7 +8,7 @@ export function Description({ isLoading, name, size, material, year }) {
 
   return (
     <Text textAlign={{ all: 'right', sm: 'center' }}>
-      <Text mb>{isLoading || name == null ? <Noop /> : name}</Text>
+      <Text mb>{isLoading || name == null ? null : name}</Text>
       <Text variant='caption'>
         {isLoading ? intl.t('ui.loading') : join(material, size, year)}
       </Text>

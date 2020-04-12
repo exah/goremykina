@@ -4,7 +4,6 @@ import anime from 'animejs'
 import styled from '@emotion/styled'
 import { Flipped } from 'react-flip-toolkit'
 import { ALT_LANG, ROUTE_MAIN, ROUTE_ABOUT } from '../constants'
-import { renderMarkdown } from '../utils'
 import { useFetchPage, useIntl } from '../hooks'
 import {
   Layout,
@@ -13,6 +12,7 @@ import {
   Text,
   Image,
   Link,
+  Markdown,
   RouteLink,
   useMatchMediaContext
 } from '../components'
@@ -210,9 +210,11 @@ function AboutPage({ activePicture, matchMedia }) {
                 mx='auto'
               >
                 <Box pt={2} data-transition-fade>
-                  {page.isReady
-                    ? renderMarkdown(page.result.content)
-                    : intl.t('ui.loading')}
+                  {page.isReady ? (
+                    <Markdown value={page.result.content} />
+                  ) : (
+                    intl.t('ui.loading')
+                  )}
                   <Box
                     position={{ lg: 'absolute' }}
                     bottom={0}
