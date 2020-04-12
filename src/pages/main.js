@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useHistory } from 'react-router'
 import { Flipped } from 'react-flip-toolkit'
@@ -18,17 +18,6 @@ import {
   RouteLink,
   Description
 } from '../components'
-
-const slideshowStyles = {
-  style: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    overflow: 'visible'
-  },
-  containerStyle: { height: '100%' },
-  slideStyle: { overflow: 'visible', height: '100%' }
-}
 
 const PictureImage = styled(Image)`
   position: absolute;
@@ -58,8 +47,6 @@ function MainPage({ pictures, activePicture, isLoading }) {
       ? pictures.findIndex((p) => p.slug === activePicture.slug)
       : 0
   )
-
-  const handlePictureChange = useCallback((next) => setIndex(next.index), [])
 
   useEffect(() => {
     history.replace(intl.link(ROUTE_MAIN, pictures[index]))
@@ -133,32 +120,31 @@ function MainPage({ pictures, activePicture, isLoading }) {
           </Flex>
         </Box>
         <Layout.Content as='main' position='relative'>
-          <Slideshow
-            defaultIndex={index}
-            onChange={handlePictureChange}
-            {...slideshowStyles}
-          >
+          <Slideshow defaultIndex={index} onChange={setIndex}>
             {pictures.map((picture, pictureIndex) =>
               picInRange(index, pictureIndex) ? (
-                <Slideshow.Item key={picture.slug} height='100%' px={2}>
-                  <Box position='relative' height='100%'>
-                    <RouteLink
-                      path={ROUTE_PICTURE}
-                      data={picture}
-                      disable={!picture.zoomed}
-                      cursor={picture.zoomed && 'zoom-in'}
-                    >
-                      <Flipped flipId={'pic-' + picture.id}>
-                        <PictureImage
-                          src={picture.original.url}
-                          width={picture.original.width}
-                          height={picture.original.height}
-                          alt=''
-                        />
-                      </Flipped>
-                    </RouteLink>
-                  </Box>
-                </Slideshow.Item>
+                <Box
+                  key={picture.slug}
+                  position='relative'
+                  height='100%'
+                  px={2}
+                >
+                  <RouteLink
+                    path={ROUTE_PICTURE}
+                    data={picture}
+                    disable={!picture.zoomed}
+                    cursor={picture.zoomed && 'zoom-in'}
+                  >
+                    <Flipped flipId={'pic-' + picture.id}>
+                      <PictureImage
+                        src={picture.original.url}
+                        width={picture.original.width}
+                        height={picture.original.height}
+                        alt=''
+                      />
+                    </Flipped>
+                  </RouteLink>
+                </Box>
               ) : (
                 <span key={picture.slug} />
               )

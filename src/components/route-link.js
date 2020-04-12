@@ -20,6 +20,8 @@ export function RouteLink({
   })
 
   const handleClick = (event) => {
+    if (event.defaultPrevented) return
+
     event.preventDefault()
     history.push(getLocation())
   }

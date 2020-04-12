@@ -2,5 +2,6 @@ module.exports = {
   semi: false,
   singleQuote: true,
   jsxSingleQuote: true,
-  arrowParens: 'always'
+  arrowParens: 'always',
+  trailingComma: 'none'
 }
