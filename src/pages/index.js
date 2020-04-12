@@ -42,6 +42,8 @@ export function Pages() {
         titleTemplate={'%s — ' + intl.t('title')}
       >
         <html lang={intl.lang} />
+        <meta charset='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta property='og:site_name' content={intl.t('title')} />
         <link rel='icon' sizes='192x192' href='/icon.png' />
         <link rel='apple-touch-icon' href='/apple-icon.png' />
