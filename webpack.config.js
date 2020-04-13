@@ -3,10 +3,7 @@ const config = require('config')
 const StatsPlugin = require('stats-webpack-plugin')
 
 const nodeEnv = config.isProd ? 'production' : 'development'
-
-const alias = {
-  'react-dom': '@hot-loader/react-dom'
-}
+const alias = config.isProd ? {} : { 'react-dom': '@hot-loader/react-dom' }
 
 const javascript = (isServer) => ({
   test: /\.js$/,
@@ -47,20 +44,6 @@ const clientConfig = {
   },
   module: {
     rules: [javascript()]
-  },
-  optimization: {
-    runtimeChunk: {
-      name: 'runtime'
-    },
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /node_modules/,
-          name: 'vendors',
-          chunks: 'initial'
-        }
-      }
-    }
   },
   plugins: config.isProd ? [new StatsPlugin('clientStats.json')] : []
 }
