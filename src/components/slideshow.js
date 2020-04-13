@@ -1,42 +1,44 @@
-import React, { useRef, useState, useEffect, useLayoutEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { Box, Flex } from 'pss-components'
-import { useElements, useEmblaCarousel } from '../hooks'
+import EmblaCarousel from 'embla-carousel'
+import { useElements, useUniversalEffect } from '../hooks'
 
-const useIsomorphicEffect =
-  typeof window === 'undefined' ? useEffect : useLayoutEffect
+const inRange = (index, current, visible) =>
+  current >= index - visible && current <= index + visible
 
-function Slideshow({ onChange, defaultIndex = 0, children }) {
+function Slideshow({
+  onChange,
+  startIndex = 0,
+  visible = 2,
+  children,
+  ...rest
+}) {
   const boxRef = useRef(null)
-  const defaultIndexRef = useRef(defaultIndex)
+  const [embla, setEmbla] = useState(null)
+  const [index, setIndex] = useState(startIndex)
   const [isMounted, setMounted] = useState(false)
 
-  const getEmbla = useEmblaCarousel(boxRef, {
-    startIndex: defaultIndexRef.current
-  })
-
-  useIsomorphicEffect(() => {
+  useUniversalEffect(() => {
     if (isMounted) {
-      getEmbla().changeOptions({ startIndex: defaultIndex })
-    } else {
-      setMounted(true)
+      const instance = EmblaCarousel(boxRef.current, { startIndex })
+
+      setEmbla(instance)
     }
-  }, [getEmbla, isMounted])
+  }, [isMounted, startIndex])
 
   useEffect(() => {
-    const embla = getEmbla()
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!embla) return
 
     function handleSelect() {
-      onChange(embla.selectedScrollSnap())
-    }
+      const currentIndex = embla.selectedScrollSnap()
 
-    embla.on('select', handleSelect)
-    return () => {
-      embla.off('select', handleSelect)
+      onChange(currentIndex)
+      setIndex(currentIndex)
     }
-  }, [getEmbla, onChange])
-
-  useEffect(() => {
-    const embla = getEmbla()
 
     function handleKeyDown(event) {
       switch (event.code) {
@@ -51,44 +53,47 @@ function Slideshow({ onChange, defaultIndex = 0, children }) {
       }
     }
 
-    window.addEventListener('keydown', handleKeyDown, { passive: true })
+    embla.on('select', handleSelect)
+    window.addEventListener('keydown', handleKeyDown)
+
     return () => {
-      window.removeEventListener('keydown', handleKeyDown, { passive: true })
+      embla.off('select', handleSelect)
+      window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, [embla])
 
   function handleClick(event) {
-    if (getEmbla().clickAllowed()) {
+    if (embla.clickAllowed()) {
       const rect = event.currentTarget.getBoundingClientRect()
       const position = (event.clientX - rect.left) / rect.width
 
       if (position > 0.6) {
-        getEmbla().scrollNext()
+        embla.scrollNext()
       }
 
       if (position < 0.4) {
-        getEmbla().scrollPrev()
+        embla.scrollPrev()
       }
     } else {
       event.preventDefault()
     }
   }
 
-  const elements = useElements(children).map((child) => (
-    <Box key={child.key} flex='0 0 100%' height='100%'>
-      {child}
+  const elements = useElements(children).map((child, slideIndex) => (
+    <Box key={child.key} position='relative' flex='0 0 100%'>
+      {inRange(index, slideIndex, visible) ? child : null}
     </Box>
   ))
 
   return (
     <Box
       ref={boxRef}
+      onClick={handleClick}
       position='absolute'
       height='100%'
       width='100%'
-      onClick={handleClick}
     >
-      <Flex height='100%'>{isMounted ? elements : elements[defaultIndex]}</Flex>
+      <Flex height='100%'>{isMounted ? elements : elements[startIndex]}</Flex>
     </Box>
   )
 }

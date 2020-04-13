@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useHistory } from 'react-router'
 import { Flipped } from 'react-flip-toolkit'
@@ -36,17 +36,19 @@ const PictureImage = styled(Image)`
   }
 `
 
-const picInRange = (index, current, visible = 2) =>
-  current >= index - visible && current <= index + visible
-
 function MainPage({ pictures, activePicture, isLoading }) {
   const intl = useIntl()
   const history = useHistory()
-  const [index, setIndex] = useState(() =>
-    activePicture != null
-      ? pictures.findIndex((p) => p.slug === activePicture.slug)
-      : 0
+
+  const startIndex = useMemo(
+    () =>
+      activePicture != null
+        ? pictures.findIndex((p) => p.slug === activePicture.slug)
+        : 0,
+    [pictures] // <- I intentionally do not include `activePicture` here
   )
+
+  const [index, setIndex] = useState(startIndex)
 
   useEffect(() => {
     history.replace(intl.link(ROUTE_MAIN, pictures[index]))
@@ -120,35 +122,20 @@ function MainPage({ pictures, activePicture, isLoading }) {
           </Flex>
         </Box>
         <Layout.Content as='main' position='relative'>
-          <Slideshow defaultIndex={index} onChange={setIndex}>
-            {pictures.map((picture, pictureIndex) =>
-              picInRange(index, pictureIndex) ? (
-                <Box
-                  key={picture.slug}
-                  position='relative'
-                  height='100%'
-                  px={2}
-                >
-                  <RouteLink
-                    path={ROUTE_PICTURE}
-                    data={picture}
-                    disable={!picture.zoomed}
-                    cursor={picture.zoomed && 'zoom-in'}
-                  >
-                    <Flipped flipId={'pic-' + picture.id}>
-                      <PictureImage
-                        src={picture.original.url}
-                        width={picture.original.width}
-                        height={picture.original.height}
-                        alt=''
-                      />
-                    </Flipped>
-                  </RouteLink>
-                </Box>
-              ) : (
-                <span key={picture.slug} />
-              )
-            )}
+          <Slideshow startIndex={startIndex} onChange={setIndex}>
+            {pictures.map((picture) => (
+              <RouteLink
+                key={picture.slug}
+                path={ROUTE_PICTURE}
+                data={picture}
+                disable={!picture.zoomed}
+                style={{ cursor: picture.zoomed ? 'zoom-in' : 'auto' }}
+              >
+                <Flipped flipId={'pic-' + picture.id}>
+                  <PictureImage src={picture.original.url} alt={picture.name} />
+                </Flipped>
+              </RouteLink>
+            ))}
           </Slideshow>
         </Layout.Content>
         <Box as='footer' p={2}>

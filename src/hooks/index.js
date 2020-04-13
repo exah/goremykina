@@ -1,5 +1,5 @@
 export * from './use-elements'
-export * from './use-embla-carousel'
 export * from './use-intl'
 export * from './use-fetch-page'
 export * from './use-fetch-pictures'
+export * from './use-universal-effect'
