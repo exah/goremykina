@@ -1,20 +1,9 @@
-import React, { useRef, useEffect } from 'react'
-import styled from '@emotion/styled'
-
-const PanWrapper = styled('div')`
-  touch-action: none;
-  user-select: none;
-`
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 
 export function Pan(props) {
-  const ref = useRef(null)
-
   const matrix = [1, 0, 0, 1, 0, 0]
   const data = { dx: 0, dy: 0, mx: 0, my: 0, touches: 0 }
-
-  useEffect(() => {
-    ref.current.setAttribute('touch-action', 'none')
-  }, [ref])
 
   function handlePointerDown(event) {
     data.touches++
@@ -45,11 +34,15 @@ export function Pan(props) {
   }
 
   return (
-    <PanWrapper
-      ref={ref}
+    <div
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
+      touch-action='none'
+      css={css`
+        touch-action: none;
+        user-select: none;
+      `}
       {...props}
     />
   )
