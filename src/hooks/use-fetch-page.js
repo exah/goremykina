@@ -10,7 +10,7 @@ export function useFetchPage(slug) {
 
   return useFetchData(
     useCallback(() => fetchPage({ lang, slug }), [lang, slug]),
-    `page-${slug}`,
+    `page-${slug}-${lang}`,
     TTL
   )
 }

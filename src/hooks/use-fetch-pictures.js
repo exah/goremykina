@@ -10,7 +10,7 @@ export function useFetchPictures() {
 
   return useFetchData(
     useCallback(() => fetchPicturs({ lang }), [lang]),
-    'pictures',
+    `pictures-${lang}`,
     TTL
   )
 }
