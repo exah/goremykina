@@ -10,39 +10,38 @@ export function Pan(props) {
   const ref = useRef(null)
 
   const matrix = [1, 0, 0, 1, 0, 0]
-  const data = { dx: 0, dy: 0, mx: 0, my: 0, isDragging: false }
+  const data = { dx: 0, dy: 0, mx: 0, my: 0, touches: 0 }
 
   useEffect(() => {
     ref.current.setAttribute('touch-action', 'none')
   }, [ref])
 
   function handlePointerDown(event) {
-    event.nativeEvent.stopImmediatePropagation()
-    event.stopPropagation()
-    event.preventDefault()
+    data.touches++
+
+    if (data.touches > 1) return
 
     data.dx = matrix[4]
     data.dy = matrix[5]
     data.mx = event.pageX
     data.my = event.pageY
-    data.isDragging = true
 
-    ref.current.style.cursor = 'move'
+    event.preventDefault()
+    event.currentTarget.style.cursor = 'move'
   }
 
-  function handlePointerUp() {
-    data.isDragging = false
-
-    ref.current.style.cursor = ''
+  function handlePointerUp(event) {
+    data.touches = 0
+    event.currentTarget.style.cursor = ''
   }
 
   function handlePointerMove(event) {
-    if (data.isDragging) {
-      matrix[4] = event.pageX - data.mx + data.dx
-      matrix[5] = event.pageY - data.my + data.dy
+    if (data.touches !== 1) return
 
-      ref.current.firstChild.style.transform = `matrix(${matrix})`
-    }
+    matrix[4] = event.pageX - data.mx + data.dx
+    matrix[5] = event.pageY - data.my + data.dy
+
+    event.currentTarget.firstChild.style.transform = `matrix(${matrix})`
   }
 
   return (
