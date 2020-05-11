@@ -43,6 +43,7 @@ export function Pages() {
       >
         <html lang={intl.lang} />
         <meta charset='utf-8' />
+        <meta name='description' content={intl.t('description')} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta property='og:site_name' content={intl.t('title')} />
         <link rel='icon' sizes='192x192' href='/icon.png' />

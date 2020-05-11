@@ -1,6 +1,7 @@
 const messages = {
   en: {
     title: 'Irina Goremykina',
+    description: 'Artworks of Irina Goremykina',
     'title.about': 'About',
     'nav.home': 'Irina Goremykina',
     'nav.about': 'About Irina',
@@ -11,6 +12,7 @@ const messages = {
   },
   ru: {
     title: 'Ирина Горемыкина',
+    description: 'Художественные работы Ирины Горемыкиной',
     'title.about': 'Об Ирине',
     'nav.home': 'Ирина Горемыкина',
     'nav.about': 'Об Ирине',
