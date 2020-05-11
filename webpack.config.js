@@ -1,22 +1,17 @@
 const path = require('path')
 const config = require('config')
 const StatsPlugin = require('stats-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const nodeEnv = config.isProd ? 'production' : 'development'
-const alias = config.isProd ? {} : { 'react-dom': '@hot-loader/react-dom' }
 
-const javascript = (isServer) => ({
+const javascript = (...plugins) => ({
   test: /\.js$/,
   include: config.paths.src,
   loader: 'babel-loader',
   options: {
     cacheDirectory: true,
-    plugins: [
-      isServer
-        ? 'babel-plugin-dynamic-import-node'
-        : '@babel/plugin-syntax-dynamic-import',
-      'react-hot-loader/babel'
-    ]
+    plugins: plugins.filter(Boolean)
   }
 })
 
@@ -38,14 +33,20 @@ const clientConfig = {
   },
   resolve: {
     alias: {
-      ...alias,
       config$: path.resolve(config.paths.config, './universal.js')
     }
   },
   module: {
-    rules: [javascript()]
+    rules: [
+      javascript(
+        '@babel/plugin-syntax-dynamic-import',
+        config.isProd ? require.resolve('react-refresh/babel') : null
+      )
+    ]
   },
-  plugins: config.isProd ? [new StatsPlugin('clientStats.json')] : []
+  plugins: config.isProd
+    ? [new StatsPlugin('clientStats.json')]
+    : [new ReactRefreshWebpackPlugin()]
 }
 
 const serverConfig = {
@@ -61,11 +62,8 @@ const serverConfig = {
     filename: '[name].js',
     libraryTarget: 'commonjs2'
   },
-  resolve: {
-    alias
-  },
   module: {
-    rules: [javascript(true)]
+    rules: [javascript('babel-plugin-dynamic-import-node')]
   },
   externals: Object.keys(require('./package.json').dependencies),
   performance: { hints: false },

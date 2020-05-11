@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader'
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { ROUTE_PAGE } from './constants'
@@ -16,4 +15,4 @@ const App = ({ userLang, helmetContext }) => (
   </Providers>
 )
 
-export default hot(module)(App)
+export default App
