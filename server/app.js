@@ -14,7 +14,7 @@ app.use(compression({ threshold: 0 }))
 
 app.use(
   express.static(config.paths.public, {
-    maxAge: config.isDev ? 0 : ms('30 days')
+    maxAge: config.isDev ? 0 : ms('1 year')
   })
 )
 
