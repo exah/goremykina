@@ -1,7 +1,6 @@
 const path = require('path')
 const config = require('config')
 const StatsPlugin = require('stats-webpack-plugin')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const nodeEnv = config.isProd ? 'production' : 'development'
 
@@ -37,16 +36,9 @@ const clientConfig = {
     }
   },
   module: {
-    rules: [
-      javascript(
-        '@babel/plugin-syntax-dynamic-import',
-        config.isProd ? require.resolve('react-refresh/babel') : null
-      )
-    ]
+    rules: [javascript('@babel/plugin-syntax-dynamic-import')]
   },
-  plugins: config.isProd
-    ? [new StatsPlugin('clientStats.json')]
-    : [new ReactRefreshWebpackPlugin()]
+  plugins: config.isProd ? [new StatsPlugin('clientStats.json')] : []
 }
 
 const serverConfig = {

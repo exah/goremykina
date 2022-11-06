@@ -43,7 +43,6 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.1",
     "babel-eslint": "10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dynamic-import-node": "^2.3.3",
@@ -60,7 +59,6 @@
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
-    "react-refresh": "^0.8.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
