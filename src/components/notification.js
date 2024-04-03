@@ -1,7 +1,6 @@
 import React from 'react'
 import { Flex, Text, Button } from 'pss-components'
 import { Floating } from './floating'
-import { IconClose } from './icons'
 
 export const Notification = ({ children, onOpen, onClose, ...rest }) => (
   <Floating
@@ -10,14 +9,11 @@ export const Notification = ({ children, onOpen, onClose, ...rest }) => (
     bottom={{ all: '0', md: 'auto' }}
     {...rest}
   >
-    <Flex>
+    <Flex height={26}>
       <Button px='1rem' onClick={onOpen}>
         <Text variant='caption' whiteSpace='nowrap'>
           {children}
         </Text>
-      </Button>
-      <Button onClick={onClose}>
-        <IconClose />
       </Button>
     </Flex>
   </Floating>

@@ -81,7 +81,7 @@ function PicturePage({ activePicture: picture }) {
 
     // Firefox requires image to be in the DOM
     document.body.appendChild(image)
-  }, [isReady, picture])
+  }, [isReady, picture.zoomed])
 
   return (
     <>

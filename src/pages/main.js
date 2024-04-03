@@ -18,6 +18,7 @@ import {
   RouteLink,
   Description
 } from '../components'
+import ExhibitionPage from './exhibition'
 
 const PictureImage = styled(Image)`
   position: absolute;
@@ -101,6 +102,7 @@ function MainPage({ pictures, activePicture, isLoading }) {
           {next && <link rel='next' href={intl.href(ROUTE_MAIN, next)} />}
         </Helmet>
       )}
+      <ExhibitionPage />
       <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
         <Box as='header' p={2}>
           <Flex alignItems={{ sm: 'center' }}>

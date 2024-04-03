@@ -15,7 +15,7 @@ const THEME = {
     sm: [0, 6, 16, 32]
   },
   size: {
-    overlay: '3px'
+    overlay: '4px'
   },
   color: {
     gray: '#E4E4E4'
@@ -30,7 +30,7 @@ const THEME = {
       fg: '#ffffff'
     },
     overlay: {
-      bg: '#333333',
+      bg: 'hsl(249deg 7% 20% / 93%)',
       fg: '#E7E7E7'
     }
   },
