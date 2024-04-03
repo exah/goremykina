@@ -101,7 +101,7 @@ function ExhibitionPage({ duration = 300, easing = 'easeInOutSine' }) {
                       height='100%'
                       ratio={1}
                       src='/videos/korean-center.mp4'
-                      inline
+                      playsInline
                       loop
                       autoPlay
                     />
