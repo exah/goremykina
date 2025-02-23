@@ -15,8 +15,10 @@ import MainPage from './main'
 import PicturePage from './picture'
 import AboutPage from './about'
 
-const getActivePicture = (pictures, slug) => (prevState = pictures[0]) =>
-  slug ? pictures.find((picture) => picture.slug === slug) : prevState
+const getActivePicture =
+  (pictures, slug) =>
+  (prevState = pictures[0]) =>
+    slug ? pictures.find((picture) => picture.slug === slug) : prevState
 
 export function Pages() {
   const intl = useIntl()

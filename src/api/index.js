@@ -10,5 +10,5 @@ export const api = YF.create({
 export const fetchPage = (data) =>
   api.get(generatePath(API_GET_PAGE, data)).json()
 
-export const fetchPicturs = (data) =>
+export const fetchPictures = (data) =>
   api.get(generatePath(API_GET_PICTURES, data)).json()
