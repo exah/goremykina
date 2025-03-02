@@ -196,6 +196,34 @@ const windowsOfHeaven = [
       width: 4000,
       height: 2373
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'queen-faith-portrait-of-park-se-young',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Королева. Faith. Портрет Park Se-Young (диптих)',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Queen. Faith. Portrait of Park Se-Young (diptych)',
+        material: 'oil on canvas'
+      }
+    },
+    size: '80x60 + 80x60',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/09-windows-of-heaven-queen-faith-portrait-of-park-se-young-diptych-preview.jpg',
+      width: 1800,
+      height: 1168
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/09-windows-of-heaven-queen-faith-portrait-of-park-se-young-diptych-zoomed.jpg',
+      width: 4000,
+      height: 2595
+    }
   }
 ]
 
