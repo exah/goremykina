@@ -168,6 +168,34 @@ const windowsOfHeaven = [
       width: 4000,
       height: 2658
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'actor-portrait-of-lee-min-ho-diptych',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Актер. Портрет Lee Min-ho (диптих)',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Actor. Portrait of Lee Min-ho (diptych)',
+        material: 'oil on canvas'
+      }
+    },
+    size: '120x100 + 120x100',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/06-windows-of-heaven-actor-portrait-of-lee-min-ho-diptych-preview.jpg',
+      width: 1800,
+      height: 1068
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/06-windows-of-heaven-actor-portrait-of-lee-min-ho-diptych-zoomed.jpg',
+      width: 4000,
+      height: 2373
+    }
   }
 ]
 
