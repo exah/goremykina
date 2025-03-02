@@ -1,6 +1,180 @@
-const pictures = [
+import * as crypto from 'crypto'
+
+const windowsOfHeaven = [
   {
-    id: 0,
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'portrait-of-lee-min-ho-overcoming',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Портрет Lee Min-ho. Преодоление',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Portrait of Lee Min-ho. Overcoming',
+        material: 'oil on canvas'
+      }
+    },
+    size: '100x85',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/00-windows-of-heaven-portrait-of-lee-min-ho-overcoming-preview.jpg',
+      width: 1537,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/00-windows-of-heaven-portrait-of-lee-min-ho-overcoming-zoomed.jpg',
+      width: 3415,
+      height: 4000
+    }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'portrait-of-lee-min-ho-song-of-waves',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Портрет Lee Min-ho. Бесконечная песня волн',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Portrait of Lee Min-ho. Infinite Song of Waves',
+        material: 'oil on canvas'
+      }
+    },
+    size: '120x100',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/01-windows-of-heaven-portrait-of-lee-min-ho-song-of-waves-preview.jpg',
+      width: 1499,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/01-windows-of-heaven-portrait-of-lee-min-ho-song-of-waves-zoomed.jpg',
+      width: 3331,
+      height: 4000
+    }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'portrait-of-lee-min-ho-iii',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Портрет Lee Min-ho III',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Portrait of Lee Min-ho III',
+        material: 'oil on canvas'
+      }
+    },
+    size: '60x50',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/02-windows-of-heaven-portrait-of-lee-min-ho-iii-preview.jpg',
+      width: 1492,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/02-windows-of-heaven-portrait-of-lee-min-ho-iii-zoomed.jpg',
+      width: 3316,
+      height: 4000
+    }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'stone-and-butterfly-ii',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Камень и бабочка II',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Stone and Butterfly III',
+        material: 'oil on canvas'
+      }
+    },
+    size: '100x150',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/03-windows-of-heaven-stone-and-butterfly-ii-preview.jpg',
+      width: 1800,
+      height: 1172
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/03-windows-of-heaven-stone-and-butterfly-ii-zoomed.jpg',
+      width: 4000,
+      height: 2604
+    }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'love-koo-hye-sun',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Любовь. Koo Hye-sun',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Love. Koo Hye-sun',
+        material: 'oil on canvas'
+      }
+    },
+    size: '100x150',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/04-windows-of-heaven-love-koo-hye-sun-preview.jpg',
+      width: 1800,
+      height: 1185
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/04-windows-of-heaven-love-koo-hye-sun-zoomed.jpg',
+      width: 4000,
+      height: 2634
+    }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'blooming-tree',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Цветущее дерево',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Blooming tree',
+        material: 'oil on canvas'
+      }
+    },
+    size: '100x150',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/05-windows-of-heaven-blooming-tree-preview.jpg',
+      width: 1800,
+      height: 1196
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/05-windows-of-heaven-blooming-tree-zoomed.jpg',
+      width: 4000,
+      height: 2658
+    }
+  }
+]
+
+const pictures = [
+  ...windowsOfHeaven,
+  {
+    id: crypto.randomUUID(),
     year: 2011,
     slug: 'landscape-with-birds',
     locales: {
@@ -27,7 +201,7 @@ const pictures = [
     }
   },
   {
-    id: 1,
+    id: crypto.randomUUID(),
     year: 2010,
     slug: 'shore',
     locales: {
@@ -53,7 +227,7 @@ const pictures = [
     }
   },
   {
-    id: 2,
+    id: crypto.randomUUID(),
     year: 2011,
     slug: 'evening',
     locales: {
@@ -80,7 +254,7 @@ const pictures = [
     }
   },
   {
-    id: 4,
+    id: crypto.randomUUID(),
     year: 2011,
     slug: 'illusions-i',
     locales: {
@@ -106,7 +280,7 @@ const pictures = [
     }
   },
   {
-    id: 5,
+    id: crypto.randomUUID(),
     year: 2012,
     slug: 'illusions-ii',
     locales: {
@@ -132,7 +306,7 @@ const pictures = [
     }
   },
   {
-    id: 6,
+    id: crypto.randomUUID(),
     year: 2012,
     slug: 'illusions-iii',
     locales: {
@@ -158,7 +332,7 @@ const pictures = [
     }
   },
   {
-    id: 7,
+    id: crypto.randomUUID(),
     year: 2012,
     slug: 'illusions-v',
     locales: {
@@ -184,7 +358,7 @@ const pictures = [
     }
   },
   {
-    id: 8,
+    id: crypto.randomUUID(),
     year: 2012,
     slug: 'illusions-vi',
     locales: {
@@ -210,7 +384,7 @@ const pictures = [
     }
   },
   {
-    id: 3,
+    id: crypto.randomUUID(),
     year: 2012,
     slug: 'illusions-vii',
     locales: {
@@ -237,7 +411,7 @@ const pictures = [
     }
   },
   {
-    id: 9,
+    id: crypto.randomUUID(),
     year: 2011,
     slug: 'angel',
     locales: {
@@ -264,7 +438,7 @@ const pictures = [
     }
   },
   {
-    id: 10,
+    id: crypto.randomUUID(),
     year: 2016,
     slug: 'sergey-burov',
     locales: {
@@ -291,7 +465,7 @@ const pictures = [
     }
   },
   {
-    id: 11,
+    id: crypto.randomUUID(),
     year: 2010,
     slug: 'fok',
     locales: {
@@ -318,7 +492,7 @@ const pictures = [
     }
   },
   {
-    id: 12,
+    id: crypto.randomUUID(),
     year: 2008,
     slug: 'rain',
     locales: {
@@ -345,7 +519,7 @@ const pictures = [
     }
   },
   {
-    id: 13,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'legend-of-the-kara-dag',
     locales: {
@@ -371,7 +545,7 @@ const pictures = [
     }
   },
   {
-    id: 15,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'violet-music',
     locales: {
@@ -397,7 +571,7 @@ const pictures = [
     }
   },
   {
-    id: 16,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'self-portrait',
     locales: {
@@ -423,7 +597,7 @@ const pictures = [
     }
   },
   {
-    id: 17,
+    id: crypto.randomUUID(),
     year: 2009,
     slug: 'inspiration',
     locales: {
@@ -450,7 +624,7 @@ const pictures = [
     }
   },
   {
-    id: 18,
+    id: crypto.randomUUID(),
     year: 2009,
     slug: 'air',
     locales: {
@@ -477,7 +651,7 @@ const pictures = [
   },
   {
     // Красное море - х.м. - 100x90 - 2009
-    id: 20,
+    id: crypto.randomUUID(),
     year: 2009,
     slug: 'red-sea',
     locales: {
@@ -504,7 +678,7 @@ const pictures = [
   },
   {
     // Над Египтом - х.м. - 70x120 - 2009
-    id: 25,
+    id: crypto.randomUUID(),
     year: 2009,
     slug: 'over-egypt',
     locales: {
@@ -532,7 +706,7 @@ const pictures = [
   },
   {
     // Молитва - х.м. - 50x80 - 2008
-    id: 26,
+    id: crypto.randomUUID(),
     year: 2008,
     slug: 'prayer',
     locales: {
@@ -560,7 +734,7 @@ const pictures = [
   {
     // Диптих - Волна - х.м. - 100x120 - 2009.jpg
     // Диптих - Алегро - х.м. - 100x120 - 2008.jpg
-    id: 34,
+    id: crypto.randomUUID(),
     year: 2009,
     slug: 'diptych-wave',
     locales: {
@@ -588,7 +762,7 @@ const pictures = [
   },
   {
     // Музка моря - х.м. - 30x35 - 2007
-    id: 27,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'music-of-the-sea',
     locales: {
@@ -614,7 +788,7 @@ const pictures = [
     }
   },
   {
-    id: 28,
+    id: crypto.randomUUID(),
     year: 2008,
     slug: 'allegro',
     locales: {
@@ -642,7 +816,7 @@ const pictures = [
   },
   {
     // Парк - х.м. - 100x80 - 2008
-    id: 29,
+    id: crypto.randomUUID(),
     year: 2008,
     slug: 'park',
     locales: {
@@ -669,7 +843,7 @@ const pictures = [
   },
   {
     // К морю - х.м. - 80x100 - 2006
-    id: 21,
+    id: crypto.randomUUID(),
     year: 2006,
     slug: 'to-the-sea',
     locales: {
@@ -696,7 +870,7 @@ const pictures = [
   },
   {
     // Чайки - х.м. - 50x70 - 2007
-    id: 22,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'seagulls',
     locales: {
@@ -722,7 +896,7 @@ const pictures = [
     }
   },
   {
-    id: 19,
+    id: crypto.randomUUID(),
     year: 2008,
     slug: 'stones',
     locales: {
@@ -750,7 +924,7 @@ const pictures = [
   },
   {
     // Пейзаж с неопознаным объектом - х.м. - 80x100 - 2007
-    id: 23,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'landscape-with-unidentified-object',
     locales: {
@@ -778,7 +952,7 @@ const pictures = [
   },
   {
     // Крым. Этюд. - х.м. - 40x30 - 2007
-    id: 24,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'crimea-study',
     locales: {
@@ -806,7 +980,7 @@ const pictures = [
   },
   {
     // Портрет Тани - х.м. - 100x60 - 2007
-    id: 30,
+    id: crypto.randomUUID(),
     year: 2007,
     slug: 'portrait-of-tanya',
     locales: {
@@ -833,7 +1007,7 @@ const pictures = [
   },
   {
     // Мечта - х.м. - 101x61 - 2006
-    id: 31,
+    id: crypto.randomUUID(),
     year: 2006,
     slug: 'dream',
     locales: {
@@ -861,7 +1035,7 @@ const pictures = [
   },
   {
     // Ностальгия - х.а. - 100x60 - 2006
-    id: 32,
+    id: crypto.randomUUID(),
     year: 2006,
     slug: 'nostalgia',
     locales: {
@@ -888,7 +1062,7 @@ const pictures = [
   },
   {
     // Музыка. Отдых - х.а. - 70x90 - 2006
-    id: 33,
+    id: crypto.randomUUID(),
     year: 2006,
     slug: 'music-relaxation',
     locales: {
