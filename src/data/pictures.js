@@ -199,6 +199,34 @@ const windowsOfHeaven = [
   },
   {
     id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'general-faith-portrait-of-lee-min-ho',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Генерал. Faith. Портрет Lee Min-ho',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'General. Faith. Portrait of Lee Min-ho',
+        material: 'oil on canvas'
+      }
+    },
+    size: '60x80',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/08-windows-of-heaven-general-faith-portrait-of-lee-min-ho-preview.jpg',
+      width: 1800,
+      height: 1325
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/08-windows-of-heaven-general-faith-portrait-of-lee-min-ho-zoomed.jpg',
+      width: 4000,
+      height: 2945
+    }
+  },
+  {
+    id: crypto.randomUUID(),
     year: 2023,
     slug: 'queen-faith-portrait-of-park-se-young',
     series: 'windows-of-heaven',
