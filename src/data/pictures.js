@@ -252,6 +252,34 @@ const windowsOfHeaven = [
       width: 4000,
       height: 2595
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2023,
+    slug: 'yoo-in-soo-faith-portrait-kim-hee-sun',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Ю Ын Су. Faith. Портрет Kim Hee-sun',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Yoo Eun-soo. Faith. Portrait of Kim Hee-sun',
+        material: 'oil on canvas'
+      }
+    },
+    size: '80x60',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/11-windows-of-heaven-yoo-in-soo-faith-portrait-kim-hee-sun-preview.jpg',
+      width: 1354,
+      height: 1800
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/11-windows-of-heaven-yoo-in-soo-faith-portrait-kim-hee-sun-zoomed.jpg',
+      width: 3008,
+      height: 4000
+    }
   }
 ]
 
