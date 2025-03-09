@@ -102,7 +102,11 @@ function MainPage({ pictures, activePicture, isLoading }) {
         </Helmet>
       )}
       <Layout flexDirection='column' minHeight='100%' overflow='hidden'>
-        <Box as='header' p={2}>
+        <Box
+          as='header'
+          p={2}
+          style={{ color: 'white', mixBlendMode: 'difference' }}
+        >
           <Flex alignItems={{ sm: 'center' }}>
             <Box mr='auto' width={1 / 3} hide='md'>
               <RouteLink path={ROUTE_ABOUT}>
@@ -138,7 +142,11 @@ function MainPage({ pictures, activePicture, isLoading }) {
             ))}
           </Slideshow>
         </Layout.Content>
-        <Box as='footer' p={2}>
+        <Box
+          as='footer'
+          p={2}
+          style={{ color: 'white', mixBlendMode: 'difference' }}
+        >
           <Flex justifyContent='space-between' alignItems='flex-end'>
             <Box hide='sm'>
               <RouteLink path={ROUTE_ABOUT}>

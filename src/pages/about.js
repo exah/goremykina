@@ -27,7 +27,7 @@ const PhotoBox = styled(Box)`
     margin-left: 0;
     background-color: ${(props) => props.overlayColor};
     z-index: 1;
-    mix-blend-mode: multiply;
+    mix-blend-mode: color;
   }
 
   & > ${Image} {
@@ -156,7 +156,12 @@ function AboutPage({ activePicture }) {
       <Flipped flipId='about-page' onAppear={handleAppear} onExit={handleExit}>
         <Box height='100%' overflow='hidden auto touch' onScroll={handleScroll}>
           <Layout flexDirection='column' minHeight='100%'>
-            <Box p={2} ml='auto' hide='sm'>
+            <Box
+              p={2}
+              ml='auto'
+              hide='sm'
+              style={{ color: 'white', mixBlendMode: 'difference' }}
+            >
               <RouteLink path={ROUTE_ABOUT} alternate>
                 <Text>{intl.t('nav.lang')}</Text>
               </RouteLink>
@@ -208,6 +213,7 @@ function AboutPage({ activePicture }) {
                 column={{ sm: 16, md: 8, lg: 6 }}
                 order={{ sm: 1 }}
                 mx='auto'
+                style={{ color: 'white', mixBlendMode: 'difference' }}
               >
                 <Box pt={2} data-transition-fade>
                   {page.isReady ? (
