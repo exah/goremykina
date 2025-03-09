@@ -280,6 +280,34 @@ const windowsOfHeaven = [
       width: 3008,
       height: 4000
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'stone',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Камень',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Stone',
+        material: 'oil on canvas'
+      }
+    },
+    size: '60x70',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/12-windows-of-heaven-stone-preview.jpg',
+      width: 1800,
+      height: 1514
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/12-windows-of-heaven-stone-zoomed.jpg',
+      width: 4000,
+      height: 3365
+    }
   }
 ]
 
