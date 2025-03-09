@@ -8,7 +8,7 @@ export const api = YF.create({
 })
 
 export const fetchPage = (data) =>
-  api.get(generatePath(API_GET_PAGE, data)).json()
+  api.get(generatePath(API_GET_PAGE, data)).then((res) => res.json())
 
 export const fetchPictures = (data) =>
-  api.get(generatePath(API_GET_PICTURES, data)).json()
+  api.get(generatePath(API_GET_PICTURES, data)).then((res) => res.json())
