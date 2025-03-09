@@ -308,6 +308,34 @@ const windowsOfHeaven = [
       width: 4000,
       height: 3365
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'silence',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Silence',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Silence',
+        material: 'oil on canvas'
+      }
+    },
+    size: '60x40 + 60x40',
+    color: '#282828',
+    original: {
+      url: '/pictures/windows-of-heaven/13-windows-of-heaven-silence-diptych-preview.jpg',
+      width: 1800,
+      height: 1341
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/13-windows-of-heaven-silence-diptych-zoomed.jpg',
+      width: 4000,
+      height: 2979
+    }
   }
 ]
 
