@@ -336,6 +336,34 @@ const windowsOfHeaven = [
       width: 4000,
       height: 2979
     }
+  },
+  {
+    id: crypto.randomUUID(),
+    year: 2022,
+    slug: 'stone-and-butterfly-i',
+    series: 'windows-of-heaven',
+    locales: {
+      ru: {
+        name: 'Камень и бабочка I',
+        material: 'холст / масло'
+      },
+      en: {
+        name: 'Stone and Butterfly I',
+        material: 'oil on canvas'
+      }
+    },
+    size: '56.5x79',
+    color: '#F6F1ED',
+    original: {
+      url: '/pictures/windows-of-heaven/15-windows-of-heaven-stone-and-butterfly-i-preview.jpg',
+      width: 1800,
+      height: 1297
+    },
+    zoomed: {
+      url: '/pictures/windows-of-heaven/public/pictures/windows-of-heaven/15-windows-of-heaven-stone-and-butterfly-i-zoomed.jpg',
+      width: 4000,
+      height: 2883
+    }
   }
 ]
 
